@@ -8,11 +8,10 @@ function menu:load()
 end
 
 function menu:update(dt)
+ 
 end
 
 function menu:draw()
-    local background = love.graphics.newImage("contents/images/menu1.png")
-    love.graphics.draw(background, 0, 0)
 end
 
 function menu:keypressed(key)

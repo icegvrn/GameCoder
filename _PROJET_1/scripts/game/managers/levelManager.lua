@@ -8,6 +8,8 @@ require("scripts/states/WEAPONS")
 levelManager = {}
 levelManager.currentLevel = 1
 levelManager.charactersList = {}
+levelManager.ennemiesList = {}
+
 -- REGARDE A QUEL NIVEAU ON EST
 -- CHANGE LE NIVEAU AUQUEL ON EST
 
@@ -24,18 +26,16 @@ function levelManager.load()
     myWeapon = w_factory.createWeapon(WEAPONS.TYPE.SWORD)
     myWeapon2 = w_factory.createWeapon(WEAPONS.TYPE.DOUBLE_AXE)
     myWeapon3 = w_factory.createWeapon(WEAPONS.TYPE.AXE)
-    myWeapon4 = w_factory.createWeapon(WEAPONS.TYPE.FLOWER)
+    myWeapon4 = w_factory.createWeapon(WEAPONS.TYPE.BITE)
     myWeapon5 = w_factory.createWeapon(WEAPONS.TYPE.MAGIC_STAFF)
     myCharacter = c_factory.createCharacter(CHARACTERS.CATEGORY.PLAYER, CHARACTERS.TYPE.ORC, true, love.mouse)
 
     player.setCharacter(myCharacter)
-    myCharacter2 = c_factory.createCharacter(CHARACTERS.CATEGORY.ENNEMY, CHARACTERS.TYPE.PRINCESS, false, myCharacter)
 
+    myCharacter2 = c_factory.createCharacter(CHARACTERS.CATEGORY.ENNEMY, CHARACTERS.TYPE.PRINCESS, false, myCharacter)
     myCharacter4 = c_factory.createCharacter(CHARACTERS.CATEGORY.ENNEMY, CHARACTERS.TYPE.KNIGHT, false, myCharacter)
     myCharacter5 = c_factory.createCharacter(CHARACTERS.CATEGORY.ENNEMY, CHARACTERS.TYPE.MAGE, false, myCharacter)
-
     myCharacter3 = c_factory.createCharacter(CHARACTERS.CATEGORY.ENNEMY, CHARACTERS.TYPE.DWARF, false, myCharacter)
-
     myCharacter6 = c_factory.createCharacter(CHARACTERS.CATEGORY.ENNEMY, CHARACTERS.TYPE.KNIGHT, false, myCharacter)
     myCharacter7 = c_factory.createCharacter(CHARACTERS.CATEGORY.ENNEMY, CHARACTERS.TYPE.KNIGHT, false, myCharacter)
     myCharacter8 = c_factory.createCharacter(CHARACTERS.CATEGORY.ENNEMY, CHARACTERS.TYPE.KNIGHT, false, myCharacter)
@@ -70,6 +70,7 @@ function levelManager.load()
     myWeapon13 = w_factory.createWeapon(WEAPONS.TYPE.AXE)
     myWeapon14 = w_factory.createWeapon(WEAPONS.TYPE.FLOWER)
     myWeapon15 = w_factory.createWeapon(WEAPONS.TYPE.MAGIC_STAFF)
+
     myCharacter6:equip(myWeapon6)
     myCharacter7:equip(myWeapon7)
     myCharacter8:equip(myWeapon8)
@@ -82,43 +83,34 @@ function levelManager.load()
     myCharacter15:equip(myWeapon15)
 
     table.insert(levelManager.charactersList, myCharacter)
-    table.insert(levelManager.charactersList, myCharacter2)
-    table.insert(levelManager.charactersList, myCharacter3)
-    table.insert(levelManager.charactersList, myCharacter4)
-    table.insert(levelManager.charactersList, myCharacter5)
-
-    table.insert(levelManager.charactersList, myCharacter6)
-    table.insert(levelManager.charactersList, myCharacter7)
-    table.insert(levelManager.charactersList, myCharacter8)
-    table.insert(levelManager.charactersList, myCharacter9)
-    table.insert(levelManager.charactersList, myCharacter10)
-    table.insert(levelManager.charactersList, myCharacter11)
-    table.insert(levelManager.charactersList, myCharacter12)
-    table.insert(levelManager.charactersList, myCharacter13)
-    table.insert(levelManager.charactersList, myCharacter14)
-    table.insert(levelManager.charactersList, myCharacter15)
+    table.insert(levelManager.ennemiesList, myCharacter2)
+    table.insert(levelManager.ennemiesList, myCharacter3)
+    table.insert(levelManager.ennemiesList, myCharacter4)
+    table.insert(levelManager.ennemiesList, myCharacter5)
+    table.insert(levelManager.ennemiesList, myCharacter6)
+    table.insert(levelManager.ennemiesList, myCharacter7)
+    table.insert(levelManager.ennemiesList, myCharacter8)
+    table.insert(levelManager.ennemiesList, myCharacter9)
+    table.insert(levelManager.ennemiesList, myCharacter10)
+    table.insert(levelManager.ennemiesList, myCharacter11)
+    table.insert(levelManager.ennemiesList, myCharacter12)
+    table.insert(levelManager.ennemiesList, myCharacter13)
+    table.insert(levelManager.ennemiesList, myCharacter14)
+    table.insert(levelManager.ennemiesList, myCharacter15)
 end
 
 function levelManager.update(dt)
     player.update(dt)
-
-    for n = 1, #levelManager.charactersList do
-        levelManager.charactersList[n]:update(dt)
+    for n = #levelManager.ennemiesList, 1, -1 do
+        levelManager.ennemiesList[n]:update(dt)
     end
 end
 
 function levelManager.draw()
-    for n = 1, #levelManager.charactersList do
-        if levelManager.charactersList[n]:isThePlayer() == false then
-            levelManager.charactersList[n]:draw()
-        end
+    for n = #levelManager.ennemiesList, 1, -1 do
+        levelManager.ennemiesList[n]:draw()
     end
-
-    for n = 1, #levelManager.charactersList do
-        if levelManager.charactersList[n]:isThePlayer() then
-            levelManager.charactersList[n]:draw()
-        end
-    end
+    player.draw()
 end
 
 function levelManager.setCurrentLevel(nb)
@@ -159,4 +151,17 @@ function levelManager.keypressed(key)
     end
     player.keypressed(key)
 end
+
+function levelManager.getListofEnnemies()
+    return levelManager.ennemiesList
+end
+
+function levelManager.destroyCharacter(character, weapon)
+    for n = #levelManager.ennemiesList, 1, -1 do
+        if levelManager.ennemiesList[n] == character then
+            table.remove(levelManager.ennemiesList, n)
+        end
+    end
+end
+
 return levelManager

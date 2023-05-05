@@ -9,6 +9,9 @@ local textPositionY = 0
 local timer = 0
 local timerEnd = 45
 
+local textFont = love.graphics.newFont("contents/fonts/pixelfont.ttf", 30)
+local textFont50 = love.graphics.newFont("contents/fonts/pixelfont.ttf", 50)
+
 function narrative:load()
     isLoaded = true
 end
@@ -26,7 +29,6 @@ function narrative:update(dt)
 end
 
 function narrative:draw()
-    local textFont = love.graphics.newFont("contents/fonts/pixelfont.ttf", 30)
     love.graphics.setFont(textFont)
     love.graphics.setColor(0, 1, 0)
     love.graphics.print(
@@ -34,8 +36,8 @@ function narrative:draw()
         10,
         utils.screenHeight + textPositionY
     )
-    local textFont = love.graphics.newFont("contents/fonts/pixelfont.ttf", 50)
-    love.graphics.setFont(textFont)
+
+    love.graphics.setFont(textFont50)
     love.graphics.print(
         "    La destinée de Gromokgg est désormais \n             entre vos mains…",
         10,

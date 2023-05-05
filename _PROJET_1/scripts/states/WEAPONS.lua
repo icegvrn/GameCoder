@@ -4,6 +4,7 @@ WEAPONS.IMGPATH = "contents/images/weapons"
 
 WEAPONS.TYPE = {}
 WEAPONS.TYPE.HERO_MAGIC_STAFF = "hero_magic_staff"
+WEAPONS.TYPE.BITE = "bite"
 WEAPONS.TYPE.MAGIC_STAFF = "magic_staff"
 WEAPONS.TYPE.SWORD = "sword"
 WEAPONS.TYPE.FLOWER = "flower"

@@ -1,5 +1,6 @@
 require("scripts/states/CONST")
 utils = require("scripts/Utils/utils")
+local map = require("scripts/game/gameMap")
 
 local weapon = {}
 local weapons_mt = {__index = weapon}
@@ -52,10 +53,12 @@ function weapon.new()
 
     newWeapon.currentSpriteId = 1
 
-    newWeaponFireList = {}
+    newWeapon.FireList = {}
 
     newWeapon.rotationAngle = 0
     newWeapon.timer = 0
+
+    newWeapon.hittableCharacters = {}
 
     return setmetatable(newWeapon, weapons_mt)
 end
@@ -89,7 +92,7 @@ function weapon:setRangedWeapon(bool)
     self.isRangedWeapon = bool
 end
 
-function weapon:isRangedWeapon()
+function weapon:getIsRangedWeapon()
     return self.isRangedWeapon
 end
 
@@ -195,8 +198,8 @@ end
 
 function weapon:drawFiredElements()
     if (self.isRangedWeapon) then
-        if newWeaponFireList then
-            for k, v in ipairs(newWeaponFireList) do
+        if self.FireList then
+            for k, v in ipairs(self.FireList) do
                 love.graphics.circle("fill", v.x, v.y, 5, 5)
             end
         end
@@ -217,7 +220,27 @@ function weapon:getFireOffset()
 end
 
 function weapon:update(dt)
+    if self.owner:isThePlayer() then
+        self.hittableCharacters = levelManager.getListofEnnemies()
+        if self.owner:getMode() == CHARACTERS.MODE.BOOSTED then
+            self:boostOwner()
+        end
+    else
+        if self.hittableCharacters[1] ~= self.owner:getTarget() then
+            self.hittableCharacters[1] = self.owner:getTarget()
+        end
+    end
+
     self:updateFiredElements(dt)
+end
+
+function weapon:boostOwner()
+    local x, y = self.owner:getPosition()
+    for c = #self.hittableCharacters, 1, -1 do
+        if self:isCollide(x, y, self.owner:getHeight(), self.owner:getHeight(), self.hittableCharacters[c]) then
+            self.hittableCharacters[c]:hit(self.owner, self.damage)
+        end
+    end
 end
 
 function weapon:fire(dt, ownerPosition, ownerScale, ownerHandPosition, ownerWeaponScaling, ownerTarget)
@@ -248,32 +271,46 @@ function weapon:fire(dt, ownerPosition, ownerScale, ownerHandPosition, ownerWeap
             fire.angle = angle
             fire.speed = 180 * dt
             fire.lifeTime = 2
+            fire.size = 5
             fire.distance = utils.distance(pX, pY, mX, mY)
 
-            table.insert(newWeaponFireList, fire)
+            table.insert(self.FireList, fire)
             self.canFire = false
         end
     else
-        self.rotationAngle = self.rotationAngle + self.speed * dt
+        self:playAttackAnimation(dt)
     end
-
     self.isFiring = false
 end
 
 function weapon:updateFiredElements(dt)
     if (self.isRangedWeapon) then
-        if newWeaponFireList then
-            for n = #newWeaponFireList, 1, -1 do
-                local t = newWeaponFireList[n]
+        if self.FireList then
+            for n = #self.FireList, 1, -1 do
+                local t = self.FireList[n]
                 t.x = t.x + t.speed * math.cos(t.angle)
                 t.y = t.y + t.speed * math.sin(t.angle)
                 t.lifeTime = t.lifeTime - dt
+
                 if t.lifeTime <= 0 then
-                    table.remove(newWeaponFireList, n)
+                    table.remove(self.FireList, n)
+                elseif map.isOverTheMap(t.x, t.y) then
+                    table.remove(self.FireList, n)
+                else
+                    for c = #self.hittableCharacters, 1, -1 do
+                        if self:isCollide(t.x, t.y, t.size, t.size, self.hittableCharacters[c]) then
+                            self.hittableCharacters[c]:hit(self.owner, self.damage)
+                            table.remove(self.FireList, n)
+                        end
+                    end
                 end
             end
         end
     end
+end
+
+function weapon:isCollide(weaponX, weaponY, weaponWidth, weaponHeight, p_character)
+    return p_character:isCollidedBy(weaponX, weaponY, weaponWidth, weaponHeight)
 end
 
 function weapon:drawWeapon()
@@ -360,6 +397,10 @@ function weapon:calcWeaponHitZone(dt, ownerPosition, ownerScale, ownerHandPositi
 
     self.hitBox.position.x = weaponHitPositionX
     self.hitBox.position.y = weaponHitPositionY
+end
+
+function weapon:playAttackAnimation(dt)
+    self.rotationAngle = self.rotationAngle + self.speed * dt
 end
 
 return weapon

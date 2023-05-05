@@ -1,6 +1,7 @@
 require("scripts/states/CONST")
 ennemiAgent = require("scripts/engine/ennemiAgent")
 utils = require("scripts/Utils/utils")
+
 local Character = {}
 local characters_mt = {__index = Character}
 
@@ -8,7 +9,9 @@ function Character.new()
     newCharacter = {}
     newCharacter.isPlayer = false
     newCharacter.name = "inconnu"
-    newCharacter.pv = 50
+    newCharacter.height = 0
+    newCharacter.maxPV = 50
+    newCharacter.currentPV = 100
     newCharacter.strenght = 10
     newCharacter.canMove = true
     newCharacter.canFire = true
@@ -35,6 +38,11 @@ function Character.new()
     newCharacter.currentWeaponId = 1
     newCharacter.weaponScaling = 1
 
+    newCharacter.color = {1, 1, 1, 1}
+    newCharacter.isHit = false
+    newCharacter.timer = 0
+    newCharacter.dieTimer = 0
+    newCharacter.canBeHurt = true
     newCharacter.handPosition = {}
     newCharacter.handPosition.x = 0
     newCharacter.handPosition.y = 0
@@ -45,11 +53,23 @@ function Character.new()
     newCharacter.spritestileSheets = {}
     newCharacter.spritesList = {}
     newCharacter.currentSpriteId = 1
+    newCharacter.font10 = love.graphics.newFont(10)
+    newCharacter.font15 = love.graphics.newFont(15)
+    newCharacter.defaultFont = love.graphics.newFont()
+    newCharacter.alertImg = love.graphics.newImage("contents/images/characters/exclamation.png")
 
     return setmetatable(newCharacter, characters_mt)
 end
 function Character:setWeaponScaling(nb)
     self.weaponScaling = nb
+end
+
+function Character:getCurrentPV()
+    return self.currentPV
+end
+
+function Character:setCurrentPV(pv)
+    self.currentPV = pv
 end
 
 function Character:getHandOffset()
@@ -73,6 +93,10 @@ function Character:isThePlayer()
     return self.isPlayer
 end
 
+function Character:getHeight()
+    return self.height
+end
+
 function Character:getWeaponScaling()
     return self.weaponScaling
 end
@@ -80,6 +104,7 @@ function Character:setSprites(p_table)
     local sprites = {}
     for k, sprite in pairs(p_table) do
         self.spritestileSheets[k] = sprite
+        self.height = sprite:getHeight()
         local nbColumns = sprite:getWidth() / sprite:getHeight()
         local nbLine = sprite:getHeight() / sprite:getHeight()
         local id = 1
@@ -171,6 +196,11 @@ end
 
 function Character:setMode(mode)
     self.mode = mode
+    if mode == CHARACTERS.MODE.BOOSTED then
+        self:changeWeapon(2)
+    else
+        self:changeWeapon(1)
+    end
 end
 
 function Character:getMode()
@@ -191,12 +221,12 @@ function Character:equip(p_weapon)
     table.insert(self.weapon, p_weapon)
 end
 
-function Character:setPointOfLife(pv)
-    self.pv = pv
+function Character:setMaxPV(pv)
+    self.maxPV = pv
 end
 
-function Character:getPointOfLife()
-    return self.pv
+function Character:getMaxPV()
+    return self.maxPV
 end
 
 function Character:changeDirection(direction)
@@ -265,6 +295,8 @@ function Character:draw()
         end
     end
 
+    love.graphics.setColor(self.color)
+
     love.graphics.draw(
         self.spritestileSheets[c_state],
         self.spritesList[c_state][c_spriteID],
@@ -276,9 +308,47 @@ function Character:draw()
         self.spritestileSheets[c_state]:getHeight() / 2,
         self.spritestileSheets[c_state]:getHeight() / 2
     )
+
+    if self.isPlayer == false then
+        if self.isHit then
+            local points = ""
+            if self.currentPV > 0 then
+                love.graphics.setFont(self.font10)
+                love.graphics.setColor(1, 1, 1)
+                points = "+" .. (self.maxPV / 10) .. " points"
+            else
+                love.graphics.setFont(self.font15)
+                love.graphics.setColor(1, 0.9, 0.1)
+                points = "+" .. (self.maxPV / 2) .. " points"
+            end
+            love.graphics.print(points, self.transform.position.x, self.transform.position.y - 30)
+            love.graphics.setFont(self.defaultFont)
+        end
+    end
+
+    if self.isPlayer == false and self.state == CHARACTERS.STATE.ALERT then
+        love.graphics.draw(
+            self.alertImg,
+            self.transform.position.x,
+            self.transform.position.y - 30,
+            0,
+            self.transform.scale.x,
+            self.transform.scale.y
+        )
+    end
 end
 
 function Character:update(dt)
+    if self.isHit then
+        self:ChangeColorRed(true)
+        self.timer = self.timer + dt
+        if self.timer >= 0.4 then
+            self.timer = 0
+            self.isHit = false
+            self:ChangeColorRed(false)
+        end
+    end
+
     local c_state = self.mode .. "_" .. self.state
     self.currentSpriteId = self.currentSpriteId + 5 * dt
     if self.currentSpriteId >= #self.spritesList[c_state] + 0.99 then
@@ -292,6 +362,15 @@ function Character:update(dt)
 
     if self.ennemiAgent then
         self.ennemiAgent:update(dt, self.transform.position.x, self.transform.position.y, self.state)
+    end
+
+    if self.currentPV <= 0 then
+        self.canBeHurt = false
+        self.dieTimer = self.dieTimer + 1 * dt
+        if self.dieTimer >= 0.5 then
+            levelManager.destroyCharacter(self, weapon)
+            self.dieTimer = 0
+        end
     end
 end
 
@@ -351,6 +430,51 @@ function Character:addEnnemiAgent()
     local localEnnemiAgent = ennemiAgent.new()
     self.ennemiAgent = localEnnemiAgent.create()
     self.ennemiAgent:init(self)
+end
+
+function Character:hit(attacker, damage)
+    if self.canBeHurt == true then
+        self.isHit = true
+        self.currentPV = self.currentPV - damage
+        if attacker:isThePlayer() then
+            if self.currentPV <= 0 then
+                player.addPoints(self.maxPV / 2)
+                print("Tu gagne : " .. self.maxPV / 2)
+            else
+                player.addPoints(self.maxPV / 10)
+                print("Tu gagne : " .. self.maxPV / 10)
+            end
+        end
+    end
+end
+
+function Character:isCollidedBy(weaponX, weaponY, weaponWidth, weaponHeight)
+    local weaponTopRight = weaponX + weaponWidth
+    local weaponBottomLeft = weaponY + weaponHeight
+
+    local c_state = self.mode .. "_" .. self.state
+    local spriteWidth = self.spritestileSheets[c_state]:getWidth() / #self.spritesList[c_state]
+    local spriteHeight = self.spritestileSheets[c_state]:getHeight()
+
+    if
+        weaponX > self.transform.position.x + spriteWidth / 2 or weaponTopRight < self.transform.position.x or
+            weaponY > self.transform.position.y + spriteHeight / 2 or
+            weaponBottomLeft < self.transform.position.y
+     then
+        return false
+    else
+        return true
+    end
+
+    return false
+end
+
+function Character:ChangeColorRed(bool)
+    if bool then
+        self.color = {1, 0, 0, 1}
+    else
+        self.color = {1, 1, 1, 1}
+    end
 end
 
 return Character

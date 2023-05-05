@@ -4,15 +4,15 @@ local scene = require("scripts/engine/scene")
 soundManager = require("scripts/game/managers/soundManager")
 
 local start = scene.new()
-
 local showImage = true
 local timer = 0
 local interval = 0.5
 local isLoaded = false
+local font9 = love.graphics.newFont(9)
+local defaultFont = love.graphics.newFont()
 
 function start:load()
     isLoaded = true
-    print("Je suis chargé")
 end
 
 function start:update(dt)
@@ -37,13 +37,13 @@ function start:draw()
             0.7
         )
     end
-    local font = love.graphics.newFont(9)
-    love.graphics.setFont(font)
+    love.graphics.setFont(font9)
     love.graphics.print(
         "Simon Foucher - First LUA project 2023 - Illustration generate by Midjourney",
         5,
         Utils.screenHeight - 10
     )
+    love.graphics.setFont(defaultFont)
 end
 
 function start:keypressed(key)

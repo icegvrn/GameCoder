@@ -1,5 +1,6 @@
 require("scripts/game/gameMap")
 soundManager = require("scripts/game/managers/soundManager")
+uiManager = require("scripts/game/managers/uiManager")
 GAMESTATE = require("scripts/states/GAMESTATE")
 
 gameManager = {}
@@ -23,12 +24,14 @@ end
 
 function gameManager.load()
     gameManager.scenes.start:load()
-
+    uiManager.load()
     soundManager:load()
 end
 
 function gameManager.update(dt)
+    uiManager.update(dt)
     soundManager.update(dt)
+
     for sceneName, scene in pairs(gameManager.scenes) do
         if sceneName == GAMESTATE.currentState then
             if gameManager.currentState ~= scene then
@@ -45,10 +48,12 @@ end
 
 function gameManager.draw()
     gameManager.currentState:draw()
+    uiManager.draw()
 end
 
 function gameManager.keypressed(key)
     gameManager.currentState:keypressed(key)
+    uiManager.keypressed(key)
 end
 
 return gameManager

@@ -13,10 +13,14 @@ function weaponFactory.createWeapon(type)
     weapon:setName(tostring(type))
 
     if type == WEAPONS.TYPE.HERO_MAGIC_STAFF then
-        weapon:setDamageValue(40)
-        weapon:setSpeed(0.5)
+        weapon:setDamageValue(20)
+        weapon:setSpeed(0.2)
         weapon:setRangedWeapon(true)
         weapon:setHoldingOffset(-10, 0)
+    elseif type == WEAPONS.TYPE.BITE then
+        weapon:setDamageValue(1000)
+        weapon:setRangedWeapon(false)
+        weapon:setHoldingOffset(0, 0)
     elseif type == WEAPONS.TYPE.MAGIC_STAFF then
         weapon:setDamageValue(10)
         weapon:setRangedWeapon(true)
@@ -50,7 +54,6 @@ function weaponFactory.createSprites(p_weapon, type)
         print("WARNING WEAPONS FACTORY : " .. type .. " needs images.")
     end
     spriteList[1] = love.graphics.newImage(imagePath)
-    print(spriteList[1])
     p_weapon:setSprites(spriteList)
 end
 

@@ -13,12 +13,12 @@ end
 
 function ennemiAgent:create()
     local ennemiAgent = {}
-
+    ennemiAgent.randomNumber = 0
     ennemiAgent.velocityX = 0
     ennemiAgent.velocityY = 0
     ennemiAgent.character = nil
     ennemiAgent.angle = 0
-    ennemiAgent.range = math.random(5, 30)
+    ennemiAgent.range = math.random(10, 30)
 
     function ennemiAgent:init(character)
         ennemiAgent.character = character
@@ -42,6 +42,10 @@ function ennemiAgent:create()
                 Utils.angle(x, y, love.math.random(0, Utils.screenWidth), love.math.random(0, Utils.screenHeight))
             ennemiAgent.velocityX = speed * math.cos(ennemiAgent.angle)
             ennemiAgent.velocityY = speed * math.sin(ennemiAgent.angle)
+            if (ennemiAgent.character:getWeaponRange()) then
+                ennemiAgent.randomNumber =
+                    math.random(-ennemiAgent.character:getWeaponRange() + 1, ennemiAgent.character:getWeaponRange() - 1)
+            end
             ennemiAgent.character:setState(CHARACTERS.STATE.WALKING)
         elseif currentState == CHARACTERS.STATE.WALKING then
             local newPositionX = x + ennemiAgent.velocityX * dt
@@ -68,7 +72,8 @@ function ennemiAgent:create()
             local speed = ennemiAgent.character:getSpeed() * 2
             local scaleX, scaleY = ennemiAgent.character:getScale()
 
-            ennemiAgent.angle = Utils.angle(x, y, targetX, targetY)
+            ennemiAgent.angle =
+                Utils.angle(x, y, targetX + ennemiAgent.randomNumber, targetY + ennemiAgent.randomNumber)
 
             ennemiAgent.velocityX = (speed * math.cos(ennemiAgent.angle))
             ennemiAgent.velocityY = (speed * math.sin(ennemiAgent.angle))
@@ -92,6 +97,12 @@ function ennemiAgent:create()
                     ennemiAgent.character:setState(CHARACTERS.STATE.IDLE)
                 else
                     ennemiAgent.character:fire(dt)
+                    if ennemiAgent.character:getCurrentWeapon():getIsRangedWeapon() == false then
+                        ennemiAgent.character:getTarget():hit(
+                            ennemiAgent.character,
+                            (ennemiAgent.character:getCurrentWeapon():getDamage() * dt) / 30
+                        )
+                    end
                 end
             end
         end

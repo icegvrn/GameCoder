@@ -11,6 +11,7 @@ function gameOver:update(dt)
 end
 
 function gameOver:draw()
+    love.graphics.print("Game Over", Utils.screenWidth/2, Utils.screenHeight/2)
 end
 
 function gameOver:keypressed(key)

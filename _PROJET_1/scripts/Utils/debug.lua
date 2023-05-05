@@ -40,8 +40,10 @@ function debug.drawCameraDebugOverlay()
 end
 
 function debug.drawPlayerCoordinates()
+
     local cx, cy = d_mainCamera.camera:getPosition()
     local debugBarSize = 30
+    
     if debug.playerCoordinates then
         love.graphics.setColor(0.2, 0.2, 0.2)
         love.graphics.rectangle("fill", 0 + cx, cy, love.graphics.getWidth(), debugBarSize)
@@ -57,6 +59,8 @@ function debug.drawPlayerCoordinates()
             "Player in world : " .. string.format("%.3f", debug.player.position.x),
             Utils.screenCoordinates(310, 10)
         )
+
+        love.graphics.print("FPS : " .. string.format("%.3f", love.timer.getFPS()), Utils.screenCoordinates(440, 10))
     end
 end
 

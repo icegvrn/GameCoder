@@ -8,7 +8,6 @@ local game = scene.new()
 
 function game:load()
     isLoaded = true
-    print("---GAME")
     levelManager.load()
     gameMap.load()
     camera.follow(player.character)
