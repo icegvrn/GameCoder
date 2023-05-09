@@ -32,8 +32,12 @@ font9 = love.graphics.newFont(9)
 uiGame.buttons.weaponText = love.graphics.newText(font9, controller.action1)
 uiGame.buttons.boosterText = love.graphics.newText(font9, controller.action2)
 
+uiGame.buttons.door = love.graphics.newImage("contents/images/ui/doorOpen.png")
+uiGame.buttons.doorOpened = false
+
 function uiGame.load()
     uiGame.buttons.timer = player.boosterDuration
+
     uiGame.buttons.boostedSheet = love.graphics.newImage("contents/images/ui/boostedButtons.png")
     uiGame.buttons.weaponSheet = love.graphics.newImage("contents/images/ui/weaponButtons.png")
     uiGame.buttons.boostedImg =
@@ -58,6 +62,12 @@ function uiGame.update(dt)
 end
 
 function uiGame.draw()
+    if uiGame.buttons.doorOpened then
+        love.graphics.draw(
+            uiGame.buttons.door,
+            Utils.screenCoordinates(Utils.screenWidth - 60, Utils.screenHeight - 60)
+        )
+    end
 end
 
 function uiGame.updatePlayerPointsBar(dt, points, maxPoints)
@@ -212,6 +222,14 @@ function ui.drawPlayerPointBar(points, maxPoints)
     if player.character:getMode() == CHARACTERS.MODE.BOOSTED then
         love.graphics.setFont(defaultFont)
         love.graphics.print(math.floor(uiGame.buttons.timer), x, y)
+    end
+end
+
+function ui.doorIsOpen(bool)
+    if bool then
+        uiGame.buttons.doorOpened = true
+    else
+        uiGame.buttons.doorOpened = false
     end
 end
 

@@ -10,6 +10,7 @@ function Character.new()
     newCharacter.isPlayer = false
     newCharacter.name = "inconnu"
     newCharacter.height = 0
+    newCharacter.width = 0
     newCharacter.maxPV = 50
     newCharacter.currentPV = 100
     newCharacter.strenght = 10
@@ -98,6 +99,15 @@ function Character:getHeight()
     return self.height
 end
 
+function Character:getDimension()
+    return self.height, self.width
+end
+
+function Character:setDimension(h, w)
+    self.height = h
+    self.width = w
+end
+
 function Character:getWeaponScaling()
     return self.weaponScaling
 end
@@ -106,8 +116,9 @@ function Character:setSprites(p_table)
     for k, sprite in pairs(p_table) do
         self.spritestileSheets[k] = sprite
         self.height = sprite:getHeight()
+        self.width = sprite:getWidth() / sprite:getHeight()
         local nbColumns = sprite:getWidth() / sprite:getHeight()
-        local nbLine = sprite:getHeight() / sprite:getHeight()
+        local nbLine = sprite:getHeight() / self.height
         local id = 1
 
         local spriteTable = {}

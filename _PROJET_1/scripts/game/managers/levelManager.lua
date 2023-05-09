@@ -7,11 +7,13 @@ local map = require("scripts/game/gameMap")
 player = require("scripts/game/player")
 require("scripts/states/CHARACTERS")
 require("scripts/states/WEAPONS")
+local ui = require("scripts/ui/uiGame")
 
 levelManager = {}
 levelManager.currentLevel = 1
 levelManager.charactersList = {}
 levelManager.ennemiesList = {}
+levelManager.exitDoor = nil
 
 levelManager.LEVELSTATE = {}
 levelManager.LEVELSTATE.start = "start"
@@ -24,10 +26,13 @@ levelManager.cinematic.timer = 0
 levelManager.cinematic.IsStarted = false
 levelManager.cinematic.lenght = 3
 
+levelManager.isTheGameFinish = false
+levelManager.doorOpened = false
+
 -- REGARDE A QUEL NIVEAU ON EST
 -- CHANGE LE NIVEAU AUQUEL ON EST
 
--- SI LEVEL 1 --
+-- SI LEVEL 1
 
 -- SI LEVEL 2 --
 
@@ -38,19 +43,20 @@ levelManager.cinematic.lenght = 3
 function levelManager.load()
     levelManager.spawnPlayer()
     levelManager.spawnEnnemies()
+    levelManager.exitDoor = map.getDoor()
 end
 
 function levelManager.update(dt)
-    if #levelManager.ennemiesList <= 0 then
-        levelManager.LEVELSTATE.currentState = levelManager.LEVELSTATE.win
-    end
-
     if levelManager.LEVELSTATE.currentState == levelManager.LEVELSTATE.start then
         levelManager.playLevelCinematic(dt)
     elseif levelManager.LEVELSTATE.currentState == levelManager.LEVELSTATE.game then
         levelManager.updateGame(dt)
+        if #levelManager.ennemiesList <= 0 then
+            levelManager.openDoor()
+            levelManager.LEVELSTATE.currentState = levelManager.LEVELSTATE.win
+        end
     elseif levelManager.LEVELSTATE.currentState == levelManager.LEVELSTATE.win then
-        levelManager.openDoor(dt)
+        levelManager.checkDoor(levelManager.exitDoor)
     end
     player.update(dt)
 end
@@ -65,6 +71,33 @@ end
 function levelManager.updateGame(dt)
     for n = #levelManager.ennemiesList, 1, -1 do
         levelManager.ennemiesList[n]:update(dt)
+    end
+    if love.keyboard.isDown("m") then
+        levelManager.nextLevel()
+    end
+end
+
+function levelManager.openDoor()
+    ui.doorIsOpen(true)
+end
+
+function levelManager.checkDoor(exitDoor)
+    playerX, playerY = player.character:getPosition()
+    playerH, playerW = player.character:getDimension()
+
+    if
+        Utils.isCollision(
+            exitDoor.positionX,
+            exitDoor.positionY,
+            exitDoor.width,
+            exitDoor.height,
+            playerX,
+            playerY,
+            playerH,
+            playerW
+        )
+     then
+        levelManager.nextLevel()
     end
 end
 
@@ -113,10 +146,6 @@ function levelManager.spawnPlayer()
 end
 
 function levelManager.keypressed(key)
-    if key == "m" then
-        levelManager.nextLevel()
-    end
-
     for n = 1, #levelManager.charactersList do
         if levelManager.charactersList[n]:isThePlayer() == false then
             levelManager.charactersList[n]:keypressed(key)
@@ -153,20 +182,22 @@ function levelManager.playLevelCinematic(dt)
         end
 
         if levelManager.cinematic.timer >= levelManager.cinematic.lenght then
-            camera.lock(false)
-            player.setInCinematicMode(false)
-            for n = #levelManager.ennemiesList, 1, -1 do
-                levelManager.ennemiesList[n]:setInCinematicMode(false)
+            if levelManager.currentLevel == #levelsConfig then
+                levelManager.cinematic.timer = 0
+                levelManager.cinematic.IsStarted = false
+                levelManager.isTheGameFinish = true
+            else
+                camera.lock(false)
+                player.setInCinematicMode(false)
+                for n = #levelManager.ennemiesList, 1, -1 do
+                    levelManager.ennemiesList[n]:setInCinematicMode(false)
+                end
+                levelManager.LEVELSTATE.currentState = levelManager.LEVELSTATE.game
+                levelManager.cinematic.timer = 0
+                levelManager.cinematic.IsStarted = false
             end
-            levelManager.LEVELSTATE.currentState = levelManager.LEVELSTATE.game
-            levelManager.cinematic.timer = 0
-            levelManager.cinematic.IsStarted = false
         end
     end
-end
-
-function levelManager.openDoor(dt)
-    camera.lock(true)
 end
 
 function levelManager.nextLevel()
@@ -176,13 +207,17 @@ function levelManager.nextLevel()
         levelManager.LEVELSTATE.currentState = levelManager.LEVELSTATE.start
         levelManager.clearEnnemies()
         levelManager.spawnEnnemies()
-    else
-        GAMESTATE.STATE.currentState = GAMESTATE.STATE.WIN
+        ui.doorIsOpen(false)
+        levelManager.exitDoor = map.getDoor()
     end
 end
 
 function levelManager.clearEnnemies()
     levelManager.ennemiesList = {}
+end
+
+function levelManager.playerWinGame()
+    return levelManager.isTheGameFinish
 end
 
 return levelManager

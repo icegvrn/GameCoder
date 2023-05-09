@@ -12,6 +12,7 @@ function win:update(dt)
 end
 
 function win:draw()
+    love.graphics.print("WIIIN", 400, 400)
 end
 
 function win:keypressed(key)

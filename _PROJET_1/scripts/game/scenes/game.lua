@@ -17,6 +17,10 @@ end
 function game:update(dt)
     levelManager.update(dt)
     camera.update(dt)
+
+    if levelManager.playerWinGame() then
+        GAMESTATE.currentState = GAMESTATE.STATE.WIN
+    end
 end
 
 function game:draw()

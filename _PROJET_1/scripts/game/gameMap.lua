@@ -8,7 +8,6 @@ tilesTexture = {}
 gameMap.mapEnable = true
 
 function gameMap.load()
-    -- Choisi la première carte à afficher
     gameMap.initMap()
 end
 
@@ -29,6 +28,11 @@ function gameMap.draw()
                 end
             end
         end
+        posX = currentMap.map.width * currentMap.map.tilewidth
+        posY = (currentMap.map.height * currentMap.map.tileheight) / 2
+
+        local door = currentMap.door
+        love.graphics.rectangle("fill", door.positionX, door.positionY, door.width, door.height)
     end
 end
 
@@ -95,6 +99,10 @@ function gameMap.getMapDimension()
         local height = currentMap.map.height * currentMap.map.tileheight
         return width, height
     end
+end
+
+function gameMap.getDoor()
+    return currentMap.door
 end
 
 return gameMap
