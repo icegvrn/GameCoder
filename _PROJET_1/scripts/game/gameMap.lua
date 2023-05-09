@@ -33,9 +33,9 @@ function gameMap.draw()
 end
 
 -- Initialise le jeu sur la première map
-function gameMap.initMap()
+function gameMap.initMap(nb)
     currentMap = map.new()
-    currentMap:setMapTo(mapList, 1)
+    currentMap:setMapTo(mapList, nb)
     gameMap.loadMap()
 end
 
@@ -87,6 +87,14 @@ function gameMap.clamp(elementPosX, elementPosY)
         elementPosY = mapSizeHeight - 1
     end
     return elementPosX, elementPosY
+end
+
+function gameMap.getMapDimension()
+    if currentMap.map then
+        local width = currentMap.map.width * currentMap.map.tilewidth
+        local height = currentMap.map.height * currentMap.map.tileheight
+        return width, height
+    end
 end
 
 return gameMap

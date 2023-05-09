@@ -15,6 +15,7 @@ function Character.new()
     newCharacter.strenght = 10
     newCharacter.canMove = true
     newCharacter.canFire = true
+    newCharacter.isCinematicMode = false
     newCharacter.ennemiAgent = nil
     newCharacter.target = love.mouse
     newCharacter.lookAt = CONST.DIRECTION.left
@@ -475,6 +476,18 @@ function Character:ChangeColorRed(bool)
     else
         self.color = {1, 1, 1, 1}
     end
+end
+
+function Character:setInCinematicMode(bool)
+    if bool then
+        self.isCinematicMode = true
+    else
+        self.isCinematicMode = false
+    end
+end
+
+function Character:isInCinematicMode()
+    return self.isCinematicMode
 end
 
 return Character

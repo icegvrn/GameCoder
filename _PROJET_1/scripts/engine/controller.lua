@@ -10,7 +10,6 @@ controller.action2 = "lalt"
 controller.bend = "lshift"
 
 function controller.changeMode()
-    print("LAAAA__________________________________")
     if controller.mode == "AZERTY" then
         controller.mode = "QWERTY"
         controller.up = "w"

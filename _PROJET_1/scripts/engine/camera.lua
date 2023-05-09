@@ -9,6 +9,7 @@ function Camera.new()
     newCamera.target = nil
     newCamera.destinationX = 0
     newCamera.destinationY = 0
+
     return setmetatable(newCamera, camera_mt)
 end
 

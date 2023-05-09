@@ -19,6 +19,7 @@ function ennemiAgent:create()
     ennemiAgent.character = nil
     ennemiAgent.angle = 0
     ennemiAgent.range = math.random(10, 30)
+    ennemiAgent.isCinematicMode = false
 
     function ennemiAgent:init(character)
         ennemiAgent.character = character
@@ -63,10 +64,11 @@ function ennemiAgent:create()
                 end
             end
 
-            ---- On cherche le joueur, qui est dans target déjà.  ----
-
-            if distance <= ennemiAgent.range then
-                ennemiAgent.character:setState(CHARACTERS.STATE.ALERT)
+            if ennemiAgent.character:isInCinematicMode() == false then
+                ---- On cherche le joueur, qui est dans target déjà.  ----
+                if distance <= ennemiAgent.range then
+                    ennemiAgent.character:setState(CHARACTERS.STATE.ALERT)
+                end
             end
         elseif currentState == CHARACTERS.STATE.ALERT then
             local speed = ennemiAgent.character:getSpeed() * 2

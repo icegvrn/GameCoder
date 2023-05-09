@@ -17,10 +17,17 @@ keyDown = false
 
 function player.setCharacter(character)
     player.character = character
-    player.character:setPosition(100, 300)
+    player.character:setPosition(-10, Utils.screenHeight / 2)
     player.character:setSpeed(120)
     player.character:setMode(CHARACTERS.MODE.NORMAL)
     player.changeState(CHARACTERS.STATE.IDLE)
+end
+
+function player.setInCinematicMode(bool)
+    if bool then
+        player.setPosition(-10, Utils.screenHeight / 2)
+    end
+    player.character:setInCinematicMode(bool)
 end
 
 function player.getCharacter()
@@ -38,18 +45,23 @@ function player.update(dt)
     end
 
     player.character:update(dt)
-    player.updatePosition(dt)
-    player.updatePVbar(dt)
-    player.updateMode(dt)
 
-    if love.keyboard.isDown(controller.action1) then
-        player.fire(dt)
+    if player.character:isInCinematicMode() == false then
+        player.updatePosition(dt)
+        player.updatePVbar(dt)
+        player.updateMode(dt)
+
+        if love.keyboard.isDown(controller.action1) then
+            player.fire(dt)
+        end
     end
 end
 
 function player.draw()
     player.character:draw()
-    player.drawUI()
+    if player.character:isInCinematicMode() == false then
+        player.drawUI()
+    end
 end
 
 function player.updateMode(dt)
@@ -168,6 +180,21 @@ end
 
 function player.resetPoints()
     player.points = 0
+end
+
+function player.playEntranceAnimation(dt)
+    if player.character:getState() ~= CHARACTERS.STATE.WALKING then
+        player.changeState(CHARACTERS.STATE.WALKING)
+    end
+
+    x, y = player.character:getPosition()
+    local sX, sY = player.character:getScale()
+    local speed = player.character:getSpeed()
+    local velocityX = speed / 3 * dt
+
+    x = x + velocityX * sX
+
+    player.setPosition(x, y)
 end
 
 return player

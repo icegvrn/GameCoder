@@ -11,6 +11,7 @@ uiGame.player.lifeColor = {}
 uiGame.player.lifeColor[1] = {0.06, 0.69, 0.27}
 uiGame.player.lifeColor[2] = {1, 1, 0}
 uiGame.player.lifeColor[3] = {1, 0, 0}
+uiGame.player.currentLifeColor = uiGame.player.lifeColor[1]
 
 uiGame.player.pointsBarWidth = 200
 uiGame.player.pointsBarHeight = 15

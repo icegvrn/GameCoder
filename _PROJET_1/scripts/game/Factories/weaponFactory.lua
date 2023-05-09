@@ -11,8 +11,11 @@ function weaponFactory.createWeapon(type)
 
     weapon:setState(WEAPONS.STATE.IDLE)
     weapon:setName(tostring(type))
-
-    if type == WEAPONS.TYPE.HERO_MAGIC_STAFF then
+    if type == WEAPONS.TYPE.NONE then
+        weapon:setDamageValue(0)
+        weapon:setSpeed(0)
+        weapon:setRangedWeapon(false)
+elseif type == WEAPONS.TYPE.HERO_MAGIC_STAFF then
         weapon:setDamageValue(20)
         weapon:setSpeed(0.2)
         weapon:setRangedWeapon(true)
