@@ -40,6 +40,17 @@ function player.load()
 end
 
 function player.update(dt)
+    local gmap = map.getCurrentMap()
+    x, y = player.character:getPosition()
+
+    local w, h = player.character:getDimension()
+
+    if (map.isThereASolidElement(x, y, w, h, player.character)) then
+        player.character.canMove = false
+    else
+        player.character.canMove = true
+    end
+
     if player.character:getCurrentPV() <= 0 then
         GAMESTATE.currentState = GAMESTATE.STATE.GAMEOVER
     end
@@ -47,9 +58,14 @@ function player.update(dt)
     player.character:update(dt)
 
     if player.character:isInCinematicMode() == false then
-        player.updatePosition(dt)
         player.updatePVbar(dt)
         player.updateMode(dt)
+        if player.character.canMove then
+            lastX, lastY = player.character:getPosition()
+            player.updatePosition(dt)
+        else
+            player.character:setPosition(lastX, lastY)
+        end
 
         if love.keyboard.isDown(controller.action1) then
             player.fire(dt)

@@ -6,6 +6,8 @@ function Map.new()
     newMap.door = {}
     newMap.door.height = 50
     newMap.door.width = 10
+    newMap.openDoorImg = love.graphics.newImage("contents/images/doorOpen.png")
+    newMap.closeDoorImg = love.graphics.newImage("contents/images/doorClose.png")
     return setmetatable(newMap, maps_mt)
 end
 
@@ -18,6 +20,12 @@ function Map:setMapTo(list, mapNb)
     end
     if self.map.layers[3] then
         self.data[3] = self.map.layers[3].data
+    end
+    if self.map.layers[4] then
+        self.data[4] = self.map.layers[4].data
+    end
+    if self.map.layers[5] then
+        self.data[5] = self.map.layers[5].data
     end
 
     self:initDoor()

@@ -6,7 +6,8 @@ currentMap = {}
 tileSheet = love.graphics.newImage("contents/images/dungeontileset-extended.png")
 tilesTexture = {}
 gameMap.mapEnable = true
-
+gameMap.doorOpen = false
+local testFont = love.graphics.newFont(9)
 function gameMap.load()
     gameMap.initMap()
 end
@@ -14,25 +15,62 @@ end
 function gameMap.draw()
     if gameMap.mapEnable then
         for i = 1, #currentMap.data do
-            for l = 1, currentMap.map.height do
-                for c = 1, currentMap.map.width do
-                    local index = (l - 1) * currentMap.map.width + c
-                    local tid = currentMap.data[i][index]
-                    if tid ~= 0 then
-                        local x = (c - 1) * currentMap.map.tilewidth
-                        local y = (l - 1) * currentMap.map.tileheight
-                        if tilesTexture[tid] then
-                            love.graphics.draw(tileSheet, tilesTexture[tid], x, y)
-                        end
-                    end
-                end
-            end
+            gameMap.drawTiles(i)
         end
         posX = currentMap.map.width * currentMap.map.tilewidth
         posY = (currentMap.map.height * currentMap.map.tileheight) / 2
 
         local door = currentMap.door
-        love.graphics.rectangle("fill", door.positionX, door.positionY, door.width, door.height)
+        local exitDoorImg = currentMap.closeDoorImg
+
+        if gameMap.doorOpen then
+            exitDoorImg = currentMap.openDoorImg
+        end
+        love.graphics.draw(
+            exitDoorImg,
+            door.positionX + currentMap.openDoorImg:getWidth() / 2,
+            door.positionY + 5,
+            math.rad(90),
+            1,
+            1,
+            currentMap.openDoorImg:getWidth() / 2,
+            currentMap.openDoorImg:getHeight() / 2
+        )
+
+        love.graphics.draw(
+            currentMap.closeDoorImg,
+            10 - currentMap.openDoorImg:getWidth() / 2,
+            door.positionY + 5,
+            math.rad(-90),
+            1,
+            1,
+            currentMap.openDoorImg:getWidth() / 2,
+            currentMap.openDoorImg:getHeight() / 2
+        )
+
+    --  love.graphics.rectangle("fill", door.positionX, door.positionY, door.width, door.height)
+    end
+end
+
+function gameMap.drawTiles(i)
+    for l = 1, currentMap.map.height do
+        for c = 1, currentMap.map.width do
+            local index = (l - 1) * currentMap.map.width + c
+            local tid = currentMap.data[i][index]
+            if tid ~= 0 then
+                local x = (c - 1) * currentMap.map.tilewidth
+                local y = (l - 1) * currentMap.map.tileheight
+                if tilesTexture[tid] then
+                    love.graphics.draw(tileSheet, tilesTexture[tid], x, y)
+                end
+            end
+            if i == 3 then
+                local x = (c - 1) * currentMap.map.tilewidth
+                local y = (l - 1) * currentMap.map.tileheight
+              --  love.graphics.setFont(testFont)
+               -- love.graphics.print(currentMap.data[i][index], x, y)
+            end
+        end
     end
 end
 
@@ -103,6 +141,60 @@ end
 
 function gameMap.getDoor()
     return currentMap.door
+end
+
+function gameMap.closeDoor()
+    gameMap.doorOpen = false
+end
+
+function gameMap.openDoor()
+    gameMap.doorOpen = true
+end
+
+function gameMap.getCurrentMap()
+    return currentMap.map
+end
+
+function gameMap.isThereASolidElement(p_left, p_top, p_width, p_height, character)
+    if character then
+        if character:isThePlayer() then
+            p_width = p_width - 16
+            p_height = p_height - 16
+        end
+    end
+
+    local touch = false
+    local col = math.floor(p_left / currentMap.map.tilewidth)
+    local lin = math.floor(p_top / currentMap.map.tileheight)
+
+    -- calcul de la colonne et de la ligne de la dernière case couverte par le joueur
+    local col2 = col + math.floor((p_width) / currentMap.map.tilewidth)
+    local lin2 = lin + math.floor((p_height) / currentMap.map.tileheight)
+
+    -- parcours de toutes les cases couvertes par le joueur
+    for c = col, col2 do
+        for r = lin, lin2 do
+            local index = (r - 1) * currentMap.map.width + c
+
+            if currentMap.data[3][index] then
+                if index > 0 then
+                    if (currentMap.data[3][index] ~= 0) then
+                        touch = true
+                    end
+                end
+            end
+        end
+    end
+
+    if touch == true then
+        return true
+    else
+        return false
+    end
+end
+
+function gameMap.getName()
+    return currentMap.map.layers[3].name
 end
 
 return gameMap

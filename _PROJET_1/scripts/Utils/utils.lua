@@ -49,4 +49,14 @@ function Utils.isCollision(x1, y1, w1, h1, x2, y2, w2, h2)
     end
 end
 
+function Utils.convertToTilemapPosition(x, y, w, h, map)
+    print("Tuile largeur : " .. map.tilewidth)
+    print("Tuile hauteur : " .. map.tileheight)
+    local tilemapPositionX = math.floor(x / map.tilewidth)
+    local tilemapPositionY = math.floor(y / map.tileheight)
+    local tilemapRightPosition = math.floor((x + w) / map.tilewidth)
+    local tilemapBottomPosition = math.floor((y + h) / map.tileheight)
+    return tilemapPositionX, tilemapPositionY, tilemapRightPosition, tilemapBottomPosition
+end
+
 return Utils

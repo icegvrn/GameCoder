@@ -53,6 +53,7 @@ function levelManager.update(dt)
         levelManager.updateGame(dt)
         if #levelManager.ennemiesList <= 0 then
             levelManager.openDoor()
+
             levelManager.LEVELSTATE.currentState = levelManager.LEVELSTATE.win
         end
     elseif levelManager.LEVELSTATE.currentState == levelManager.LEVELSTATE.win then
@@ -78,6 +79,7 @@ function levelManager.updateGame(dt)
 end
 
 function levelManager.openDoor()
+    map.openDoor()
     ui.doorIsOpen(true)
 end
 
@@ -127,12 +129,24 @@ function levelManager.spawnEnnemies()
             local ennemi = c_factory.createCharacter(CHARACTERS.CATEGORY.ENNEMY, type, false, myCharacter)
             local ennemiWeapon = w_factory.createWeapon(weapon)
             ennemi:equip(ennemiWeapon)
-            local positionX = love.math.random(300, mapWidth)
-            local positionY = love.math.random(0, mapWidth)
+            c_w, c_h = ennemi:getDimension()
+            positionX, positionY = levelManager.findSpawnPoint(mapWidth, mapHeight, c_w, c_h)
             ennemi:setPosition(positionX, positionY)
             table.insert(levelManager.ennemiesList, ennemi)
         end
     end
+end
+
+function levelManager.findSpawnPoint(mapWidth, mapHeight, c_w, c_h)
+    print("je passe")
+    local pX = love.math.random(300, mapWidth)
+    local pY = love.math.random(0, mapHeight)
+
+    while (map.isThereASolidElement(pX, pY, c_w, c_h)) do
+        pX = love.math.random(300, mapWidth - c_w)
+        pY = love.math.random(0, mapHeight - c_h)
+    end
+    return pX, pY
 end
 
 function levelManager.spawnPlayer()
@@ -208,6 +222,7 @@ function levelManager.nextLevel()
         levelManager.clearEnnemies()
         levelManager.spawnEnnemies()
         ui.doorIsOpen(false)
+        map.closeDoor()
         levelManager.exitDoor = map.getDoor()
     end
 end

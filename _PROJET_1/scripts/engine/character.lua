@@ -100,7 +100,10 @@ function Character:getHeight()
 end
 
 function Character:getDimension()
-    return self.height, self.width
+    local c_state = self.mode .. "_" .. self.state
+    local w = self.spritestileSheets[c_state]:getWidth() / 4
+    local h = self.spritestileSheets[c_state]:getHeight()
+    return w, h
 end
 
 function Character:setDimension(h, w)
@@ -116,7 +119,7 @@ function Character:setSprites(p_table)
     for k, sprite in pairs(p_table) do
         self.spritestileSheets[k] = sprite
         self.height = sprite:getHeight()
-        self.width = sprite:getWidth() / sprite:getHeight()
+        self.width = sprite:getWidth() / 4
         local nbColumns = sprite:getWidth() / sprite:getHeight()
         local nbLine = sprite:getHeight() / self.height
         local id = 1
@@ -126,9 +129,9 @@ function Character:setSprites(p_table)
             for l = 1, nbLine do
                 spriteTable[id] =
                     love.graphics.newQuad(
-                    (c - 1) * sprite:getHeight(),
+                    (c - 1) * sprite:getWidth() / 4,
                     (l - 1) * sprite:getHeight(),
-                    sprite:getHeight(),
+                    sprite:getWidth() / 4,
                     sprite:getHeight(),
                     sprite:getWidth(),
                     sprite:getHeight()
@@ -220,7 +223,7 @@ function Character:getMode()
 end
 
 function Character:getCurrentTileSheet()
-    local c_state = self.mode .. "_" .. self.state
+    local c_state = c
     return self.spritestileSheets[c_state]
 end
 
@@ -291,7 +294,7 @@ function Character:draw()
     local c_state = self.mode .. "_" .. self.state
     local c_spriteID = math.floor(self.currentSpriteId)
     local px, py = self.transform.position.x, self.transform.position.y
-    x, y = Utils.screenCoordinates(self.target:getPosition())
+    local x, y = Utils.screenCoordinates(self.target:getPosition())
 
     if (self.target ~= love.mouse) then
         px, py = Utils.screenCoordinates(px, py)

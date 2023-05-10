@@ -18,8 +18,12 @@ function ennemiAgent:create()
     ennemiAgent.velocityY = 0
     ennemiAgent.character = nil
     ennemiAgent.angle = 0
-    ennemiAgent.range = math.random(10, 30)
+    ennemiAgent.range = math.random(10, 25)
     ennemiAgent.isCinematicMode = false
+    ennemiAgent.timer = 0
+    ennemiAgent.timerIsStarted = false
+    lastPositionX = 0
+    lastPositionY = 0
 
     function ennemiAgent:init(character)
         ennemiAgent.character = character
@@ -43,10 +47,12 @@ function ennemiAgent:create()
                 Utils.angle(x, y, love.math.random(0, Utils.screenWidth), love.math.random(0, Utils.screenHeight))
             ennemiAgent.velocityX = speed * math.cos(ennemiAgent.angle)
             ennemiAgent.velocityY = speed * math.sin(ennemiAgent.angle)
+
             if (ennemiAgent.character:getWeaponRange()) then
                 ennemiAgent.randomNumber =
                     math.random(-ennemiAgent.character:getWeaponRange() + 1, ennemiAgent.character:getWeaponRange() - 1)
             end
+
             ennemiAgent.character:setState(CHARACTERS.STATE.WALKING)
         elseif currentState == CHARACTERS.STATE.WALKING then
             local newPositionX = x + ennemiAgent.velocityX * dt
@@ -56,18 +62,36 @@ function ennemiAgent:create()
                 ennemiAgent.character:setPosition(map.clamp(newPositionX, newPositionY))
                 ennemiAgent.character:setState(CHARACTERS.STATE.IDLE)
             else
-                ennemiAgent.character:setPosition(newPositionX, newPositionY)
+                local ennemiWidth, ennemiHeight = ennemiAgent.character:getDimension()
+                local gmap = map.getCurrentMap()
+
+                if (map.isThereASolidElement(newPositionX, newPositionY, ennemiWidth, ennemiHeight)) then
+                    ennemiAgent.character:setPosition(positionX, positionY)
+                    ennemiAgent.character:setState(CHARACTERS.STATE.IDLE)
+                else
+                    ennemiAgent.character:setPosition(newPositionX, newPositionY)
+                    lastPositionX, lastPositionY = ennemiAgent.character:getPosition()
+                    if ennemiAgent.character:isInCinematicMode() == false then
+                        ---- On cherche le joueur, qui est dans target déjà.  ----
+                        if distance <= ennemiAgent.range then
+                            if ennemiAgent.timerIsStarted == false then
+                                ennemiAgent.timer = 0
+                                ennemiAgent.timerIsStarted = true
+                            else
+                                ennemiAgent.timer = ennemiAgent.timer + dt
+                                if ennemiAgent.timer >= 2 then
+                                    ennemiAgent.character:setState(CHARACTERS.STATE.ALERT)
+                                    ennemiAgent.timerIsStarted = false
+                                end
+                            end
+                        end
+                    end
+                end
+
                 if ennemiAgent.velocityX < 0 then
                     ennemiAgent.character:changeDirection(CONST.DIRECTION.left)
                 else
                     ennemiAgent.character:changeDirection(CONST.DIRECTION.right)
-                end
-            end
-
-            if ennemiAgent.character:isInCinematicMode() == false then
-                ---- On cherche le joueur, qui est dans target déjà.  ----
-                if distance <= ennemiAgent.range then
-                    ennemiAgent.character:setState(CHARACTERS.STATE.ALERT)
                 end
             end
         elseif currentState == CHARACTERS.STATE.ALERT then
@@ -83,7 +107,15 @@ function ennemiAgent:create()
             local newPositionX = x + ennemiAgent.velocityX * dt
             local newPositionY = y + ennemiAgent.velocityY * dt
 
-            ennemiAgent.character:setPosition(map.clamp(newPositionX, newPositionY))
+            local ennemiWidth, ennemiHeight = ennemiAgent.character:getDimension()
+
+            local gmap = map.getCurrentMap()
+            if (map.isThereASolidElement(newPositionX, newPositionY, ennemiWidth, ennemiHeight)) then
+                ennemiAgent.character:setState(CHARACTERS.STATE.IDLE)
+            else
+                ennemiAgent.character:setPosition(map.clamp(newPositionX, newPositionY))
+                lastPositionX, lastPositionY = ennemiAgent.character:getPosition()
+            end
 
             -- VERIFIER SI JE PERDS DE VUE LE HEROS
             if ennemiAgent.character:getWeaponRange() then
