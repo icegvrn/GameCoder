@@ -8,8 +8,10 @@ levelsConfiguration[5] = {}
 levelsConfiguration[6] = {}
 levelsConfiguration[7] = {}
 
-levelsConfiguration[1].ennemies = {{CHARACTERS.TYPE.KNIGHT, WEAPONS.TYPE.SWORD, 25},
-{CHARACTERS.TYPE.KNIGHT, WEAPONS.TYPE.SWORD, 25}}
+levelsConfiguration[1].ennemies = {
+    {CHARACTERS.TYPE.KNIGHT, WEAPONS.TYPE.SWORD, 70},
+    {CHARACTERS.TYPE.MAGE, WEAPONS.TYPE.MAGIC_STAFF, 25}
+}
 
 levelsConfiguration[2].ennemies = {
     {CHARACTERS.TYPE.KNIGHT, WEAPONS.TYPE.SWORD, 20}

@@ -45,6 +45,7 @@ function ennemiAgent:create()
             local speed = ennemiAgent.character:getSpeed()
             ennemiAgent.angle =
                 Utils.angle(x, y, love.math.random(0, Utils.screenWidth), love.math.random(0, Utils.screenHeight))
+
             ennemiAgent.velocityX = speed * math.cos(ennemiAgent.angle)
             ennemiAgent.velocityY = speed * math.sin(ennemiAgent.angle)
 
@@ -52,8 +53,12 @@ function ennemiAgent:create()
                 ennemiAgent.randomNumber =
                     math.random(-ennemiAgent.character:getWeaponRange() + 1, ennemiAgent.character:getWeaponRange() - 1)
             end
-
-            ennemiAgent.character:setState(CHARACTERS.STATE.WALKING)
+            local newPositionX = x + ennemiAgent.velocityX * dt
+            local newPositionY = y + ennemiAgent.velocityY * dt
+            local ennemiWidth, ennemiHeight = ennemiAgent.character:getDimension()
+            if (map.isThereASolidElement(newPositionX, newPositionY, ennemiWidth - 16, ennemiHeight - 16)) == false then
+                ennemiAgent.character:setState(CHARACTERS.STATE.WALKING)
+            end
         elseif currentState == CHARACTERS.STATE.WALKING then
             local newPositionX = x + ennemiAgent.velocityX * dt
             local newPositionY = y + ennemiAgent.velocityY * dt
@@ -65,8 +70,8 @@ function ennemiAgent:create()
                 local ennemiWidth, ennemiHeight = ennemiAgent.character:getDimension()
                 local gmap = map.getCurrentMap()
 
-                if (map.isThereASolidElement(newPositionX, newPositionY, ennemiWidth, ennemiHeight)) then
-                    ennemiAgent.character:setPosition(positionX, positionY)
+                if (map.isThereASolidElement(newPositionX, newPositionY, ennemiWidth - 16, ennemiHeight - 16)) then
+                    ennemiAgent.character:setPosition(x, y)
                     ennemiAgent.character:setState(CHARACTERS.STATE.IDLE)
                 else
                     ennemiAgent.character:setPosition(newPositionX, newPositionY)
@@ -79,7 +84,7 @@ function ennemiAgent:create()
                                 ennemiAgent.timerIsStarted = true
                             else
                                 ennemiAgent.timer = ennemiAgent.timer + dt
-                                if ennemiAgent.timer >= 2 then
+                                if ennemiAgent.timer >= 1.5 then
                                     ennemiAgent.character:setState(CHARACTERS.STATE.ALERT)
                                     ennemiAgent.timerIsStarted = false
                                 end
