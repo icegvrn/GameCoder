@@ -60,12 +60,47 @@ function Character.new()
     newCharacter.defaultFont = love.graphics.newFont()
     newCharacter.alertImg = love.graphics.newImage("contents/images/characters/exclamation.png")
 
+    newCharacter.sounds = {}
+    newCharacter.sounds[1] = "contents/sounds/game/characters/default.wav"
+    newCharacter.sounds[2] = "contents/sounds/game/characters/default.wav"
+    newCharacter.sounds[3] = "contents/sounds/game/characters/default.wav"
+    newCharacter.talkVolume = 0.3
+    newCharacter.silenceBetweenTalk = 1
+
+    newCharacter.playSound = false
+
     return setmetatable(newCharacter, characters_mt)
 end
+
+function Character:setSounds(string, string2, string3)
+    self.sounds[1] = string
+    if string2 then
+        self.sounds[2] = string2
+        if string3 then
+            self.sounds[3] = string3
+        else
+            self.sounds[3] = string
+        end
+    else
+        self.sounds[2] = string
+    end
+end
+
+function Character:getSound()
+    return self.sounds[1], self.sounds[2], self.sounds[3]
+end
+
+function Character:setSilenceIntervalBetweenTalk(nb)
+    self.silenceBetweenTalk = nb
+end
+
 function Character:setWeaponScaling(nb)
     self.weaponScaling = nb
 end
 
+function Character:setTalkingVolume(nb)
+    self.talkVolume = nb
+end
 function Character:getCurrentPV()
     return self.currentPV
 end
@@ -203,6 +238,13 @@ end
 
 function Character:setState(state)
     self.state = state
+
+    if state == CHARACTERS.STATE.ALERT then
+        local randNb = love.math.random(1, self.silenceBetweenTalk * 100)
+        if randNb == self.silenceBetweenTalk * 100 then
+            soundManager:playSound("contents/sounds/game/characters/alert.wav", 0.2, false)
+        end
+    end
 end
 
 function Character:getState()
@@ -287,8 +329,10 @@ function Character:draw()
     if self.ennemiAgent then
         self.ennemiAgent:draw()
     end
-    if #self.weapon ~= 0 then
-        self.weapon[self.currentWeaponId]:draw()
+    if self.state ~= CHARACTERS.STATE.DEAD then
+        if #self.weapon ~= 0 then
+            self.weapon[self.currentWeaponId]:draw()
+        end
     end
 
     local c_state = self.mode .. "_" .. self.state
@@ -353,6 +397,19 @@ function Character:draw()
     end
 end
 
+function Character:playSounds()
+    if self.playSound == false then
+        if self.isHit then
+            if self.isPlayer then
+                soundManager:playSound("contents/sounds/game/heros_hitted.wav", 0.7, false)
+            else
+                soundManager:playSound("contents/sounds/game/ennemi_hitted.wav", 0.1, false)
+            end
+            self.playSound = true
+        end
+    end
+end
+
 function Character:update(dt)
     if self.isHit then
         self:ChangeColorRed(true)
@@ -360,8 +417,10 @@ function Character:update(dt)
         if self.timer >= 0.4 then
             self.timer = 0
             self.isHit = false
+            self.playSound = false
             self:ChangeColorRed(false)
         end
+        self:playSounds()
     end
 
     local c_state = self.mode .. "_" .. self.state
@@ -380,11 +439,13 @@ function Character:update(dt)
     end
 
     if self.currentPV <= 0 then
+        self:setState(CHARACTERS.STATE.DEAD)
         self.canBeHurt = false
         self.dieTimer = self.dieTimer + 1 * dt
         if self.dieTimer >= 0.5 then
             levelManager.destroyCharacter(self, weapon)
             self.dieTimer = 0
+            soundManager:playSound("contents/sounds/game/win_point.wav", 0.2, false)
         end
     end
 end
@@ -416,6 +477,11 @@ function Character:fire(dt)
         self.weaponScaling,
         self.target
     )
+    local randNb = love.math.random(1, self.silenceBetweenTalk * 1000)
+    if randNb == self.silenceBetweenTalk * 1000 then
+        local nb = love.math.random(1, #self.sounds)
+        soundManager:playSound(self.sounds[nb], self.talkVolume, false)
+    end
 end
 
 function Character:moveWeapon(dt)
@@ -454,10 +520,8 @@ function Character:hit(attacker, damage)
         if attacker:isThePlayer() then
             if self.currentPV <= 0 then
                 player.addPoints(self.maxPV / 2)
-                print("Tu gagne : " .. self.maxPV / 2)
             else
                 player.addPoints(self.maxPV / 10)
-                print("Tu gagne : " .. self.maxPV / 10)
             end
         end
     end
@@ -468,6 +532,7 @@ function Character:isCollidedBy(weaponX, weaponY, weaponWidth, weaponHeight)
     local weaponBottomLeft = weaponY + weaponHeight
 
     local c_state = self.mode .. "_" .. self.state
+
     local spriteWidth = self.spritestileSheets[c_state]:getWidth() / #self.spritesList[c_state]
     local spriteHeight = self.spritestileSheets[c_state]:getHeight()
 

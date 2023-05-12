@@ -67,8 +67,8 @@ function gameMap.drawTiles(i)
             if i == 3 then
                 local x = (c - 1) * currentMap.map.tilewidth
                 local y = (l - 1) * currentMap.map.tileheight
-              --  love.graphics.setFont(testFont)
-               -- love.graphics.print(currentMap.data[i][index], x, y)
+            --  love.graphics.setFont(testFont)
+            -- love.graphics.print(currentMap.data[i][index], x, y)
             end
         end
     end
@@ -175,11 +175,12 @@ function gameMap.isThereASolidElement(p_left, p_top, p_width, p_height, characte
     for c = col, col2 do
         for r = lin, lin2 do
             local index = (r - 1) * currentMap.map.width + c
-
-            if currentMap.data[3][index] then
-                if index > 0 then
-                    if (currentMap.data[3][index] ~= 0) then
-                        touch = true
+            if currentMap.data[3] then
+                if currentMap.data[3][index] then
+                    if index > 0 then
+                        if (currentMap.data[3][index] ~= 0) then
+                            touch = true
+                        end
                     end
                 end
             end

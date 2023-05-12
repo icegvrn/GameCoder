@@ -59,6 +59,13 @@ function weapon.new()
     newWeapon.timer = 0
 
     newWeapon.hittableCharacters = {}
+    lifeFactor = 0.7
+
+    newWeapon.sounds = {}
+    newWeapon.sounds[1] = "contents/sounds/game/heros_hitted.wav"
+    newWeapon.sounds[2] = "contents/sounds/game/heros_hitted.wav"
+    newWeapon.soundVolume = 0.3
+    newWeapon.playSound = false
 
     return setmetatable(newWeapon, weapons_mt)
 end
@@ -73,6 +80,24 @@ end
 
 function weapon:setDamageValue(dmg)
     self.damage = dmg
+end
+
+function weapon:setSounds(string, string2, string3)
+    self.sounds[1] = string
+    if string2 then
+        self.sounds[2] = string2
+        if string3 then
+            self.sounds[3] = string3
+        end
+    end
+end
+
+function weapon:setSoundsVolume(nb)
+    self.soundVolume = nb
+end
+
+function weapon:getSound()
+    return self.sounds[1], self.sounds[2]
 end
 
 function weapon:getDamage()
@@ -200,7 +225,23 @@ function weapon:drawFiredElements()
     if (self.isRangedWeapon) then
         if self.FireList then
             for k, v in ipairs(self.FireList) do
-                love.graphics.circle("fill", v.x, v.y, 5, 5)
+                if self.owner:isThePlayer() then
+                    love.graphics.setColor(1, 0.1, 0, 1)
+                    love.graphics.circle("fill", v.x, v.y, 6)
+                    for n = 1, #v.list_trail do
+                        local t = v.list_trail[n]
+                        love.graphics.setColor(t.color, 0.1, 0.8, t.vie)
+                        love.graphics.circle("fill", t.x, t.y, 6)
+                    end
+                else
+                    love.graphics.setColor(0, 1, 0.1, 0.8)
+                    love.graphics.circle("fill", v.x, v.y, 4)
+                    for n = 1, #v.list_trail do
+                        local t = v.list_trail[n]
+                        love.graphics.setColor(t.color, 0.8, 0.1, t.vie)
+                        love.graphics.circle("fill", t.x, t.y, 4)
+                    end
+                end
             end
         end
     end
@@ -223,7 +264,7 @@ function weapon:update(dt)
     if self.owner:isThePlayer() then
         self.hittableCharacters = levelManager.getListofEnnemies()
         if self.owner:getMode() == CHARACTERS.MODE.BOOSTED then
-            self:boostOwner()
+            self:boostOwner(dt)
         end
     else
         if self.hittableCharacters[1] ~= self.owner:getTarget() then
@@ -234,10 +275,11 @@ function weapon:update(dt)
     self:updateFiredElements(dt)
 end
 
-function weapon:boostOwner()
+function weapon:boostOwner(dt)
     local x, y = self.owner:getPosition()
     for c = #self.hittableCharacters, 1, -1 do
         if self:isCollide(x, y, self.owner:getHeight(), self.owner:getHeight(), self.hittableCharacters[c]) then
+            self:fire(dt)
             self.hittableCharacters[c]:hit(self.owner, self.damage)
         end
     end
@@ -246,25 +288,30 @@ end
 function weapon:fire(dt, ownerPosition, ownerScale, ownerHandPosition, ownerWeaponScaling, ownerTarget)
     self.isFiring = true
 
-    if self.isRangedWeapon then
-        self.timer = self.timer + dt
-        if self.timer >= self.speed then
-            self.canFire = true
-            self.timer = 0
-        end
+    self.timer = self.timer + dt
 
-        local pX, pY = ownerPosition.x, ownerPosition.y
-        local mX, mY = ownerTarget:getPosition()
+    if self.timer >= self.speed then
+        self.canFire = true
+        self.timer = 0
+    end
 
-        if ownerTarget == love.mouse then
-            mX, mY = utils.mouseToWorldCoordinates(love.mouse.getPosition())
-        end
+    if self.canFire then
+        -- Lecture entre deux sons, pour avoir des sons plus naturels
+        local nb = love.math.random(1, #self.sounds)
+        soundManager:playSound(self.sounds[nb], self.soundVolume, false)
 
-        local angle = math.atan2(mY - pY, mX - pX)
-        self.currentAngle = angle
-        self:move(dt, ownerPosition, ownerScale, ownerHandPosition, ownerWeaponScaling, ownerTarget)
+        if self.isRangedWeapon then
+            local pX, pY = ownerPosition.x, ownerPosition.y
+            local mX, mY = ownerTarget:getPosition()
 
-        if self.canFire == true then
+            if ownerTarget == love.mouse then
+                mX, mY = utils.mouseToWorldCoordinates(love.mouse.getPosition())
+            end
+
+            local angle = math.atan2(mY - pY, mX - pX)
+            self.currentAngle = angle
+            self:move(dt, ownerPosition, ownerScale, ownerHandPosition, ownerWeaponScaling, ownerTarget)
+
             local fire = {}
             fire.x = self.hitBox.position.x
             fire.y = self.hitBox.position.y
@@ -273,16 +320,41 @@ function weapon:fire(dt, ownerPosition, ownerScale, ownerHandPosition, ownerWeap
             fire.lifeTime = 2
             fire.size = 5
             fire.distance = utils.distance(pX, pY, mX, mY)
-
+            fire.list_trail = {}
             table.insert(self.FireList, fire)
-            self.canFire = false
         end
-    else
+        self.canFire = false
+    end
+    if self.isRangedWeapon == false then
         self:playAttackAnimation(dt)
     end
     self.isFiring = false
 end
 
+function weapon:AddTrailToBall(dt, fireList)
+    for i = #fireList, 1, -1 do
+        for n = #fireList[i].list_trail, 1, -1 do
+            local t = fireList[i].list_trail[n]
+            t.vie = t.vie - dt + lifeFactor * dt
+            t.color = t.color - 0.7 * dt
+            t.x = t.x + t.vx
+            t.y = t.y + t.vy
+            if t.vie <= 0 then
+                table.remove(fireList[i].list_trail, n)
+            end
+        end
+
+        local maTrainee = {}
+        maTrainee.vx = math.random(-0.1, 0.1)
+        maTrainee.vy = math.random(-0.02, 0.02)
+        maTrainee.x = fireList[i].x
+        maTrainee.y = fireList[i].y
+        maTrainee.color = 1
+        maTrainee.vie = 0.4
+
+        table.insert(fireList[i].list_trail, maTrainee)
+    end
+end
 function weapon:updateFiredElements(dt)
     if (self.isRangedWeapon) then
         if self.FireList then
@@ -305,6 +377,7 @@ function weapon:updateFiredElements(dt)
                     end
                 end
             end
+            weapon:AddTrailToBall(dt, self.FireList)
         end
     end
 end
@@ -400,7 +473,7 @@ function weapon:calcWeaponHitZone(dt, ownerPosition, ownerScale, ownerHandPositi
 end
 
 function weapon:playAttackAnimation(dt)
-    self.rotationAngle = self.rotationAngle + self.speed * dt
+    self.rotationAngle = self.rotationAngle + self.speed * 10 * dt
 end
 
 return weapon

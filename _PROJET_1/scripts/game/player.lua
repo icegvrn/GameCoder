@@ -52,6 +52,7 @@ function player.update(dt)
     end
 
     if player.character:getCurrentPV() <= 0 then
+        soundManager:playSound("contents/sounds/game/heros_death.wav", 0.3, false)
         GAMESTATE.currentState = GAMESTATE.STATE.GAMEOVER
     end
 
@@ -85,6 +86,7 @@ function player.updateMode(dt)
         player.boosterTimer = player.boosterTimer - 1 * dt
         if player.boosterTimer <= 0 then
             player.character:setMode(CHARACTERS.MODE.NORMAL)
+            soundManager:playSound("contents/sounds/game/endPlayerBoost.wav", 0.5, false)
             player.boosterTimer = player.boosterDuration
         end
     end
@@ -155,6 +157,7 @@ function player.keypressed(key)
         if player.character:getMode() == CHARACTERS.MODE.NORMAL and player.points == player.maxPoints then
             player.resetPoints()
             player.character:setMode(CHARACTERS.MODE.BOOSTED)
+            soundManager:playSound("contents/sounds/game/heros_transform.wav", 0.4, false)
         else
             player.character:setMode(CHARACTERS.MODE.NORMAL)
         end

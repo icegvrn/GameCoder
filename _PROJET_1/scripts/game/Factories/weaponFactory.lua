@@ -15,23 +15,35 @@ function weaponFactory.createWeapon(type)
         weapon:setDamageValue(0)
         weapon:setSpeed(0)
         weapon:setRangedWeapon(false)
-elseif type == WEAPONS.TYPE.HERO_MAGIC_STAFF then
+    elseif type == WEAPONS.TYPE.HERO_MAGIC_STAFF then
         weapon:setDamageValue(20)
         weapon:setSpeed(0.2)
         weapon:setRangedWeapon(true)
         weapon:setHoldingOffset(-10, 0)
+        weapon:setSounds("contents/sounds/game/weapons/heros_magic_staff.wav")
     elseif type == WEAPONS.TYPE.BITE then
         weapon:setDamageValue(1000)
         weapon:setRangedWeapon(false)
+        weapon:setSpeed(1)
         weapon:setHoldingOffset(0, 0)
+        weapon:setSounds("contents/sounds/game/eating_ennemi.wav")
+        weapon:setSoundsVolume(0.2)
     elseif type == WEAPONS.TYPE.MAGIC_STAFF then
         weapon:setDamageValue(10)
         weapon:setRangedWeapon(true)
         weapon:setHoldingOffset(-5, 0)
         weapon:setWeaponRange(15)
+        weapon:setSounds("contents/sounds/game/weapons/ennemi_magic_staff.wav")
     elseif type == WEAPONS.TYPE.SWORD then
         weapon:setHoldingOffset(-20, 0)
         weapon:setDamageValue(15)
+        weapon:setSpeed(1)
+        weapon:setSounds(
+            "contents/sounds/game/weapons/weapon_sword.wav",
+            "contents/sounds/game/weapons/weapon_sword2.wav"
+        )
+        weapon:setSoundsVolume(0.05)
+
         weapon:setRangedWeapon(false)
     elseif type == WEAPONS.TYPE.FLOWER then
         weapon:setDamageValue(5)

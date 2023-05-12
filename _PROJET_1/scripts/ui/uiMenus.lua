@@ -54,7 +54,6 @@ end
 
 function uiMenus.draw()
     if GAMESTATE.currentState == GAMESTATE.STATE.MENU then
-        
         love.graphics.draw(uiMenus.menu.menuBackground, 0, 0)
 
         if uiMenus.menu.STATE.currentState == uiMenus.menu.STATE.main then
@@ -106,8 +105,8 @@ function uiMenus.draw()
         end
     end
     love.graphics.setFont(font12)
-        love.graphics.print("ESC", 10, 10)
-        love.graphics.setFont(defaultFont)
+    love.graphics.print("ESC", 10, 10)
+    love.graphics.setFont(defaultFont)
 end
 
 function uiMenus.initMenuButtons()
@@ -317,7 +316,7 @@ function uiMenus.initMenuButtons()
     end
 
     uiMenus.menu.buttons.restart.interaction = function()
-        love.load()
+        love.event.quit("restart")
     end
 
     uiMenus.menu.buttons.settings.interaction = function()

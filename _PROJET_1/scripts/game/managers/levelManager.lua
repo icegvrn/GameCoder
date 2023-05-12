@@ -2,6 +2,7 @@
 local c_factory = require("scripts/game/factories/characterFactory")
 local w_factory = require("scripts/game/factories/weaponFactory")
 local levelsConfig = require("scripts/game/levelsConfiguration")
+local soundManager = require("scripts/game/managers/soundManager")
 local camera = require("scripts/game/mainCamera")
 local map = require("scripts/game/gameMap")
 player = require("scripts/game/player")
@@ -138,7 +139,6 @@ function levelManager.spawnEnnemies()
 end
 
 function levelManager.findSpawnPoint(mapWidth, mapHeight, c_w, c_h)
-    print("je passe")
     local pX = love.math.random(300, mapWidth)
     local pY = love.math.random(0, mapHeight)
 
@@ -224,6 +224,8 @@ function levelManager.nextLevel()
         ui.doorIsOpen(false)
         map.closeDoor()
         levelManager.exitDoor = map.getDoor()
+        soundManager:playSound("contents/sounds/game/playerInDoor.wav", 0.5, false)
+        soundManager:changeSoundForLevel()
     end
 end
 

@@ -24,7 +24,7 @@ uiGame.player.pointsColor[4] = {0.8, 0, 0.2}
 uiGame.player.pointsColor[5] = {1, 1, 1}
 uiGame.player.currentPointsColor = uiGame.player.pointsColor[1]
 uiGame.player.timer = 0
-
+uiGame.player.canPlaySoundNotification = true
 uiGame.buttons = {}
 uiGame.buttons.timer = 0
 defaultFont = love.graphics.newFont()
@@ -80,11 +80,21 @@ function uiGame.updatePlayerPointsBar(dt, points, maxPoints)
     elseif points < maxPoints / 1.3 then
         uiGame.player.currentPointsColor = uiGame.player.pointsColor[3]
     elseif points == maxPoints then
+        if uiGame.player.canPlaySoundNotification == true then
+            soundManager:playSound("contents/sounds/game/boostCharge.wav", 0.5, false)
+            uiGame.player.canPlaySoundNotification = false
+        end
+
         uiGame.player.timer = uiGame.player.timer + dt
+
         if uiGame.player.timer % 2 > 1 then
             uiGame.player.currentPointsColor = uiGame.player.pointsColor[4]
         else
             uiGame.player.currentPointsColor = uiGame.player.pointsColor[5]
+        end
+    elseif points == 0 then
+        if uiGame.player.canPlaySoundNotification == false then
+            uiGame.player.canPlaySoundNotification = true
         end
     end
 
@@ -228,6 +238,8 @@ end
 function ui.doorIsOpen(bool)
     if bool then
         uiGame.buttons.doorOpened = true
+        soundManager:playSound("contents/sounds/game/door_signal.wav", 0.5, false)
+        soundManager:playSound("contents/sounds/game/doorOpen.wav", 0.1, false)
     else
         uiGame.buttons.doorOpened = false
     end

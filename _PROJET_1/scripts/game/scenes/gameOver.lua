@@ -2,6 +2,7 @@ GAMESTATE = require("scripts/states/GAMESTATE")
 local scene = require("scripts/engine/scene")
 local isLoaded = false
 local gameOver = scene.new()
+local background = love.graphics.newImage("contents/images/gameOver_background.png")
 
 function gameOver:load()
     isLoaded = true
@@ -11,10 +12,14 @@ function gameOver:update(dt)
 end
 
 function gameOver:draw()
-    love.graphics.print("Game Over", Utils.screenWidth/2, Utils.screenHeight/2)
+    love.graphics.draw(background, 0, 0)
 end
 
 function gameOver:keypressed(key)
+    if key == "escape" then
+        GAMESTATE.currentState = GAMESTATE.STATE.START
+        love.event.quit("restart")
+    end
 end
 
 function gameOver:isAlreadyLoaded()

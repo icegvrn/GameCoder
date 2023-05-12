@@ -3,6 +3,7 @@ local scene = require("scripts/engine/scene")
 
 local win = scene.new()
 local isLoaded = false
+local background = love.graphics.newImage("contents/images/end_background.png")
 
 function win:load()
     isLoaded = true
@@ -12,7 +13,7 @@ function win:update(dt)
 end
 
 function win:draw()
-    love.graphics.print("WIIIN", 400, 400)
+    love.graphics.draw(background, 0, 0)
 end
 
 function win:keypressed(key)

@@ -4,6 +4,14 @@ GAMESTATE = require("scripts/states/GAMESTATE")
 soundManager.currentGameState = GAMESTATE.STATE.START
 local startMusic = "contents/sounds/musics/start.mp3"
 local narrativeMusic = "contents/sounds/musics/narrative.wav"
+local gameOverMusic = "contents/sounds/musics/gameOver.mp3"
+local winMusic = "contents/sounds/musics/win.mp3"
+local gameMusics = {}
+
+gameMusics[1] = "contents/sounds/musics/background_1.mp3"
+gameMusics[2] = "contents/sounds/musics/background_2.wav"
+gameMusics[3] = "contents/sounds/musics/background_3.wav"
+
 soundManager.currentMusic = love.audio.newSource(startMusic, "static")
 
 function soundManager.load()
@@ -26,10 +34,13 @@ function soundManager:loadMusic(state)
     elseif state == GAMESTATE.STATE.NARRATIVE then
         soundManager:playBackgroundMusic(narrativeMusic, 0.1, true)
     elseif state == GAMESTATE.STATE.GAME then
-        soundManager:playBackgroundMusic(nil, 0.1, true)
+        soundManager:playBackgroundMusic(gameMusics[3], 0.3, true)
     elseif state == GAMESTATE.STATE.MENU then
+        soundManager:playBackgroundMusic(startMusic, 0.3, true)
     elseif state == GAMESTATE.STATE.GAMEOVER then
+        soundManager:playBackgroundMusic(gameOverMusic, 0.5, true)
     elseif state == GAMESTATE.STATE.WIN then
+        soundManager:playBackgroundMusic(winMusic, 0.4, true)
     end
 end
 
@@ -52,6 +63,19 @@ function soundManager:playBackgroundMusic(sound, volume, loop)
         soundManager.currentMusic:setLooping(loop)
         soundManager.currentMusic:play()
     end
+end
+
+function soundManager:changeSoundForLevel()
+    local random = love.math.random(1, #gameMusics)
+    local vol = 0.3
+    if random == 1 then
+        vol = 0.1
+    elseif random == 2 then
+        vol = 0.2
+    elseif random == 3 then
+        vol = 0.3
+    end
+    soundManager:playBackgroundMusic(gameMusics[random], vol, true)
 end
 
 return soundManager
