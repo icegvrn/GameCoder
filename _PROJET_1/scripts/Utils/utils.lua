@@ -32,7 +32,6 @@ function Utils.angleWithMouseWorldPosition(x1, y1)
     local cX, cY = mainCamera.camera:getPosition()
     local x2 = mx + cX
     local y2 = my + cY
-
     return math.atan2(y2 - y1, x2 - x1)
 end
 

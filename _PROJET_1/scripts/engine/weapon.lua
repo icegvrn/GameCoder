@@ -308,14 +308,14 @@ function weapon:fire(dt, ownerPosition, ownerScale, ownerHandPosition, ownerWeap
         soundManager:playSound(self.sounds[nb], self.soundVolume, false)
 
         if self.isRangedWeapon then
-            local pX, pY = ownerPosition.x, ownerPosition.y
+            local pX, pY = self.hitBox.position.x, self.hitBox.position.y
             local mX, mY = ownerTarget:getPosition()
+            local angle = math.atan2(mY - pY, mX - pX)
 
             if ownerTarget == love.mouse then
-                mX, mY = utils.mouseToWorldCoordinates(love.mouse.getPosition())
+                angle = Utils.angleWithMouseWorldPosition(pX, pY)
             end
 
-            local angle = math.atan2(mY - pY, mX - pX)
             self.currentAngle = angle
             self:move(dt, ownerPosition, ownerScale, ownerHandPosition, ownerWeaponScaling, ownerTarget)
 
@@ -326,7 +326,6 @@ function weapon:fire(dt, ownerPosition, ownerScale, ownerHandPosition, ownerWeap
             fire.speed = 180 * dt
             fire.lifeTime = 2
             fire.size = 5
-            fire.distance = utils.distance(pX, pY, mX, mY)
             fire.list_trail = {}
             table.insert(self.FireList, fire)
         end
@@ -373,7 +372,7 @@ function weapon:updateFiredElements(dt)
 
                 if t.lifeTime <= 0 then
                     table.remove(self.FireList, n)
-                elseif map.isOverTheMap(t.x, t.y) then
+                elseif map.isThereASolidElement(t.x, t.y, t.size, t.size, c) then
                     table.remove(self.FireList, n)
                 else
                     for c = #self.hittableCharacters, 1, -1 do

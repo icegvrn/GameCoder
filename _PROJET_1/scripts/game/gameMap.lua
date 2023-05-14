@@ -68,10 +68,10 @@ function gameMap.drawTiles(i)
                 end
             end
             -- if i == 3 then
-            --    local x = (c - 1) * currentMap.map.tilewidth
-            --   local y = (l - 1) * currentMap.map.tileheight
-            --  love.graphics.setFont(testFont)
-            -- love.graphics.print(currentMap.data[i][index], x, y)
+            --     local x = (c - 1) * currentMap.map.tilewidth
+            --     local y = (l - 1) * currentMap.map.tileheight
+            --     love.graphics.setFont(testFont)
+            --     love.graphics.print(currentMap.data[i][index], x, y)
             -- end
         end
     end
@@ -177,7 +177,7 @@ function gameMap.isThereASolidElement(p_left, p_top, p_width, p_height, characte
     -- parcours de toutes les cases couvertes par le joueur
     for c = col, col2 do
         for r = lin, lin2 do
-            local index = (r - 1) * currentMap.map.width + c
+            local index = r * currentMap.map.width + c
             if currentMap.data[3] then
                 if currentMap.data[3][index] then
                     if index > 0 then
