@@ -29,11 +29,14 @@ uiGame.buttons = {}
 uiGame.buttons.timer = 0
 defaultFont = love.graphics.newFont()
 font9 = love.graphics.newFont(9)
+font100 = love.graphics.newFont(100)
 uiGame.buttons.weaponText = love.graphics.newText(font9, controller.action1)
 uiGame.buttons.boosterText = love.graphics.newText(font9, controller.action2)
 
 uiGame.buttons.door = love.graphics.newImage("contents/images/ui/doorOpen.png")
 uiGame.buttons.doorOpened = false
+
+uiGame.victory = false
 
 function uiGame.load()
     uiGame.buttons.timer = player.boosterDuration
@@ -66,6 +69,13 @@ function uiGame.draw()
         love.graphics.draw(
             uiGame.buttons.door,
             Utils.screenCoordinates(Utils.screenWidth - 60, Utils.screenHeight - 60)
+        )
+    end
+    if uiGame.victory then
+        love.graphics.setFont(font100)
+        love.graphics.print(
+            "VICTORY !",
+            Utils.screenCoordinates((Utils.screenWidth / 2) - 250, (Utils.screenHeight / 2) - 50)
         )
     end
 end
@@ -243,6 +253,10 @@ function ui.doorIsOpen(bool)
     else
         uiGame.buttons.doorOpened = false
     end
+end
+
+function ui.drawVictory()
+    uiGame.victory = true
 end
 
 return uiGame

@@ -9,6 +9,7 @@ io.stdout:setvbuf("no")
 gameManager = require("scripts/game/managers/gameManager")
 ui = require("scripts/ui/ui")
 debugManager = require("scripts/game/managers/debugManager")
+require("scripts/states/PATHS")
 
 function love.load()
     gameManager.load()

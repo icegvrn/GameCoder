@@ -1,4 +1,5 @@
 camera = require("scripts/engine/camera")
+map = require("scripts/game/gameMap")
 --player = require("scripts/game/player")
 mainCamera = {}
 mainCamera.camera = camera.new()
@@ -24,7 +25,8 @@ end
 
 function mainCamera.getPosition()
     if mainCamera.isLocked then
-        return Utils.screenWidth / 2, Utils.screenHeight / 2
+        local mapWidth, mapHeight = map.getMapDimension()
+        return Utils.screenWidth / 2, mapHeight / 2
     else
         return mainCamera.camera:getPosition()
     end

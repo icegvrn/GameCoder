@@ -18,19 +18,21 @@ function ennemiAgent:create()
     ennemiAgent.velocityY = 0
     ennemiAgent.character = nil
     ennemiAgent.angle = 0
-    ennemiAgent.range = math.random(10, 25)
+    ennemiAgent.range = love.math.random(10,20)
     ennemiAgent.isCinematicMode = false
     ennemiAgent.timer = 0
     ennemiAgent.timerIsStarted = false
     lastPositionX = 0
     lastPositionY = 0
+    ennemiAgent.isAlreadyIDLE = false
+    chiffre = 0
 
     function ennemiAgent:init(character)
         ennemiAgent.character = character
         local x, y = ennemiAgent.character:getPosition()
         local speed = ennemiAgent.character:getSpeed()
-        ennemiAgent.angle =
-            Utils.angle(x, y, love.math.random(0, Utils.screenWidth), love.math.random(0, Utils.screenHeight))
+        local mpW, mpH = map.getMapDimension()
+        ennemiAgent.angle = Utils.angle(x, y, love.math.random(0, mpW), love.math.random(0, mpH))
         ennemiAgent.velocityX = speed * math.cos(ennemiAgent.angle)
         ennemiAgent.velocityY = speed * math.sin(ennemiAgent.angle)
     end
@@ -38,14 +40,13 @@ function ennemiAgent:create()
     function ennemiAgent:update(dt, positionX, positionY, currentState)
         local x, y = positionX, positionY
         local targetX, targetY = ennemiAgent.character:getTargetPos()
-        local agentX, agentY = ennemiAgent.character:getPosition()
-        local distance = Utils.distance(agentX, agentY, targetX, targetY)
+        local distance = Utils.distance(x, y, targetX, targetY)
+        local ennemiWidth, ennemiHeight = ennemiAgent.character:getDimension()
 
         if currentState == CHARACTERS.STATE.IDLE then
             local speed = ennemiAgent.character:getSpeed()
-            ennemiAgent.angle =
-                Utils.angle(x, y, love.math.random(0, Utils.screenWidth), love.math.random(0, Utils.screenHeight))
-
+            local mpW, mpH = map.getMapDimension()
+            ennemiAgent.angle = Utils.angle(x, y, love.math.random(0, mpW), love.math.random(0, mpH))
             ennemiAgent.velocityX = speed * math.cos(ennemiAgent.angle)
             ennemiAgent.velocityY = speed * math.sin(ennemiAgent.angle)
 
@@ -53,13 +54,10 @@ function ennemiAgent:create()
                 ennemiAgent.randomNumber =
                     math.random(-ennemiAgent.character:getWeaponRange() + 1, ennemiAgent.character:getWeaponRange() - 1)
             end
-            local newPositionX = x + ennemiAgent.velocityX * dt
-            local newPositionY = y + ennemiAgent.velocityY * dt
-            local ennemiWidth, ennemiHeight = ennemiAgent.character:getDimension()
-            if (map.isThereASolidElement(newPositionX, newPositionY, ennemiWidth - 16, ennemiHeight - 16)) == false then
-                ennemiAgent.character:setState(CHARACTERS.STATE.WALKING)
-            end
+
+            ennemiAgent.character:setState(CHARACTERS.STATE.WALKING)
         elseif currentState == CHARACTERS.STATE.WALKING then
+            local ennemiWidth, ennemiHeight = ennemiAgent.character:getDimension()
             local newPositionX = x + ennemiAgent.velocityX * dt
             local newPositionY = y + ennemiAgent.velocityY * dt
 
@@ -70,12 +68,12 @@ function ennemiAgent:create()
                 local ennemiWidth, ennemiHeight = ennemiAgent.character:getDimension()
                 local gmap = map.getCurrentMap()
 
-                if (map.isThereASolidElement(newPositionX, newPositionY, ennemiWidth - 16, ennemiHeight - 16)) then
-                    ennemiAgent.character:setPosition(x, y)
+                if (map.isThereASolidElement(newPositionX, newPositionY, ennemiWidth, ennemiHeight)) then
                     ennemiAgent.character:setState(CHARACTERS.STATE.IDLE)
                 else
                     ennemiAgent.character:setPosition(newPositionX, newPositionY)
                     lastPositionX, lastPositionY = ennemiAgent.character:getPosition()
+
                     if ennemiAgent.character:isInCinematicMode() == false then
                         ---- On cherche le joueur, qui est dans target déjà.  ----
                         if distance <= ennemiAgent.range then
@@ -92,12 +90,11 @@ function ennemiAgent:create()
                         end
                     end
                 end
-
-                if ennemiAgent.velocityX < 0 then
-                    ennemiAgent.character:changeDirection(CONST.DIRECTION.left)
-                else
-                    ennemiAgent.character:changeDirection(CONST.DIRECTION.right)
-                end
+            end
+            if ennemiAgent.velocityX < 0 then
+                ennemiAgent.character:changeDirection(CONST.DIRECTION.left, dt)
+            else
+                ennemiAgent.character:changeDirection(CONST.DIRECTION.right, dt)
             end
         elseif currentState == CHARACTERS.STATE.ALERT then
             local speed = ennemiAgent.character:getSpeed() * 2
@@ -118,8 +115,8 @@ function ennemiAgent:create()
             if (map.isThereASolidElement(newPositionX, newPositionY, ennemiWidth, ennemiHeight)) then
                 ennemiAgent.character:setState(CHARACTERS.STATE.IDLE)
             else
-                ennemiAgent.character:setPosition(map.clamp(newPositionX, newPositionY))
-                lastPositionX, lastPositionY = ennemiAgent.character:getPosition()
+                ennemiAgent.character:setPosition(newPositionX, newPositionY)
+                lastPositionX, lastPositionY = newPositionX, newPositionY
             end
 
             -- VERIFIER SI JE PERDS DE VUE LE HEROS
@@ -129,6 +126,11 @@ function ennemiAgent:create()
                 elseif distance > ennemiAgent.range then
                     ennemiAgent.character:setState(CHARACTERS.STATE.IDLE)
                 end
+            end
+            if ennemiAgent.velocityX < 0 then
+                ennemiAgent.character:changeDirection(CONST.DIRECTION.left, dt)
+            else
+                ennemiAgent.character:changeDirection(CONST.DIRECTION.right, dt)
             end
         elseif currentState == CHARACTERS.STATE.FIRE then
             if ennemiAgent.character:getWeaponRange() then

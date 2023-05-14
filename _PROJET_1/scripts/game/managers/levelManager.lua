@@ -45,6 +45,7 @@ function levelManager.load()
     levelManager.spawnPlayer()
     levelManager.spawnEnnemies()
     levelManager.exitDoor = map.getDoor()
+    gameMap.initMap(levelManager.currentLevel)
 end
 
 function levelManager.update(dt)
@@ -122,31 +123,39 @@ function levelManager.spawnEnnemies()
     local map = require("scripts/game/gameMap")
     local mapWidth, mapHeight = map.getMapDimension()
     local currentLvlList = levelsConfig.getEnnemiesByLvl(levelManager.currentLevel)
-    for n = 1, #currentLvlList do
-        local type = currentLvlList[n][1]
-        local weapon = currentLvlList[n][2]
-        local number = currentLvlList[n][3]
-        for i = 1, number do
-            local ennemi = c_factory.createCharacter(CHARACTERS.CATEGORY.ENNEMY, type, false, myCharacter)
-            local ennemiWeapon = w_factory.createWeapon(weapon)
-            ennemi:equip(ennemiWeapon)
-            c_w, c_h = ennemi:getDimension()
-            positionX, positionY = levelManager.findSpawnPoint(mapWidth, mapHeight, c_w, c_h)
-            ennemi:setPosition(positionX, positionY)
-            table.insert(levelManager.ennemiesList, ennemi)
+    if currentLvlList then
+        for n = 1, #currentLvlList do
+            local type = currentLvlList[n][1]
+            local weapon = currentLvlList[n][2]
+            local number = currentLvlList[n][3]
+            for i = 1, number do
+                local ennemi = c_factory.createCharacter(CHARACTERS.CATEGORY.ENNEMY, type, false, myCharacter)
+                local ennemiWeapon = w_factory.createWeapon(weapon)
+                ennemi:equip(ennemiWeapon)
+                c_w, c_h = ennemi:getDimension()
+                positionX, positionY = levelManager.findSpawnPoint(mapWidth, mapHeight, c_w, c_h)
+                ennemi:setPosition(positionX, positionY)
+                mapWidth, mapHeight = map.getMapDimension()
+                -- ennemi:setPosition(mapWidth / 2, mapHeight / 2)
+                table.insert(levelManager.ennemiesList, ennemi)
+            end
         end
     end
 end
 
 function levelManager.findSpawnPoint(mapWidth, mapHeight, c_w, c_h)
-    local pX = love.math.random(300, mapWidth)
+    local pX = love.math.random(0, mapWidth)
     local pY = love.math.random(0, mapHeight)
+    local spawnFounded = false
+    while spawnFounded == false do
+        pX = love.math.random(0, mapWidth)
+        pY = love.math.random(0, mapHeight)
 
-    while (map.isThereASolidElement(pX, pY, c_w, c_h)) do
-        pX = love.math.random(300, mapWidth - c_w)
-        pY = love.math.random(0, mapHeight - c_h)
+        if (map.isThereASolidElement(pX, pY, c_w, c_h)) == false and (map.isThereAFloor(pX, pY, c_w, c_h)) then
+            spawnFounded = true
+            return pX, pY
+        end
     end
-    return pX, pY
 end
 
 function levelManager.spawnPlayer()
@@ -189,12 +198,20 @@ function levelManager.playLevelCinematic(dt)
         camera.lock(true)
         levelManager.cinematic.IsStarted = true
     elseif levelManager.cinematic.IsStarted then
-        levelManager.cinematic.timer = levelManager.cinematic.timer + dt
+        if levelManager.currentLevel == #levelsConfig then
+            levelManager.cinematic.timer = levelManager.cinematic.timer + dt * 0.25
+        else
+            levelManager.cinematic.timer = levelManager.cinematic.timer + dt
+        end
         player.playEntranceAnimation(dt)
         for n = #levelManager.ennemiesList, 1, -1 do
             levelManager.ennemiesList[n]:update(dt)
         end
-
+        if levelManager.cinematic.timer >= levelManager.cinematic.lenght / 2 then
+            if levelManager.currentLevel == #levelsConfig then
+                ui.drawVictory()
+            end
+        end
         if levelManager.cinematic.timer >= levelManager.cinematic.lenght then
             if levelManager.currentLevel == #levelsConfig then
                 levelManager.cinematic.timer = 0

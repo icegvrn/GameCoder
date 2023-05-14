@@ -57,13 +57,14 @@ function weapon.new()
 
     newWeapon.rotationAngle = 0
     newWeapon.timer = 0
+    newWeapon.timerIsStarted = false
 
     newWeapon.hittableCharacters = {}
     lifeFactor = 0.7
 
     newWeapon.sounds = {}
-    newWeapon.sounds[1] = "contents/sounds/game/heros_hitted.wav"
-    newWeapon.sounds[2] = "contents/sounds/game/heros_hitted.wav"
+    newWeapon.sounds[1] = PATHS.SOUNDS.GAME .. "heros_hitted.wav"
+    newWeapon.sounds[2] = PATHS.SOUNDS.GAME .. "heros_hitted.wav"
     newWeapon.soundVolume = 0.3
     newWeapon.playSound = false
 
@@ -82,13 +83,9 @@ function weapon:setDamageValue(dmg)
     self.damage = dmg
 end
 
-function weapon:setSounds(string, string2, string3)
-    self.sounds[1] = string
-    if string2 then
-        self.sounds[2] = string2
-        if string3 then
-            self.sounds[3] = string3
-        end
+function weapon:setSounds(array)
+    for i = 1, #array do
+        self.sounds[i] = array[i]
     end
 end
 
@@ -175,6 +172,7 @@ end
 
 function weapon:setSpeed(pSpeed)
     self.speed = pSpeed
+    self.timer = pSpeed
 end
 
 function weapon:getSpeed()
@@ -205,9 +203,9 @@ function weapon:getDirection()
     return self.strenght
 end
 
-function weapon:setHoldingOffset(x, y)
-    self.holdingOffset.x = x
-    self.holdingOffset.y = y
+function weapon:setHoldingOffset(array)
+    self.holdingOffset.x = array[1]
+    self.holdingOffset.y = array[2]
 end
 
 function weapon:getHoldingOffset()
@@ -273,6 +271,18 @@ function weapon:update(dt)
     end
 
     self:updateFiredElements(dt)
+    self:checkIfWeaponCanFire(dt)
+end
+
+function weapon:checkIfWeaponCanFire(dt)
+    if self.timerIsStarted then
+        self.timer = self.timer + dt
+
+        if self.timer >= self.speed then
+            self.canFire = true
+            self.timer = 0
+        end
+    end
 end
 
 function weapon:boostOwner(dt)
@@ -288,11 +298,8 @@ end
 function weapon:fire(dt, ownerPosition, ownerScale, ownerHandPosition, ownerWeaponScaling, ownerTarget)
     self.isFiring = true
 
-    self.timer = self.timer + dt
-
-    if self.timer >= self.speed then
-        self.canFire = true
-        self.timer = 0
+    if self.timerIsStarted == false then
+        self.timerIsStarted = true
     end
 
     if self.canFire then
@@ -474,6 +481,12 @@ end
 
 function weapon:playAttackAnimation(dt)
     self.rotationAngle = self.rotationAngle + self.speed * 10 * dt
+end
+
+function weapon:clear()
+    for n = #self.FireList, 1, -1 do
+        table.remove(self.FireList, n)
+    end
 end
 
 return weapon

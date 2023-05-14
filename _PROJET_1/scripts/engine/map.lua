@@ -14,7 +14,9 @@ end
 function Map:setMapTo(list, mapNb)
     self.map = require(list[mapNb])
     self.data = {}
-    self.data[1] = self.map.layers[1].data
+    if self.map.layers[1] then
+        self.data[1] = self.map.layers[1].data
+    end
     if self.map.layers[2] then
         self.data[2] = self.map.layers[2].data
     end

@@ -21,7 +21,7 @@ function Character.new()
     newCharacter.target = love.mouse
     newCharacter.lookAt = CONST.DIRECTION.left
     newCharacter.initialScale = 1
-    newCharacter.speed = 0
+    newCharacter.speed = 0.3
     newCharacter.mode = CHARACTERS.MODE.NORMAL
     newCharacter.state = CHARACTERS.STATE.IDLE
 
@@ -61,28 +61,23 @@ function Character.new()
     newCharacter.alertImg = love.graphics.newImage("contents/images/characters/exclamation.png")
 
     newCharacter.sounds = {}
-    newCharacter.sounds[1] = "contents/sounds/game/characters/default.wav"
-    newCharacter.sounds[2] = "contents/sounds/game/characters/default.wav"
-    newCharacter.sounds[3] = "contents/sounds/game/characters/default.wav"
+    newCharacter.sounds[1] = PATHS.SOUNDS.CHARACTERS .. "default.wav"
+    newCharacter.sounds[2] = PATHS.SOUNDS.CHARACTERS .. "default.wav"
+    newCharacter.sounds[3] = PATHS.SOUNDS.CHARACTERS .. "default.wav"
     newCharacter.talkVolume = 0.3
     newCharacter.silenceBetweenTalk = 1
 
     newCharacter.playSound = false
+    newCharacter.directionTimer = 0.01
+    newCharacter.directionTimerIsStarted = false
+    newCharacter.directionCanBeChange = false
 
     return setmetatable(newCharacter, characters_mt)
 end
 
-function Character:setSounds(string, string2, string3)
-    self.sounds[1] = string
-    if string2 then
-        self.sounds[2] = string2
-        if string3 then
-            self.sounds[3] = string3
-        else
-            self.sounds[3] = string
-        end
-    else
-        self.sounds[2] = string
+function Character:setSounds(array)
+    for i = 1, #array do
+        self.sounds[i] = array[i]
     end
 end
 
@@ -113,9 +108,9 @@ function Character:getHandOffset()
     return self.handOffset.x, self.handOffset.y
 end
 
-function Character:setHandOffset(x, y)
-    self.handOffset.x = x
-    self.handOffset.y = y
+function Character:setHandOffset(array)
+    self.handOffset.x = array[1]
+    self.handOffset.y = array[2]
 end
 
 function Character:getHandPosition()
@@ -155,7 +150,7 @@ function Character:setSprites(p_table)
         self.spritestileSheets[k] = sprite
         self.height = sprite:getHeight()
         self.width = sprite:getWidth() / 4
-        local nbColumns = sprite:getWidth() / sprite:getHeight()
+        local nbColumns = 4
         local nbLine = sprite:getHeight() / self.height
         local id = 1
 
@@ -242,7 +237,7 @@ function Character:setState(state)
     if state == CHARACTERS.STATE.ALERT then
         local randNb = love.math.random(1, self.silenceBetweenTalk * 100)
         if randNb == self.silenceBetweenTalk * 100 then
-            soundManager:playSound("contents/sounds/game/characters/alert.wav", 0.2, false)
+            soundManager:playSound(PATHS.SOUNDS.CHARACTERS .. "alert.wav", 0.2, false)
         end
     end
 end
@@ -254,10 +249,15 @@ end
 function Character:setMode(mode)
     self.mode = mode
     if mode == CHARACTERS.MODE.BOOSTED then
+        self:clearFiringElements()
         self:changeWeapon(2)
     else
         self:changeWeapon(1)
     end
+end
+
+function Character:clearFiringElements()
+    self.weapon[self.currentWeaponId]:clear()
 end
 
 function Character:getMode()
@@ -286,20 +286,65 @@ function Character:getMaxPV()
     return self.maxPV
 end
 
-function Character:changeDirection(direction)
-    if direction == CONST.DIRECTION.left then
-        if (self.transform.scale.x == self.initialScale) then
+function Character:changeDirection(direction, dt)
+    if self.lookAt ~= direction then
+        self.lookAt = direction
+    else
+        if self.lookAt == CONST.DIRECTION.left then
             self.transform.scale.x = -self.initialScale
-            self.lookAt = direction
-        end
-    end
-
-    if direction == CONST.DIRECTION.right then
-        if (self.transform.scale.x ~= self.initialScale) then
+        elseif self.lookAt == CONST.DIRECTION.right then
             self.transform.scale.x = self.initialScale
-            self.lookAt = direction
         end
     end
+    -- if direction ~= self.lookAt then
+    --     if self.directionTimerIsStarted == false then
+    --         initialTimer = self.directionTimer
+    --         self.directionTimerIsStarted = true
+    --         self.directionCanBeChange = true
+    --     elseif self.directionTimerIsStarted then
+    --         if dt then
+    --             self.directionTimer = self.directionTimer - dt
+    --             if self.isPlayer == false then
+    --             end
+    --         else
+    --             self.directionTimer = 0
+    --         end
+
+    --         if self.directionTimer <= 0 then
+    --             print("Je change de direction")
+    --             self.lookAt = direction
+    --             self.directionTimerIsStarted = false
+    --             self.directionTimer = initialTimer
+    --         end
+    --     end
+
+    -- end
+
+    -- if self.directionCanBeChange == true then
+    --     self.directionCanBeChange = false
+    --     if direction ~= self.lookAt then
+    --         local initialTimer = 0
+    --         if self.directionTimer <= 0 then
+    --             if direction == CONST.DIRECTION.left then
+    --                 if (self.transform.scale.x == self.initialScale) then
+    --                     self.transform.scale.x = -self.initialScale
+    --                     self.lookAt = direction
+    --                     self.directionCanBeChange = true
+    --                 end
+    --             end
+
+    --             if direction == CONST.DIRECTION.right then
+    --                 if (self.transform.scale.x ~= self.initialScale) then
+    --                     self.transform.scale.x = self.initialScale
+    --                     self.lookAt = direction
+    --                     self.directionCanBeChange = true
+    --                 end
+    --             end
+
+    --         end
+    --     else
+    --     end
+    -- end
 end
 
 function Character:getDirection()
@@ -346,28 +391,29 @@ function Character:draw()
 
     if self.isPlayer == true or self.state == CHARACTERS.STATE.ALERT or self.state == CHARACTERS.STATE.FIRE then
         if x > px then
-            self:changeDirection(CONST.DIRECTION.right)
+            self:changeDirection(CONST.DIRECTION.right, dt)
         end
 
         if x < px then
-            self:changeDirection(CONST.DIRECTION.left)
+            self:changeDirection(CONST.DIRECTION.left, dt)
         end
     end
 
     love.graphics.setColor(self.color)
 
-    love.graphics.draw(
-        self.spritestileSheets[c_state],
-        self.spritesList[c_state][c_spriteID],
-        self.transform.position.x,
-        self.transform.position.y,
-        self.transform.rotation.y,
-        self.transform.scale.x,
-        self.transform.scale.y,
-        self.spritestileSheets[c_state]:getHeight() / 2,
-        self.spritestileSheets[c_state]:getHeight() / 2
-    )
-
+    if self.spritesList[c_state][c_spriteID] then
+        love.graphics.draw(
+            self.spritestileSheets[c_state],
+            self.spritesList[c_state][c_spriteID],
+            self.transform.position.x,
+            self.transform.position.y,
+            self.transform.rotation.y,
+            self.transform.scale.x,
+            self.transform.scale.y,
+            self.spritestileSheets[c_state]:getHeight() / 2,
+            self.spritestileSheets[c_state]:getHeight() / 2
+        )
+    end
     if self.isPlayer == false then
         if self.isHit then
             local points = ""
@@ -382,6 +428,7 @@ function Character:draw()
             end
             love.graphics.print(points, self.transform.position.x, self.transform.position.y - 30)
             love.graphics.setFont(self.defaultFont)
+            love.graphics.setColor(1, 1, 1)
         end
     end
 
@@ -401,9 +448,9 @@ function Character:playSounds()
     if self.playSound == false then
         if self.isHit then
             if self.isPlayer then
-                soundManager:playSound("contents/sounds/game/heros_hitted.wav", 0.7, false)
+                soundManager:playSound(PATHS.SOUNDS.GAME .. "heros_hitted.wav", 0.7, false)
             else
-                soundManager:playSound("contents/sounds/game/ennemi_hitted.wav", 0.1, false)
+                soundManager:playSound(PATHS.SOUNDS.GAME .. "ennemi_hitted.wav", 0.1, false)
             end
             self.playSound = true
         end
@@ -445,7 +492,7 @@ function Character:update(dt)
         if self.dieTimer >= 0.5 then
             levelManager.destroyCharacter(self, weapon)
             self.dieTimer = 0
-            soundManager:playSound("contents/sounds/game/win_point.wav", 0.2, false)
+            soundManager:playSound(PATHS.SOUNDS.GAME .. "win_point.wav", 0.2, false)
         end
     end
 end

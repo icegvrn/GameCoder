@@ -1,96 +1,86 @@
 -- Créé un personnage en fonction de sa catégorie et de son type
-require("scripts/states/CHARACTERS")
+PATHS = require("scripts/states/PATHS")
+CHARACTERS_STATE = require("scripts/states/CHARACTERS")
 Character = require("scripts/engine/character")
 
 characterFactory = {}
 
-function characterFactory.createCharacter(category, type, boostable, target)
-    local character = Character.new()
-    characterFactory.createSprites(character, category, type, boostable)
-
-    character:setMode(CHARACTERS.MODE.NORMAL)
-    character:setState(CHARACTERS.STATE.IDLE)
-    character:setName(type)
-
-    if type == CHARACTERS.TYPE.ORC then
-        character:setSpeed(120)
-        character:setMaxPV(100)
-        character:setStrenght(1)
-        character:setWeaponScaling(1)
-        character:setSounds(
-            "contents/sounds/game/characters/orc.wav",
-            "contents/sounds/game/characters/orc_2.wav",
-            "contents/sounds/game/characters/orc_3.wav"
-        )
-        character:setSilenceIntervalBetweenTalk(0.09)
-        character:setTalkingVolume(0.8)
-        character:load()
-    elseif type == CHARACTERS.TYPE.KNIGHT then
-        character:setSpeed(math.random(15, 35))
-        character:setMaxPV(200)
-        character:setStrenght(2)
-        character:setHandOffset(10, 16)
-        character:setWeaponScaling(0.8)
-        character:setSounds("contents/sounds/game/characters/knight.wav")
-        character:setSilenceIntervalBetweenTalk(0.6)
-        character:load()
-    elseif type == CHARACTERS.TYPE.MAGE then
-        character:setSpeed(10)
-        character:setMaxPV(10)
-        character:setStrenght(0.5)
-        character:setHandOffset(10, 16)
-        character:setWeaponScaling(0.7)
-        character:setSounds("contents/sounds/game/characters/mage.wav")
-        character:setSilenceIntervalBetweenTalk(0.75)
-        character:load()
-    elseif type == CHARACTERS.TYPE.PRINCESS then
-        character:setSpeed(30)
-        character:setMaxPV(60)
-        character:setStrenght(0.5)
-        character:setHandOffset(10, 22)
-        character:setWeaponScaling(0.7)
-        character:setSounds("contents/sounds/game/characters/princess.wav")
-        character:setSilenceIntervalBetweenTalk(0.75)
-        character:load()
-    elseif type == CHARACTERS.TYPE.DWARF then
-        character:setSpeed(10)
-        character:setMaxPV(120)
-        character:setStrenght(3)
-        character:setHandOffset(10, 16)
-        character:setWeaponScaling(0.7)
-        character:setSounds("contents/sounds/game/characters/dwarf.wav")
-        character:setSilenceIntervalBetweenTalk(0.75)
-        character:load()
-    end
-
-    if (target) then
-        character:setTarget(target)
-    else
-        print("CHARACTER FACTORY : LA CIBLE EST INCORRECTE.")
-    end
-
-    if category == CHARACTERS.CATEGORY.PLAYER then
-        character:setPlayer()
-    else
-        character:addEnnemiAgent()
-    end
+-- Crée un nouveau personnage à la demande
+function characterFactory.createCharacter(p_category, p_type, p_boostable, p_target)
+    local character = characterFactory.createNewCharacter()
+    characterFactory.defineRole(character, p_category)
+    characterFactory.setTarget(character, p_target)
+    characterFactory.setCharacteristics(character, p_category, p_type, p_boostable)
+    characterFactory.createSprites(character, p_category, p_type, p_boostable)
+    characterFactory.initCharacter(character)
     return character
 end
 
+function characterFactory.createNewCharacter()
+    return Character.new()
+end
+
+    -- Ajoute un agent si c'est un ennemi, ou passe le personnage en mode joueur si c'est le joueur
+function characterFactory.defineRole(c, category)
+    if category == CHARACTERS_STATE.CATEGORY.PLAYER then
+        characterFactory.enableController(c)
+    else
+        characterFactory.enableAgent(c)
+    end
+end
+
+function characterFactory.enableAgent(c)
+    c:addEnnemiAgent()
+end
+
+function characterFactory.enableController(c)
+    c:setPlayer()
+end
+
+    -- Va chercher les caractéristiques du personnage dans un fichier portant le nom de son type ("knight", "princess"...)
+function characterFactory.setCharacteristics(c, category, p_type, boostable)
+    local characterData = require(PATHS.ENTITIES.CHARACTERS .. p_type)
+    c:setName(characterData.name)
+    c:setSpeed(characterData.speed)
+    c:setMaxPV(characterData.pv)
+    c:setHandOffset(characterData.handOffset)
+    c:setStrenght(characterData.strenght)
+    c:setWeaponScaling(characterData.weaponScaling)
+    c:setSounds(characterData.talkingSound)
+    c:setSilenceIntervalBetweenTalk(characterData.talkingInterval)
+    c:setTalkingVolume(characterData.talkingVolume)
+end
+
+function characterFactory.setTarget(c, target)
+    if (target) then
+        c:setTarget(target)
+    else
+        print("CHARACTER FACTORY : LA CIBLE EST INCORRECTE.")
+    end
+end
+
+-- -- Génère les sprites associés à ce type de personnage ; boostable true uniquement pour le joueur
 function characterFactory.createSprites(character, category, type, boostable)
     local spriteList = {}
 
-    for k, v in pairs(CHARACTERS.STATE) do
-        if v ~= CHARACTERS.STATE.DEAD then
-            local state = CHARACTERS.MODE.NORMAL .. "_" .. v
-            local imagePath = CHARACTERS.IMGPATH .. "/" .. category .. "/" .. type .. "_" .. state .. ".png"
+    -- Pour chaque state possible du personnage
+    for k, v in pairs(CHARACTERS_STATE.STATE) do
+        -- Si ce n'est pas le state mort (animation commune à tous les personnages, traitement plus bas)
+        if v ~= CHARACTERS_STATE.STATE.DEAD then
+
+            -- On définit d'abord toutes les images du mode normal
+            local state = CHARACTERS_STATE.MODE.NORMAL .. "_" .. v
+            local imagePath = PATHS.IMG.CHARACTERS .. category .. "/" .. type .. "_" .. state .. ".png"
+
+            -- Si les images existent dans le dossier, on les ajoute à la liste des sprites indexé par un nom type "normal_IDLE"
             if love.filesystem.getInfo(imagePath) then
                 local sprite = love.graphics.newImage(imagePath)
                 spriteList[state] = sprite
 
+                -- Si le personnage est boostable, on définit aussi les images du mode boostable (boosted_IDLE) (utilisé pour joueur)
                 if (boostable) then
-                    local state = CHARACTERS.MODE.BOOSTED .. "_" .. v
-                    local imagePath = CHARACTERS.IMGPATH .. "/" .. category .. "/" .. type .. "_" .. state .. ".png"
+                    local state = CHARACTERS_STATE.MODE.BOOSTED .. "_" .. v
+                    local imagePath = PATHS.IMG.CHARACTERS .. category .. "/" .. type .. "_" .. state .. ".png"
                     if love.filesystem.getInfo(imagePath) then
                         local sprite = love.graphics.newImage(imagePath)
                         spriteList[state] = sprite
@@ -102,14 +92,25 @@ function characterFactory.createSprites(character, category, type, boostable)
                     end
                 end
             else
-                print("WARNING CHARACTER FACTORY : " .. type .. " needs images for " .. state .. ".")
+                if (v == CHARACTERS_STATE.STATE.ALERT and character:isThePlayer()) == false then
+                    print("WARNING CHARACTER FACTORY : " .. type .. " needs images for " .. state .. ".")
+                end
             end
         else
-            c_state = CHARACTERS.MODE.NORMAL .. "_" .. CHARACTERS.STATE.DEAD
-            spriteList[c_state] = love.graphics.newImage("contents/images/characters/explosion_sprite.png")
+            -- Si c'est le state "dead", on va chercher l'image commune à tous pour la mettre dans la liste
+            c_state = CHARACTERS_STATE.MODE.NORMAL .. "_" .. CHARACTERS_STATE.STATE.DEAD
+            spriteList[c_state] = love.graphics.newImage(PATHS.IMG.CHARACTERS .. "explosion_sprite.png")
         end
     end
 
+    -- On associe cette liste finale au character
     character:setSprites(spriteList)
 end
+
+function characterFactory.initCharacter(c)
+    c:setMode(CHARACTERS_STATE.MODE.NORMAL)
+    c:setState(CHARACTERS_STATE.STATE.IDLE)
+    c:load()
+end
+
 return characterFactory

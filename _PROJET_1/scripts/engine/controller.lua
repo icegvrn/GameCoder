@@ -5,8 +5,8 @@ controller.up = "z"
 controller.down = "s"
 controller.left = "q"
 controller.right = "d"
-controller.action1 = "space"
-controller.action2 = "lalt"
+controller.action1 = "mouse1"
+controller.action2 = "space"
 controller.bend = "lshift"
 
 function controller.changeMode()

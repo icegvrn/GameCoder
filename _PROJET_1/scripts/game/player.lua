@@ -16,8 +16,9 @@ player.boosterTimer = 5
 keyDown = false
 
 function player.setCharacter(character)
+    print(map.getCurrentMap().height)
     player.character = character
-    player.character:setPosition(-10, Utils.screenHeight / 2)
+    player.character:setPosition(-10, map.getCurrentMap().height * map.getCurrentMap().tileheight / 2)
     player.character:setSpeed(120)
     player.character:setMode(CHARACTERS.MODE.NORMAL)
     player.changeState(CHARACTERS.STATE.IDLE)
@@ -25,7 +26,7 @@ end
 
 function player.setInCinematicMode(bool)
     if bool then
-        player.setPosition(-10, Utils.screenHeight / 2)
+        player.setPosition(-10, map.getCurrentMap().height * map.getCurrentMap().tileheight / 2)
     end
     player.character:setInCinematicMode(bool)
 end
@@ -45,7 +46,8 @@ function player.update(dt)
 
     local w, h = player.character:getDimension()
 
-    if (map.isThereASolidElement(x, y, w, h, player.character)) then
+    -- Remplacer 16 par "largeur des tuiles"
+    if (map.isThereASolidElement(x + 16, y + 16, w - 16, h - 16, player.character)) then
         player.character.canMove = false
     else
         player.character.canMove = true
@@ -68,7 +70,7 @@ function player.update(dt)
             player.character:setPosition(lastX, lastY)
         end
 
-        if love.keyboard.isDown(controller.action1) then
+        if player.useAction(controller.action1) then
             player.fire(dt)
         end
     end
@@ -125,21 +127,17 @@ function player.move(dt)
         local sX, sY = player.character:getScale()
         local speed = player.character:getSpeed()
         local angle = utils.angleWithMouseWorldPosition(player.character:getPosition())
-        local velocityX = speed * dt * math.cos(angle)
-        local velocityY = speed * dt * math.sin(angle)
+        local velocityX = speed * dt
+        local velocityY = speed * dt
 
         if love.keyboard.isDown(controller.up) then
-            x = x + velocityX
-            y = y + velocityY
-        elseif love.keyboard.isDown(controller.down) then
-            x = x - velocityX
             y = y - velocityY
+        elseif love.keyboard.isDown(controller.down) then
+            y = y + velocityY
         elseif love.keyboard.isDown(controller.left) then
-            x = x - velocityX * sX
-            y = y - velocityY * sX
+            x = x - velocityX
         elseif love.keyboard.isDown(controller.right) then
-            x = x + velocityX * sX
-            y = y + velocityY * sX
+            x = x + velocityX
         end
         player.setPosition(x, y)
     elseif player.character:getState() ~= CHARACTERS.STATE.IDLE or player.character:getMode() ~= lastMode then
@@ -214,6 +212,18 @@ function player.playEntranceAnimation(dt)
     x = x + velocityX * sX
 
     player.setPosition(x, y)
+end
+
+function player.useAction(action)
+    if action == "mouse1" then
+        return love.mouse.isDown(1)
+    elseif action == "mouse2" then
+        return love.mouse.isDown(2)
+    elseif action == "mouse3" then
+        return love.mouse.isDown(3)
+    else
+        return love.keyboard.isDown(action)
+    end
 end
 
 return player

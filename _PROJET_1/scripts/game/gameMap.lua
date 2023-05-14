@@ -47,9 +47,10 @@ function gameMap.draw()
             currentMap.openDoorImg:getWidth() / 2,
             currentMap.openDoorImg:getHeight() / 2
         )
-
+    --   love.graphics.draw(tileSheet, tilesTexture[1366], x, y)
     --  love.graphics.rectangle("fill", door.positionX, door.positionY, door.width, door.height)
     end
+    -- love.graphics.clear()
 end
 
 function gameMap.drawTiles(i)
@@ -57,19 +58,21 @@ function gameMap.drawTiles(i)
         for c = 1, currentMap.map.width do
             local index = (l - 1) * currentMap.map.width + c
             local tid = currentMap.data[i][index]
+
             if tid ~= 0 then
                 local x = (c - 1) * currentMap.map.tilewidth
                 local y = (l - 1) * currentMap.map.tileheight
+
                 if tilesTexture[tid] then
                     love.graphics.draw(tileSheet, tilesTexture[tid], x, y)
                 end
             end
-            if i == 3 then
-                local x = (c - 1) * currentMap.map.tilewidth
-                local y = (l - 1) * currentMap.map.tileheight
+            -- if i == 3 then
+            --    local x = (c - 1) * currentMap.map.tilewidth
+            --   local y = (l - 1) * currentMap.map.tileheight
             --  love.graphics.setFont(testFont)
             -- love.graphics.print(currentMap.data[i][index], x, y)
-            end
+            -- end
         end
     end
 end
@@ -83,7 +86,7 @@ end
 
 function gameMap.loadMap()
     local nbColumns = tileSheet:getWidth() / currentMap.map.tilewidth
-    local nbLine = tileSheet:getHeight() / currentMap.map.height
+    local nbLine = tileSheet:getHeight() / currentMap.map.tileheight
     local l, c
     local id = 1
     for l = 1, nbLine do
@@ -187,11 +190,37 @@ function gameMap.isThereASolidElement(p_left, p_top, p_width, p_height, characte
         end
     end
 
-    if touch == true then
-        return true
-    else
-        return false
+    return touch
+end
+
+function gameMap.isThereAFloor(p_left, p_top, p_width, p_height, character)
+    local floor = false
+    local col = math.floor(p_left / currentMap.map.tilewidth)
+    local lin = math.floor(p_top / currentMap.map.tileheight)
+
+    -- calcul de la colonne et de la ligne de la dernière case couverte par le joueur
+    local col2 = col + math.floor((p_width) / currentMap.map.tilewidth)
+    local lin2 = lin + math.floor((p_height) / currentMap.map.tileheight)
+
+    -- parcours de toutes les cases couvertes par le joueur
+    for c = col, col2 do
+        for r = lin, lin2 do
+            local index = (r - 1) * currentMap.map.width + c
+            if currentMap.data[1] then
+                if currentMap.data[1][index] then
+                    if index > 0 then
+                        if (currentMap.data[1][index] ~= 0) then
+                            floor = true
+                        else
+                            floor = false
+                        end
+                    end
+                end
+            end
+        end
     end
+
+    return floor
 end
 
 function gameMap.getName()

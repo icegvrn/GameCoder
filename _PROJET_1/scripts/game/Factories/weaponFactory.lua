@@ -1,70 +1,37 @@
--- Créé un personnage en fonction de sa catégorie et de son type
-require("scripts/states/WEAPONS")
+-- Créé une arme en fonction de son type
+WEAPONS_CONST = require("scripts/states/WEAPONS")
+PATHS = require("scripts/states/PATHS")
 Weapon = require("scripts/engine/weapon")
 
 weaponFactory = {}
 
-function weaponFactory.createWeapon(type)
-    local weapon = Weapon.new()
-
-    weaponFactory.createSprites(weapon, type)
-
-    weapon:setState(WEAPONS.STATE.IDLE)
-    weapon:setName(tostring(type))
-    if type == WEAPONS.TYPE.NONE then
-        weapon:setDamageValue(0)
-        weapon:setSpeed(0)
-        weapon:setRangedWeapon(false)
-    elseif type == WEAPONS.TYPE.HERO_MAGIC_STAFF then
-        weapon:setDamageValue(20)
-        weapon:setSpeed(0.2)
-        weapon:setRangedWeapon(true)
-        weapon:setHoldingOffset(-10, 0)
-        weapon:setSounds("contents/sounds/game/weapons/heros_magic_staff.wav")
-    elseif type == WEAPONS.TYPE.BITE then
-        weapon:setDamageValue(1000)
-        weapon:setRangedWeapon(false)
-        weapon:setSpeed(1)
-        weapon:setHoldingOffset(0, 0)
-        weapon:setSounds("contents/sounds/game/eating_ennemi.wav")
-        weapon:setSoundsVolume(0.2)
-    elseif type == WEAPONS.TYPE.MAGIC_STAFF then
-        weapon:setDamageValue(10)
-        weapon:setRangedWeapon(true)
-        weapon:setHoldingOffset(-5, 0)
-        weapon:setWeaponRange(15)
-        weapon:setSounds("contents/sounds/game/weapons/ennemi_magic_staff.wav")
-    elseif type == WEAPONS.TYPE.SWORD then
-        weapon:setHoldingOffset(-20, 0)
-        weapon:setDamageValue(15)
-        weapon:setSpeed(1)
-        weapon:setSounds(
-            "contents/sounds/game/weapons/weapon_sword.wav",
-            "contents/sounds/game/weapons/weapon_sword2.wav"
-        )
-        weapon:setSoundsVolume(0.05)
-
-        weapon:setRangedWeapon(false)
-    elseif type == WEAPONS.TYPE.FLOWER then
-        weapon:setDamageValue(5)
-        weapon:setRangedWeapon(false)
-        weapon:setHoldingOffset(-15, 0)
-    elseif type == WEAPONS.TYPE.AXE then
-        weapon:setDamageValue(10)
-        weapon:setRangedWeapon(false)
-        weapon:setHoldingOffset(-10, 0)
-    elseif type == WEAPONS.TYPE.DOUBLE_AXE then
-        weapon:setDamageValue(20)
-        weapon:setRangedWeapon(false)
-        weapon:setHoldingOffset(-10, 0)
-    end
-
+function weaponFactory.createWeapon(p_type)
+    local weapon = weaponFactory.createNewWeapon()
+    weaponFactory.setCharacteristics(weapon, p_type)
+    weaponFactory.createSprites(weapon, p_type)
     return weapon
 end
 
+function weaponFactory.createNewWeapon()
+    return Weapon.new()
+end
+
+-- Va chercher les caractéristiques de l'arme dans un fichier portant le nom de son type ("sword", "magic_staff"...)
+function weaponFactory.setCharacteristics(w, p_type)
+    local weaponData = require(PATHS.ENTITIES.WEAPONS .. p_type)
+    w:setName(weaponData.name)
+    w:setDamageValue(weaponData.damageValue)
+    w:setSpeed(weaponData.speed)
+    w:setRangedWeapon(weaponData.isRangedWeapon)
+    w:setHoldingOffset(weaponData.holdingOffset)
+    w:setSounds(weaponData.sounds)
+    w:setSoundsVolume(weaponData.soundsVolume)
+end
+
+-- Va chercher le sprite de l'arme dans le dossier approprié
 function weaponFactory.createSprites(p_weapon, type)
     local spriteList = {}
-    local imagePath = WEAPONS.IMGPATH .. "/" .. type .. ".png"
+    local imagePath = PATHS.IMG.WEAPONS .. type .. ".png"
     if love.filesystem.getInfo(imagePath) == false then
         print("WARNING WEAPONS FACTORY : " .. type .. " needs images.")
     end
