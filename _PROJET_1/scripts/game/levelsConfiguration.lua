@@ -1,3 +1,5 @@
+
+-- Permet de définir les ennemis qu'il y a dans chaque niveau
 local levelsConfiguration = {}
 
 levelsConfiguration[1] = {}
@@ -50,6 +52,7 @@ levelsConfiguration[7].ennemies = {
 
 levelsConfiguration[8].ennemies = {{CHARACTERS.TYPE.ORC, WEAPONS.TYPE.NONE, 3}}
 
+-- Retourne la liste de tous les ennemis du niveau en cours (utilisé pour définir la victoire du level par exemple)
 function levelsConfiguration.getEnnemiesByLvl(lvl)
     return levelsConfiguration[lvl].ennemies
 end

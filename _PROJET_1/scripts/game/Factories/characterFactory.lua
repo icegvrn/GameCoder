@@ -20,7 +20,7 @@ function characterFactory.createNewCharacter()
     return Character.new()
 end
 
-    -- Ajoute un agent si c'est un ennemi, ou passe le personnage en mode joueur si c'est le joueur
+-- Ajoute un agent si c'est un ennemi, ou passe le personnage en mode joueur si c'est le joueur
 function characterFactory.defineRole(c, category)
     if category == CHARACTERS_STATE.CATEGORY.PLAYER then
         characterFactory.enableController(c)
@@ -37,7 +37,7 @@ function characterFactory.enableController(c)
     c:setPlayer()
 end
 
-    -- Va chercher les caractéristiques du personnage dans un fichier portant le nom de son type ("knight", "princess"...)
+-- Va chercher les caractéristiques du personnage dans un fichier portant le nom de son type ("knight", "princess"...)
 function characterFactory.setCharacteristics(c, category, p_type, boostable)
     local characterData = require(PATHS.ENTITIES.CHARACTERS .. p_type)
     c:setName(characterData.name)
@@ -59,25 +59,22 @@ function characterFactory.setTarget(c, target)
     end
 end
 
--- -- Génère les sprites associés à ce type de personnage ; boostable true uniquement pour le joueur
+-- -- Génère les sprites associés à ce type de personnage pour chaque "state" possible du personnage.
+-- State"Dead" traité différemment car même image pour tous. Boostable true uniquement pour le joueur ;
 function characterFactory.createSprites(character, category, type, boostable)
     local spriteList = {}
 
-    -- Pour chaque state possible du personnage
     for k, v in pairs(CHARACTERS_STATE.STATE) do
-        -- Si ce n'est pas le state mort (animation commune à tous les personnages, traitement plus bas)
+        --
         if v ~= CHARACTERS_STATE.STATE.DEAD then
-
-            -- On définit d'abord toutes les images du mode normal
+            -- Personnage mode normal
             local state = CHARACTERS_STATE.MODE.NORMAL .. "_" .. v
             local imagePath = PATHS.IMG.CHARACTERS .. category .. "/" .. type .. "_" .. state .. ".png"
-
-            -- Si les images existent dans le dossier, on les ajoute à la liste des sprites indexé par un nom type "normal_IDLE"
             if love.filesystem.getInfo(imagePath) then
                 local sprite = love.graphics.newImage(imagePath)
                 spriteList[state] = sprite
 
-                -- Si le personnage est boostable, on définit aussi les images du mode boostable (boosted_IDLE) (utilisé pour joueur)
+                -- Si le personnage a mode boostable
                 if (boostable) then
                     local state = CHARACTERS_STATE.MODE.BOOSTED .. "_" .. v
                     local imagePath = PATHS.IMG.CHARACTERS .. category .. "/" .. type .. "_" .. state .. ".png"
@@ -97,13 +94,12 @@ function characterFactory.createSprites(character, category, type, boostable)
                 end
             end
         else
-            -- Si c'est le state "dead", on va chercher l'image commune à tous pour la mettre dans la liste
             c_state = CHARACTERS_STATE.MODE.NORMAL .. "_" .. CHARACTERS_STATE.STATE.DEAD
             spriteList[c_state] = love.graphics.newImage(PATHS.IMG.CHARACTERS .. "explosion_sprite.png")
         end
     end
 
-    -- On associe cette liste finale au character
+    -- Retourne la liste finale au character
     character:setSprites(spriteList)
 end
 

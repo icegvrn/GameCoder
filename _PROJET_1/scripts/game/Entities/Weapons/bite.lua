@@ -1,4 +1,5 @@
 bite = {}
+
 bite.name = WEAPONS.TYPE.BITE
 bite.damageValue = 1000
 bite.speed = 1

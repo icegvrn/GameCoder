@@ -25,7 +25,7 @@ function Camera:getSmooth()
 end
 
 function Camera:getTarget()
-    return self.target
+        return self.target
 end
 
 function Camera:setPosition(p_x, p_y)

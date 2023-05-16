@@ -1,4 +1,5 @@
 flower = {}
+
 flower.name = WEAPONS.TYPE.FLOWER
 flower.damageValue = 5
 flower.speed = 4

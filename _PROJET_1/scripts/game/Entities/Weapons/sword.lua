@@ -1,4 +1,5 @@
 sword = {}
+
 sword.name = WEAPONS.TYPE.SWORD
 sword.damageValue = 15
 sword.speed = 1

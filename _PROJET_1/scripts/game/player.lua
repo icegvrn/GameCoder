@@ -42,7 +42,7 @@ end
 
 function player.update(dt)
     local gmap = map.getCurrentMap()
-    x, y = player.character:getPosition()
+    x, y = player.character.transform:getPosition()
 
     local w, h = player.character:getDimension()
 
@@ -64,7 +64,7 @@ function player.update(dt)
         player.updatePVbar(dt)
         player.updateMode(dt)
         if player.character.canMove then
-            lastX, lastY = player.character:getPosition()
+            lastX, lastY = player.character.transform:getPosition()
             player.updatePosition(dt)
         else
             player.character:setPosition(lastX, lastY)
@@ -95,10 +95,10 @@ function player.updateMode(dt)
 end
 
 function player.updatePosition(dt)
-    if map.isOverTheMap(player.character:getPosition()) == false then
+    if map.isOverTheMap(player.character.transform:getPosition()) == false then
         player.move(dt)
     else
-        player.character:setPosition(map.clamp(player.character:getPosition()))
+        player.character:setPosition(map.clamp(player.character.transform:getPosition()))
     end
 end
 
@@ -123,10 +123,10 @@ function player.move(dt)
             player.changeState(CHARACTERS.STATE.WALKING)
         end
 
-        x, y = player.character:getPosition()
+        x, y = player.character.transform:getPosition()
         local sX, sY = player.character:getScale()
         local speed = player.character:getSpeed()
-        local angle = utils.angleWithMouseWorldPosition(player.character:getPosition())
+        local angle = utils.angleWithMouseWorldPosition(player.character.transform:getPosition())
         local velocityX = speed * dt
         local velocityY = speed * dt
 
@@ -176,7 +176,7 @@ function player.updatePVbar(dt)
 end
 
 function player.drawUI()
-    local x, y = player.character:getPosition()
+    local x, y = player.character.transform:getPosition()
     ui.drawPlayerLifeBar(
         x,
         y,
@@ -204,7 +204,7 @@ function player.playEntranceAnimation(dt)
         player.changeState(CHARACTERS.STATE.WALKING)
     end
 
-    x, y = player.character:getPosition()
+    x, y = player.character.transform:getPosition()
     local sX, sY = player.character:getScale()
     local speed = player.character:getSpeed()
     local velocityX = speed / 3 * dt

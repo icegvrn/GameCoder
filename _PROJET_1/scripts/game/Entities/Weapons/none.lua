@@ -1,4 +1,5 @@
 none = {}
+
 none.name = WEAPONS.TYPE.NONE
 none.damageValue = 0
 none.speed = 0

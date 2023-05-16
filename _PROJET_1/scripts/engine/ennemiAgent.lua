@@ -18,7 +18,7 @@ function ennemiAgent:create()
     ennemiAgent.velocityY = 0
     ennemiAgent.character = nil
     ennemiAgent.angle = 0
-    ennemiAgent.range = love.math.random(10,20)
+    ennemiAgent.range = love.math.random(10, 20)
     ennemiAgent.isCinematicMode = false
     ennemiAgent.timer = 0
     ennemiAgent.timerIsStarted = false
@@ -29,7 +29,7 @@ function ennemiAgent:create()
 
     function ennemiAgent:init(character)
         ennemiAgent.character = character
-        local x, y = ennemiAgent.character:getPosition()
+        local x, y = ennemiAgent.character.transform:getPosition()
         local speed = ennemiAgent.character:getSpeed()
         local mpW, mpH = map.getMapDimension()
         ennemiAgent.angle = Utils.angle(x, y, love.math.random(0, mpW), love.math.random(0, mpH))
@@ -39,7 +39,7 @@ function ennemiAgent:create()
 
     function ennemiAgent:update(dt, positionX, positionY, currentState)
         local x, y = positionX, positionY
-        local targetX, targetY = ennemiAgent.character:getTargetPos()
+        local targetX, targetY = ennemiAgent.character:getTarget().transform:getPosition()
         local distance = Utils.distance(x, y, targetX, targetY)
         local ennemiWidth, ennemiHeight = ennemiAgent.character:getDimension()
 
@@ -72,7 +72,7 @@ function ennemiAgent:create()
                     ennemiAgent.character:setState(CHARACTERS.STATE.IDLE)
                 else
                     ennemiAgent.character:setPosition(newPositionX, newPositionY)
-                    lastPositionX, lastPositionY = ennemiAgent.character:getPosition()
+                    lastPositionX, lastPositionY = ennemiAgent.character.transform:getPosition()
 
                     if ennemiAgent.character:isInCinematicMode() == false then
                         ---- On cherche le joueur, qui est dans target déjà.  ----

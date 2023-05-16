@@ -1,4 +1,5 @@
 axe = {}
+
 axe.name = WEAPONS.TYPE.AXE
 axe.damageValue = 10
 axe.speed = 5

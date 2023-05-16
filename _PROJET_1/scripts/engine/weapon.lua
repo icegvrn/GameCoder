@@ -1,6 +1,7 @@
 require("scripts/states/CONST")
 utils = require("scripts/Utils/utils")
 local map = require("scripts/game/gameMap")
+Transform = require("scripts/engine/transform")
 
 local weapon = {}
 local weapons_mt = {__index = weapon}
@@ -15,10 +16,7 @@ function weapon.new()
     newWeapon.isVisible = true
     newWeapon.isFiring = false
     newWeapon.speed = 5
-    newWeapon.transform = {}
-    newWeapon.transform.position = {}
-    newWeapon.transform.position.x = 100
-    newWeapon.transform.position.y = 100
+    newWeapon.transform = Transform.new()
 
     newWeapon.hitBox = {}
     newWeapon.hitBox.offset = {}
@@ -33,12 +31,6 @@ function weapon.new()
     newWeapon.hitBox.size.x = 10
     newWeapon.hitBox.size.y = 10
 
-    newWeapon.transform.rotation = {}
-    newWeapon.transform.rotation.x = 0
-    newWeapon.transform.rotation.y = 0
-    newWeapon.transform.scale = {}
-    newWeapon.transform.scale.x = 1
-    newWeapon.transform.scale.y = 1
     newWeapon.initialScale = 1
 
     newWeapon.holdingOffset = {}
