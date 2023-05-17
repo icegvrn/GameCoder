@@ -17,6 +17,7 @@ function mainCamera.update(dt)
     local targetPosition = mainCamera.camera:getTarget():getPosition()
     mainCamera.camera:setTargetPosition(targetPosition)
     destX, destY = mainCamera.camera:calcSmoothDestination(dt)
+
 end
 
 function mainCamera.draw()

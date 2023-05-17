@@ -2,58 +2,68 @@
 PATHS = require("scripts/states/PATHS")
 CHARACTERS_STATE = require("scripts/states/CHARACTERS")
 Character = require("scripts/engine/character")
+Player = require("scripts/game/Entities/Characters/Modules/Player")
+Ennemi = require("scripts/game/Entities/Characters/Modules/Ennemi")
 
 characterFactory = {}
-
+local player = Player.new()
+local ennemi = Ennemi.new()
+local createdPlayer = nil
 -- Crée un nouveau personnage à la demande
 function characterFactory.createCharacter(p_category, p_type, p_boostable, p_target)
-    local character = characterFactory.createNewCharacter()
-    characterFactory.defineRole(character, p_category)
-    characterFactory.setTarget(character, p_target)
-    characterFactory.setCharacteristics(character, p_category, p_type, p_boostable)
-    characterFactory.createSprites(character, p_category, p_type, p_boostable)
-    characterFactory.initCharacter(character)
-    return character
+    local c = characterFactory.createCharacterByRole(character, p_category)
+    -- local character = characterFactory.createNewCharacter()
+    characterFactory.setTarget(c.character, p_target)
+    characterFactory.setCharacteristics(c.character, p_category, p_type, p_boostable)
+    characterFactory.createSprites(c.character, p_category, p_type, p_boostable)
+    characterFactory.initCharacter(c.character)
+    return c
 end
 
-function characterFactory.createNewCharacter()
-    return Character.new()
-end
+-- function characterFactory.createNewCharacter()
+--     return Character.new()
+-- end
 
 -- Ajoute un agent si c'est un ennemi, ou passe le personnage en mode joueur si c'est le joueur
-function characterFactory.defineRole(c, category)
+function characterFactory.createCharacterByRole(c, category)
     if category == CHARACTERS_STATE.CATEGORY.PLAYER then
-        characterFactory.enableController(c)
+        createdPlayer = player:create()
+        return createdPlayer
     else
-        characterFactory.enableAgent(c)
+        local e = ennemi:create()
+        return e
     end
 end
 
-function characterFactory.enableAgent(c)
-    c:addEnnemiAgent()
+function characterFactory:getPlayer()
+    return createdPlayer
 end
 
-function characterFactory.enableController(c)
-    c:setPlayer()
-end
+-- function characterFactory.enableAgent(c)
+--     c.controller:addEnnemiAgent(c)
+-- end
+
+-- function characterFactory.enableController(c)
+--     c.controller:setPlayer()
+-- end
 
 -- Va chercher les caractéristiques du personnage dans un fichier portant le nom de son type ("knight", "princess"...)
 function characterFactory.setCharacteristics(c, category, p_type, boostable)
     local characterData = require(PATHS.ENTITIES.CHARACTERS .. p_type)
     c:setName(characterData.name)
-    c:setSpeed(characterData.speed)
-    c:setMaxPV(characterData.pv)
-    c:setHandOffset(characterData.handOffset)
-    c:setStrenght(characterData.strenght)
-    c:setWeaponScaling(characterData.weaponScaling)
-    c:setSounds(characterData.talkingSound)
-    c:setSilenceIntervalBetweenTalk(characterData.talkingInterval)
-    c:setTalkingVolume(characterData.talkingVolume)
+    c.controller:setSpeed(characterData.speed)
+    c.fight:setMaxPV(characterData.pv)
+    c.fight:setStrenght(characterData.strenght)
+    c.fight.weaponSlot:setHandOffset(characterData.handOffset)
+    c.fight.weaponSlot:setWeaponScaling(characterData.weaponScaling)
+    c.sound:setSounds(characterData.talkingSound)
+    c.sound:setSilenceIntervalBetweenTalk(characterData.talkingInterval)
+    c.sound:setTalkingVolume(characterData.talkingVolume)
 end
 
 function characterFactory.setTarget(c, target)
     if (target) then
-        c:setTarget(target)
+        c.controller:setTarget(target)
     else
         print("CHARACTER FACTORY : LA CIBLE EST INCORRECTE.")
     end
@@ -89,7 +99,7 @@ function characterFactory.createSprites(character, category, type, boostable)
                     end
                 end
             else
-                if (v == CHARACTERS_STATE.STATE.ALERT and character:isThePlayer()) == false then
+                if v == CHARACTERS_STATE.STATE.ALERT and character.controller.ennemiAgent then
                     print("WARNING CHARACTER FACTORY : " .. type .. " needs images for " .. state .. ".")
                 end
             end
@@ -100,13 +110,12 @@ function characterFactory.createSprites(character, category, type, boostable)
     end
 
     -- Retourne la liste finale au character
-    character:setSprites(spriteList)
+    character.sprites:setSprites(spriteList)
 end
 
 function characterFactory.initCharacter(c)
     c:setMode(CHARACTERS_STATE.MODE.NORMAL)
     c:setState(CHARACTERS_STATE.STATE.IDLE)
-    c:load()
 end
 
 return characterFactory

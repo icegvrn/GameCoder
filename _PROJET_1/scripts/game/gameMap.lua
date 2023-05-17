@@ -160,7 +160,7 @@ end
 
 function gameMap.isThereASolidElement(p_left, p_top, p_width, p_height, character)
     if character then
-        if character:isThePlayer() then
+        if character.controller.player then
             p_width = p_width - 16
             p_height = p_height - 16
         end

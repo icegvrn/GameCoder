@@ -1,7 +1,6 @@
 ui = require("scripts/engine/ui")
 require("scripts/Utils/utils")
 controller = require("scripts/engine/controller")
-
 local uiGame = ui.new()
 
 uiGame.player = {}
@@ -80,7 +79,7 @@ function uiGame.draw()
     end
 end
 
-function uiGame.updatePlayerPointsBar(dt, points, maxPoints)
+function uiGame.updatePlayerPointsBar(dt, player, points, maxPoints)
     uiGame.player.currentPointsBarWidth = (points / maxPoints) * uiGame.player.pointsBarWidth
 
     if points < maxPoints / 4 then
@@ -130,7 +129,7 @@ function uiGame.updatePlayerLifeBar(currentPV, maxPV)
         uiGame.player.currentLifeColor = uiGame.player.lifeColor[1]
     elseif currentPV < maxPV / 2 and currentPV > maxPV / 4 then
         uiGame.player.currentLifeColor = uiGame.player.lifeColor[2]
-    elseif currentPV <= currentPV / 4 then
+    elseif currentPV <= maxPV / 4 then
         uiGame.player.currentLifeColor = uiGame.player.lifeColor[3]
     end
 end
@@ -151,7 +150,7 @@ function uiGame.drawPlayerLifeBar(position_x, position_y, maxPV, currentPV, scal
     love.graphics.setColor(1, 1, 1)
 end
 
-function ui.drawPlayerPointBar(points, maxPoints)
+function ui.drawPlayerPointBar(player, points, maxPoints)
     local x, y = Utils.screenCoordinates(10, (Utils.screenHeight - 40))
     love.graphics.setColor(1, 1, 1, 0.3)
     love.graphics.rectangle("fill", x + 45, y + 5, uiGame.player.pointsBarWidth, uiGame.player.pointsBarHeight)

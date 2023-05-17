@@ -1,6 +1,5 @@
 GAMESTATE = require("scripts/states/GAMESTATE")
 local scene = require("scripts/engine/scene")
-player = require("scripts/game/player")
 camera = require("scripts/game/mainCamera")
 levelManager = require("scripts/game/managers/levelManager")
 local isLoaded = false
@@ -10,7 +9,7 @@ local game = scene.new()
 function game:load()
     gameMap.initMap(1)
     levelManager.load()
-    camera.follow(player.character)
+    camera.follow(levelManager.player.character)
     isLoaded = true
 end
 

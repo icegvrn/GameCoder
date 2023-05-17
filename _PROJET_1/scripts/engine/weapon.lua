@@ -17,7 +17,7 @@ function weapon.new()
     newWeapon.isFiring = false
     newWeapon.speed = 5
     newWeapon.transform = Transform.new()
-
+    newWeapon.transform = newWeapon.transform:create()
     newWeapon.hitBox = {}
     newWeapon.hitBox.offset = {}
     newWeapon.hitBox.offset.x = 0
@@ -215,7 +215,7 @@ function weapon:drawFiredElements()
     if (self.isRangedWeapon) then
         if self.FireList then
             for k, v in ipairs(self.FireList) do
-                if self.owner:isThePlayer() then
+                if self.owner.controller.player then
                     love.graphics.setColor(1, 0.1, 0, 1)
                     love.graphics.circle("fill", v.x, v.y, 6)
                     for n = 1, #v.list_trail do
@@ -251,14 +251,14 @@ function weapon:getFireOffset()
 end
 
 function weapon:update(dt)
-    if self.owner:isThePlayer() then
-        self.hittableCharacters = levelManager.getListofEnnemies()
+    if self.owner.controller.player then
+        self.hittableCharacters = levelManager.getListofEnnemiesCharacters()
         if self.owner:getMode() == CHARACTERS.MODE.BOOSTED then
             self:boostOwner(dt)
         end
     else
-        if self.hittableCharacters[1] ~= self.owner:getTarget() then
-            self.hittableCharacters[1] = self.owner:getTarget()
+        if self.hittableCharacters[1] ~= self.owner.controller.target then
+            self.hittableCharacters[1] = self.owner.controller.target
         end
     end
 
@@ -278,11 +278,11 @@ function weapon:checkIfWeaponCanFire(dt)
 end
 
 function weapon:boostOwner(dt)
-    local x, y = self.owner:getPosition()
+    local x, y = self.owner.transform:getPosition()
     for c = #self.hittableCharacters, 1, -1 do
-        if self:isCollide(x, y, self.owner:getHeight(), self.owner:getHeight(), self.hittableCharacters[c]) then
+        if self:isCollide(x, y, self.owner.sprites.height, self.owner.sprites.width, self.hittableCharacters[c]) then
             self:fire(dt)
-            self.hittableCharacters[c]:hit(self.owner, self.damage)
+            self.hittableCharacters[c].fight:hit(self.owner, self.damage)
         end
     end
 end
@@ -369,7 +369,7 @@ function weapon:updateFiredElements(dt)
                 else
                     for c = #self.hittableCharacters, 1, -1 do
                         if self:isCollide(t.x, t.y, t.size, t.size, self.hittableCharacters[c]) then
-                            self.hittableCharacters[c]:hit(self.owner, self.damage)
+                            self.hittableCharacters[c].fight:hit(self.owner, self.damage)
                             table.remove(self.FireList, n)
                         end
                     end
@@ -381,7 +381,7 @@ function weapon:updateFiredElements(dt)
 end
 
 function weapon:isCollide(weaponX, weaponY, weaponWidth, weaponHeight, p_character)
-    return p_character:isCollidedBy(weaponX, weaponY, weaponWidth, weaponHeight)
+    return p_character.collider:isCharacterCollidedBy(p_character, weaponX, weaponY, weaponWidth, weaponHeight)
 end
 
 function weapon:drawWeapon()
@@ -428,7 +428,7 @@ function weapon:calcWeaponAngle(dt, ownerPosition, ownerScale, ownerHandPosition
         weaponAngle = math.atan2((mY - pY) * ownerDirectionX, (mX - pX) * ownerDirectionX)
     end
 
-    if self.owner:isThePlayer() then
+    if self.owner.controller.player then
         -- Permet de "tracker" la souris par le calcul atan2 qui calcul l'angle entre deux vecteurs pour modifier l'angle si le personnage est joueur
         local mouseWorldPositionX, mouseWorldPositionY = utils.mouseToWorldCoordinates(love.mouse.getPosition())
         weaponAngle =
