@@ -1,6 +1,6 @@
 camera = require("scripts/engine/camera")
 map = require("scripts/game/gameMap")
---player = require("scripts/game/player")
+
 mainCamera = {}
 mainCamera.camera = camera.new()
 mainCamera.originalTarget = nil
@@ -17,7 +17,6 @@ function mainCamera.update(dt)
     local targetPosition = mainCamera.camera:getTarget():getPosition()
     mainCamera.camera:setTargetPosition(targetPosition)
     destX, destY = mainCamera.camera:calcSmoothDestination(dt)
-
 end
 
 function mainCamera.draw()

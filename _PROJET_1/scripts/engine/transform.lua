@@ -7,21 +7,11 @@ function Transform.new()
 end
 
 function Transform:create()
-
     local transform = {
-        position = {x = 0, y = 0}, 
-        rotation = {x = 0, y = 0}, 
-        scale = {x = 1, y = 1}}
-
-    -- function transform:setTransform(p_x, p_y, r_x, r_y, s_x, s_y)
-    --     self.position.x, self.position.y = p_x, p_y
-    --     if r_x and r_y then
-    --         self.rotation.x, self.rotation.y = r_x, r_y
-    --         if s_x and sy then
-    --             self.scale.x, self.scale.y = s_x, s_y
-    --         end
-    --     end
-    -- end
+        position = {x = 0, y = 0},
+        rotation = {x = 0, y = 0},
+        scale = {x = 1, y = 1}
+    }
 
     function transform:getTransform()
         return self.position.x, self.position.y, self.rotation.x, self.rotation.y, self.scale.x, self.scale.y

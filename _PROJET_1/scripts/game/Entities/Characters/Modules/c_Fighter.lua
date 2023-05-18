@@ -44,9 +44,9 @@ function c_Fighter:create()
             self.currentPV = self.currentPV - damage
             if attacker.controller.player then
                 if self.currentPV <= 0 then
-                    attacker.controller.player:addPoints(self.maxPV / 2)
+                    attacker.controller.player.pointsCounter:addPoints(attacker.controller.player, self.maxPV / 2)
                 else
-                    attacker.controller.player:addPoints(self.maxPV / 10)
+                    attacker.controller.player.pointsCounter:addPoints(attacker.controller.player, self.maxPV / 10)
                 end
             end
         end
@@ -62,6 +62,13 @@ function c_Fighter:create()
                 self.isHit = false
                 sprites:changeSpriteColorTo({1, 1, 1, 1})
                 soundModule.playSound = false
+            end
+
+            if parent.controller.player then
+                if parent.fight.currentPV <= 0 then
+                    parent.controller.player.isDead = true
+                    soundManager:playSound("contents/sounds/game/heros_death.wav", 0.3, false)
+                end
             end
         end
     end

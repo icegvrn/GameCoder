@@ -38,7 +38,6 @@ function Character:create()
     }
 
     function character:update(dt)
-
         self.controller:lookAtRightDirection(dt, self)
         self.sprites:animate(dt, self.mode, self.state)
         self.fight.weaponSlot:moveWeapon(dt, self, self.controller.target)
@@ -48,6 +47,7 @@ function Character:create()
         if self.fight.currentPV <= 0 then
             self.fight:dyingEvents(dt, self, self.sound)
         end
+        self.collider:update(dt, self)
     end
 
     function character:draw()

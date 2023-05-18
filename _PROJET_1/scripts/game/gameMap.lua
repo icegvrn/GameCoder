@@ -159,10 +159,16 @@ function gameMap.getCurrentMap()
 end
 
 function gameMap.isThereASolidElement(p_left, p_top, p_width, p_height, character)
+    -- Créé une tolérance pour ne pas rendre la collision trop abrupte en ignorant quelques tiles par rapport à la taille du personnage
     if character then
         if character.controller.player then
-            p_width = p_width - 16
-            p_height = p_height - 16
+            if character.mode == CHARACTERS.MODE.BOOSTED then
+                p_width = p_width - currentMap.map.tilewidth * 4
+                p_height = p_height - currentMap.map.tileheight * 4
+            else
+                p_width = p_width - currentMap.map.tilewidth * 2
+                p_height = p_height - currentMap.map.tileheight * 2
+            end
         end
     end
 

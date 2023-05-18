@@ -40,6 +40,10 @@ function levelManager.load()
 end
 
 function levelManager.update(dt)
+    if levelManager.player.isDead then
+        GAMESTATE.currentState = GAMESTATE.STATE.GAMEOVER
+    end
+
     if levelManager.LEVELSTATE.currentState == levelManager.LEVELSTATE.start then
         levelManager.playLevelCinematic(dt)
     elseif levelManager.LEVELSTATE.currentState == levelManager.LEVELSTATE.game then
@@ -164,17 +168,13 @@ function levelManager.spawnPlayer()
 end
 
 function levelManager.keypressed(key)
-
-
     if key == "m" then
-            levelManager.nextLevel()
+        levelManager.nextLevel()
     end
 
     for n = 1, #levelManager.charactersList do
         levelManager.charactersList[n]:keypressed(key)
     end
-
-    
 end
 
 function levelManager.getListofEnnemiesCharacters()
@@ -216,8 +216,8 @@ function levelManager.playLevelCinematic(dt)
             levelManager.cinematic.timer = levelManager.cinematic.timer + dt
         end
         for n = 1, #levelManager.charactersList do
-            if levelManager.charactersList[n].character.controller.player then
-                levelManager.charactersList[n].character.controller.player:playEntranceAnimation(dt)
+            if levelManager.charactersList[n].isPlayer then
+                --     levelManager.charactersList[n]:playEntranceAnimation(dt)
             else
                 levelManager.charactersList[n]:update(dt)
             end

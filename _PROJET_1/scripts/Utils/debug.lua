@@ -1,8 +1,9 @@
 d_mainCamera = require("scripts/game/mainCamera")
-d_player = require("scripts/game/player")
 d_Utils = require("scripts/Utils/utils")
 d_map = require("scripts/game/gameMap")
 debug = {}
+debug.font10 = love.graphics.newFont(10)
+debug.font = debug.font10
 debug.cameraOverlay = false
 debug.playerCoordinates = false
 debug.player = {}
@@ -19,12 +20,13 @@ end
 
 function debug.update()
     if debug.playerCoordinates then
-        debug.player.position.x, debug.player.position.y = d_player.character:getPosition()
+        debug.player.position.x, debug.player.position.y = levelManager.player.character:getPosition()
         debug.mouse.position.x, debug.mouse.position.y = d_Utils.mouseToWorldCoordinates(love.mouse.getPosition())
     end
 end
 
 function debug.draw()
+    love.graphics.setFont(debug.font)
     debug.drawCameraDebugOverlay()
     debug.drawPlayerCoordinates()
 end
@@ -40,10 +42,9 @@ function debug.drawCameraDebugOverlay()
 end
 
 function debug.drawPlayerCoordinates()
-
     local cx, cy = d_mainCamera.camera:getPosition()
     local debugBarSize = 30
-    
+
     if debug.playerCoordinates then
         love.graphics.setColor(0.2, 0.2, 0.2)
         love.graphics.rectangle("fill", 0 + cx, cy, love.graphics.getWidth(), debugBarSize)
@@ -82,6 +83,10 @@ end
 
 function debug.isMapEnable()
     return d_map.mapEnable
+end
+
+function debug.setPlayerCharacter(playerCharacter)
+    debug.playerCharacter = playerCharacter
 end
 
 function debug.setMapEnable(bool)

@@ -21,6 +21,7 @@ function c_PointsUI:create()
         love.graphics.setFont(self.defaultFont)
         love.graphics.setColor(1, 1, 1)
     end
+
     return pointsUI
 end
 

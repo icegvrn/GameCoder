@@ -23,7 +23,6 @@ function Ennemi:create()
 
     function ennemi:draw()
         self.character:draw()
-        --zself.character.controller.ennemiAgent:draw()
     end
 
     function ennemi:update(dt)

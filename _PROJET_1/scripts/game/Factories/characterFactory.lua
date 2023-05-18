@@ -2,6 +2,7 @@
 PATHS = require("scripts/states/PATHS")
 CHARACTERS_STATE = require("scripts/states/CHARACTERS")
 Character = require("scripts/engine/character")
+debug = require("scripts/Utils/debug")
 Player = require("scripts/game/Entities/Characters/Modules/Player")
 Ennemi = require("scripts/game/Entities/Characters/Modules/Ennemi")
 
@@ -9,6 +10,7 @@ characterFactory = {}
 local player = Player.new()
 local ennemi = Ennemi.new()
 local createdPlayer = nil
+
 -- Crée un nouveau personnage à la demande
 function characterFactory.createCharacter(p_category, p_type, p_boostable, p_target)
     local c = characterFactory.createCharacterByRole(character, p_category)
@@ -19,10 +21,6 @@ function characterFactory.createCharacter(p_category, p_type, p_boostable, p_tar
     characterFactory.initCharacter(c.character)
     return c
 end
-
--- function characterFactory.createNewCharacter()
---     return Character.new()
--- end
 
 -- Ajoute un agent si c'est un ennemi, ou passe le personnage en mode joueur si c'est le joueur
 function characterFactory.createCharacterByRole(c, category)
@@ -38,14 +36,6 @@ end
 function characterFactory:getPlayer()
     return createdPlayer
 end
-
--- function characterFactory.enableAgent(c)
---     c.controller:addEnnemiAgent(c)
--- end
-
--- function characterFactory.enableController(c)
---     c.controller:setPlayer()
--- end
 
 -- Va chercher les caractéristiques du personnage dans un fichier portant le nom de son type ("knight", "princess"...)
 function characterFactory.setCharacteristics(c, category, p_type, boostable)

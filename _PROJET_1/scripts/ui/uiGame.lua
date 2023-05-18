@@ -38,7 +38,7 @@ uiGame.buttons.doorOpened = false
 uiGame.victory = false
 
 function uiGame.load()
-    uiGame.buttons.timer = player.boosterDuration
+    uiGame.buttons.timer = player.playerBooster.boosterDuration
 
     uiGame.buttons.boostedSheet = love.graphics.newImage("contents/images/ui/boostedButtons.png")
     uiGame.buttons.weaponSheet = love.graphics.newImage("contents/images/ui/weaponButtons.png")
@@ -111,7 +111,7 @@ function uiGame.updatePlayerPointsBar(dt, player, points, maxPoints)
         if uiGame.buttons.timer > 0 then
             uiGame.buttons.timer = uiGame.buttons.timer - 1 * dt
         else
-            uiGame.buttons.timer = player.boosterDuration
+            uiGame.buttons.timer = player.playerBooster.boosterDuration
         end
     end
 end
