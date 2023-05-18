@@ -1,5 +1,6 @@
 Character = require("scripts/engine/character")
 EnnemiAgent = require("scripts/engine/ennemiAgent")
+local Animator = require("scripts/game/Entities/Characters/Modules/c_Animator")
 
 local Ennemi = {}
 local Ennemi_mt = {__index = Ennemi}
@@ -7,7 +8,8 @@ local Ennemi_mt = {__index = Ennemi}
 function Ennemi.new()
     local ennemi = {
         ennemiCharacter = Character.new(),
-        ennemiAgent = EnnemiAgent.new()
+        ennemiAgent = EnnemiAgent.new(),
+        animator = Animator.new()
     }
     return setmetatable(ennemi, Ennemi_mt)
 end
@@ -15,10 +17,11 @@ end
 function Ennemi:create()
     local ennemi = {
         character = self.ennemiCharacter:create(),
-        agent = self.ennemiAgent.create()
+        agent = self.ennemiAgent.create(),
+        animator = self.animator.create()
     }
 
-    ennemi.agent:init(ennemi.character)
+    ennemi.agent:init(ennemi)
     ennemi.character.controller.ennemiAgent = ennemi.agent
 
     function ennemi:draw()
@@ -28,7 +31,8 @@ function Ennemi:create()
     function ennemi:update(dt)
         self.character:update(dt)
         x, y = self.character:getPosition()
-        self.character.controller.ennemiAgent:update(dt, x, y, self.character.state)
+        self.character.controller.ennemiAgent:update(dt, self, x, y, self.character.state)
+        self.animator:update(dt, self)
     end
 
     function ennemi:keypressed(key)

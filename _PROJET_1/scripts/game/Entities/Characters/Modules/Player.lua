@@ -34,7 +34,6 @@ function Player:create()
     function player:update(dt)
         self.character:update(dt)
         self.animator:update(dt, self)
-
         if self.character.controller:isInCinematicMode() == false then
             self:updatePlayables(dt, self)
         end

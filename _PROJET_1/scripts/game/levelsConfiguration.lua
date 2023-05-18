@@ -1,4 +1,3 @@
-
 -- Permet de définir les ennemis qu'il y a dans chaque niveau
 local levelsConfiguration = {}
 
@@ -16,7 +15,8 @@ levelsConfiguration[1].ennemies = {
 }
 
 levelsConfiguration[2].ennemies = {
-    {CHARACTERS.TYPE.KNIGHT, WEAPONS.TYPE.SWORD, 10}
+    {CHARACTERS.TYPE.KNIGHT, WEAPONS.TYPE.SWORD, 10},
+    {CHARACTERS.TYPE.MAGE, WEAPONS.TYPE.MAGIC_STAFF, 3}
 }
 
 levelsConfiguration[3].ennemies = {

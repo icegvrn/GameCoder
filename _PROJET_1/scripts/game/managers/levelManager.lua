@@ -206,7 +206,6 @@ function levelManager.playLevelCinematic(dt)
                 true
             )
         end
-
         camera.lock(true)
         levelManager.cinematic.IsStarted = true
     elseif levelManager.cinematic.IsStarted then
@@ -215,10 +214,9 @@ function levelManager.playLevelCinematic(dt)
         else
             levelManager.cinematic.timer = levelManager.cinematic.timer + dt
         end
+
         for n = 1, #levelManager.charactersList do
-            if levelManager.charactersList[n].isPlayer then
-                --     levelManager.charactersList[n]:playEntranceAnimation(dt)
-            else
+            if levelManager.charactersList[n].agent then
                 levelManager.charactersList[n]:update(dt)
             end
         end

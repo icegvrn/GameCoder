@@ -211,7 +211,7 @@ function gameMap.isThereAFloor(p_left, p_top, p_width, p_height, character)
     -- parcours de toutes les cases couvertes par le joueur
     for c = col, col2 do
         for r = lin, lin2 do
-            local index = (r - 1) * currentMap.map.width + c
+            local index = r * currentMap.map.width + c
             if currentMap.data[1] then
                 if currentMap.data[1][index] then
                     if index > 0 then

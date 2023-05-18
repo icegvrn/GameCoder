@@ -33,8 +33,7 @@ function Character:create()
         fight = self.fight:create(),
         controller = self.controller:create(),
         sprites = self.sprites:create(),
-        sound = self.sound:create(),
-        i = 0
+        sound = self.sound:create()
     }
 
     function character:update(dt)

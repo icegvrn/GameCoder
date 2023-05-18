@@ -100,7 +100,7 @@ function characterFactory.createSprites(character, category, type, boostable)
     end
 
     -- Retourne la liste finale au character
-    character.sprites:setSprites(spriteList)
+    character.sprites:setSpritesList(spriteList, 4, 1)
 end
 
 function characterFactory.initCharacter(c)

@@ -19,18 +19,12 @@ function c_Sound:create()
     }
 
     function sound:randomSpeak()
-        local randNb = love.math.random(1, self.silenceBetweenTalk * 1000)
-        if randNb == self.silenceBetweenTalk * 1000 then
-            local nb = love.math.random(1, #self.tracks)
-            soundManager:playSound(self.tracks[nb], self.talkVolume, false)
-        end
+        local nb = love.math.random(1, #self.tracks)
+        self:play(self.tracks[nb], self.talkVolume, false, 1000)
     end
 
     function sound:alertedSound()
-        local randNb = love.math.random(1, self.silenceBetweenTalk * 100)
-        if randNb == self.silenceBetweenTalk * 100 then
-            soundManager:playSound(PATHS.SOUNDS.CHARACTERS .. "alert.wav", 0.2, false)
-        end
+        self:play(PATHS.SOUNDS.CHARACTERS .. "alert.wav", 0.2, false, 100)
     end
 
     function sound:dyingSound()
@@ -38,6 +32,7 @@ function c_Sound:create()
     end
 
     function sound:setSounds(array)
+        self.tracks = {}
         for i = 1, #array do
             self.tracks[i] = array[i]
         end
@@ -54,6 +49,18 @@ function c_Sound:create()
     function sound:playBoostedSound()
         soundManager:playSound(PATHS.SOUNDS.GAME .. "heros_transform.wav", 0.4, false)
     end
+
+    function sound:play(sound, volume, loop, interval)
+        if interval then
+            local randNb = love.math.random(1, self.silenceBetweenTalk * interval)
+            if randNb == self.silenceBetweenTalk * interval then
+                soundManager:playSound(sound, volume, loop)
+            end
+        else
+            soundManager:playSound(sound, volume, loop)
+        end
+    end
+
     return sound
 end
 

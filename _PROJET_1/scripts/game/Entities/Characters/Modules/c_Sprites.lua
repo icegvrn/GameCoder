@@ -14,28 +14,32 @@ function c_Sprites:create()
         color = {1, 1, 1, 1},
         currentSpriteId = 1,
         spritestileSheets = {},
-        spritesList = {}
+        spritesList = {},
+        currentAngle = 0,
+        rotationAngle = 0
     }
-    function c_sprite:drawSprite(parent, direction, mode, state)
-        self:updateSpriteDirection(parent, direction)
 
-        local c_state = mode .. "_" .. state
+    function c_sprite:drawSprite(parent, direction, index, index2)
+        if index2 then
+            index = index .. "_" .. index2
+        end
+
+        self:updateSpriteDirection(parent, direction)
         local c_spriteID = math.floor(self.currentSpriteId)
-        local px, py = parent.transform.position.x, parent.transform.position.y
 
         love.graphics.setColor(self.color)
 
-        if self.spritesList[c_state][c_spriteID] then
+        if self.spritesList[index][c_spriteID] then
             love.graphics.draw(
-                self.spritestileSheets[c_state],
-                self.spritesList[c_state][c_spriteID],
+                self.spritestileSheets[index],
+                self.spritesList[index][c_spriteID],
                 parent.transform.position.x,
                 parent.transform.position.y,
                 parent.transform.rotation.y,
                 parent.transform.scale.x,
                 parent.transform.scale.y,
-                self.spritestileSheets[c_state]:getHeight() / 2,
-                self.spritestileSheets[c_state]:getHeight() / 2
+                self.spritestileSheets[index]:getHeight() / 2,
+                self.spritestileSheets[index]:getHeight() / 2
             )
         end
     end
@@ -52,29 +56,33 @@ function c_Sprites:create()
         self.color = color
     end
 
-    function c_sprite:animate(dt, mode, state)
-        local c_state = mode .. "_" .. state
+    function c_sprite:animate(dt, index, index2)
+        if index2 then
+            index = index .. "_" .. index2
+        end
         self.currentSpriteId = self.currentSpriteId + 5 * dt
-        if self.currentSpriteId >= #self.spritesList[c_state] + 0.99 then
+        if self.currentSpriteId >= #self.spritesList[index] + 0.99 then
             self.currentSpriteId = 1
         end
     end
 
-    function c_sprite:getDimension(mode, state)
-        local c_state = mode .. "_" .. state
-        local w = self.spritestileSheets[c_state]:getWidth() / 4
-        local h = self.spritestileSheets[c_state]:getHeight()
+    function c_sprite:getDimension(index, index2)
+        if index2 then
+            index = index .. "_" .. index2
+        end
+        local w = self.spritestileSheets[index]:getWidth() / 4
+        local h = self.spritestileSheets[index]:getHeight()
         return w, h
     end
 
-    function c_sprite:setSprites(p_table)
+    function c_sprite:setSpritesList(p_table, p_widthNb, p_heightNb)
         local sprites = {}
         for k, sprite in pairs(p_table) do
             self.spritestileSheets[k] = sprite
-            self.height = sprite:getHeight()
-            self.width = sprite:getWidth() / 4
-            local nbColumns = 4
-            local nbLine = sprite:getHeight() / self.height
+            self.height = sprite:getHeight() / p_heightNb
+            self.width = sprite:getWidth() / p_widthNb
+            local nbColumns = p_widthNb
+            local nbLine = p_heightNb
             local id = 1
 
             local spriteTable = {}
@@ -82,10 +90,10 @@ function c_Sprites:create()
                 for l = 1, nbLine do
                     spriteTable[id] =
                         love.graphics.newQuad(
-                        (c - 1) * sprite:getWidth() / 4,
-                        (l - 1) * sprite:getHeight(),
-                        sprite:getWidth() / 4,
-                        sprite:getHeight(),
+                        (c - 1) * sprite:getWidth() / p_widthNb,
+                        (l - 1) * sprite:getHeight() / p_heightNb,
+                        sprite:getWidth() / p_widthNb,
+                        sprite:getHeight() / p_heightNb,
                         sprite:getWidth(),
                         sprite:getHeight()
                     )
@@ -94,7 +102,6 @@ function c_Sprites:create()
             end
             sprites[k] = spriteTable
         end
-
         self.spritesList = sprites
     end
 
