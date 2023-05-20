@@ -11,7 +11,7 @@ levelsConfiguration[7] = {}
 levelsConfiguration[8] = {}
 
 levelsConfiguration[1].ennemies = {
-    {CHARACTERS.TYPE.MAGE, WEAPONS.TYPE.NONE, 1}
+    {CHARACTERS.TYPE.KNIGHT, WEAPONS.TYPE.SWORD, 1}
 }
 
 levelsConfiguration[2].ennemies = {

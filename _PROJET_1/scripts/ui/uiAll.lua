@@ -5,7 +5,7 @@ local uiAll = ui.new()
 function uiAll.load()
     love.window.setMode(800, 610)
     love.window.setTitle("GROMOKGG ESCAPE")
-    local cursor = love.mouse.newCursor("contents/images/cursor.png")
+    local cursor = love.mouse.newCursor("contents/images/cursor.png", 48, 48)
     love.mouse.setCursor(cursor)
 end
 

@@ -21,8 +21,10 @@ function Ennemi:create()
         animator = self.animator.create()
     }
 
-    ennemi.agent:init(ennemi)
-    ennemi.character.controller.ennemiAgent = ennemi.agent
+    function ennemi:init()
+        ennemi.agent:init(ennemi)
+        ennemi.character.controller.ennemiAgent = ennemi.agent
+    end
 
     function ennemi:draw()
         self.character:draw()

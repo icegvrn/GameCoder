@@ -105,6 +105,14 @@ function c_Sprites:create()
         self.spritesList = sprites
     end
 
+    function c_sprite:setCurrentSpriteId(nb)
+        self.currentSpriteId = nb
+    end
+
+    function c_sprite:setAngle(angle)
+        self.currentAngle = angle
+    end
+
     return c_sprite
 end
 

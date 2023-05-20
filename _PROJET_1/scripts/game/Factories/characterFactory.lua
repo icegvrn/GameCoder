@@ -26,9 +26,11 @@ end
 function characterFactory.createCharacterByRole(c, category)
     if category == CHARACTERS_STATE.CATEGORY.PLAYER then
         createdPlayer = player:create()
+        createdPlayer:init()
         return createdPlayer
     else
         local e = ennemi:create()
+        e:init()
         return e
     end
 end

@@ -7,13 +7,13 @@ end
 io.stdout:setvbuf("no")
 
 gameManager = require("scripts/game/managers/gameManager")
-ui = require("scripts/ui/ui")
+uiTools = require("scripts/ui/uiTools")
 debugManager = require("scripts/game/managers/debugManager")
 require("scripts/states/PATHS")
 
 function love.load()
     gameManager.load()
-    ui.load()
+    uiTools.load()
 end
 
 function love.update(dt)

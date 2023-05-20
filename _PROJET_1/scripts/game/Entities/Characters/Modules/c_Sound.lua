@@ -51,13 +51,15 @@ function c_Sound:create()
     end
 
     function sound:play(sound, volume, loop, interval)
-        if interval then
-            local randNb = love.math.random(1, self.silenceBetweenTalk * interval)
-            if randNb == self.silenceBetweenTalk * interval then
+        if sound ~= nil then
+            if interval then
+                local randNb = love.math.random(1, self.silenceBetweenTalk * interval)
+                if randNb == self.silenceBetweenTalk * interval then
+                    soundManager:playSound(sound, volume, loop)
+                end
+            else
                 soundManager:playSound(sound, volume, loop)
             end
-        else
-            soundManager:playSound(sound, volume, loop)
         end
     end
 

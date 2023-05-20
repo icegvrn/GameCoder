@@ -1,8 +1,0 @@
--- PLAYER_STATE = {}
--- PLAYER_STATE[1] = "IDLE"
--- PLAYER_STATE[2] = "WALKING"
--- PLAYER_STATE[3] = "FIRE"
--- PLAYER_STATE.mode = {}
--- PLAYER_STATE.mode.normal = "NORMAL"
--- PLAYER_STATE.mode.boosted = "BOOSTED"
--- return PLAYER_STATE

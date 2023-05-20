@@ -41,7 +41,7 @@ function c_WeaponSlot:create()
     end
 
     function weaponSlot:clearFiringElements()
-        self.weapon[self.currentWeaponId]:clear()
+        self.weapon[self.currentWeaponId].attack.bullets:clear()
     end
 
     function weaponSlot:getWeaponRange()

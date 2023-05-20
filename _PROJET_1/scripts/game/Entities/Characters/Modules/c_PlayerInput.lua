@@ -22,9 +22,6 @@ function c_PlayerInput:create()
         self:move(dt, player)
     end
 
-    function playerInput:updatePVbar(dt, player)
-    end
-
     function playerInput:draw(player)
     end
 
@@ -42,8 +39,12 @@ function c_PlayerInput:create()
 
     function playerInput:keypressed(key, player)
         if key == controller.action2 then
-            if player.character:getMode() == CHARACTERS.MODE.NORMAL and player.points == player.maxPoints then
+            if
+                player.character:getMode() == CHARACTERS.MODE.NORMAL and
+                    player.pointsCounter.points == player.pointsCounter.maxPoints
+             then
                 player.character:setMode(CHARACTERS.MODE.BOOSTED)
+                player.playerBooster:init(player)
                 player.character.sound:playBoostedSound()
             else
                 player.character:setMode(CHARACTERS.MODE.NORMAL)
@@ -52,9 +53,7 @@ function c_PlayerInput:create()
     end
 
     function playerInput:fire(dt, player)
-        if player.character:getState() ~= CHARACTERS.STATE.FIRE then
-            player.character:setState(CHARACTERS.STATE.FIRE)
-        end
+        player.character:setState(CHARACTERS.STATE.FIRE)
         player.character:fire(dt)
     end
 
@@ -71,6 +70,7 @@ function c_PlayerInput:create()
             local x, y = player.character.transform:getPosition()
             local sX, sY = player.character.transform:getScale()
             local speed = player.character.controller.speed
+
             local angle = utils.angleWithMouseWorldPosition(player.character.transform:getPosition())
             local velocityX = speed * dt
             local velocityY = speed * dt
@@ -85,9 +85,10 @@ function c_PlayerInput:create()
                 x = x + velocityX
             end
             player.character.transform:setPosition(x, y)
-        elseif player.character:getState() ~= CHARACTERS.STATE.IDLE or player.character:getMode() ~= lastMode then
-            player.character:setState(CHARACTERS.STATE.IDLE)
-            lastMode = player.character:getMode()
+        -- elseif player.character:getState() ~= CHARACTERS.STATE.IDLE or player.character:getMode() ~= lastMode then
+
+        --     player.character:setState(CHARACTERS.STATE.IDLE)
+        --     lastMode = player.character:getMode()
         end
     end
 

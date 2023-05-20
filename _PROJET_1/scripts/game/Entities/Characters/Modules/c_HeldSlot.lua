@@ -13,6 +13,11 @@ function c_HeldSlot:create()
         idleAngle = 45
     }
 
+    function heldSlot:setHoldingOffset(array)
+        self.holdingOffset.x = array[1]
+        self.holdingOffset.y = array[2]
+    end
+
     return heldSlot
 end
 

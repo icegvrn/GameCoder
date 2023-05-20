@@ -24,12 +24,16 @@ function Player:create()
         character = self.character:create(),
         playerUI = self.playerUI.create(),
         playerInput = self.playerInput.create(),
-        playerBooster = self.booster.create(),
+        playerBooster = self.booster.create(player),
         pointsCounter = self.pointsCounter.create(),
         animator = self.animator.create(),
         isPlayer = true,
         isDead = false
     }
+
+    function player:init()
+        self.playerUI:load(self)
+    end
 
     function player:update(dt)
         self.character:update(dt)
@@ -41,9 +45,9 @@ function Player:create()
 
     function player:updatePlayables(dt, self)
         self.playerUI:update(dt, self)
-        self.playerInput:update(dt, self)
         self.playerBooster:update(dt, self)
         self.pointsCounter:update(dt, self)
+        self.playerInput:update(dt, self)
     end
 
     function player:keypressed(key)

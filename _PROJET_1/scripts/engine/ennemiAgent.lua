@@ -80,10 +80,10 @@ function ennemiAgent:create()
     function ennemiAgent:attack(dt, ennemi, distance)
         if ennemi.character.fight.weaponSlot:getWeaponRange() then
             if distance > ennemi.character.fight.weaponSlot:getWeaponRange() then
+                ennemi.character:getCurrentWeapon().attack.isFiring = false
                 ennemi.character:setState(CHARACTERS.STATE.IDLE)
             else
                 ennemi.character:fire(dt)
-
                 --- A METTRE DANS WEAPON
                 if ennemi.character:getCurrentWeapon():getIsRangedWeapon() == false then
                     ennemi.character.controller.target.fight:hit(

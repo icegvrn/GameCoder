@@ -28,8 +28,10 @@ function c_Fighter:create()
     }
 
     function fighter:fire(dt, parent)
-        self.weaponSlot.weapon[self.weaponSlot.currentWeaponId]:fire(
+        local weapon = self.weaponSlot.weapon[self.weaponSlot.currentWeaponId]
+        weapon.attack:fire(
             dt,
+            weapon,
             parent.transform.position,
             parent.transform.scale,
             self.weaponSlot.handPosition,

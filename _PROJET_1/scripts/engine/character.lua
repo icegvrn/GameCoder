@@ -66,19 +66,13 @@ function Character:create()
         self.sound:randomSpeak()
     end
 
-    ---- A REVOIR A PARTIR DE LA ---
-    function character:addPoints(points)
-        if self.controller.isThePlayer then
-            player.addPoints(points)
-        end
-    end
-
     function character:destroy()
         levelManager.destroyCharacter(self, self.fight.weaponSlot.weapon)
     end
 
     function character:equip(p_weapon)
         p_weapon:setOwner(self)
+        p_weapon:init()
         table.insert(self.fight.weaponSlot.weapon, p_weapon)
     end
 
