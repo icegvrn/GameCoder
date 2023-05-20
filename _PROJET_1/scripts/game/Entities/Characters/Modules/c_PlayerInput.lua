@@ -85,10 +85,9 @@ function c_PlayerInput:create()
                 x = x + velocityX
             end
             player.character.transform:setPosition(x, y)
-        -- elseif player.character:getState() ~= CHARACTERS.STATE.IDLE or player.character:getMode() ~= lastMode then
-
-        --     player.character:setState(CHARACTERS.STATE.IDLE)
-        --     lastMode = player.character:getMode()
+        elseif player.character:getState() == CHARACTERS.STATE.WALKING or player.character:getMode() ~= lastMode then
+            player.character:setState(CHARACTERS.STATE.IDLE)
+            lastMode = player.character:getMode()
         end
     end
 

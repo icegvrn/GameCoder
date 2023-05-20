@@ -82,8 +82,8 @@ function c_Attack:create()
                     ownerWeaponScaling,
                     ownerTarget
                 )
-                self.canFire = false
             end
+            self.canFire = false
         end
         if self.isRangedWeapon == false then
             parent.animator:playattackAnimation(dt, parent)

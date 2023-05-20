@@ -41,15 +41,6 @@ function uiGame:draw()
     end
 end
 
-function ui.drawPlayerPointBar(player, points, maxPoints)
-    local x, y = Utils.screenCoordinates(10, (Utils.screenHeight - 40))
-
-    if player.character:getMode() == CHARACTERS.MODE.BOOSTED then
-        love.graphics.setFont(defaultFont)
-        love.graphics.print(math.floor(uiGame.buttons.timer), x, y)
-    end
-end
-
 function ui.doorIsOpen(bool)
     if bool then
         uiGame.buttons.doorOpened = true
