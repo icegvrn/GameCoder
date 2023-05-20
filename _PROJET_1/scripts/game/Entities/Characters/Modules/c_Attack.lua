@@ -53,9 +53,10 @@ function c_Attack:create()
 
     function attack:updateHittableTargets(owner)
         -- Défini qui est touchable par l'arme --
+
         if owner.controller.player then
-            if #self.hittableCharacters ~= #levelManager.getListofEnnemiesCharacters() then
-                self.hittableCharacters = levelManager.getListofEnnemiesCharacters()
+            if #self.hittableCharacters ~= #levelManager.ennemiManager:getEnnemiesCharacters() then
+                self.hittableCharacters = levelManager.ennemiManager:getEnnemiesCharacters()
             end
         else
             self.hittableCharacters[1] = owner.controller.target

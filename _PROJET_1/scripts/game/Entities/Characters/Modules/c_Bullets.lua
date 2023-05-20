@@ -1,3 +1,5 @@
+local mapManager = require("scripts/game/managers/mapManager")
+
 local c_Bullets = {}
 local Bullets_mt = {__index = c_Bullets}
 
@@ -52,7 +54,7 @@ function c_Bullets:create()
 
                     if t.lifeTime <= 0 then
                         table.remove(self.FireList, n)
-                    elseif map.isThereASolidElement(t.x, t.y, t.size, t.size, c) then
+                    elseif mapManager:isThereASolidElement(t.x, t.y, t.size, t.size, c) then
                         table.remove(self.FireList, n)
                     else
                         for c = #parent.hittableCharacters, 1, -1 do

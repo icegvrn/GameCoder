@@ -1,5 +1,4 @@
-local map = require("scripts/game/gameMap")
-
+local mapManager = require("scripts/game/managers/mapManager")
 local c_Animator = {}
 local Animator_mt = {__index = c_Animator}
 
@@ -57,7 +56,7 @@ function c_Animator:create()
     function animator:chooseARandomPoint(dt, player)
         self.speed = self.initialSpeed
         local x, y = player.character.transform:getPosition()
-        self.destinationX, self.destinationY = map.getMapDimension()
+        self.destinationX, self.destinationY = mapManager:getMapDimension()
         self.destinationX = love.math.random(0, self.destinationX)
         self.destinationY = love.math.random(0, self.destinationY)
         self.angle = Utils.angle(x, y, self.destinationX, self.destinationY)
@@ -70,7 +69,7 @@ function c_Animator:create()
         local newPositionX = initialPositionX + self.velocityX
         local newPositionY = initialPositionY + self.velocityY
 
-        if (map.isThereASolidElement(newPositionX, newPositionY, ennemiWidth, ennemiHeight)) == false then
+        if (mapManager:isThereASolidElement(newPositionX, newPositionY, ennemiWidth, ennemiHeight)) == false then
             self:move(dt, player, newPositionX, newPositionY)
             return true
         else
@@ -107,12 +106,13 @@ function c_Animator:create()
         if (player.character.fight.weaponSlot:getWeaponRange()) then
             local randNumber =
                 math.random(
-                -player.character.fight.weaponSlot:getWeaponRange() + map.getCurrentMap().tilewidth * 2,
-                player.character.fight.weaponSlot:getWeaponRange() - map.getCurrentMap().tilewidth * 2
+                -player.character.fight.weaponSlot:getWeaponRange() + mapManager:getCurrentMap().tilewidth * 2,
+                player.character.fight.weaponSlot:getWeaponRange() - mapManager:getCurrentMap().tilewidth * 2
             )
             return randNumber
         else
-            local randNumber = math.random(-map.getCurrentMap().tilewidth * 2, map.getCurrentMap().tilewidth * 2)
+            local randNumber =
+                math.random(-mapManager:getCurrentMap().tilewidth * 2, mapManager:getCurrentMap().tilewidth * 2)
             return randNumber
         end
     end

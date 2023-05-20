@@ -78,4 +78,9 @@ function soundManager:changeSoundForLevel()
     soundManager:playBackgroundMusic(gameMusics[random], vol, true)
 end
 
+function soundManager:endOfLevel()
+    self:playSound("contents/sounds/game/playerInDoor.wav", 0.5, false)
+    self:changeSoundForLevel()
+end
+
 return soundManager

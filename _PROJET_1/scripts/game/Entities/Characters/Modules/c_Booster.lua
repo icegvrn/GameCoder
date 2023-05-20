@@ -15,7 +15,6 @@ function c_Booster:create()
     }
 
     function booster:init(player)
-        print("Je passe sur ", player.character.controller.speed)
         self.initialSpeed = player.character.controller.speed
         self.boostedSpeed = player.character.controller.speed * 2
     end

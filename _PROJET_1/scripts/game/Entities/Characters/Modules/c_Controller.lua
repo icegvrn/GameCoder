@@ -1,5 +1,4 @@
-local map = require("scripts/game/gameMap")
-
+local mapManager = require("scripts/game/managers/mapManager")
 local c_Controller = {}
 local Controller_mt = {__index = c_Controller}
 
@@ -58,7 +57,10 @@ function c_Controller:create()
     function controller:setInCinematicMode(parent, bool)
         self.isCinematicMode = bool
         if self.player and bool then
-            parent.transform:setPosition(-10, (map.getCurrentMap().height * map.getCurrentMap().tileheight / 2))
+            parent.transform:setPosition(
+                -10,
+                (mapManager:getCurrentMap().height * mapManager:getCurrentMap().tileheight / 2)
+            )
         end
     end
 

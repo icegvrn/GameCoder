@@ -1,5 +1,4 @@
-local map = require("scripts/game/gameMap")
-
+local mapManager = require("scripts/game/managers/mapManager")
 local c_Collider = {}
 local Collider_mt = {__index = c_Collider}
 
@@ -43,10 +42,9 @@ function c_Collider:create()
     end
 
     function collider:checkPlayerCollisions(character)
-        local gmap = map.getCurrentMap()
         local x, y = character.transform:getPosition()
         local w, h = character.sprites:getDimension(character.mode, character.state)
-        if (map.isThereASolidElement(x, y, w, h, character)) then
+        if (mapManager:isThereASolidElement(x, y, w, h, character)) then
             character.controller.canMove = false
         else
             character.controller.canMove = true

@@ -52,7 +52,7 @@ function Weapon:create()
     function weapon:draw()
         self:drawWeapon()
         self.attack:draw(self)
-        self.hitBox:draw()
+        -- self.hitBox:draw()
     end
 
     function weapon:drawWeapon()

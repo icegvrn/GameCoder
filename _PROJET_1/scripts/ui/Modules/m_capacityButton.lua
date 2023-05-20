@@ -83,7 +83,7 @@ function m_capacityButton:create(p_sheet, p_positionX, p_positionY, p_quadNB)
     end
 
     function button:drawTimer()
-        love.graphics.setFont(defaultFont)
+        love.graphics.setFont(UITools.defaultFont)
         love.graphics.print(
             math.floor(self.timer.count),
             self.position.x + self.timer.position.x,
