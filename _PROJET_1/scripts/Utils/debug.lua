@@ -33,7 +33,7 @@ end
 
 function debug.drawCameraDebugOverlay()
     if debug.cameraOverlay == true then
-        local x, y = d_mainCamera.camera:getPosition()
+        local x, y = d_mainCamera:getPosition()
         love.graphics.setColor(1, 0, 0)
         love.graphics.rectangle("line", x, y, love.graphics.getWidth() - 1, love.graphics.getHeight() - 1)
         love.graphics.circle("line", x + love.graphics.getWidth() / 2, y + love.graphics.getHeight() / 2, 10)
@@ -42,7 +42,7 @@ function debug.drawCameraDebugOverlay()
 end
 
 function debug.drawPlayerCoordinates()
-    local cx, cy = d_mainCamera.camera:getPosition()
+    local cx, cy = d_mainCamera:getPosition()
     local debugBarSize = 30
 
     if debug.playerCoordinates then

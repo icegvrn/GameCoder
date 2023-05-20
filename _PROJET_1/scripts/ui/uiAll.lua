@@ -1,6 +1,4 @@
-ui = require("scripts/engine/ui")
-
-local uiAll = ui.new()
+local uiAll = {}
 
 function uiAll.load()
     love.window.setMode(800, 610)

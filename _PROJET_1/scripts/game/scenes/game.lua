@@ -1,11 +1,11 @@
 GAMESTATE = require("scripts/states/GAMESTATE")
-local scene = require("scripts/engine/scene")
+
 camera = require("scripts/game/mainCamera")
 local LevelManager = require("scripts/game/managers/levelManager")
 local ui = require("scripts/ui/uiGame")
 local isLoaded = false
 
-local game = scene.new()
+local game = {}
 local LvlManager = LevelManager.new()
 levelManager = LvlManager:create()
 

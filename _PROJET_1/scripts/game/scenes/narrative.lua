@@ -1,8 +1,7 @@
 GAMESTATE = require("scripts/states/GAMESTATE")
 require("scripts/Utils/utils")
-local scene = require("scripts/engine/scene")
 
-local narrative = scene.new()
+local narrative = {}
 local isLoaded = false
 
 local textPositionY = 0

@@ -1,14 +1,13 @@
 GAMESTATE = require("scripts/states/GAMESTATE")
-local scene = require("scripts/engine/scene")
+
 local isLoaded = false
-local menu = scene.new()
+local menu = {}
 
 function menu:load()
     isLoaded = true
 end
 
 function menu:update(dt)
- 
 end
 
 function menu:draw()

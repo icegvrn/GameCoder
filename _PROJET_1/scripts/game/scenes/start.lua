@@ -1,9 +1,8 @@
 GAMESTATE = require("scripts/states/GAMESTATE")
 require("scripts/Utils/utils")
-local scene = require("scripts/engine/scene")
 soundManager = require("scripts/game/managers/soundManager")
 
-local start = scene.new()
+local start = {}
 local showImage = true
 local timer = 0
 local interval = 0.5

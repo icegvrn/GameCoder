@@ -1,7 +1,7 @@
 GAMESTATE = require("scripts/states/GAMESTATE")
-local scene = require("scripts/engine/scene")
+
 local isLoaded = false
-local gameOver = scene.new()
+local gameOver = {}
 local background = love.graphics.newImage("contents/images/gameOver_background.png")
 
 function gameOver:load()

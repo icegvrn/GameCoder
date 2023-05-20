@@ -1,7 +1,6 @@
 GAMESTATE = require("scripts/states/GAMESTATE")
-local scene = require("scripts/engine/scene")
 
-local win = scene.new()
+local win = {}
 local isLoaded = false
 local background = love.graphics.newImage("contents/images/end_background.png")
 

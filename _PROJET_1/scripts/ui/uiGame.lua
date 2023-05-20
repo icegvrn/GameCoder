@@ -1,8 +1,8 @@
-ui = require("scripts/engine/ui")
+UITools = require("scripts/ui/uiTools")
 require("scripts/Utils/utils")
 controller = require("scripts/engine/controller")
 
-local uiGame = ui.new()
+local uiGame = {}
 
 uiGame.buttons = {}
 uiGame.buttons.door = love.graphics.newImage("contents/images/ui/doorOpen.png")
@@ -23,7 +23,7 @@ function uiGame:draw()
         )
     end
     if uiGame.victory then
-        love.graphics.setFont(font100)
+        love.graphics.setFont(UITools.font100)
         love.graphics.print(
             "VICTORY !",
             Utils.screenCoordinates((Utils.screenWidth / 2) - 250, (Utils.screenHeight / 2) - 50)
@@ -31,15 +31,15 @@ function uiGame:draw()
     end
 end
 
-function ui:nextLevel()
+function uiGame:nextLevel()
     self:doorIsOpen(false)
 end
 
-function ui:endTheLevel()
+function uiGame:endTheLevel()
     self:doorIsOpen(true)
 end
 
-function ui:doorIsOpen(bool)
+function uiGame:doorIsOpen(bool)
     if bool then
         uiGame.buttons.doorOpened = true
     else
@@ -47,8 +47,11 @@ function ui:doorIsOpen(bool)
     end
 end
 
-function ui.drawVictory()
+function uiGame.drawVictory()
     uiGame.victory = true
+end
+
+function uiGame.keypressed(key)
 end
 
 return uiGame

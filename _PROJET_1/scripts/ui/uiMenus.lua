@@ -1,8 +1,7 @@
-ui = require("scripts/engine/ui")
 controller = require("scripts/engine/controller")
 UiButton = require("scripts/ui/Modules/m_uiButton")
 
-local uiMenus = ui.new()
+local uiMenus = {}
 local uiButton = UiButton.new()
 
 uiMenus.menu = {}
@@ -16,7 +15,6 @@ uiMenus.menu.timer = 0
 uiMenus.menu.timerStarted = false
 
 local textFont = love.graphics.newFont("contents/fonts/pixelfont.ttf", 50)
-local font12 = love.graphics.newFont(12)
 uiMenus.menu.settingsText = love.graphics.newText(textFont, "Choose mode : " .. controller.mode)
 
 function uiMenus.load()
@@ -104,9 +102,9 @@ end
 function uiMenus.drawSettingsText()
     uiMenus.menu.settingsText:set("Choose mode : " .. controller.mode)
     love.graphics.draw(uiMenus.menu.settingsText, Utils.screenWidth / 2 - uiMenus.menu.settingsText:getWidth() / 2, 200)
-    love.graphics.setFont(font12)
+    love.graphics.setFont(uiTools.font12)
     love.graphics.print("ESC", 10, 10)
-    love.graphics.setFont(defaultFont)
+    love.graphics.setFont(uiTools.defaultFont)
 end
 
 return uiMenus

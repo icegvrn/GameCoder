@@ -4,7 +4,7 @@ Utils.screenWidth = love.graphics.getWidth()
 Utils.screenHeight = love.graphics.getHeight()
 
 function Utils.screenCoordinates(x, y)
-    local cX, cY = mainCamera.camera:getPosition()
+    local cX, cY = mainCamera:getPosition()
     x = x + cX
     y = y + cY
     return x, y
@@ -29,7 +29,7 @@ end
 
 function Utils.angleWithMouseWorldPosition(x1, y1)
     local mx, my = love.mouse.getPosition()
-    local cX, cY = mainCamera.camera:getPosition()
+    local cX, cY = mainCamera:getPosition()
     local x2 = mx + cX
     local y2 = my + cY
     return math.atan2(y2 - y1, x2 - x1)

@@ -1,5 +1,6 @@
 local mainCamera = require("scripts/game/mainCamera")
 local levelsConfig = require("scripts/game/levelsConfiguration")
+local uiGame = require("scripts/ui/uiGame")
 
 local CinematicManager = {}
 local Cinematic_mt = {__index = CinematicManager}
@@ -43,7 +44,7 @@ function CinematicManager:create()
 
             if self.timer >= self.lenght / 2 then
                 if levelManager.currentLevel == #levelsConfig then
-                    ui.drawVictory()
+                    uiGame.drawVictory()
                 end
             end
 

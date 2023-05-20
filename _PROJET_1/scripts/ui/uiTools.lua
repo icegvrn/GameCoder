@@ -1,7 +1,8 @@
 uiTools = {
     defaultFont = love.graphics.newFont(),
     font9 = love.graphics.newFont(9),
-    font100 = love.graphics.newFont(100)
+    font100 = love.graphics.newFont(100),
+    font12 = love.graphics.newFont(12)
 }
 
 function uiTools.load()
