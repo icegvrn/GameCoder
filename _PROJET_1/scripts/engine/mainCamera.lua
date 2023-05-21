@@ -5,7 +5,7 @@ mainCamera.originalTarget = nil
 mainCamera.isLocked = false
 mainCamera.x = 0
 mainCamera.y = 0
-mainCamera.smooth = 0.7
+mainCamera.smooth = 0.1
 mainCamera.target = nil
 mainCamera.targetX = 0
 mainCamera.targetY = 0
@@ -29,9 +29,11 @@ end
 function mainCamera:getPosition()
     -- Pour qu'elle s'appuie sur-elle même quand elle est en mode lock
     if mainCamera.isLocked then
+        mainCamera.smooth = 0.7
         local mapWidth, mapHeight = mapManager:getMapDimension()
         return Utils.screenWidth / 2, mapHeight / 2
     else
+        mainCamera.smooth = 0.05
         -- Pour renvoyer le chiffre normal quand elle est pas lock
         return mainCamera.x, mainCamera.y
     end
@@ -49,17 +51,14 @@ function mainCamera.lock(bool)
 end
 
 function mainCamera:calcSmoothDestination(dt)
-    -- Si j'ai attribué une cible à ma caméra et que la fonction getPosition() existe sur celle-ci
     if self.target ~= nil then
-        -- Calcul de là où la caméra doit aller ; elle arrive à zéro quand elle a parcouru la distance
-        destX = self.targetX - (love.graphics.getWidth() / 2) - self.x
-        destY = self.targetY - (love.graphics.getHeight() / 2) - self.y
+        local destX = self.targetX - (love.graphics.getWidth() / 2) - self.x
+        local destY = self.targetY - (love.graphics.getHeight() / 2) - self.y
 
-        -- La caméra y est emmené selon la vitesse et le dt
         self.x = self.x + (destX / self.smooth) * dt
         self.y = self.y + (destY / self.smooth) * dt
 
-        return self.x, self.y
+        return math.ceil(self.x), math.ceil(self.y)
     end
 end
 

@@ -12,6 +12,7 @@ end
 io.stdout:setvbuf("no")
 
 function love.load()
+ 
     gameManager.load()
     UITools.load()
 end

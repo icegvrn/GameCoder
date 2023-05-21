@@ -7,7 +7,7 @@ function Utils.screenCoordinates(x, y)
     local cX, cY = mainCamera:getPosition()
     x = x + cX
     y = y + cY
-    return x, y
+    return math.floor(x), math.floor(y)
 end
 
 function Utils.mouseToWorldCoordinates(x, y)

@@ -11,6 +11,7 @@ uiGame.victoryText = love.graphics.newText(UITools.font100, "VICTORY!")
 uiGame.victory = false
 
 function uiGame:load()
+    love.graphics.setBackgroundColor(0.08, 0.06, 0.05)
 end
 
 function uiGame:update(dt)
