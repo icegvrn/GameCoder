@@ -38,6 +38,7 @@ function mainCamera:getPosition()
 end
 
 function mainCamera.lock(bool)
+    print(bool)
     if bool then
         mainCamera.target = mainCamera
         mainCamera.isLocked = true

@@ -7,6 +7,7 @@ local uiGame = {}
 uiGame.buttons = {}
 uiGame.buttons.door = love.graphics.newImage("contents/images/ui/doorOpen.png")
 uiGame.buttons.doorOpened = false
+uiGame.victoryText = love.graphics.newText(UITools.font100, "VICTORY!")
 uiGame.victory = false
 
 function uiGame:load()
@@ -22,11 +23,11 @@ function uiGame:draw()
             Utils.screenCoordinates(Utils.screenWidth - 60, Utils.screenHeight - 60)
         )
     end
+
     if uiGame.victory then
-        love.graphics.setFont(UITools.font100)
-        love.graphics.print(
-            "VICTORY !",
-            Utils.screenCoordinates((Utils.screenWidth / 2) - 250, (Utils.screenHeight / 2) - 50)
+        love.graphics.draw(
+            uiGame.victoryText,
+            Utils.screenCoordinates(-uiGame.victoryText:getWidth() / 2, -uiGame.victoryText:getHeight() / 2)
         )
     end
 end

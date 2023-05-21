@@ -1,0 +1,125 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1036{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.22621}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang12 Dans le fichier scripts/engine : \par
+Character : controlle le composant "personnage" des entit\'e9s ennemis et joueur.\par
+Controller : Contient la configuration des touches pour joueur avec un mode pour changer de qwerty \'e0 azerty.\par
+EnnemiAgent : entit\'e9 ou composant ajout\'e9 \'e0 tous les ennemis qui permet de d\'e9cider ce qu'ils font en fonction de leur state (c'est une machine \'e0 \'e9tat)\par
+Transform : composant qui contient les transforms, ajout\'e9 aux objets qui en ont besoins (ennemi, player, weapon)\par
+Weapon : entit\'e9 ou composant arme  qui appelle tous les modules n\'e9cessaires \'e0 une arme. Chaque weapon est associ\'e9 \'e0 un Character.\par
+\par
+Dans le fichier : scripts/game/Entities/: il y a un dossier Characters et un dossier Weapons. \par
+Dans le dossier Weapons, des fichiers : axe, bite, double_axe, flower, hero_magic_staff, magic_staff, none, sword. Ce sont des fichiers de configuration pour chaque arme (vitesse, force etc).\par
+Dans le dossier Characters, il y a des fichiers \'e0 la racine et un dossier modules.\par
+A la racine, les fichiers : dwarf, knight, mage, orc et princess qui contiennent la configuration de chaque type de personnage (vitesse, force etc). \par
+Dans le dossier modules, beaucoup de fichiers : \par
+c_animator : permet de faire bouger les personnages automatiquement. Pour les ennemis c'est utilis\'e9 tout le temps pour d\'e9cider o\'f9 ils vont, pour le joueur c'est utilis\'e9 quand il est en mode cin\'e9matique. \par
+\par
+c_Fighter : contient un composant weaponSlot pour mettre l'arme weapon dedans, appel un pointsUI pour afficher les points et pointsCounter pour donner des points. Ce composant permet d'appeler le fire de c_attack, a une fonction hit qui ajoute des points au joueur si l'attaquant est le joueur et qui dit ce qui se passe si le personnage qui le contient est touch\'e9. C'est un peu le gestionnaire de combat. \par
+\par
+c_Attack : permet de mettre des d\'e9g\'e2ts, il est ajout\'e9 \'e0 fighter sur chaque personnage, il contient la speed d'attack du perso, les dommages etc. r\'e9cup\'e9r\'e9 dans les fichiers de conf, et aussi un composant bullets si jamais l'arme est \'e0 distance. C'est l\'e0 dedans qu'on v\'e9rifie si le perso peut tirer ou pas, la liste des gens qu'il peut toucher etc.\par
+\par
+c_Booster : utilis\'e9 seulement par le joueur pour l'instant, il contient seulement un timer pour renvoyer au joueur s'il est encore boost\'e9 quand il utilis\'e9 son pouvoir boost. \par
+\par
+c_Bullets : utilis\'e9 par les armes \'e0 distance, cr\'e9\'e9 les tirs, les effets de particules qui vont avec et renvoi au fighter HIT s'il y a collision avec un personnage. \par
+\par
+c_Controller : contient la vitesse du character, s'il peut bouger ou pas, s'il est en mode cinematique ou pas et dans quelle direction il regarde. Il replace aussi le joueur si le joueur est en mode cin\'e9matic. \par
+\par
+c_Heldslot : contient seulement un offset X et Y mis sur chaque weapon pour dire quel offset on applique pour tenir l'arme (comme si c'\'e9tait son manche)\par
+\par
+c_HitBox : il n'est pas tr\'e8s bien nomm\'e9, mais c'est un composant sur chaque weapon qui continent un offset, une position et une taille poru d\'e9terminer le bout de l'arme d'o\'f9 elle peut tirer si c'est une arme \'e0 distance. \par
+\par
+c_PlayerInput : Pour le joueru seulement, g\'e8re ce que fait le jeu quand le joueur appuie sur des touches. \par
+c_PlayerUI : calcul et affiche l'UI relative au joueur : barre de vie au dessus de sa t\'eate, barre de points en bas de l'\'e9cran, bouton montrant les touches \'e0 utiliser et si les capacit\'e9s du eprsonnage sont en cours d'utilisation. Il est update par Player et utilise aussi c_booster pour afficher le temps restant pour le superpouvoir. \par
+\par
+c_PointsCounter : contient les points actuels et points max du joueur. Contient les fonctions pour en ajouter ou en enlever ou les reset.\par
+\par
+c_PointsUI : affiche les points gagn\'e9s \'e0 l'\'e9cran. \par
+c_Sound : composant sound ajout\'e9 aux characters et weapons. Permet de demander au soundManager de lire un son, contient quelques fonction sp\'e9cifiques qui ne sont pas utilis\'e9es par tout le monde : randomSpeak() pour les personnages, dyingSound() pour eux etc.\par
+\par
+c_Sprites : permet l'affichage des sprites characters et weapons correctement et dans le bon \'e9tat. \par
+\par
+c_weaponAnimator : composant qui fait des calculs pour estimer la bonne position de l'arme : un angle en IDLE, suivre la souris si c'est le joueur, suivre le joueur si c'est un mage en cours d'attaque, faire des mouvements de bas en haut si ennemi en cours d'attaque.\par
+\par
+c_WeaponSlot : contient un composant weapon, un handposition, handoffset et weaponScaling. repr\'e9sente l'endroit o\'f9 le character peut tenir une arme. Ces param\'e8tre sont mis en rapport avec le heldSlot de chaque weapon pour d\'e9terminer comment une arme est tenue. Il contient \'e9galement une fonction weapon:move appel\'e9 par le character\par
+\par
+Door : composant ou entit\'e9 porte. Elle affiche deux portes sur chaque map et ouvre l'une d'elle (appel\'e9 par mapManager quand tous les ennemis sont morts)\par
+\par
+Ennemi : c'est l'entit\'e9 ennemi qui a donc un character, un ennemiAgent, un animator. \par
+Player : c'est l'entit\'e9 joueur qui a donc un character, un animator, un playerInput, un playerUI, un booster, un pointsCounter\par
+\par
+Dans scripts/game/Factory nous avons : \par
+characterFactory : r\'e9cup\'e8re les infos personnages dans les fichiers de config Characters et assigne les valeurs aux bons composants (le speed au controller, le strenght au fighter, le handoffset au weaponslot etc). \par
+\par
+weaponFactory : r\'e9cup\'e8re les infos weapons dans les fichiers de config Weapons et assigne les valeurs aux bons composants (damage, speed, weaponrange etc au c_attack, name au weapon, holdingoffset au heldslot etc). \par
+\par
+Ensuite nous avons un dossier scripts/game/managers :\par
+\par
+cinematicManager : appel\'e9e par levelManager, g\'e8re les cin\'e9matiques d'entr\'e9es dans chaque pi\'e8ce et la cin\'e9matiques de victoire.\par
+\par
+debugManager : contient des inputs \'e0 activer pour afficher des infos de debug.\par
+\par
+ennemiManager : un spawner qui fait spawn les ennemis comme il faut \'e0 chaque demande du levelManager.\par
+\par
+playerManager : un spawner qui fait spawn le joueur comme il faut \'e0 chaque demande du levelManager.\par
+\par
+gameManager :permet de d\'e9terminer quel fichier de sc\'e8ne appeler en s'appuyant sur un GAMESTATE.currentState : appelle soit start.lua quan don est au d\'e9marrage, game.lua quand on est en jeu, win.lua quand on est en victoire, menu.lua en menu etc.\par
+\par
+levelManager : g\'e8re la logique des niveaux quand on est en mode jeu. Il contient un ennemiManager, playerManager, cinematicManager, charactersList, infos si le jeu est fini etc. Il appelle les spawners d'ennemis et de joueur, demande \'e0 la mapManager d'afficher la bonne carte du niveau en cours etc. et indique quand un niveau est fini. \par
+\par
+mapManager : demande \'e0 gameMap d'afficher la bonne carte, contient les fonctions de calcul des colision sur la map : est-ce qu'il y a un \'e9l\'e9ment solide, est-ce que c'est en dehors de la carte, est-ce qu'il y a un sol etc.contient aussi la fonction permettant de remonter les dimension de la carte.\par
+\par
+soundManager : permet de choisir quelle music jouer \'e0 chaque sc\'e8ne du gameMaanger, permet aussi de jouer un son ou de choisir al\'e9atoiremetn parmi des sons. \par
+\par
+uiManager : permet de d\'e9terminer quel fichier ui appel\'e9 selon l'\'e9tat actuel du GAMESTATE.currentState.\par
+\par
+Ensuite nous avons un dossier scripts/game/scenes qui contient les sc\'e8nes appel\'e9es par le gameManager : \par
+game : met la cam\'e9ra \'e0 suivre le joueur, charge le levelManager. \par
+gameOver : contient l'image de gameOver et la touche echap pour restart le jeu.\par
+menu : contient seulemetn la touche \'e9chap pour quitter, car le reste du menu est dans uiMenus\par
+narrative : contient un texte qui s'affiche \'e0 l'\'e9cran et un timer pour le faire d\'e9filer, utilis\'e9 en introduction du jeu.\par
+start : contiennt le text et les images de l'\'e9cran de d\'e9marrage.\par
+win : affiche seulement une image de victoire.\par
+\par
+Ensuite \'e0 la racine de scripts/game nous avons trois fichiers : \par
+gameMap : affiche la carte en tant que telle en parcourant les tuiles d'une tilesheet \'e0 la demande du mapManager. \par
+levelsConfiguration : fichier de configuratio ndes niveaux : combien d'ennemis, quel type et quel arme ? (ex 10 chevaliers avec \'e9p\'e9e pour le niveau 2)\par
+mainCamera: fichier qui permet d'avoir un effet de cam\'e9ra qui suit le joueur. Elle peut \'eatre modifi\'e9e par le composant cinematicManager. \par
+\par
+Dans scripts/states nous avons :\par
+CHARACTERS : contient les \'e9tats possibles des personnages et les types de personnages (chevaliers, princesse etc)\par
+CONST : continent une constante de direction : left, right, up, down, utilis\'e9 par le c_controller notamment pour dire si le perso regarde \'e0 gauche ou droite sans avoir a l'\'e9crire en dur. \par
+GAMESTATE : continent les states du jeu (gameover, start, game, menu etc)\par
+PATHS : continent les URL d'acc\'e8s aux images, aux sons etc. pour ne pas avoir a les \'e9crire en dur.\par
+WEAPONS : continent les "types" de weapons existant.\par
+\par
+Ensuite nous avons un fichier scritps/ui/Modules : \par
+m_capacityButton : permet de cr\'e9er un bouton de capacit\'e9 ; appel\'e9 dans c_PlayerUI. \par
+m_coloredBar : permet de cr\'e9er une barre color\'e9e qui \'e9volue au fil du jeu, appel\'e9 par c_PlayerUI.\par
+m_uiButton : permet de cr\'e9er un bouton interactif, utilis\'e9 dans uiMenus. \par
+\par
+A la racine de scripts/ui nous avons : \par
+uiAll : continent des infos appliquable \'e0 tout : taille de l'\'e9cran, curseur souris, titre de la fen\'eatre.\par
+uiGame : g\'e8re les \'e9l\'e9ments UI hors \'e9l\'e9ments propre au joueur pendant le jeu. Seulemetn deux choses : icone pour dire qu'une porte est ouverte, texte indiquant "victoire"\par
+\par
+uiMenu : ui du menu avec des boutons cliquables faisant des actions : quitter, recommencer, changer mode azerty et qwerty. \par
+\par
+uiTools : continent juste des appelles de cr\'e9ation de 4 fonts utilis\'e9 dans tout le jeu.\par
+\par
+Dans le dossier scripts/Utils nous avons :\par
+debug : g\'e8re l'affichage du debug selon ce que debugManager appel. \par
+utils : continent des fonctions de calcul de distance, d'angle etc utilis\'e9 dans tout le jeu.\par
+\par
+Enfin, \'e0 la racine de scripts, se trouve le main.lua : \par
+il appelle le gameManager, debugManager et uiTools. \par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+}
+ 
