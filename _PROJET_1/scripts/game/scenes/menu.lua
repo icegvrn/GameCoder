@@ -1,4 +1,4 @@
-GAMESTATE = require("scripts/states/GAMESTATE")
+GAMESTATE = require(PATHS.GAMESTATE)
 
 local isLoaded = false
 local menu = {}

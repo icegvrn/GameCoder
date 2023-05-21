@@ -1,5 +1,5 @@
-UIColoredBar = require("scripts/ui/Modules/m_coloredBar")
-UICapacityButton = require("scripts/ui/Modules/m_capacityButton")
+UIColoredBar = require(PATHS.UICOLOREDBAR)
+UICapacityButton = require(PATHS.UICAPACITYBUTTON)
 
 local c_PlayerUI = {}
 local PlayerUI_mt = {__index = c_PlayerUI}
@@ -32,10 +32,10 @@ function c_PlayerUI:create()
 
     function playerUI:createPlayerCapacityButtons(player)
         local x, y = Utils.screenCoordinates(10, (Utils.screenHeight - 40))
-        self.weaponButton = UICapacityButton:create("contents/images/ui/weaponButtons.png", 10, -90, 2)
+        self.weaponButton = UICapacityButton:create(PATHS.IMG.UI .. "weaponButtons.png", 10, -90, 2)
         self.weaponButton:init()
         self.weaponButton:addText(controller.action1, {0, 0, 0}, {1, 0.7, 0})
-        self.boosterButton = UICapacityButton:create("contents/images/ui/boostedButtons.png", 10, -45, 3)
+        self.boosterButton = UICapacityButton:create(PATHS.IMG.UI .. "boostedButtons.png", 10, -45, 3)
         self.boosterButton:init()
         self.boosterButton:addText(controller.action2, {0, 0, 0}, {1, 0.7, 0})
         self.boosterButton:addTimer(player.playerBooster.boosterDuration, 2, 2)

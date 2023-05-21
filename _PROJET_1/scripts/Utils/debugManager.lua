@@ -1,4 +1,4 @@
-debug = require("scripts/Utils/debug")
+debug = require(PATHS.DEBUG)
 
 debugManager = {}
 debugManager.debugger = true

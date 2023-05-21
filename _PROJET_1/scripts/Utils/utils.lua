@@ -1,4 +1,4 @@
-camera = require("scripts/game/mainCamera")
+camera = require(PATHS.MAINCAMERA)
 Utils = {}
 Utils.screenWidth = love.graphics.getWidth()
 Utils.screenHeight = love.graphics.getHeight()

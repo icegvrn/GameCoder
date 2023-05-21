@@ -1,7 +1,7 @@
-local mapManager = require("scripts/game/managers/mapManager")
-local c_factory = require("scripts/game/factories/characterFactory")
-local w_factory = require("scripts/game/factories/weaponFactory")
-local levelsConfig = require("scripts/game/levelsConfiguration")
+local mapManager = require(PATHS.MAPMANAGER)
+local c_factory = require(PATHS.CHARACTERFACTORY)
+local w_factory = require(PATHS.WEAPONFACTORY)
+local levelsConfig = require(PATHS.LEVELCONFIGURATION)
 
 local EnnemiManager = {}
 local Ennemi_mt = {__index = EnnemiManager}
@@ -54,7 +54,6 @@ function EnnemiManager:create()
     end
 
     function ennemiManager:spawnToAvailableLocation(ennemi)
-        local map = require("scripts/game/gameMap")
         local mapWidth, mapHeight = mapManager:getMapDimension()
         c_w, c_h = ennemi.character.sprites:getDimension(ennemi.character.mode, ennemi.character.state)
         positionX, positionY = self:findSpawnPoint(mapManager, mapWidth, mapHeight, c_w, c_h)

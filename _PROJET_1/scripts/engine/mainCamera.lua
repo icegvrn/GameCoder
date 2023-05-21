@@ -1,4 +1,4 @@
-local mapManager = require("scripts/game/managers/mapManager")
+local mapManager = require(PATHS.MAPMANAGER)
 
 mainCamera = {}
 mainCamera.originalTarget = nil

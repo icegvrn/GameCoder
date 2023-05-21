@@ -1,11 +1,11 @@
-UITools = require("scripts/ui/uiTools")
-require("scripts/Utils/utils")
-controller = require("scripts/engine/controller")
+UITools = require(PATHS.UITOOLS)
+require(PATHS.UTILS)
+controller = require(PATHS.CONFIGS.CONTROLLER)
 
 local uiGame = {}
 
 uiGame.buttons = {}
-uiGame.buttons.door = love.graphics.newImage("contents/images/ui/doorOpen.png")
+uiGame.buttons.door = love.graphics.newImage(PATHS.IMG.UI .. "doorOpen.png")
 uiGame.buttons.doorOpened = false
 uiGame.victoryText = love.graphics.newText(UITools.font100, "VICTORY!")
 uiGame.victory = false

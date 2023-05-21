@@ -1,4 +1,4 @@
-Bullets = require("scripts/game/Entities/Characters/Modules/c_Bullets")
+Bullets = require(PATHS.MODULES.BULLETS)
 
 local c_Attack = {}
 local Attack_mt = {__index = c_Attack}

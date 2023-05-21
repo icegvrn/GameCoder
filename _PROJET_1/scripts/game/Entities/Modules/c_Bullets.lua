@@ -1,4 +1,4 @@
-local mapManager = require("scripts/game/managers/mapManager")
+local mapManager = require(PATHS.MAPMANAGER)
 
 local c_Bullets = {}
 local Bullets_mt = {__index = c_Bullets}

@@ -1,6 +1,6 @@
-local mainCamera = require("scripts/game/mainCamera")
-local levelsConfig = require("scripts/game/levelsConfiguration")
-local uiGame = require("scripts/ui/uiGame")
+local mainCamera = require(PATHS.MAINCAMERA)
+local levelsConfig = require(PATHS.LEVELCONFIGURATION)
+local uiGame = require(PATHS.UIGAME)
 
 local CinematicManager = {}
 local Cinematic_mt = {__index = CinematicManager}

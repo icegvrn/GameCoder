@@ -13,8 +13,8 @@ function Door:create()
         map = {width = 0, height = 0},
         open = false,
         position = {x = 0, y = 0},
-        openDoorImg = love.graphics.newImage("contents/images/doorOpen.png"),
-        closeDoorImg = love.graphics.newImage("contents/images/doorClose.png"),
+        openDoorImg = love.graphics.newImage(PATHS.IMG.ROOT .. "doorOpen.png"),
+        closeDoorImg = love.graphics.newImage(PATHS.IMG.ROOT .. "doorClose.png"),
         currentDoorImg = nil
     }
 
@@ -63,8 +63,8 @@ function Door:create()
 
     function door:openDoor()
         self.open = true
-        soundManager:playSound("contents/sounds/game/door_signal.wav", 0.5, false)
-        soundManager:playSound("contents/sounds/game/doorOpen.wav", 0.1, false)
+        soundManager:playSound(PATHS.SOUNDS.GAME .. "door_signal.wav", 0.5, false)
+        soundManager:playSound(PATHS.SOUNDS.GAME .. "doorOpen.wav", 0.1, false)
     end
 
     function door:init(currentMap)

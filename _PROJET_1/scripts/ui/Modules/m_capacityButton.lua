@@ -1,4 +1,4 @@
-UITools = require("scripts/ui/uiTools")
+UITools = require(PATHS.UITOOLS)
 
 local m_capacityButton = {}
 local capacityButton_mt = {__index = m_capacityButton}

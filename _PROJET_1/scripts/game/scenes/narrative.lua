@@ -1,5 +1,5 @@
-GAMESTATE = require("scripts/states/GAMESTATE")
-require("scripts/Utils/utils")
+GAMESTATE = require(PATHS.GAMESTATE)
+require(PATHS.UTILS)
 
 local narrative = {}
 local isLoaded = false
@@ -8,8 +8,8 @@ local textPositionY = 0
 local timer = 0
 local timerEnd = 45
 
-local textFont = love.graphics.newFont("contents/fonts/pixelfont.ttf", 30)
-local textFont50 = love.graphics.newFont("contents/fonts/pixelfont.ttf", 50)
+local textFont = love.graphics.newFont(PATHS.FONTS .. "pixelfont.ttf", 30)
+local textFont50 = love.graphics.newFont(PATHS.FONTS .. "pixelfont.ttf", 50)
 
 function narrative:load()
     isLoaded = true

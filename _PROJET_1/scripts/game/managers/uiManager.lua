@@ -1,12 +1,12 @@
-GAMESTATE = require("scripts/states/GAMESTATE")
+GAMESTATE = require(PATHS.GAMESTATE)
 
 uiManager = {}
 
 uiManager.ui = {}
 
-uiManager.ui.all = require("scripts/ui/uiAll")
-uiManager.ui.menus = require("scripts/ui/uiMenus")
-uiManager.ui.game = require("scripts/ui/uiGame")
+uiManager.ui.all = require(PATHS.UIALL)
+uiManager.ui.menus = require(PATHS.UIMENUS)
+uiManager.ui.game = require(PATHS.UIGAME)
 uiManager.currentState = GAMESTATE.STATE.START
 
 function uiManager.load()

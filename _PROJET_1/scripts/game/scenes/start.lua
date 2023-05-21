@@ -1,6 +1,6 @@
-GAMESTATE = require("scripts/states/GAMESTATE")
-require("scripts/Utils/utils")
-soundManager = require("scripts/game/managers/soundManager")
+GAMESTATE = require(PATHS.GAMESTATE)
+require(PATHS.UTILS)
+soundManager = require(PATHS.SOUNDMANAGER)
 
 local start = {}
 local showImage = true
@@ -24,8 +24,8 @@ function start:update(dt)
 end
 
 function start:draw()
-    local startButton = love.graphics.newImage("contents/images/startButton.png")
-    local background = love.graphics.newImage("contents/images/background.png")
+    local startButton = love.graphics.newImage(PATHS.IMG.ROOT .. "startButton.png")
+    local background = love.graphics.newImage(PATHS.IMG.ROOT .. "background.png")
     love.graphics.draw(background, 0, 0)
     if showImage then
         love.graphics.draw(
@@ -47,7 +47,7 @@ end
 
 function start:keypressed(key)
     if key == "space" then
-        soundManager:playSound("contents/sounds/button.mp3", 0.5, false)
+        soundManager:playSound(PATHS.SOUNDS.ROOT .. "button.mp3", 0.5, false)
         GAMESTATE.currentState = GAMESTATE.STATE.NARRATIVE
     end
 end

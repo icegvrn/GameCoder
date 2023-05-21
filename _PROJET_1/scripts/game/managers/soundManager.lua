@@ -1,16 +1,16 @@
 local soundManager = {}
 
-GAMESTATE = require("scripts/states/GAMESTATE")
+GAMESTATE = require(PATHS.GAMESTATE)
 soundManager.currentGameState = GAMESTATE.STATE.START
-local startMusic = "contents/sounds/musics/start.mp3"
-local narrativeMusic = "contents/sounds/musics/narrative.wav"
-local gameOverMusic = "contents/sounds/musics/gameOver.mp3"
-local winMusic = "contents/sounds/musics/win.mp3"
+local startMusic = PATHS.SOUNDS.MUSICS .. "start.mp3"
+local narrativeMusic = PATHS.SOUNDS.MUSICS .. "narrative.wav"
+local gameOverMusic = PATHS.SOUNDS.MUSICS .. "gameOver.mp3"
+local winMusic = PATHS.SOUNDS.MUSICS .. "win.mp3"
 local gameMusics = {}
 
-gameMusics[1] = "contents/sounds/musics/background_1.mp3"
-gameMusics[2] = "contents/sounds/musics/background_2.wav"
-gameMusics[3] = "contents/sounds/musics/background_3.wav"
+gameMusics[1] = PATHS.SOUNDS.MUSICS .. "background_1.mp3"
+gameMusics[2] = PATHS.SOUNDS.MUSICS .. "background_2.wav"
+gameMusics[3] = PATHS.SOUNDS.MUSICS .. "background_3.wav"
 
 soundManager.currentMusic = love.audio.newSource(startMusic, "static")
 
@@ -79,7 +79,7 @@ function soundManager:changeSoundForLevel()
 end
 
 function soundManager:endOfLevel()
-    self:playSound("contents/sounds/game/playerInDoor.wav", 0.5, false)
+    self:playSound(PATHS.SOUNDS.GAME .. "playerInDoor.wav", 0.5, false)
     self:changeSoundForLevel()
 end
 

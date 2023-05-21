@@ -1,3 +1,8 @@
+PATHS = require("scripts/configs/PATHS")
+gameManager = require(PATHS.GAMEMANAGER)
+UITools = require(PATHS.UITOOLS)
+debugManager = require(PATHS.DEBUGMANAGER)
+
 -- Débogueur Visual Studio Code tomblind.local-lua-debugger-vscode
 if pcall(require, "lldebugger") then
     require("lldebugger").start()
@@ -6,14 +11,9 @@ end
 -- Cette ligne permet d'afficher des traces dans la console pendant l'éxécution
 io.stdout:setvbuf("no")
 
-gameManager = require("scripts/game/managers/gameManager")
-uiTools = require("scripts/ui/uiTools")
-debugManager = require("scripts/game/managers/debugManager")
-require("scripts/states/PATHS")
-
 function love.load()
     gameManager.load()
-    uiTools.load()
+    UITools.load()
 end
 
 function love.update(dt)

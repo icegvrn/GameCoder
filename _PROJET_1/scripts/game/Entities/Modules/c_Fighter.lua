@@ -1,6 +1,6 @@
-PointsUI = require("scripts/game/Entities/Characters/Modules/c_PointsUI")
-Sound = require("scripts/game/Entities/Characters/Modules/c_Sound")
-WeaponSlot = require("scripts/game/Entities/Characters/Modules/c_WeaponSlot")
+PointsUI = require(PATHS.MODULES.POINTSUI)
+Sound = require(PATHS.SOUND)
+WeaponSlot = require(PATHS.MODULES.WEAPONSLOT)
 
 local c_Fighter = {}
 local Fighter_mt = {__index = c_Fighter}
@@ -21,7 +21,7 @@ function c_Fighter:create()
         canBeHurt = true,
         canFire = true,
         isHit = false,
-        alertImg = love.graphics.newImage("contents/images/characters/exclamation.png"),
+        alertImg = love.graphics.newImage(PATHS.IMG.CHARACTERS .. "exclamation.png"),
         timer = 0,
         dieTimer = 0,
         pointsUI = p_UI:create()
@@ -69,7 +69,7 @@ function c_Fighter:create()
             if parent.controller.player then
                 if parent.fight.currentPV <= 0 then
                     parent.controller.player.isDead = true
-                    soundManager:playSound("contents/sounds/game/heros_death.wav", 0.3, false)
+                    soundManager:playSound(PATHS.SOUNDS.GAME .. "/heros_death.wav", 0.3, false)
                 end
             end
         end

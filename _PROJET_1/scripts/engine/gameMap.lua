@@ -9,7 +9,7 @@ end
 function m_gameMap:create()
     local gameMap = {
         currentMap = {},
-        tileSheet = love.graphics.newImage("contents/images/dungeontileset-extended.png"),
+        tileSheet = love.graphics.newImage(PATHS.IMG.ROOT .. "dungeontileset-extended.png"),
         tilesTexture = {},
         mapEnable = true
     }

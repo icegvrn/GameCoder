@@ -1,6 +1,6 @@
-Character = require("scripts/engine/character")
-EnnemiAgent = require("scripts/engine/ennemiAgent")
-local Animator = require("scripts/game/Entities/Characters/Modules/c_Animator")
+Character = require(PATHS.MODULES.CHARACTER)
+EnnemiAgent = require(PATHS.MODULES.ENNEMIAGENT)
+local Animator = require(PATHS.MODULES.ANIMATOR)
 
 local Ennemi = {}
 local Ennemi_mt = {__index = Ennemi}

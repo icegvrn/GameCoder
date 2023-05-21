@@ -1,8 +1,8 @@
-GAMESTATE = require("scripts/states/GAMESTATE")
+GAMESTATE = require(PATHS.GAMESTATE)
 
-camera = require("scripts/game/mainCamera")
-local LevelManager = require("scripts/game/managers/levelManager")
-local ui = require("scripts/ui/uiGame")
+camera = require(PATHS.MAINCAMERA)
+local LevelManager = require(PATHS.LEVELMANAGER)
+local ui = require(PATHS.UIGAME)
 local isLoaded = false
 
 local game = {}

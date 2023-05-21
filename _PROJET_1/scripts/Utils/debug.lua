@@ -1,6 +1,6 @@
-d_mainCamera = require("scripts/game/mainCamera")
-d_Utils = require("scripts/Utils/utils")
-d_map = require("scripts/game/gameMap")
+d_mainCamera = require(PATHS.MAINCAMERA)
+d_Utils = require(PATHS.UTILS)
+d_map = require(PATHS.GAMEMAP)
 debug = {}
 debug.font10 = love.graphics.newFont(10)
 debug.font = debug.font10

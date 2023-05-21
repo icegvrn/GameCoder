@@ -1,5 +1,5 @@
-controller = require("scripts/engine/controller")
-UiButton = require("scripts/ui/Modules/m_uiButton")
+controller = require(PATHS.CONFIGS.CONTROLLER)
+UiButton = require(PATHS.UIBUTTON)
 
 local uiMenus = {}
 local uiButton = UiButton.new()
@@ -10,11 +10,11 @@ uiMenus.menu.STATE = {}
 uiMenus.menu.STATE.main = "mainMenu"
 uiMenus.menu.STATE.settings = "settings"
 uiMenus.menu.STATE.currentState = uiMenus.menu.STATE.main
-uiMenus.menu.menuBackground = love.graphics.newImage("contents/images/menu1.png")
+uiMenus.menu.menuBackground = love.graphics.newImage(PATHS.IMG.ROOT .. "menu1.png")
 uiMenus.menu.timer = 0
 uiMenus.menu.timerStarted = false
 
-local textFont = love.graphics.newFont("contents/fonts/pixelfont.ttf", 50)
+local textFont = love.graphics.newFont(PATHS.FONTS .. "pixelfont.ttf", 50)
 uiMenus.menu.settingsText = love.graphics.newText(textFont, "Choose mode : " .. controller.mode)
 
 function uiMenus.load()
@@ -24,14 +24,14 @@ end
 
 function uiMenus.initMenuButtons()
     uiMenus.menu.buttons[1] =
-        uiButton:create("contents/images/ui/menu_restart.png", 200, uiMenus.menu.STATE.main, "restart")
+        uiButton:create(PATHS.IMG.UI .. "menu_restart.png", 200, uiMenus.menu.STATE.main, "restart")
     uiMenus.menu.buttons[2] =
-        uiButton:create("contents/images/ui/menu_settings.png", 310, uiMenus.menu.STATE.main, "settings")
+        uiButton:create(PATHS.IMG.UI .. "menu_settings.png", 310, uiMenus.menu.STATE.main, "settings")
     uiMenus.menu.buttons[3] = uiButton:create("contents/images/ui/menu_exit.png", 420, uiMenus.menu.STATE.main, "quit")
     uiMenus.menu.buttons[4] =
-        uiButton:create("contents/images/ui/menu_mode.png", 310, uiMenus.menu.STATE.settings, "changeMode")
+        uiButton:create(PATHS.IMG.UI .. "menu_mode.png", 310, uiMenus.menu.STATE.settings, "changeMode")
     uiMenus.menu.buttons[5] =
-        uiButton:create("contents/images/ui/menu_return.png", 420, uiMenus.menu.STATE.settings, "main")
+        uiButton:create(PATHS.IMG.UI .. "menu_return.png", 420, uiMenus.menu.STATE.settings, "main")
 end
 
 function uiMenus.update(self, dt)

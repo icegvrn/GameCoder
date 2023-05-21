@@ -1,15 +1,15 @@
 -- LE LEVEL MANAGER GERE TOUT CE QUI EST PROPRE AU NIVEAU : LE NOMBRE D'ENNEMI, LEUR TYPE, LEURS ARMES, LA MAP A AFFICHER
-local levelsConfig = require("scripts/game/levelsConfiguration")
-local soundManager = require("scripts/game/managers/soundManager")
+local levelsConfig = require(PATHS.LEVELCONFIGURATION)
+local soundManager = require(PATHS.SOUNDMANAGER)
 
-local mapManager = require("scripts/game/managers/mapManager")
-local CinematicManager = require("scripts/game/managers/cinematicManager")
-local PlayerManager = require("scripts/game/managers/playerManager")
-local EnnemiManager = require("scripts/game/managers/ennemiManager")
+local mapManager = require(PATHS.MAPMANAGER)
+local CinematicManager = require(PATHS.CINEMATICMANAGER)
+local PlayerManager = require(PATHS.PLAYERMANAGER)
+local EnnemiManager = require(PATHS.ENNEMIMANAGER)
 
-require("scripts/states/CHARACTERS")
-require("scripts/states/WEAPONS")
-local ui = require("scripts/ui/uiGame")
+require(PATHS.CONFIGS.CHARACTERS)
+require(PATHS.CONFIGS.WEAPONS)
+local ui = require(PATHS.UIGAME)
 
 local m_LevelManager = {}
 local LevelManager_mt = {__index = m_LevelManager}

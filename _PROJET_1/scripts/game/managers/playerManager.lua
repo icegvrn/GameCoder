@@ -1,5 +1,5 @@
-local c_factory = require("scripts/game/factories/characterFactory")
-local w_factory = require("scripts/game/factories/weaponFactory")
+local c_factory = require(PATHS.CHARACTERFACTORY)
+local w_factory = require(PATHS.WEAPONFACTORY)
 
 local PlayerManager = {}
 local Player_mt = {__index = PlayerManager}

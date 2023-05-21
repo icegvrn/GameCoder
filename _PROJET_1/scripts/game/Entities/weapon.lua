@@ -1,13 +1,11 @@
-require("scripts/states/CONST")
-utils = require("scripts/Utils/utils")
-local map = require("scripts/game/gameMap")
-Transform = require("scripts/engine/transform")
-Sound = require("scripts/game/Entities/Characters/Modules/c_Sound")
-HeldSlot = require("scripts/game/Entities/Characters/Modules/c_HeldSlot")
-Hitbox = require("scripts/game/Entities/Characters/Modules/c_Hitbox")
-Attack = require("scripts/game/Entities/Characters/Modules/c_Attack")
-Sprites = require("scripts/game/Entities/Characters/Modules/c_Sprites")
-WeaponAnimator = require("scripts/game/Entities/Characters/Modules/c_WeaponAnimator")
+require(PATHS.CONST)
+Transform = require(PATHS.TRANSFORM)
+Sound = require(PATHS.SOUND)
+HeldSlot = require(PATHS.MODULES.HELDSLOT)
+Hitbox = require(PATHS.MODULES.HITBOX)
+Attack = require(PATHS.MODULES.ATTACK)
+Sprites = require(PATHS.SPRITES)
+WeaponAnimator = require(PATHS.MODULES.WEAPONANIMATOR)
 
 local Weapon = {}
 local weapons_mt = {__index = Weapon}

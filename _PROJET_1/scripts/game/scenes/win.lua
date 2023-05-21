@@ -1,8 +1,8 @@
-GAMESTATE = require("scripts/states/GAMESTATE")
+GAMESTATE = require(PATHS.GAMESTATE)
 
 local win = {}
 local isLoaded = false
-local background = love.graphics.newImage("contents/images/end_background.png")
+local background = love.graphics.newImage(PATHS.IMG.ROOT .. "end_background.png")
 
 function win:load()
     isLoaded = true

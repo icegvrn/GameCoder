@@ -1,5 +1,5 @@
-local CHARACTERS = require("scripts/states/CHARACTERS")
-local WEAPONS = require("scripts/states/WEAPONS")
+local CHARACTERS = require(PATHS.CONFIGS.CHARACTERS)
+local WEAPONS = require(PATHS.CONFIGS.WEAPONS)
 -- Permet de définir les ennemis qu'il y a dans chaque niveau
 local levelsConfiguration = {}
 

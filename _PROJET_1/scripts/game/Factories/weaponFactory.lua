@@ -1,7 +1,6 @@
 -- Créé une arme en fonction de son type
-WEAPONS_CONST = require("scripts/states/WEAPONS")
-PATHS = require("scripts/states/PATHS")
-Weapon = require("scripts/engine/weapon")
+WEAPONS_CONST = require(PATHS.CONFIGS.WEAPONS)
+Weapon = require(PATHS.WEAPON)
 
 weaponFactory = {}
 local weapon = Weapon.new()
@@ -15,7 +14,7 @@ end
 
 -- Va chercher les caractéristiques de l'arme dans un fichier portant le nom de son type ("sword", "magic_staff"...)
 function weaponFactory.setCharacteristics(w, p_type)
-    local weaponData = require(PATHS.ENTITIES.WEAPONS .. p_type)
+    local weaponData = require(PATHS.CONFIGS.WEAPONSFOLDER .. p_type)
     w:setName(weaponData.name)
     w.attack:setDamageValue(weaponData.damageValue)
     w.attack:setSpeed(weaponData.speed)

@@ -1,13 +1,13 @@
-require("scripts/states/CONST")
-utils = require("scripts/Utils/utils")
-Transform = require("scripts/engine/transform")
-ennemiAgent = require("scripts/engine/ennemiAgent")
-Fighter = require("scripts/game/Entities/Characters/Modules/c_Fighter")
-Controller = require("scripts/game/Entities/Characters/Modules/c_Controller")
-Sprites = require("scripts/game/Entities/Characters/Modules/c_Sprites")
-WeaponSlot = require("scripts/game/Entities/Characters/Modules/c_WeaponSlot")
-Sound = require("scripts/game/Entities/Characters/Modules/c_Sound")
-Collider = require("scripts/game/Entities/Characters/Modules/c_Collider")
+require(PATHS.CONST)
+utils = require(PATHS.UTILS)
+Transform = require(PATHS.TRANSFORM)
+ennemiAgent = require(PATHS.MODULES.ENNEMIAGENT)
+Fighter = require(PATHS.MODULES.FIGTHER)
+Controller = require(PATHS.MODULES.CONTROLLER)
+Sprites = require(PATHS.SPRITES)
+WeaponSlot = require(PATHS.MODULES.WEAPONSLOT)
+Sound = require(PATHS.SOUND)
+Collider = require(PATHS.COLLIDER)
 
 local Character = {}
 local characters_mt = {__index = Character}

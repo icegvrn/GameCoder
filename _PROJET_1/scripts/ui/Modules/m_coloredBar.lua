@@ -100,7 +100,7 @@ function m_coloredBar:create(
 
     function coloredBar:Soundnotification()
         if self.canPlaySoundNotification then
-            soundManager:playSound("contents/sounds/game/boostCharge.wav", 0.5, false)
+            soundManager:playSound(PATHS.SOUNDS.GAME .. "boostCharge.wav", 0.5, false)
             self.canPlaySoundNotification = false
         end
     end

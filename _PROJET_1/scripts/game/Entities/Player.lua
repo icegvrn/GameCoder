@@ -1,8 +1,8 @@
-local PlayerUI = require("scripts/game/Entities/Characters/Modules/c_PlayerUI")
-local PlayerInput = require("scripts/game/Entities/Characters/Modules/c_PlayerInput")
-local PointsCounter = require("scripts/game/Entities/Characters/Modules/c_PointsCounter")
-local Booster = require("scripts/game/Entities/Characters/Modules/c_Booster")
-local Animator = require("scripts/game/Entities/Characters/Modules/c_Animator")
+local PlayerUI = require(PATHS.MODULES.PLAYERUI)
+local PlayerInput = require(PATHS.MODULES.PLAYERINPUT)
+local PointsCounter = require(PATHS.MODULES.POINTSCOUNTER)
+local Booster = require(PATHS.MODULES.BOOSTER)
+local Animator = require(PATHS.MODULES.ANIMATOR)
 
 local Player = {}
 local Player_mt = {__index = Player}

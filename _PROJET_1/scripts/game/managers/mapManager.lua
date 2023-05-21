@@ -1,6 +1,6 @@
-local Map = require("scripts/game/gameMap")
-Door = require("scripts/game/Entities/Characters/Modules/Door")
-mapList = require("maps/mapList")
+local Map = require(PATHS.GAMEMAP)
+Door = require(PATHS.DOOR)
+mapList = require(PATHS.MAPLIST)
 
 local mapManager = {
     currentMap = nil,

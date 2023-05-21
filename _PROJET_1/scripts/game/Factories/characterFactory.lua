@@ -1,10 +1,8 @@
--- Créé un personnage en fonction de sa catégorie et de son type
-PATHS = require("scripts/states/PATHS")
-CHARACTERS_STATE = require("scripts/states/CHARACTERS")
-Character = require("scripts/engine/character")
-debug = require("scripts/Utils/debug")
-Player = require("scripts/game/Entities/Characters/Modules/Player")
-Ennemi = require("scripts/game/Entities/Characters/Modules/Ennemi")
+CHARACTERS_STATE = require(PATHS.CONFIGS.CHARACTERS)
+Character = require(PATHS.MODULES.CHARACTER)
+debug = require(PATHS.DEBUG)
+Player = require(PATHS.PLAYER)
+Ennemi = require(PATHS.ENNEMI)
 
 characterFactory = {}
 local player = Player.new()
@@ -41,7 +39,7 @@ end
 
 -- Va chercher les caractéristiques du personnage dans un fichier portant le nom de son type ("knight", "princess"...)
 function characterFactory.setCharacteristics(c, category, p_type, boostable)
-    local characterData = require(PATHS.ENTITIES.CHARACTERS .. p_type)
+    local characterData = require(PATHS.CONFIGS.CHARACTERSFOLDER .. p_type)
     c:setName(characterData.name)
     c.controller:setSpeed(characterData.speed)
     c.fight:setMaxPV(characterData.pv)

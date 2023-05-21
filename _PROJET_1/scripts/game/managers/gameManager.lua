@@ -1,20 +1,19 @@
-require("scripts/game/gameMap")
-soundManager = require("scripts/game/managers/soundManager")
-uiManager = require("scripts/game/managers/uiManager")
-GAMESTATE = require("scripts/states/GAMESTATE")
+require(PATHS.GAMEMAP)
+soundManager = require(PATHS.SOUNDMANAGER)
+uiManager = require(PATHS.UIMANAGER)
+GAMESTATE = require(PATHS.GAMESTATE)
 
 gameManager = {}
 
 gameManager.scenes = {}
 
-gameManager.scenes.start = require("scripts/game/scenes/start")
-gameManager.scenes.narrative = require("scripts/game/scenes/narrative")
-gameManager.scenes.menu = require("scripts/game/scenes/menu")
-gameManager.scenes.game = require("scripts/game/scenes/game")
-gameManager.scenes.gameOver = require("scripts/game/scenes/gameOver")
-gameManager.scenes.win = require("scripts/game/scenes/win")
-
-debug = require("scripts/Utils/debug")
+gameManager.scenes.start = require(PATHS.START)
+gameManager.scenes.narrative = require(PATHS.NARRATIVE)
+gameManager.scenes.menu = require(PATHS.MENU)
+gameManager.scenes.game = require(PATHS.GAME)
+gameManager.scenes.gameOver = require(PATHS.GAMEOVER)
+gameManager.scenes.win = require(PATHS.WIN)
+debug = require(PATHS.DEBUG)
 
 gameManager.currentState = gameManager.scenes.start
 
