@@ -1,7 +1,8 @@
 -- LE LEVEL MANAGER GERE TOUT CE QUI EST PROPRE AU NIVEAU : LE NOMBRE D'ENNEMI, LEUR TYPE, LEURS ARMES, LA MAP A AFFICHER
+
+-- Chargement des modules
 local levelsConfig = require(PATHS.LEVELCONFIGURATION)
 local soundManager = require(PATHS.SOUNDMANAGER)
-
 local mapManager = require(PATHS.MAPMANAGER)
 local CinematicManager = require(PATHS.CINEMATICMANAGER)
 local PlayerManager = require(PATHS.PLAYERMANAGER)
@@ -61,7 +62,8 @@ function m_LevelManager:create()
                 levelManager:nextLevel()
             end
         end
-        self.playerManager:getPlayer():update(dt)
+        
+        self.player:update(dt)
     end
 
     function levelManager:draw()

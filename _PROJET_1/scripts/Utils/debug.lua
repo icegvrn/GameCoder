@@ -1,3 +1,4 @@
+-- MODULE QUI PERMET D'AFFICHER DES INFORMATIONS DE DEBUG
 d_mainCamera = require(PATHS.MAINCAMERA)
 d_Utils = require(PATHS.UTILS)
 d_map = require(PATHS.GAMEMAP)

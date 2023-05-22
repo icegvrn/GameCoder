@@ -1,4 +1,5 @@
-require(PATHS.CONST)
+
+-- ENTITE ARME, COMPREND LES COMPOSANTS QUI FONT UNE ARME : SPRITES, ATTACK... 
 Transform = require(PATHS.TRANSFORM)
 Sound = require(PATHS.SOUND)
 HeldSlot = require(PATHS.MODULES.HELDSLOT)
@@ -10,6 +11,7 @@ WeaponAnimator = require(PATHS.MODULES.WEAPONANIMATOR)
 local Weapon = {}
 local weapons_mt = {__index = Weapon}
 
+-- Création des instances des composants de l'arme
 function Weapon.new()
     weapon = {
         transform = Transform.new(),
@@ -23,6 +25,7 @@ function Weapon.new()
     return setmetatable(weapon, weapons_mt)
 end
 
+-- Création d'une nouvelle arme locale
 function Weapon:create()
     local weapon = {}
     weapon.transform = self.transform:create()
@@ -39,6 +42,8 @@ function Weapon:create()
     function weapon:init()
     end
 
+    -- Mise à jour du composant "attack" et de l'animator en permanence. L'attaque est en mode "boosted"
+    -- si le héros est en mode boosted.
     function weapon:update(dt)
         self.attack:update(dt, self)
         if self.owner:getMode() == CHARACTERS.MODE.BOOSTED then
@@ -47,12 +52,14 @@ function Weapon:create()
         self.animator:update(dt, self)
     end
 
+    -- Appel le draw de l'arme et le draw de l'attack (qui draw les bullets éventuelles)(debug possible avec le draw de la hitbox, désactivé par défaut)
     function weapon:draw()
         self:drawWeapon()
         self.attack:draw(self)
         -- self.hitBox:draw()
     end
 
+    -- Draw du sprite de l'arme a proprement parlé en fonction de l'arme actuelle 
     function weapon:drawWeapon()
         if (self.sprites.spritesList[1][self.sprites.currentSpriteId] ~= nil) then
             love.graphics.draw(
@@ -69,6 +76,7 @@ function Weapon:create()
         end
     end
 
+    -- Function qui envoie les informations de mouvement à l'animator de l'arme pour qu'il puisse la déplacer
     function weapon:move(dt, ownerPosition, ownerScale, ownerHandPosition, ownerWeaponScaling, ownerTarget)
         self.animator:updateInformations(
             dt,

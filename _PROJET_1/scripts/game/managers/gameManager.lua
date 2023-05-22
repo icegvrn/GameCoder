@@ -1,19 +1,20 @@
-require(PATHS.GAMEMAP)
+-- Chargement des modules
 soundManager = require(PATHS.SOUNDMANAGER)
 uiManager = require(PATHS.UIMANAGER)
 GAMESTATE = require(PATHS.GAMESTATE)
+debug = require(PATHS.DEBUG)
+require(PATHS.GAMEMAP)
 
 gameManager = {}
 
-gameManager.scenes = {}
-
-gameManager.scenes.start = require(PATHS.START)
-gameManager.scenes.narrative = require(PATHS.NARRATIVE)
-gameManager.scenes.menu = require(PATHS.MENU)
-gameManager.scenes.game = require(PATHS.GAME)
-gameManager.scenes.gameOver = require(PATHS.GAMEOVER)
-gameManager.scenes.win = require(PATHS.WIN)
-debug = require(PATHS.DEBUG)
+gameManager.scenes = {
+    start = require(PATHS.START),
+    narrative = require(PATHS.NARRATIVE),
+    menu = require(PATHS.MENU),
+    game = require(PATHS.GAME),
+    gameOver = require(PATHS.GAMEOVER),
+    win = require(PATHS.WIN)
+}
 
 gameManager.currentState = gameManager.scenes.start
 

@@ -1,3 +1,4 @@
+-- MODULE PERSONNAGE QUI RASSEMBLE TOUS LES COMPOSANTS D'UN PERSONNAGE
 require(PATHS.CONST)
 utils = require(PATHS.UTILS)
 Transform = require(PATHS.TRANSFORM)
@@ -36,7 +37,7 @@ function Character:create()
         sound = self.sound:create()
     }
 
-    function character:update(dt)
+    function character:update(dt, parent)
         self.controller:lookAtRightDirection(dt, self)
         self.sprites:animate(dt, self.mode, self.state)
         self.fight.weaponSlot:moveWeapon(dt, self, self.controller.target)
@@ -47,6 +48,7 @@ function Character:create()
             self.fight:dyingEvents(dt, self, self.sound)
         end
         self.collider:update(dt, self)
+        self.controller:update(dt, parent, self.transform.position.x, self.transform.position.y, self.state)
     end
 
     function character:draw()
@@ -103,6 +105,10 @@ function Character:create()
         else
             self.fight:changeWeapon(1)
         end
+    end
+
+    function character:setAgentEnnemi(agent)
+        self.controller:setAgentEnnemi(agent)
     end
 
     function character:getName()

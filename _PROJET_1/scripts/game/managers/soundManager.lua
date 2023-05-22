@@ -1,5 +1,7 @@
-local soundManager = {}
+-- MANAGER QUI GERE LA LECTURE DES SONS ET DE LA MUSIQUE
 
+-- Chargement des modules
+local soundManager = {}
 GAMESTATE = require(PATHS.GAMESTATE)
 soundManager.currentGameState = GAMESTATE.STATE.START
 local startMusic = PATHS.SOUNDS.MUSICS .. "start.mp3"

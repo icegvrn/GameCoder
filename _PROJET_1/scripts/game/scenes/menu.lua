@@ -1,3 +1,5 @@
+-- SCENE DU MENU
+
 GAMESTATE = require(PATHS.GAMESTATE)
 
 local isLoaded = false

@@ -1,3 +1,6 @@
+-- SPAWNER DU PLAYER, PILOTE PAR LE LEVELMANAGER
+
+-- Chargement des modules
 local c_factory = require(PATHS.CHARACTERFACTORY)
 local w_factory = require(PATHS.WEAPONFACTORY)
 

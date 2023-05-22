@@ -1,3 +1,5 @@
+-- SCENE DE GAMEOVER
+
 GAMESTATE = require(PATHS.GAMESTATE)
 
 local isLoaded = false

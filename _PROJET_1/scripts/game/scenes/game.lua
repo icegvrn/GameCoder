@@ -1,3 +1,5 @@
+-- SCENE DE JEU
+
 GAMESTATE = require(PATHS.GAMESTATE)
 
 camera = require(PATHS.MAINCAMERA)

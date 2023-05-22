@@ -1,3 +1,5 @@
+-- FACTORY QUI PERMET DE CREER UN NOUVEAU PERSONNAGE A LA DEMANDE, SOIT PLAYER SOIT ENNEMI
+
 CHARACTERS_STATE = require(PATHS.CONFIGS.CHARACTERS)
 Character = require(PATHS.MODULES.CHARACTER)
 debug = require(PATHS.DEBUG)
@@ -9,14 +11,13 @@ local player = Player.new()
 local ennemi = Ennemi.new()
 local createdPlayer = nil
 
--- Crée un nouveau personnage à la demande
 function characterFactory.createCharacter(p_category, p_type, p_boostable, p_target)
     local c = characterFactory.createCharacterByRole(character, p_category)
-    -- local character = characterFactory.createNewCharacter()
     characterFactory.setTarget(c.character, p_target)
     characterFactory.setCharacteristics(c.character, p_category, p_type, p_boostable)
     characterFactory.createSprites(c.character, p_category, p_type, p_boostable)
     characterFactory.initCharacter(c.character)
+    c:init()
     return c
 end
 
@@ -24,11 +25,9 @@ end
 function characterFactory.createCharacterByRole(c, category)
     if category == CHARACTERS_STATE.CATEGORY.PLAYER then
         createdPlayer = player:create()
-        createdPlayer:init()
         return createdPlayer
     else
         local e = ennemi:create()
-        e:init()
         return e
     end
 end
@@ -41,7 +40,7 @@ end
 function characterFactory.setCharacteristics(c, category, p_type, boostable)
     local characterData = require(PATHS.CONFIGS.CHARACTERSFOLDER .. p_type)
     c:setName(characterData.name)
-    c.controller:setSpeed(characterData.speed)
+    c.controller:setSpeed(characterData.speed, category)
     c.fight:setMaxPV(characterData.pv)
     c.fight:setStrenght(characterData.strenght)
     c.fight.weaponSlot:setHandOffset(characterData.handOffset)

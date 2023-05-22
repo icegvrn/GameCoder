@@ -1,3 +1,5 @@
+-- SCENE DE L'ECRAN DE VICTOIRE
+
 GAMESTATE = require(PATHS.GAMESTATE)
 
 local win = {}

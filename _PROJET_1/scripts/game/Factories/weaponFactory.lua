@@ -1,4 +1,4 @@
--- Créé une arme en fonction de son type
+-- FACTORY PERMETTANT DE GENERER UNE ARME A LA DEMANDE
 WEAPONS_CONST = require(PATHS.CONFIGS.WEAPONS)
 Weapon = require(PATHS.WEAPON)
 

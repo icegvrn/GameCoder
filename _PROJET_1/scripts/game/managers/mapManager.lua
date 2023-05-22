@@ -1,3 +1,4 @@
+-- Chargement des modules
 local Map = require(PATHS.GAMEMAP)
 Door = require(PATHS.DOOR)
 mapList = require(PATHS.MAPLIST)

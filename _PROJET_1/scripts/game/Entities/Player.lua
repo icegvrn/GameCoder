@@ -1,3 +1,4 @@
+-- L'ENTITE PLAYER, COMPREND LES COMPOSANTS D'UN PLAYER, CHARACTER, PLAYERINPUT, BOOSTER, ANIMATOR ETC
 local PlayerUI = require(PATHS.MODULES.PLAYERUI)
 local PlayerInput = require(PATHS.MODULES.PLAYERINPUT)
 local PointsCounter = require(PATHS.MODULES.POINTSCOUNTER)
@@ -19,6 +20,7 @@ function Player.new()
     return setmetatable(_player, Player_mt)
 end
 
+-- Création des différents composants nécessaire à un joueur
 function Player:create()
     local player = {
         character = self.character:create(),
@@ -31,10 +33,12 @@ function Player:create()
         isDead = false
     }
 
+    -- Initialisation du playerUI (permet de créer les barres et les boutons de capacités)
     function player:init()
         self.playerUI:load(self)
     end
 
+    -- Update des éléments du joueur avec séparation des éléments qui doivent être update ou non durant une cinématique
     function player:update(dt)
         self.character:update(dt)
         self.animator:update(dt, self)
@@ -43,6 +47,7 @@ function Player:create()
         end
     end
 
+    -- Update des éléments utilisables qu'en mode jeu et pas en mode cinématique
     function player:updatePlayables(dt, self)
         self.playerUI:update(dt, self)
         self.playerBooster:update(dt, self)
@@ -50,10 +55,12 @@ function Player:create()
         self.playerInput:update(dt, self)
     end
 
+    -- Transmission des keyPressed au playerInput
     function player:keypressed(key)
         self.playerInput:keypressed(key, self)
     end
 
+    -- Draw des éléments du player ; pas l'UI en mode cinématique
     function player:draw()
         self.character:draw()
         if self.character.controller:isInCinematicMode() == false then
@@ -61,6 +68,7 @@ function Player:create()
         end
     end
 
+    -- Renvoi comme référence au controller
     player.character.controller.player = player
 
     return player

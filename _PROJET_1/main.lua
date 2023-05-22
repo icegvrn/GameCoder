@@ -1,4 +1,5 @@
 PATHS = require("scripts/configs/PATHS")
+CONST = require(PATHS.CONST)
 gameManager = require(PATHS.GAMEMANAGER)
 UITools = require(PATHS.UITOOLS)
 debugManager = require(PATHS.DEBUGMANAGER)
@@ -12,13 +13,12 @@ end
 io.stdout:setvbuf("no")
 
 function love.load()
- 
     gameManager.load()
     UITools.load()
 end
 
 function love.update(dt)
-    dt = math.min(dt, 1 / 60)
+    dt = math.min(dt, 1 / 60) -- Permet d'éviter les bugs de calcul lors d'un changement de frame. 
     gameManager.update(dt)
     debugManager.update(dt)
 end

@@ -4,7 +4,7 @@ local orc = {}
 orc.name = "orc"
 orc.type = CHARACTERS.TYPE.ORC
 orc.pv = 100
-orc.speed = 120
+orc.speed = 0.3
 
 -- Position de l'arme, taille de l'arme et facteur de dégâts
 orc.handOffset = {10, 5}

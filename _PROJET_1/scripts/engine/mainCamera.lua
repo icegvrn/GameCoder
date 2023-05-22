@@ -1,14 +1,17 @@
+-- MODULE PERMETTANT D'AVOIR UNE CAMERA QUI FOLLOW LE JOUEUR OU EST FIXE EN MODE CINEMATIQUE, AVEC UN PEU DE SMOOTHNESS
 local mapManager = require(PATHS.MAPMANAGER)
 
-mainCamera = {}
-mainCamera.originalTarget = nil
-mainCamera.isLocked = false
-mainCamera.x = 0
-mainCamera.y = 0
-mainCamera.smooth = 0.1
-mainCamera.target = nil
-mainCamera.targetX = 0
-mainCamera.targetY = 0
+mainCamera = {
+    originalTarget = nil,
+    isLocked = false,
+    x = 0,
+    y = 0,
+    smooth = 0.1,
+    target = nil,
+    targetX = 0,
+    targetY = 0
+}
+
 destX = 0
 destY = 0
 

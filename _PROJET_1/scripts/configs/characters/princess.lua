@@ -4,7 +4,7 @@ local princess = {}
 princess.name = "princess"
 princess.type = CHARACTERS.TYPE.PRINCESS
 princess.pv = 60
-princess.speed = love.math.random(20,35)
+princess.speed = 0.3
 
 -- Position de l'arme, taille de l'arme et facteur de dégâts
 princess.handOffset = {10, 22}

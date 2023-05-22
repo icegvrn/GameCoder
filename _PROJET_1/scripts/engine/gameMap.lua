@@ -1,3 +1,4 @@
+-- MODULE QUI PERMET L'AFFICHAGE D'UNE CARTE A PARTIR D'UN INDEX DONNE ET COMPARE A MAPLIST
 local m_gameMap = {}
 local GameMap_mt = {__index = m_gameMap}
 
@@ -62,8 +63,6 @@ function m_gameMap:create()
             end
             posX = self.map.width * self.map.tilewidth
             posY = (self.map.height * self.map.tileheight) / 2
-
-        --  self.door:draw()
         end
     end
 
@@ -81,18 +80,21 @@ function m_gameMap:create()
                         love.graphics.draw(self.tileSheet, self.tilesTexture[tid], x, y)
                     end
                 end
-                -- if i == 3 then
-                --     local x = (c - 1) * self.map.tilewidth
-                --     local y = (l - 1) * self.map.tileheight
-                --     love.graphics.setFont(testFont)
-                --     love.graphics.print(self.data[i][index], x, y)
-                -- end
+                -- gameMap:debug(i, 3)
             end
         end
     end
 
     function gameMap:getName()
         return self.map.layers[3].name
+    end
+
+    function gameMap:debug(nb)
+        if i == nb then
+            local x = (c - 1) * self.map.tilewidth
+            local y = (l - 1) * self.map.tileheight
+            love.graphics.print(self.data[i][index], x, y)
+        end
     end
 
     return gameMap

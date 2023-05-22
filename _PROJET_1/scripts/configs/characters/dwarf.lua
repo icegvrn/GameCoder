@@ -4,7 +4,7 @@ local dwarf = {}
 dwarf.name = "dwarf"
 dwarf.type = CHARACTERS.TYPE.DWARF
 dwarf.pv = 80
-dwarf.speed = love.math.random(40, 55)
+dwarf.speed = 0.6
 
 -- Position de l'arme, taille de l'arme et facteur de dégâts
 dwarf.handOffset = {10, 16}

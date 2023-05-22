@@ -1,3 +1,5 @@
+-- MODULE CONTENANT QUELQUES FONCTIONS TRES UTILES, NOTAMMENT DES MATHS
+
 camera = require(PATHS.MAINCAMERA)
 Utils = {}
 Utils.screenWidth = love.graphics.getWidth()

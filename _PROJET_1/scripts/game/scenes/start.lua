@@ -1,3 +1,5 @@
+-- SCENE DE L'ECRAN START
+
 GAMESTATE = require(PATHS.GAMESTATE)
 require(PATHS.UTILS)
 soundManager = require(PATHS.SOUNDMANAGER)

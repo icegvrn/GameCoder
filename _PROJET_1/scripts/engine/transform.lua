@@ -1,3 +1,4 @@
+-- MODULE QUI PERMET D'AJOUTER UN TRANSFORM A N'IMPORTE QUEL OBJET
 local Transform = {}
 local transform_mt = {__index = Transform}
 

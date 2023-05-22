@@ -1,9 +1,10 @@
+-- MANAGER QUI CHOISIT QUEL UI AFFICHER EN FONCTION DE L'ETAT DU JEU
+
+-- Chargement des modules
 GAMESTATE = require(PATHS.GAMESTATE)
 
 uiManager = {}
-
 uiManager.ui = {}
-
 uiManager.ui.all = require(PATHS.UIALL)
 uiManager.ui.menus = require(PATHS.UIMENUS)
 uiManager.ui.game = require(PATHS.UIGAME)

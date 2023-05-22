@@ -4,8 +4,7 @@ local mage = {}
 mage.name = "mage"
 mage.type = CHARACTERS.TYPE.MAGE
 mage.pv = 10
-mage.speed = love.math.random(10, 15)
-
+mage.speed = 0.2
 -- Position de l'arme, taille de l'arme et facteur de dégâts
 mage.handOffset = {10, 5}
 mage.weaponScaling = 0.7
