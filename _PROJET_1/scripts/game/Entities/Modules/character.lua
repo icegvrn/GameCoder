@@ -69,6 +69,11 @@ function Character:create()
         table.insert(self.fight.weaponSlot.weapon, p_weapon)
     end
 
+    -- Fonction qui permet d'upgrade le niveau du personnage en augmentant la vitesse de son arme
+    function character:upCharacterLevel()
+        self.fight:upFightLevel()
+    end
+
     -- Fonction pour changer le "mode" du personnage et indiquer au fight ce qu'il doit faire en conséquence
     -- (changer d'arme et clear les tirs en cours)
     function character:setMode(mode)

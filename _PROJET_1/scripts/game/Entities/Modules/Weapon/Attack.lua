@@ -79,7 +79,9 @@ function c_Attack:create()
                     ownerTarget
                 )
             else
-                ownerTarget.fight:hit(owner, (parent:getDamage() / 30))
+                if ownerTarget.fight then
+                    ownerTarget.fight:hit(owner, (parent:getDamage() / 30))
+                end
             end
             self.canFire = false
         end
@@ -120,6 +122,11 @@ function c_Attack:create()
                 self.timer = 0
             end
         end
+    end
+
+    -- Fonction qui permet d'upgrade l'attaque en augmentant son niveau à chaque passage dedans
+    function attack:upgradeAttack()
+        self.speed = self.speed - 0.15
     end
 
     -- SETTERS ---

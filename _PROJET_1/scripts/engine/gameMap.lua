@@ -12,7 +12,7 @@ end
 function m_gameMap:create()
     local gameMap = {
         currentMap = {},
-        tileSheet = love.graphics.newImage(PATHS.IMG.ROOT .. "dungeontileset-extended.png"),
+        tileSheet = nil,
         tilesTexture = {},
         mapEnable = true
     }
@@ -27,6 +27,7 @@ function m_gameMap:create()
                 self.data[n] = self.map.layers[n].data
             end
         end
+        self.tileSheet = love.graphics.newImage(list["tilesheet"])
     end
 
     -- Fonction qui créée les quads de tiles en fonction des données récupérées

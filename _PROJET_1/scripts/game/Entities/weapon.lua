@@ -55,7 +55,7 @@ function Weapon:create()
     function weapon:draw()
         self:drawWeapon()
         self.attack:draw(self)
-        self.hitBox:draw()
+        --  self.hitBox:draw()
     end
 
     -- Draw du sprite de l'arme a proprement parlé en fonction de l'arme actuelle, avec un sin pour une animation d'attaque
@@ -86,6 +86,11 @@ function Weapon:create()
             ownerWeaponScaling,
             ownerTarget
         )
+    end
+
+    -- Fonction qui permet d'augmenter l'attack de l'arme
+    function weapon:upgradeWeapon()
+        self.attack:upgradeAttack()
     end
 
     -- GETTERS/SETTERS------------------------------

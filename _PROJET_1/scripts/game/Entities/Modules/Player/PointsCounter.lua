@@ -9,7 +9,7 @@ end
 
 function c_PointsCounter:create()
     local pointsCounter = {
-        points = 50,
+        points = 0,
         maxPoints = 50
     }
 

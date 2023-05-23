@@ -5,6 +5,7 @@ local UIALL = {
     font50 = love.graphics.newFont(PATHS.FONTS .. "pixelfont.ttf", 50),
     font30 = love.graphics.newFont(PATHS.FONTS .. "pixelfont.ttf", 30),
     font15 = love.graphics.newFont(15),
+    font20stylized = love.graphics.newFont(PATHS.FONTS .. "pixelfont.ttf", 20),
     font12 = love.graphics.newFont(12),
     font10 = love.graphics.newFont(10),
     font9 = love.graphics.newFont(9)

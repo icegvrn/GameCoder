@@ -40,12 +40,13 @@ function m_LevelManager:create()
         mapManager:initMap()
         self:initLevel(nb)
         self.player = self:getPlayer()
+        ui:load()
     end
 
     -- Fonction update : change le LEVELSTATE selon situation, voire le GAMESTATE dans le cas de la mort du joueur.
     -- Si joueur mort, game over. Si state du niveau "start" on joue une cinématique, si level game, on met fin au niveau quand les ennemis sont à 0 et on passe en win
     -- Sinon on update les ennemis. En level win, après avoir réalisé l'action pour finir le niveau (ici passer une porte), on joue le nextLevel.
-    -- Update de la map et du player dans tous les cas (sauf mort du joueur)
+    -- Update de la map et du player dans tous les cas (sauf mort du joueur), affichage du compte d'ennemis
     function levelManager:update(dt)
         if self.player.isDead then
             GAMESTATE.currentState = GAMESTATE.STATE.GAMEOVER
@@ -65,6 +66,7 @@ function m_LevelManager:create()
                 levelManager:nextLevel()
             end
         end
+        ui:setEnnemiesCount(#self.ennemiManager:getEnnemiesList())
         self.player:update(dt)
     end
 
@@ -140,16 +142,20 @@ function m_LevelManager:create()
         end
     end
 
-    -- Fonction qui permet de passer au niveau suivant : s'il y a un niveau suivant, charge une nouvelle carte, charge de nouveaux ennemis.
+    -- Fonction qui permet de passer au niveau suivant : s'il y a un niveau suivant, charge une nouvelle carte, charge de nouveaux ennemis et augmente le niveau joueur
     function levelManager:nextLevel()
         if levelManager.currentLevel < #levelsConfig then
             levelManager.currentLevel = levelManager.currentLevel + 1
-            levelManager.LEVELSTATE.currentState = levelManager.LEVELSTATE.start
-            -- mapManager:loadMap(levelManager.currentLevel)
-            -- self.ennemiManager:nextLevel(self, self.player)
             ui:nextLevel()
             soundManager:endOfLevel()
+            levelManager.LEVELSTATE.currentState = levelManager.LEVELSTATE.start
+            self.player:upPlayerLevel()
+            ui:updatePlayerLevel()
             self:initLevel(levelManager.currentLevel)
+            if levelManager.currentLevel == #levelsConfig then
+                ui:setPlayInformations(false)
+            end
+        else
         end
     end
 

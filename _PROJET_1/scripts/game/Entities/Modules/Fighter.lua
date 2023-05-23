@@ -28,8 +28,8 @@ function c_Fighter:create()
         pointsUI = p_UI:create()
     }
 
-    -- Update des evenements du fighter:  est-ce que le personnage est touché, est-ce qu'il est mort ? 
-    -- Modification de la position de l'arme 
+    -- Update des evenements du fighter:  est-ce que le personnage est touché, est-ce qu'il est mort ?
+    -- Modification de la position de l'arme
     function fighter:update(dt, character, sprites, soundModule, target)
         if self.isHit then
             self:hitEvents(dt, character, sprites, soundModule)
@@ -73,7 +73,7 @@ function c_Fighter:create()
     end
 
     -- Fonction qui permet de jouer un son et coloriser un personnage blessé, avec un timer pour remettre le perso à son état initial
-   -- Elle met également le personnage sur "dead" s'il n'a plus de PV
+    -- Elle met également le personnage sur "dead" s'il n'a plus de PV
     function fighter:hitEvents(dt, parent, sprites, soundModule)
         if self.isHit then
             self:hitSound(parent, soundModule)
@@ -168,6 +168,11 @@ function c_Fighter:create()
                 self.weaponSlot.weapon[self.weaponSlot.currentWeaponId]:draw()
             end
         end
+    end
+
+    -- Fonction qui permet d'upgrade le niveau de combat en augmentant la vitesse de l'arme
+    function fighter:upFightLevel()
+        self.weaponSlot.weapon[self.weaponSlot.currentWeaponId]:upgradeWeapon()
     end
 
     -- Setters

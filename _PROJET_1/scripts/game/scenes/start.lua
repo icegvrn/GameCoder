@@ -46,7 +46,7 @@ end
 
 -- Fonction qui permet de passer à l'introduction quand le joueur a validé qu'il souhaitait commencer
 function start:keypressed(key)
-    if key == "space" then
+    if key == "space" or key == "escape" then
         soundManager:playSound(PATHS.SOUNDS.ROOT .. "button.mp3", 0.5, false)
         GAMESTATE.currentState = GAMESTATE.STATE.NARRATIVE
     end

@@ -55,6 +55,11 @@ function Player:create()
         self.playerInput:update(dt, self)
     end
 
+    -- Fonction qui permet d'upgrade le niveau du joueur lorsqu'il change de map, appelé par levelManager
+    function player:upPlayerLevel()
+        self.character:upCharacterLevel()
+    end
+
     -- Transmission des keyPressed au playerInput
     function player:keypressed(key)
         self.playerInput:keypressed(key, self)
