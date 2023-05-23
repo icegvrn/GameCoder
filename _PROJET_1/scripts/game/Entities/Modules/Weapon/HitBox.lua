@@ -1,5 +1,4 @@
 -- MODULE QUI PERMET DE DETERMINER A TOUT MOMENT LE "POINT CHAUD" D'UNE ARME, L'ENDROIT D'OU ELLE PEUT TIRER
-
 local c_Hitbox = {}
 local Hitbox_mt = {__index = c_Hitbox}
 
@@ -15,6 +14,12 @@ function c_Hitbox:create()
         size = {x = 10, y = 10}
     }
 
+    function hitBox:draw()
+        -- UTILISE POUR LE DEBUG : Dessin de la firebox
+        love.graphics.circle("fill", self.position.x, self.position.y, 6, 6)
+    end
+
+    -- Setters et getters
     function hitBox:setHitBoxSize(sizeX, sizeY)
         self.size.x = sizeX
         self.size.y = sizeY
@@ -27,11 +32,6 @@ function c_Hitbox:create()
 
     function hitBox:getFireOffset()
         return self.position.x, self.position.y
-    end
-
-    function hitBox:draw()
-        -- DEBUG : Dessin de l'image de tir
-        love.graphics.circle("fill", self.position.x, self.position.y, 6, 6)
     end
 
     return hitBox

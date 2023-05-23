@@ -40,7 +40,7 @@ function Player:create()
 
     -- Update des éléments du joueur avec séparation des éléments qui doivent être update ou non durant une cinématique
     function player:update(dt)
-        self.character:update(dt)
+        self.character:update(dt, self)
         self.animator:update(dt, self)
         if self.character.controller:isInCinematicMode() == false then
             self:updatePlayables(dt, self)

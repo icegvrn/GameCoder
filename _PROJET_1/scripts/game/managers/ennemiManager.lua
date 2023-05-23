@@ -26,6 +26,7 @@ function EnnemiManager:create()
     end
 
     function ennemiManager:spawnEnnemies(levelManager, player)
+        self:clear()
         local currentLvlList = levelsConfig.getEnnemiesByLvl(levelManager.currentLevel)
         if currentLvlList then
             for n = 1, #currentLvlList do
@@ -59,7 +60,6 @@ function EnnemiManager:create()
         ennemi.character.transform:setPosition(positionX, positionY)
     end
 
-
     -- Fonction permettant de trouver un point de spawn valide
     function ennemiManager:findSpawnPoint(mapManager, mapWidth, mapHeight, c_w, c_h)
         local pX = love.math.random(0, mapWidth)
@@ -67,7 +67,7 @@ function EnnemiManager:create()
         local spawnFounded = false
 
         -- Une boucle qui cherche un point de spawn sur la taille de la carte où il n'y a ni collision,
-         -- ni absence de sol elle n'a de return true que si elle en trouve un 
+        -- ni absence de sol elle n'a de return true que si elle en trouve un
         while spawnFounded == false do
             pX = love.math.random(0, mapWidth)
             pY = love.math.random(0, mapHeight)
@@ -89,8 +89,7 @@ function EnnemiManager:create()
         self:spawnEnnemies(levelManager, player)
     end
 
-  
--- Retourne la liste d'ennemis sous type "ennemi"
+    -- Retourne la liste d'ennemis sous type "ennemi"
     function ennemiManager:getEnnemiesList()
         return self.ennemiesList
     end

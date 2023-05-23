@@ -1,5 +1,4 @@
--- SCENE DE L'ECRAN DE VICTOIRE
-
+-- MODULE APPELE PAR GAMEMANAGER LORSQUE LE GAMESTATE EST SUR WIN
 GAMESTATE = require(PATHS.GAMESTATE)
 
 local win = {}
@@ -10,18 +9,18 @@ function win:load()
     isLoaded = true
 end
 
-function win:update(dt)
-end
-
+-- Affiche l'écran de win
 function win:draw()
     love.graphics.draw(background, 0, 0)
 end
 
-function win:keypressed(key)
-end
-
+-- Vérifie si cette scène a déjà été chargée pour ne pas répéter ce qui ne doit pas être répété
 function win:isAlreadyLoaded()
     return isLoaded
+end
+
+function win:update(dt)
+    --
 end
 
 return win

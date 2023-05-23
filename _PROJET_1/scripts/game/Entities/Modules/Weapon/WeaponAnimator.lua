@@ -59,6 +59,8 @@ function c_WeaponAnimator.create()
         end
     end
 
+    -- Calcul l'angle que doit adopter l'arme : si l'owner ne tire pas, angle IDLE. S'il tire, calcul l'angle
+    -- entre l'arme et la cible (principalement à distance car au corps à corps il y a une animation "playattackanimation" cf en dessous)
     function weaponAnimator:calcWeaponAngle(dt, parent)
         local weaponAngle = 0
         if parent.attack.isFiring == false then
@@ -69,9 +71,9 @@ function c_WeaponAnimator.create()
             weaponAngle = math.atan2((mY - pY) * self.owner.scale.x, (mX - pX) * self.owner.scale.x)
         end
 
+        -- Si le propriétaire de l'arme est le joueur, l'angle est calculé par rapport à la souris.
         if parent.owner.controller.player then
-            -- Permet de "tracker" la souris par le calcul atan2 qui calcul l'angle entre deux vecteurs pour modifier l'angle si le personnage est joueur
-            local mouseWorldPositionX, mouseWorldPositionY = utils.mouseToWorldCoordinates(love.mouse.getPosition())
+            local mouseWorldPositionX, mouseWorldPositionY = Utils.mouseToWorldCoordinates(love.mouse.getPosition())
             weaponAngle =
                 math.atan2(
                 (mouseWorldPositionY - self.owner.position.y) * self.owner.scale.x,
@@ -81,34 +83,32 @@ function c_WeaponAnimator.create()
         parent.sprites.currentAngle = weaponAngle
     end
 
+    -- Fonction qui calcul l'échelle que doit avoir l'arme par rapport à son propriétaire en utilisant la donné weaponScaling du propriétaire
     function weaponAnimator:calcWeaponScale(dt, parent)
         parent.transform.scale.x = self.owner.weaponScaling * self.owner.scale.x
         parent.transform.scale.y = self.owner.weaponScaling * self.owner.scale.y
     end
 
+    -- Fonction qui calcul où se trouve la hitBox sur l'arme en fonction de sa position : utilisée pour savoir
+    -- a partir de quel endroit le projectil doit être tiré pour une arme au corps à corps.
     function weaponAnimator:calcWeaponHitZone(dt, parent)
+        -- Calcul de la longueur de l'arme : la moitié du sprite (= origin) - le offset de son heldSlot, le tout multiplié par le weaponScale du proprio et son scale gauche ou droite
         local weaponLength =
             (((parent.sprites.spritestileSheets[1]:getWidth() / 2) - parent.heldSlot.holdingOffset.x) *
             self.owner.weaponScaling) *
             self.owner.scale.x
-        local weaponHitPositionX =
-            parent.transform.position.x +
-            weaponLength * math.sin(math.cos(parent.sprites.currentAngle)) * self.owner.scale.x
-        local weaponHitPositionY =
-            parent.transform.position.y +
-            weaponLength * math.sin(math.sin(parent.sprites.currentAngle)) * self.owner.scale.y
-        if self.owner.scale.x < 0 then
-            weaponHitPositionX =
-                parent.transform.position.x - weaponLength * math.cos(parent.sprites.currentAngle) * self.owner.scale.x
-        end
-        if self.owner.scale.y < 0 then
-            weaponHitPositionY =
-                parent.transform.position.y - weaponLength * math.sin(parent.sprites.currentAngle) * self.owner.scale.y
-        end
+
+        -- Calcul du point X de la hitBox : position X de l'arme + sa longueur multiplié par le cos de son angle
+        local weaponHitPositionX = parent.transform.position.x + (weaponLength * math.cos(parent.sprites.currentAngle))
+
+        -- Calcul du point Y de la hitBox : position X de l'arme, + sa longueur multiplié par le sin de l'angle
+        local weaponHitPositionY = parent.transform.position.y + (weaponLength * math.sin(parent.sprites.currentAngle))
+
         parent.hitBox.position.x = weaponHitPositionX
         parent.hitBox.position.y = weaponHitPositionY
     end
 
+    -- Fonction pour lire une animation d'attaque en modifiant l'angle de l'arme (qui est lui par un sin qui permet une impression de va et vient)
     function weaponAnimator:playattackAnimation(dt, parent)
         parent.sprites.rotationAngle = parent.sprites.rotationAngle + parent.attack.speed * 10 * dt
     end

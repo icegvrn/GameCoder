@@ -9,22 +9,25 @@ end
 
 function c_PointsCounter:create()
     local pointsCounter = {
-        points = 0,
+        points = 50,
         maxPoints = 50
     }
 
+    -- Reset les points si le joueur passe en mode boost et avait full points
     function pointsCounter:update(dt, player)
         if player.character:getMode() == CHARACTERS.MODE.BOOSTED and self.points == self.maxPoints then
             self:resetPoints()
         end
     end
 
+    -- Fonction permettant d'ajouter des points au joueur
     function pointsCounter:addPoints(points)
         if self.points < self.maxPoints then
             self.points = self.points + 1
         end
     end
 
+    -- Fonction permettant de reset les points
     function pointsCounter:resetPoints()
         self.points = 0
     end

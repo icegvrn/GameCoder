@@ -21,15 +21,6 @@ function Door:create()
         currentDoorImg = nil
     }
 
-    -- Mise à jour de l'image selon la condition "ouverte" ou "fermée" de la porte
-    function door:update(dt)
-        if self.open then
-            self.currentDoorImg = self.openDoorImg
-        else
-            self.currentDoorImg = self.closeDoorImg
-        end
-    end
-
     -- Appel le draw de chaque porte
     function door:draw()
         self:drawLeftDoor()
@@ -77,11 +68,13 @@ function Door:create()
     -- Fonction qui ferme la porte
     function door:closeDoor()
         self.open = false
+        self.currentDoorImg = self.closeDoorImg
     end
 
     -- Fonction qui ouvre la porte, avec un petit son associé indiquant "la porte est ouverte" à l'user (car parfois loin d'elle sur la carte)
     function door:openDoor()
         self.open = true
+        self.currentDoorImg = self.openDoorImg
         soundManager:playSound(PATHS.SOUNDS.GAME .. "door_signal.wav", 0.5, false)
         soundManager:playSound(PATHS.SOUNDS.GAME .. "doorOpen.wav", 0.1, false)
     end

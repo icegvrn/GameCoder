@@ -15,34 +15,29 @@ end
 function PlayerManager:create()
     local playerManager = {playersList = {}}
 
-    function playerManager:update(dt, mapManager)
-        --   self:checkCharactersCollisions(dt, mapManager)
-    end
-
-    -- function playerManager:checkCharactersCollisions(dt, mapManager)
-    --     for n = #self.playersList, 1, -1 do
-    --         if self.playersList[n].character.collider then
-    --             self.playersList[n].character.collider:update(dt, self.playersList[n].character)
-    --         end
-    --     end
-    -- end
-
+    -- Fonction qui permet de créer l'entité joueur en lui attribuant une arme et le retourne. 
+    -- Existe actuellement sous forme de liste pour avoir un fonctionnement similaire à ennemi et pouvoir éventuellement créer plusieurs joueurs
     function playerManager:spawnPlayer(levelManager)
-        -- Fais spawn le player à un endroit précis du jeu
-        myHeroWeapon = w_factory.createWeapon(WEAPONS.TYPE.HERO_MAGIC_STAFF)
-        myWeapon4 = w_factory.createWeapon(WEAPONS.TYPE.BITE)
-        myCharacter = c_factory.createCharacter(CHARACTERS.CATEGORY.PLAYER, CHARACTERS.TYPE.ORC, true, love.mouse)
-        myCharacter.character:equip(myHeroWeapon)
-        myCharacter.character:equip(myWeapon4)
-        table.insert(self.playersList, myCharacter)
-        table.insert(levelManager.charactersList, myCharacter)
-        return myCharacter
+        if #self.playersList == 0 then
+            myHeroWeapon = w_factory.createWeapon(WEAPONS.TYPE.HERO_MAGIC_STAFF)
+            myHeroWeapon_bite = w_factory.createWeapon(WEAPONS.TYPE.BITE)
+            myCharacter = c_factory.createCharacter(CHARACTERS.CATEGORY.PLAYER, CHARACTERS.TYPE.ORC, true, love.mouse)
+            myCharacter.character:equip(myHeroWeapon)
+            myCharacter.character:equip(myHeroWeapon_bite)
+            table.insert(self.playersList, myCharacter)
+            table.insert(levelManager.charactersList, myCharacter)
+            return myCharacter
+        else
+            return self.playersList[1]
+        end
     end
 
+    -- Fonction qui permet de clear la liste de player
     function playerManager:clear()
         self.playersList = {}
     end
 
+    -- Fonction qui renvoie le player en cours
     function playerManager:getPlayer()
         return self.playersList[1]
     end

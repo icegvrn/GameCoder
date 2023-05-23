@@ -1,3 +1,5 @@
+-- LE MAPMANAGER GERE LA MAP EN ENVOYANT DES ID A LA GAMEMAP, IL CONTIENT EGALEMENT DES FONCTIONS EN LIEN AVEC LA MAP COMME LA COLLISION, DIMENSION ETC
+
 -- Chargement des modules
 local Map = require(PATHS.GAMEMAP)
 Door = require(PATHS.DOOR)
@@ -11,12 +13,13 @@ local mapManager = {
     door = Door.new()
 }
 
-function mapManager:initMap(nb)
+function mapManager:initMap()
     self.currentMap = Map.create()
     mapManager.door = self.door:create()
-    self:loadMap(nb)
 end
 
+-- Fonction qui charge une nouvelle carte selon un ID et met à jour ses dimensions
+-- Initialise aussi les portes de la map
 function mapManager:loadMap(nb)
     self.currentMap:setMapTo(mapList, nb)
     self.currentMap:loadMap()
@@ -25,19 +28,18 @@ function mapManager:loadMap(nb)
     self.door:init(self.currentMap)
 end
 
+-- Appelle le draw de la map en cours et le draw des portes
 function mapManager:draw()
     self.currentMap:draw()
     self.door:draw()
 end
 
-function mapManager:update(dt)
-    self.door:update(dt)
-end
-
+-- Fonction appelée par le map manager pour exécuter des actions à la fin d'un level, ici dire à Door de s'ouvrir
 function mapManager:endTheLevel()
     self.door:openDoor()
 end
 
+-- Fonction appelée pour vérifier que le joueur a fait l'action requise pour terminer définitivement le niveau, ici passer la porte ouverte
 function mapManager:afterlevelWinAction(player)
     if self.door:checkTakeDoor(player) then
         return true
@@ -46,14 +48,7 @@ function mapManager:afterlevelWinAction(player)
     end
 end
 
-function mapManager:getDoor()
-    return self.door
-end
-
-function mapManager:getCurrentMap()
-    return self.currentMap.map
-end
-
+-- Fonction qui vérifie si un élément est en dehors des dimension de la carte
 function mapManager:isOverTheMap(elementPosX, elementPosY)
     if
         elementPosX <= 0 or elementPosX >= self.currentMapTotalWidth or elementPosY <= 0 or
@@ -65,6 +60,7 @@ function mapManager:isOverTheMap(elementPosX, elementPosY)
     end
 end
 
+-- Fonction "clamp" qui repositionne un élément si celui-ci sort de la dimension de la carte
 function mapManager:clamp(elementPosX, elementPosY)
     if elementPosX <= 0 then
         elementPosX = 1
@@ -80,10 +76,7 @@ function mapManager:clamp(elementPosX, elementPosY)
     return elementPosX, elementPosY
 end
 
-function mapManager:getMapDimension()
-    return self.currentMapTotalWidth, self.currentMapTotalHeight
-end
-
+-- Fonction qui permet de vérifier s'il y a un objet solide à cet endroit de la carte ; les objets solides sont placés sur le layer 3 de chaque map
 function mapManager:isThereASolidElement(p_left, p_top, p_width, p_height, character)
     -- Créé une tolérance pour ne pas rendre la collision trop abrupte en ignorant quelques tiles par rapport à la taille du personnage
     if character then
@@ -106,7 +99,7 @@ function mapManager:isThereASolidElement(p_left, p_top, p_width, p_height, chara
     local col2 = col + math.floor((p_width) / self.currentMap.map.tilewidth)
     local lin2 = lin + math.floor((p_height) / self.currentMap.map.tileheight)
 
-    -- parcours de toutes les cases couvertes par le joueur
+    -- parcours de toutes les cases couvertes par le joueur sur le layer de collision
     for c = col, col2 do
         for r = lin, lin2 do
             local index = r * self.currentMap.map.width + c
@@ -121,10 +114,10 @@ function mapManager:isThereASolidElement(p_left, p_top, p_width, p_height, chara
             end
         end
     end
-
     return touch
 end
 
+-- Fonction qui permet de déterminer s'il y a du sol à cet endroit de la carte. Le sol est représenté sur le layer 1 de la carte.
 function mapManager:isThereAFloor(p_left, p_top, p_width, p_height, character)
     local floor = false
     local col = math.floor(p_left / self.currentMap.map.tilewidth)
@@ -152,6 +145,20 @@ function mapManager:isThereAFloor(p_left, p_top, p_width, p_height, character)
         end
     end
     return floor
+end
+
+-- Getter qui retourne les dimensions de la carte
+function mapManager:getMapDimension()
+    return self.currentMapTotalWidth, self.currentMapTotalHeight
+end
+
+-- Getter qui retourne la map actuelle
+function mapManager:getCurrentMap()
+    return self.currentMap.map
+end
+
+function mapManager:getDoor()
+    return self.door
 end
 
 return mapManager

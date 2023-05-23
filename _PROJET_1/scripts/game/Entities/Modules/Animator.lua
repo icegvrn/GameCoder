@@ -23,6 +23,7 @@ function c_Animator:create()
         lastTurningPositionX = 0
     }
 
+    -- Intialise les paramètres de vitesse et de position de l'animator
     function animator:init(player)
         self.initialSpeed = player.character.controller.speed
         self.speed = self.initialSpeed
@@ -30,6 +31,7 @@ function c_Animator:create()
         self.lastPositionX, self.lastPositionY = player.character.transform:getPosition()
     end
 
+    -- Update l'animator : soit en jouant l'animation de cinématique, soit en modifiant la velocité pour créer du mouvement
     function animator:update(dt, player)
         if player.character.controller.isCinematicMode then
             self:playEntrance(dt, player)
@@ -37,48 +39,63 @@ function c_Animator:create()
         self:setVelocity(dt)
     end
 
+    -- Fonction permettant d'animer le personnage lors de la cinématique d'entrée.
     function animator:playEntrance(dt, player)
+        -- Faire marcher le personnage si c'est pas le cas
         if player.character:getState() ~= CHARACTERS.STATE.WALKING then
             player.character:setState(CHARACTERS.STATE.WALKING)
             self:chooseARandomPoint(dt, player)
         end
 
+        -- Rendre son déplacement plus lent pour une cinématique un peu plus longue
         local x, y = player.character.transform:getPosition()
         local speed = player.character.controller.speed
+
+        -- Si c'est le joueur, un déplacement linéaire tout droit
         if player.character.controller.player then
             local velocityX = speed / 3 * dt
             x = x + velocityX
             player.character.transform:setPosition(x, y)
         else
+            -- Sinon on déplace le personnage
             self:tryMove(dt, player)
         end
     end
 
+    -- Fonction permettant à l'animator de choisir un point au hasard sur la carte
+    -- afin que les ennemis puissent s'y rendre lorsqu'ils patrouillent
     function animator:chooseARandomPoint(dt, player)
         self.speed = self.initialSpeed
         local x, y = player.character.transform:getPosition()
-        self.destinationX, self.destinationY = mapManager:getMapDimension()
-        self.destinationX = love.math.random(0, self.destinationX)
-        self.destinationY = love.math.random(0, self.destinationY)
+        -- Détermine le point où se rendre
+        local maxDestinationX, maxDestinationY = mapManager:getMapDimension()
+        self.destinationX = love.math.random(0, maxDestinationX)
+        self.destinationY = love.math.random(0, maxDestinationY)
+        -- Détermine l'angle que doit prendre le personnage 
         self.angle = Utils.angle(x, y, self.destinationX, self.destinationY)
     end
 
+    -- Function qui permet au personnage d'essayer d'avancer. Il y parvient si pas de collision
     function animator:tryMove(dt, player)
+        
         local initialPositionX, initialPositionY = player.character.transform:getPosition()
         local ennemiWidth, ennemiHeight =
             player.character.sprites:getDimension(player.character.mode, player.character.state)
         local newPositionX = initialPositionX + self.velocityX
         local newPositionY = initialPositionY + self.velocityY
 
+        -- Appel le map manager pour vérifier si collision
         if (mapManager:isThereASolidElement(newPositionX, newPositionY, ennemiWidth, ennemiHeight)) == false then
             self:move(dt, player, newPositionX, newPositionY)
             return true
         else
-            self:move(dt, player, self.lastPositionX, self.lastPositionY)
+            -- self:move(dt, player, self.lastPositionX, self.lastPositionY)
             return false
         end
     end
 
+    -- Fonction pour bouger le personnage : on update sa direction et aussi sa position. 
+    -- Petit temps de latence ajouté sur la direction pour pas que le personnage se retourne sans cesse lorsque le choix est border
     function animator:move(dt, player, newPositionX, newPositionY)
         if newPositionX - self.lastTurningPositionX > 2 or newPositionX - self.lastTurningPositionX < -2 then
             animator:updateDirection(dt, player)
@@ -87,6 +104,7 @@ function c_Animator:create()
         self.lastPositionX, self.lastPositionY = newPositionX, newPositionY
     end
 
+    -- Fonction permettant d'update la direction du personnage
     function animator:updateDirection(dt, player)
         if self.velocityX < 0 then
             player.character.controller:changeDirection(player.character, CONST.DIRECTION.left, dt)
@@ -96,6 +114,8 @@ function c_Animator:create()
         self.lastTurningPositionX = self.lastPositionX
     end
 
+    -- Fonction qui appel les fonction nécessaire pour le mode poursuite quand le personnage est alert: 
+    -- Change la vitesse du perso, ajoute un peu d'aléatoire sur son angle d'attaque puis essaie de bouger
     function animator:chase(dt, player, targetX, targetY)
         self.speed = self.boostedSpeed
         local attackRandomizer = self:randomizeAttackDirection(player)
@@ -103,6 +123,7 @@ function c_Animator:create()
         return self:tryMove(dt, player)
     end
 
+    -- Fonction permettant d'amener un peu d'aléatoire sur l'attaque. Permet que les personnages ne se superposent pas trop
     function animator:randomizeAttackDirection(player)
         if (player.character.fight.weaponSlot:getWeaponRange()) then
             local randNumber =
@@ -126,12 +147,14 @@ function c_Animator:create()
         end
     end
 
+    -- Fonction pour changer la velocité en fonction de l'ange connu
     function animator:setVelocity(dt)
         self.velocityX = self.speed * math.cos(self.angle) * (dt * 60)
         self.velocityY = self.speed * math.sin(self.angle) * (dt * 60)
         return self.velocityX, self.velocityY
     end
 
+    -- Fonction pour changer la destination du personnage
     function animator:setDestination(dX, dY)
         self.destinationX, self.destinationY = dX, dY
     end

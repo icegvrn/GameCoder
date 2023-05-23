@@ -1,4 +1,3 @@
-
 -- MODULE QUI PERMET DE CREER UN COLLIDER DE CHARACTER QUI VA VERIFIER SI COLLISION AVEC ARME OU CARTE
 local mapManager = require(PATHS.MAPMANAGER)
 
@@ -13,10 +12,10 @@ end
 function c_Collider:create()
     local collider = {}
 
+    -- Vérifie sur le personnage collide avec un élément (ici weapon)
     function collider:isCharacterCollidedBy(parent, weaponX, weaponY, weaponWidth, weaponHeight)
         local weaponTopRight = weaponX + weaponWidth
         local weaponBottomLeft = weaponY + weaponHeight
-
         local c_state = parent.mode .. "_" .. parent.state
 
         local spriteWidth = parent.sprites.spritestileSheets[c_state]:getWidth() / #parent.sprites.spritesList[c_state]
@@ -34,16 +33,19 @@ function c_Collider:create()
         return false
     end
 
+    -- Vérifie les collision en permanence pour le joueur et la carte en utilisant une fonction spécifique
+    function collider:update(dt, character)
+        self:checkCollisions(character)
+    end
+
+    -- Vérifie s'il y a collision avec la carte si c'est un joueur
     function collider:checkCollisions(character)
         if character.controller.player then
             self:checkPlayerCollisions(character)
         end
     end
 
-    function collider:update(dt, character)
-        self:checkCollisions(character)
-    end
-
+    -- Fonction qui vérifie si y'a collision entre le joueur et la carte
     function collider:checkPlayerCollisions(character)
         local x, y = character.transform:getPosition()
         local w, h = character.sprites:getDimension(character.mode, character.state)

@@ -7,7 +7,6 @@ local mapManager = require(PATHS.MAPMANAGER)
 local CinematicManager = require(PATHS.CINEMATICMANAGER)
 local PlayerManager = require(PATHS.PLAYERMANAGER)
 local EnnemiManager = require(PATHS.ENNEMIMANAGER)
-
 require(PATHS.CONFIGS.CHARACTERS)
 require(PATHS.CONFIGS.WEAPONS)
 local ui = require(PATHS.UIGAME)
@@ -30,30 +29,34 @@ function m_LevelManager:create()
         ennemiManager = self.ennemiManager:create(),
         cinematicManager = self.cinematicManager:create(),
         charactersList = {},
-        exitDoor = nil,
         LEVELSTATE = {start = "start", game = "game", win = "win", currentState = "start"},
         currentLevel = 1,
         isTheGameFinish = false,
         player = nil
     }
 
+    -- Au load, appelle de la fonction d'initiation d'un premier level et enregistrement de la référence joueur
     function levelManager:load(nb)
-        self:createMap(nb)
-        self:spawnCharacters()
+        mapManager:initMap()
+        self:initLevel(nb)
         self.player = self:getPlayer()
     end
 
+    -- Fonction update : change le LEVELSTATE selon situation, voire le GAMESTATE dans le cas de la mort du joueur.
+    -- Si joueur mort, game over. Si state du niveau "start" on joue une cinématique, si level game, on met fin au niveau quand les ennemis sont à 0 et on passe en win
+    -- Sinon on update les ennemis. En level win, après avoir réalisé l'action pour finir le niveau (ici passer une porte), on joue le nextLevel.
+    -- Update de la map et du player dans tous les cas (sauf mort du joueur)
     function levelManager:update(dt)
-        self:updateMap(dt)
-
         if self.player.isDead then
             GAMESTATE.currentState = GAMESTATE.STATE.GAMEOVER
         elseif self.LEVELSTATE.currentState == self.LEVELSTATE.start then
             self.cinematicManager:playLevelCinematic(dt, self)
         elseif self.LEVELSTATE.currentState == self.LEVELSTATE.game then
             if #self.ennemiManager:getEnnemiesList() <= 0 then
-                levelManager:endTheLevel()
-                self.LEVELSTATE.currentState = self.LEVELSTATE.win
+                if self.player.character:getMode() ~= CHARACTERS.MODE.BOOSTED then
+                    levelManager:endTheLevel()
+                    self.LEVELSTATE.currentState = self.LEVELSTATE.win
+                end
             else
                 self:updateCharacters(dt)
             end
@@ -62,10 +65,10 @@ function m_LevelManager:create()
                 levelManager:nextLevel()
             end
         end
-        
         self.player:update(dt)
     end
 
+    -- Fonction qui appelle le draw de mapManager, mais aussi de chaque ennemi et du player via leur manager
     function levelManager:draw()
         mapManager:draw()
         for n = #levelManager.ennemiManager:getEnnemiesList(), 1, -1 do
@@ -74,29 +77,45 @@ function m_LevelManager:create()
         levelManager.playerManager:getPlayer():draw()
     end
 
-    function levelManager:createMap(nb)
-        self.currentLevel = nb
-        mapManager:initMap(self.currentLevel)
-        self.exitDoor = mapManager:getDoor()
+    -- Fonction pour initier un nouveau niveau : on appelle la fonction qui initialise une nouvelle map et on fait spawn les personnages dessus
+    function levelManager:initLevel(nb)
+        self:createMap(nb)
+        self:spawnCharacters()
     end
 
+    -- Fonction qui initialise une nouvelle carte avec un ID.
+    function levelManager:createMap(nb)
+        self.currentLevel = nb
+        mapManager:loadMap(self.currentLevel)
+    end
+
+    -- Fonction qui fait spawn les personnages : le joueur et les ennemis
     function levelManager:spawnCharacters()
         self.playerManager:spawnPlayer(self)
         self.ennemiManager:spawnEnnemies(self, self.playerManager:getPlayer())
     end
 
-    function levelManager:updateMap(dt)
-        mapManager:update(dt)
-    end
-
+    -- Fonction qui appelle les updates des personnages
     function levelManager:updateCharacters(dt)
-        self.playerManager:update(dt)
+        --self.playerManager:update(dt)
         self.ennemiManager:update(dt)
     end
 
+    -- Fonction qui appelle les actions à faire en fin de niveau sur la map et l'ui (ouvrir une porte)
     function levelManager:endTheLevel()
         mapManager:endTheLevel()
         ui:endTheLevel()
+    end
+
+    -- Fonction qui appelle les keypressed sur tous les personnages.
+    -- Raccourci de debug pour passer de niveau plus rapidement.
+    function levelManager.keypressed(key)
+        if key == "m" then
+            levelManager:nextLevel()
+        end
+        for n = 1, #levelManager.charactersList do
+            levelManager.charactersList[n]:keypressed(key)
+        end
     end
 
     function levelManager.setCurrentLevel(nb)
@@ -107,15 +126,7 @@ function m_LevelManager:create()
         return levelManager.currentLevel
     end
 
-    function levelManager.keypressed(key)
-        if key == "m" then
-            levelManager:nextLevel()
-        end
-        for n = 1, #levelManager.charactersList do
-            levelManager.charactersList[n]:keypressed(key)
-        end
-    end
-
+    -- Fonction qui permet de détruire un personnage et une arme de la liste des personnages dans le niveau (et de la liste des ennemis)
     function levelManager.destroyCharacter(character, weapon)
         for n = #levelManager.charactersList, 1, -1 do
             if levelManager.charactersList[n].character == character then
@@ -129,21 +140,25 @@ function m_LevelManager:create()
         end
     end
 
+    -- Fonction qui permet de passer au niveau suivant : s'il y a un niveau suivant, charge une nouvelle carte, charge de nouveaux ennemis.
     function levelManager:nextLevel()
         if levelManager.currentLevel < #levelsConfig then
             levelManager.currentLevel = levelManager.currentLevel + 1
             levelManager.LEVELSTATE.currentState = levelManager.LEVELSTATE.start
-            mapManager:loadMap(levelManager.currentLevel)
-            self.ennemiManager:nextLevel(self, self.player)
+            -- mapManager:loadMap(levelManager.currentLevel)
+            -- self.ennemiManager:nextLevel(self, self.player)
             ui:nextLevel()
             soundManager:endOfLevel()
+            self:initLevel(levelManager.currentLevel)
         end
     end
 
+    -- Fonction qui permet de demander à clear la liste des ennemis
     function levelManager.clearEnnemies()
         self.ennemiManager:clear()
     end
 
+    -- Fonction qui permet de savoir si le jeu est terminé ou non, si le joueur a gagné
     function levelManager.playerWinGame()
         return levelManager.isTheGameFinish
     end

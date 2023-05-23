@@ -16,10 +16,12 @@ gameMusics[3] = PATHS.SOUNDS.MUSICS .. "background_3.wav"
 
 soundManager.currentMusic = love.audio.newSource(startMusic, "static")
 
+-- Load la musique du GameState actuel
 function soundManager.load()
     soundManager:loadMusic(GAMESTATE.currentState)
 end
 
+-- Si le gamestate a changé, on charge la nouvelle musique associé à ce gamestate
 function soundManager.update(dt)
     if soundManager.currentGameState ~= GAMESTATE.currentState then
         soundManager.currentGameState = GAMESTATE.currentState
@@ -28,8 +30,10 @@ function soundManager.update(dt)
 end
 
 function soundManager.draw()
+    -- rien
 end
 
+-- Fonction qui permet de choisir la musique à jouer en fonction du GAMESTATE actuel du jeu
 function soundManager:loadMusic(state)
     if state == GAMESTATE.STATE.START then
         soundManager:playBackgroundMusic(startMusic, 0.6, true)
@@ -46,6 +50,7 @@ function soundManager:loadMusic(state)
     end
 end
 
+-- Fonction qui permet de jouer n'importe quel son avec des paramètres de volume et de loop
 function soundManager:playSound(sound, volume, loop)
     local audio = love.audio.newSource(sound, "static")
     audio:setVolume(volume)
@@ -53,6 +58,7 @@ function soundManager:playSound(sound, volume, loop)
     audio:play()
 end
 
+-- Fonction qui est utilisée dans loadMusic pour lire une musique : elle stop d'abord la musique en cours, puis créé une nouvelle musique
 function soundManager:playBackgroundMusic(sound, volume, loop)
     if soundManager.currentMusic then
         soundManager.currentMusic:stop()
@@ -67,6 +73,13 @@ function soundManager:playBackgroundMusic(sound, volume, loop)
     end
 end
 
+-- Fonction appelée lorsque c'est la fin d'un niveau. Ici joue le son de la porte qui s'ouvre et tir une musique au hasard avec la fonction changeSoundForLevel
+function soundManager:endOfLevel()
+    self:playSound(PATHS.SOUNDS.GAME .. "playerInDoor.wav", 0.5, false)
+    self:changeSoundForLevel()
+end
+
+-- Fonction qui permet de jouer aléatoirement une musique . Utilisé dans le mode game.
 function soundManager:changeSoundForLevel()
     local random = love.math.random(1, #gameMusics)
     local vol = 0.3
@@ -78,11 +91,6 @@ function soundManager:changeSoundForLevel()
         vol = 0.3
     end
     soundManager:playBackgroundMusic(gameMusics[random], vol, true)
-end
-
-function soundManager:endOfLevel()
-    self:playSound(PATHS.SOUNDS.GAME .. "playerInDoor.wav", 0.5, false)
-    self:changeSoundForLevel()
 end
 
 return soundManager

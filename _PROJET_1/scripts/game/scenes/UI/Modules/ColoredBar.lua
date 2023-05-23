@@ -36,6 +36,8 @@ function m_coloredBar:create(
         timer = 0
     }
 
+    -- La fonction update mets à jour à la fois la couleur et la position de la barre, tenant compte du fait qu'elle est attachée au monde ou à l'écran
+    -- ou si elle est mise comme étant "blinkable".
     function coloredBar:update(dt, positionX, positionY)
         coloredBar:updateColor()
 
@@ -48,11 +50,13 @@ function m_coloredBar:create(
         end
     end
 
+    -- Fonction qui met à jour la position.
     function coloredBar:updatePosition(positionX, positionY)
         self.position.x = positionX
         self.position.y = positionY
     end
 
+    -- Fonction qui update la couleur de la barre : fonctionne par seuil. Si la barre passe en dessous/dessus un certain seuil elle change de couleur.
     function coloredBar:updateColor()
         for n = 1, #self.thresholds do
             if self.currentData <= self.thresholds[n] then
@@ -62,6 +66,7 @@ function m_coloredBar:create(
         end
     end
 
+    -- Fonction qui permet de faire passer les infos de data et maxData à mettre à jour dans la barre (maxData = barre à 100% et data = données qui évoluent)
     function coloredBar:updateData(data, maxData)
         self.currentData = data
         self.maxData = maxData
@@ -81,6 +86,9 @@ function m_coloredBar:create(
         love.graphics.setColor(1, 1, 1)
     end
 
+    -- Fonction en update qui vérifie lorsqu'une barre est blinkable si elle doit blinker. Elle le fait lorsqu'elle atteint 100%.
+    -- Si elle est "soundable", elle fait une notification sonore en plus une seule fois.
+    -- Lorsque le barre retombe à zéro, on reset la possibilité de jouer une notification via resetBar()
     function coloredBar:blink(dt)
         if self.currentData == self.maxData then
             if self.isSoundable then
@@ -99,6 +107,7 @@ function m_coloredBar:create(
         end
     end
 
+    -- Fonction qui appelle le soundManager et permet de jouer une notification sonore lorsque la barre est pleine.
     function coloredBar:Soundnotification()
         if self.canPlaySoundNotification then
             soundManager:playSound(PATHS.SOUNDS.GAME .. "boostCharge.wav", 0.5, false)
@@ -106,6 +115,7 @@ function m_coloredBar:create(
         end
     end
 
+    -- Permet de réinitialiser le booléen permettant de lire un son lorsqu'elle atteint pour la première fois 100%
     function coloredBar:resetBar()
         self.canPlaySoundNotification = true
     end

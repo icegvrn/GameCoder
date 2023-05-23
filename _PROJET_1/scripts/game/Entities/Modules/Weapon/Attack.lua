@@ -1,5 +1,4 @@
--- MODULE QUI GERE L'ATTAQUE FAITE PAR QUELQU'UN EN TANT QUE TELLE : DOMMAGE
-
+-- MODULE QUI GERE L'ATTAQUE FAITE PAR QUELQU'UN EN TANT QUE TELLE : DAMAGE, SPEED, QUI EST TOUCHABLE OU PAS...
 Bullets = require(PATHS.MODULES.BULLETS)
 
 local c_Attack = {}
@@ -27,35 +26,19 @@ function c_Attack:create()
         timerIsStarted = false
     }
 
-    function attack:setDamageValue(dmg)
-        self.damage = dmg
-    end
-
-    function attack:setRangedWeapon(bool)
-        self.isRangedWeapon = bool
-    end
-
-    function attack:setWeaponRange(nb)
-        self.weaponRange = nb
-    end
-
-    function attack:setSpeed(pSpeed)
-        self.speed = pSpeed
-        self.timer = pSpeed
-    end
-
+    -- Update de l'attack en appelant la mise à jour les bullets éventuelles et la liste des cibles touchables
     function attack:update(dt, parent)
         self.bullets:update(dt, self, parent)
         self:updateHittableTargets(parent.owner)
     end
 
+    -- Appel le draw des éventuels bullets
     function attack:draw(parent)
         self.bullets:draw(self, parent)
     end
 
+    -- Update la liste des cible que l'attaque peut toucher (nécessaire car liste update avec suppression lors de mort des ennemis)
     function attack:updateHittableTargets(owner)
-        -- Défini qui est touchable par l'arme --
-
         if owner.controller.player then
             if #self.hittableCharacters ~= #levelManager.ennemiManager:getEnnemiesCharacters() then
                 self.hittableCharacters = levelManager.ennemiManager:getEnnemiesCharacters()
@@ -65,7 +48,17 @@ function c_Attack:create()
         end
     end
 
-    function attack:fire(dt, parent, ownerPosition, ownerScale, ownerHandPosition, ownerWeaponScaling, ownerTarget)
+    -- Function d'attaque : si c'est une arme à distance et qu'elle peut tirer (vérifier avec checkIfWeaponCanFire),
+    -- on "fire" une bullet à partir du module bullets, sinon c'est une arme au corps à corps : animation attaque et dégâts
+    function attack:fire(
+        dt,
+        parent,
+        owner,
+        ownerPosition,
+        ownerScale,
+        ownerHandPosition,
+        ownerWeaponScaling,
+        ownerTarget)
         self.isFiring = true
 
         self:checkIfWeaponCanFire(dt)
@@ -85,6 +78,8 @@ function c_Attack:create()
                     ownerWeaponScaling,
                     ownerTarget
                 )
+            else
+                ownerTarget.fight:hit(owner, (parent:getDamage() / 30))
             end
             self.canFire = false
         end
@@ -94,6 +89,8 @@ function c_Attack:create()
         end
     end
 
+    -- Fonction qui permet de mettre des dégâts direct s'il y a collision entre un personnage armée d'un boost
+    -- et un personnage hittable
     function attack:boostedAttack(dt, owner)
         local x, y = owner.transform:getPosition()
         for c = #self.hittableCharacters, 1, -1 do
@@ -103,10 +100,12 @@ function c_Attack:create()
         end
     end
 
+    -- Fonction qui vérifie pour le corps à corps s'il y a collision entre un personnage et une arme
     function attack:isCollide(weaponX, weaponY, weaponWidth, weaponHeight, p_character)
         return p_character.collider:isCharacterCollidedBy(p_character, weaponX, weaponY, weaponWidth, weaponHeight)
     end
 
+    -- Fonction qui vérifie si l'arme peut attaquer à l'aide d'un timer
     function attack:checkIfWeaponCanFire(dt)
         if self.timerIsStarted == false then
             self.timerIsStarted = true
@@ -121,6 +120,24 @@ function c_Attack:create()
                 self.timer = 0
             end
         end
+    end
+
+    -- SETTERS ---
+    function attack:setDamageValue(dmg)
+        self.damage = dmg
+    end
+
+    function attack:setRangedWeapon(bool)
+        self.isRangedWeapon = bool
+    end
+
+    function attack:setWeaponRange(nb)
+        self.weaponRange = nb
+    end
+
+    function attack:setSpeed(pSpeed)
+        self.speed = pSpeed
+        self.timer = pSpeed
     end
 
     return attack

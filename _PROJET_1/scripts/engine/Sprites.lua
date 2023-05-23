@@ -20,12 +20,14 @@ function c_Sprites:create()
         rotationAngle = 0
     }
 
+    -- Dessin du sprite : en fonction de sa direction, rotation et deux index (index 1 = liste contenant les quad, basé sur mode et state, index 2 = id du quad)
     function c_sprite:drawSprite(parent, direction, index, index2)
         if index2 then
             index = index .. "_" .. index2
         end
 
         self:updateSpriteDirection(parent, direction)
+
         local c_spriteID = math.floor(self.currentSpriteId)
 
         love.graphics.setColor(self.color)
@@ -45,6 +47,7 @@ function c_Sprites:create()
         end
     end
 
+    -- Fonction pour mettre à jour l'échelle du sprite selon une direction, pour qu'il "suive"
     function c_sprite:updateSpriteDirection(parent, direction)
         if direction == CONST.DIRECTION.left then
             parent.transform.scale.x = -self.initialScale
@@ -53,10 +56,12 @@ function c_Sprites:create()
         end
     end
 
+    -- Fonction pour mettre à jour la couleur d'un sprite
     function c_sprite:changeSpriteColorTo(color)
         self.color = color
     end
 
+    -- Fonction pour animer un sprite en permanence à partir de sa liste
     function c_sprite:animate(dt, index, index2)
         if index2 then
             index = index .. "_" .. index2
@@ -67,17 +72,22 @@ function c_Sprites:create()
         end
     end
 
+    -- Fonction pour retourner les dimensions du sprite
     function c_sprite:getDimension(index, index2)
         if index2 then
             index = index .. "_" .. index2
         end
+
         local w = self.spritestileSheets[index]:getWidth() / 4
         local h = self.spritestileSheets[index]:getHeight()
+
         return w, h
     end
 
+    -- Fonction pour créer une liste de tableaux de quad
     function c_sprite:setSpritesList(p_table, p_widthNb, p_heightNb)
         local sprites = {}
+
         for k, sprite in pairs(p_table) do
             self.spritestileSheets[k] = sprite
             self.height = sprite:getHeight() / p_heightNb
@@ -87,6 +97,7 @@ function c_Sprites:create()
             local id = 1
 
             local spriteTable = {}
+
             for c = 1, nbColumns do
                 for l = 1, nbLine do
                     spriteTable[id] =
@@ -103,13 +114,16 @@ function c_Sprites:create()
             end
             sprites[k] = spriteTable
         end
+
         self.spritesList = sprites
     end
 
+    -- Changer l'id du sprite courrant dans une liste
     function c_sprite:setCurrentSpriteId(nb)
         self.currentSpriteId = nb
     end
 
+    -- Modifier la rotation de l'angle
     function c_sprite:setAngle(angle)
         self.currentAngle = angle
     end

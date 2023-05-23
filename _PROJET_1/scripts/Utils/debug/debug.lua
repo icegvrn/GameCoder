@@ -1,10 +1,8 @@
--- MODULE QUI PERMET D'AFFICHER DES INFORMATIONS DE DEBUG
+-- MODULE QUI PERMET D'AFFICHER DES INFORMATIONS RESERVEE AU DEBUG
 d_mainCamera = require(PATHS.MAINCAMERA)
 d_Utils = require(PATHS.UTILS)
 d_map = require(PATHS.GAMEMAP)
 debug = {}
-debug.font10 = love.graphics.newFont(10)
-debug.font = debug.font10
 debug.cameraOverlay = false
 debug.playerCoordinates = false
 debug.player = {}
@@ -16,9 +14,7 @@ debug.mouse.position = {}
 debug.mouse.position.x = 0
 debug.mouse.position.y = 0
 
-function debug.load()
-end
-
+-- Update les coordonnées du joueur et de la souris dans le monde
 function debug.update()
     if debug.playerCoordinates then
         debug.player.position.x, debug.player.position.y = levelManager.player.character:getPosition()
@@ -26,12 +22,14 @@ function debug.update()
     end
 end
 
+-- Draw les éléments de débug voulus
 function debug.draw()
-    love.graphics.setFont(debug.font)
+    love.graphics.setFont(UIAll.font10)
     debug.drawCameraDebugOverlay()
     debug.drawPlayerCoordinates()
 end
 
+-- Si debug.cameraOverlay est true, affiche la caméra
 function debug.drawCameraDebugOverlay()
     if debug.cameraOverlay == true then
         local x, y = d_mainCamera:getPosition()
@@ -42,6 +40,7 @@ function debug.drawCameraDebugOverlay()
     end
 end
 
+-- Affiche les coordonnées du player
 function debug.drawPlayerCoordinates()
     local cx, cy = d_mainCamera:getPosition()
     local debugBarSize = 30
@@ -66,6 +65,7 @@ function debug.drawPlayerCoordinates()
     end
 end
 
+-- Setters qui permettent d'agir sur les options de débug voulues
 function debug.setCameraOverlay(bool)
     debug.cameraOverlay = bool
 end
@@ -74,6 +74,15 @@ function debug.setPlayerCoordinates(bool)
     debug.playerCoordinates = bool
 end
 
+function debug.setPlayerCharacter(playerCharacter)
+    debug.playerCharacter = playerCharacter
+end
+
+function debug.setMapEnable(bool)
+    d_map.mapEnable = bool
+end
+
+-- Getters
 function debug.isPlayerCoordinatesTrue()
     return debug.playerCoordinates
 end
@@ -86,12 +95,8 @@ function debug.isMapEnable()
     return d_map.mapEnable
 end
 
-function debug.setPlayerCharacter(playerCharacter)
-    debug.playerCharacter = playerCharacter
-end
-
-function debug.setMapEnable(bool)
-    d_map.mapEnable = bool
+function debug.load()
+    --
 end
 
 return debug

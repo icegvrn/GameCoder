@@ -1,6 +1,4 @@
 -- MODULE PERSONNAGE QUI RASSEMBLE TOUS LES COMPOSANTS D'UN PERSONNAGE
-require(PATHS.CONST)
-utils = require(PATHS.UTILS)
 Transform = require(PATHS.TRANSFORM)
 ennemiAgent = require(PATHS.MODULES.ENNEMIAGENT)
 Fighter = require(PATHS.MODULES.FIGTHER)
@@ -37,20 +35,15 @@ function Character:create()
         sound = self.sound:create()
     }
 
+    -- Fonction d'update des composant du character
     function character:update(dt, parent)
-        self.controller:lookAtRightDirection(dt, self)
+        self.fight:update(dt, self, self.sprites, self.sound, self.controller.target)
+        self.controller:update(dt, parent, self, self.state)
         self.sprites:animate(dt, self.mode, self.state)
-        self.fight.weaponSlot:moveWeapon(dt, self, self.controller.target)
-        if self.fight.isHit then
-            self.fight:hitEvents(dt, self, self.sprites, self.sound)
-        end
-        if self.fight.currentPV <= 0 then
-            self.fight:dyingEvents(dt, self, self.sound)
-        end
         self.collider:update(dt, self)
-        self.controller:update(dt, parent, self.transform.position.x, self.transform.position.y, self.state)
     end
 
+    -- Draw du personnage : arme, personnage et appel au fight pour draw points ou signe d'alerte selon l'état du controller
     function character:draw()
         self.fight:drawWeapon(self.state)
         self.sprites:drawSprite(self, self.controller.lookAt, self.mode, self.state)
@@ -63,40 +56,21 @@ function Character:create()
         end
     end
 
+    -- Function Fire du character qui appelle le fire de Fight + parole aléatoire sur le son
     function character:fire(dt)
         self.fight:fire(dt, self)
         self.sound:randomSpeak()
     end
 
-    function character:destroy()
-        levelManager.destroyCharacter(self, self.fight.weaponSlot.weapon)
-    end
-
+    -- Fonction pour "équiper" le personnage d'une arme : attribue un weapon à la liste des armes dans le fighter
     function character:equip(p_weapon)
         p_weapon:setOwner(self)
         p_weapon:init()
         table.insert(self.fight.weaponSlot.weapon, p_weapon)
     end
 
-    function character:setName(name)
-        self.name = name
-    end
-
-    function character:setPosition(x, y)
-        self.transform.position.x, self.transform.position.y = x, y
-    end
-
-    function character:setSpeed(pSpeed)
-        self.controller.speed = pSpeed
-    end
-
-    function character:setState(state)
-        self.state = state
-        if state == CHARACTERS.STATE.ALERT then
-            self.sound:alertedSound()
-        end
-    end
-
+    -- Fonction pour changer le "mode" du personnage et indiquer au fight ce qu'il doit faire en conséquence
+    -- (changer d'arme et clear les tirs en cours)
     function character:setMode(mode)
         self.mode = mode
         if mode == CHARACTERS.MODE.BOOSTED then
@@ -107,10 +81,38 @@ function Character:create()
         end
     end
 
+    -- Fonction pour attribuer un Agent au controller
     function character:setAgentEnnemi(agent)
         self.controller:setAgentEnnemi(agent)
     end
 
+    -- Function pour supprimer le personnage et son arme de la liste des personnages
+    function character:destroy()
+        levelManager.destroyCharacter(self, self.fight.weaponSlot.weapon)
+    end
+
+    -- Setters principalement utilisés par la CharacterFactory
+    function character:setName(name)
+        self.name = name
+    end
+
+    function character:setSpeed(pSpeed)
+        self.controller.speed = pSpeed
+    end
+
+    -- Fonction setters fréquemment utilisées
+    function character:setPosition(x, y)
+        self.transform.position.x, self.transform.position.y = x, y
+    end
+
+    function character:setState(state)
+        self.state = state
+        if state == CHARACTERS.STATE.ALERT then
+            self.sound:alertedSound()
+        end
+    end
+
+    -- Getters
     function character:getName()
         return self.name
     end

@@ -1,5 +1,4 @@
 -- MODULE QUI PERMET D'APPLIQUER UN OFFSET SUR UNE ARME, CORRESPOND EN GROS AU "MANCHE" DE CELLE-CI
-
 local c_HeldSlot = {}
 local HeldSlot_mt = {__index = c_HeldSlot}
 
@@ -15,6 +14,7 @@ function c_HeldSlot:create()
         idleAngle = 45
     }
 
+    -- Permet de set l'offset à partir d'un array (utilisé par le WeaponManager)
     function heldSlot:setHoldingOffset(array)
         self.holdingOffset.x = array[1]
         self.holdingOffset.y = array[2]

@@ -56,9 +56,9 @@ function CinematicManager:create()
                     uiGame.drawVictory()
                 end
             end
--- Si le timer arrive à la durée voulu, soit c'était la cinématique finale et donc on transmet au LVLmanager fin du jeu
--- Sinon on délock la caméra, on passe les persos en mode normal et non pu cinématique 
--- Et on indique que le level est en mode "game" au lieu de "start"
+            -- Si le timer arrive à la durée voulu, soit c'était la cinématique finale et donc on transmet au LVLmanager fin du jeu
+            -- Sinon on délock la caméra, on passe les persos en mode normal et non pu cinématique
+            -- Et on indique que le level est en mode "game" au lieu de "start"
             if self.timer >= self.lenght then
                 if levelManager.currentLevel == #levelsConfig then
                     self.timer = 0

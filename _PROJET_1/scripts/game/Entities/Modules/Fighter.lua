@@ -1,5 +1,4 @@
 -- MODULE QUI CONTIENT LES CARACTERISTIQUES DE "COMBATTANT" D'UN CHARACTER
-
 PointsUI = require(PATHS.MODULES.POINTSUI)
 Sound = require(PATHS.SOUND)
 WeaponSlot = require(PATHS.MODULES.WEAPONSLOT)
@@ -29,11 +28,27 @@ function c_Fighter:create()
         pointsUI = p_UI:create()
     }
 
+    -- Update des evenements du fighter:  est-ce que le personnage est touché, est-ce qu'il est mort ? 
+    -- Modification de la position de l'arme 
+    function fighter:update(dt, character, sprites, soundModule, target)
+        if self.isHit then
+            self:hitEvents(dt, character, sprites, soundModule)
+        end
+
+        if self.currentPV <= 0 then
+            self:dyingEvents(dt, character, soundModule)
+        end
+
+        self.weaponSlot:moveWeapon(dt, character, target)
+    end
+
+    -- Fonction fire qui appelle celle de weapon
     function fighter:fire(dt, parent)
         local weapon = self.weaponSlot.weapon[self.weaponSlot.currentWeaponId]
         weapon.attack:fire(
             dt,
             weapon,
+            parent,
             parent.transform.position,
             parent.transform.scale,
             self.weaponSlot.handPosition,
@@ -42,6 +57,7 @@ function c_Fighter:create()
         )
     end
 
+    -- Fonction qui met les dégâts : baisse les PV et si c'est le joueur l'attaquant, donne des points au joueur
     function fighter:hit(attacker, damage)
         if self.canBeHurt == true then
             self.isHit = true
@@ -56,6 +72,8 @@ function c_Fighter:create()
         end
     end
 
+    -- Fonction qui permet de jouer un son et coloriser un personnage blessé, avec un timer pour remettre le perso à son état initial
+   -- Elle met également le personnage sur "dead" s'il n'a plus de PV
     function fighter:hitEvents(dt, parent, sprites, soundModule)
         if self.isHit then
             self:hitSound(parent, soundModule)
@@ -77,6 +95,7 @@ function c_Fighter:create()
         end
     end
 
+    -- Fonction qui laisse un petit délai avant de supprimer un personnage quand il meurt pour qu'on puisse voir les points gagnés et entendre le son de mort
     function fighter:dyingEvents(dt, parent, soundModule)
         parent:setState(CHARACTERS.STATE.DEAD)
         self.canBeHurt = false
@@ -88,6 +107,7 @@ function c_Fighter:create()
         end
     end
 
+    -- Fonction qui permet de jouer un son de blessure (blessure joueur ou blessure ennemi selon qui est le controlleur)
     function fighter:hitSound(parent, soundModule)
         if soundModule.playSound == false then
             if self.isHit then
@@ -101,12 +121,14 @@ function c_Fighter:create()
         end
     end
 
+    -- Fonction qui permet de changer l'ID de l'arme que doit tenir le personnage
     function fighter:changeWeapon(nb)
         self.weaponSlot.currentWeaponId = nb
     end
 
+    -- Fonction qui permet de draw les points gagné (utilisé par le joueur)
     function fighter:drawHittingPoints(parent)
-        local font = self.pointsUI.font10
+        local font = UIAll.font10
         if self.isHit then
             local points = self.maxPV / 10
             local pvColor = {1, 1, 1}
@@ -114,7 +136,7 @@ function c_Fighter:create()
             if self.currentPV <= 0 then
                 points = self.maxPV / 2
                 pvColor = {1, 0.9, 0.1}
-                font = self.pointsUI.font15
+                font = UIAll.font15
             end
 
             self.pointsUI:showPoints(
@@ -127,6 +149,7 @@ function c_Fighter:create()
         end
     end
 
+    -- Fonction qui permet de droit un point d'exclamation quand le personnage a repéré un adversaire (utilisé pour ennemis)
     function fighter:drawAlertSign(parent)
         love.graphics.draw(
             self.alertImg,
@@ -138,6 +161,7 @@ function c_Fighter:create()
         )
     end
 
+    -- Fonction qui appelle le draw de l'arme
     function fighter:drawWeapon(state)
         if state ~= CHARACTERS.STATE.DEAD then
             if #self.weaponSlot.weapon ~= 0 then
@@ -146,6 +170,7 @@ function c_Fighter:create()
         end
     end
 
+    -- Setters
     function fighter:setMaxPV(pv)
         self.maxPV = pv
     end

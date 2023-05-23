@@ -1,5 +1,6 @@
-local mapManager = require(PATHS.MAPMANAGER)
 
+-- MODULE QUI GERE LES BALLES QUI ONT ETE TIREES
+local mapManager = require(PATHS.MAPMANAGER)
 local c_Bullets = {}
 local Bullets_mt = {__index = c_Bullets}
 
@@ -23,6 +24,8 @@ function c_Bullets:create()
         self:drawFiredElements(parent, weapon)
     end
 
+    -- Fonction qui permet de tirer une balle depuis la hitbox de l'arme en direction d'une cible et de l'ajouter à un tableau
+    -- Si c'est le joueur, la cible est la souris 
     function bullets:fire(dt, weapon, ownerPosition, ownerScale, ownerHandPosition, ownerWeaponScaling, ownerTarget)
         local pX, pY = weapon.hitBox.position.x, weapon.hitBox.position.y
         local mX, mY = ownerTarget:getPosition()
@@ -43,34 +46,9 @@ function c_Bullets:create()
         table.insert(self.FireList, fire)
     end
 
-    function bullets:updateFiredElements(dt, parent, weapon)
-        if (parent.isRangedWeapon) then
-            if self.FireList then
-                for n = #self.FireList, 1, -1 do
-                    local t = self.FireList[n]
-                    t.x = t.x + t.speed * math.cos(t.angle)
-                    t.y = t.y + t.speed * math.sin(t.angle)
-                    t.lifeTime = t.lifeTime - dt
-
-                    if t.lifeTime <= 0 then
-                        table.remove(self.FireList, n)
-                    elseif mapManager:isThereASolidElement(t.x, t.y, t.size, t.size, c) then
-                        table.remove(self.FireList, n)
-                    else
-                        for c = #parent.hittableCharacters, 1, -1 do
-                            if parent:isCollide(t.x, t.y, t.size, t.size, parent.hittableCharacters[c]) then
-                                parent.hittableCharacters[c].fight:hit(weapon.owner, parent.damage)
-                                table.remove(self.FireList, n)
-                            end
-                        end
-                    end
-                end
-                bullets:AddTrailToBall(dt, self.FireList)
-            end
-        end
-    end
-
-    function bullets:AddTrailToBall(dt)
+       -- Fonction qui permet d'ajouter une trainée à la balle pour un effet "sortilège"
+       -- en ajoutant une sorte de "balle secondaire" toutes les frames, puis disparition si lifetime dépassé
+       function bullets:AddTrailToBall(dt)
         for i = #self.FireList, 1, -1 do
             for n = #self.FireList[i].list_trail, 1, -1 do
                 local t = self.FireList[i].list_trail[n]
@@ -95,6 +73,38 @@ function c_Bullets:create()
         end
     end
 
+    -- Fonction qui permet de mettre à jour la trajectoire de la balle en fonction de sa vélocité.
+    -- Vérifie également si un personnage est touché. Si oui, hit.
+    function bullets:updateFiredElements(dt, parent, weapon)
+        if (parent.isRangedWeapon) then
+            if self.FireList then
+                for n = #self.FireList, 1, -1 do
+                    local t = self.FireList[n]
+                    t.x = t.x + t.speed * math.cos(t.angle)
+                    t.y = t.y + t.speed * math.sin(t.angle)
+                    t.lifeTime = t.lifeTime - dt
+
+                    -- Suppression de la balle si dépasse son lifetime ou collision avec map ou personnage touché.
+                    if t.lifeTime <= 0 then
+                        table.remove(self.FireList, n)
+                    elseif mapManager:isThereASolidElement(t.x, t.y, t.size, t.size, c) then
+                        table.remove(self.FireList, n)
+                    else
+                        for c = #parent.hittableCharacters, 1, -1 do
+                            if parent:isCollide(t.x, t.y, t.size, t.size, parent.hittableCharacters[c]) then
+                                parent.hittableCharacters[c].fight:hit(weapon.owner, parent.damage)
+                                table.remove(self.FireList, n)
+                            end
+                        end
+                    end
+                end
+                -- On met également à jour sa trainée.
+                bullets:AddTrailToBall(dt, self.FireList)
+            end
+        end
+    end
+
+    -- Draw de chaque balles et ses trainées
     function bullets:drawFiredElements(parent, weapon)
         if (parent.isRangedWeapon) then
             if self.FireList then
@@ -121,6 +131,7 @@ function c_Bullets:create()
         end
     end
 
+    -- Fonction permettant de clear les projectiles
     function bullets:clear()
         for n = #self.FireList, 1, -1 do
             table.remove(self.FireList, n)

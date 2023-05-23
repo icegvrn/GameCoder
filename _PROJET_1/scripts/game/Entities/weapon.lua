@@ -1,5 +1,4 @@
-
--- ENTITE ARME, COMPREND LES COMPOSANTS QUI FONT UNE ARME : SPRITES, ATTACK... 
+-- ENTITE ARME, COMPREND LES COMPOSANTS QUI FONT UNE ARME : SPRITES, ATTACK...
 Transform = require(PATHS.TRANSFORM)
 Sound = require(PATHS.SOUND)
 HeldSlot = require(PATHS.MODULES.HELDSLOT)
@@ -56,10 +55,10 @@ function Weapon:create()
     function weapon:draw()
         self:drawWeapon()
         self.attack:draw(self)
-        -- self.hitBox:draw()
+        self.hitBox:draw()
     end
 
-    -- Draw du sprite de l'arme a proprement parlé en fonction de l'arme actuelle 
+    -- Draw du sprite de l'arme a proprement parlé en fonction de l'arme actuelle, avec un sin pour une animation d'attaque
     function weapon:drawWeapon()
         if (self.sprites.spritesList[1][self.sprites.currentSpriteId] ~= nil) then
             love.graphics.draw(

@@ -19,6 +19,7 @@ function ennemiAgent:create()
         ennemi.animator:init(ennemi)
     end
 
+    -- Update l'IA ennemi : marche si IDLE, patrouille si marche, est chase si est alerté, et attaque si a porté
     function ennemiAgent:update(dt, ennemi, positionX, positionY, currentState)
         local x, y = positionX, positionY
         targetX, targetY = ennemi.character.controller.target:getPosition()
@@ -35,11 +36,15 @@ function ennemiAgent:create()
         end
     end
 
+    -- Fonction pour faire marcher l'ennemi jusqu'à un point random
     function ennemiAgent:walkToRandomPoint(dt, ennemi)
         ennemi.animator:chooseARandomPoint(dt, ennemi)
         ennemi.character:setState(CHARACTERS.STATE.WALKING)
     end
 
+    -- Fonction pour faire patrouiller l'ennemi : s'il parvient à bouger et qu'il n'est pas en cinématique
+    -- il reste en attente de trouver un joueur à attaquer, sinon c'est qu'il a heurté quelque chose et il
+    -- repasse en mode IDLE pour choisir un nouvel endroit où se rendre
     function ennemiAgent:patrol(dt, ennemi, distance)
         if ennemi.animator:tryMove(dt, ennemi) then
             if ennemi.character.controller:isInCinematicMode() == false then
@@ -50,6 +55,8 @@ function ennemiAgent:create()
         end
     end
 
+    -- Fonction de recherche de joueur a attaqué : on compare son range à la distance qui le sépare du joueur
+    -- Si c'est plus petit pendant une certaine durée, il passe en alert
     function ennemiAgent:lookingForTarget(dt, ennemi, distance)
         if distance <= ennemiAgent.range then
             if ennemiAgent.timerIsStarted == false then
@@ -65,8 +72,11 @@ function ennemiAgent:create()
         end
     end
 
+    -- Fonction de chase utilisée en alert. S'il réussit à poursuivre le héros, soit il atteint son objectif
+    -- et se trouve à portée et passe en mode attaque (fire), soit le joueur parvient à le semer, donc il
+    -- repasse en IDLE quand le joueur n'est plus à portée
+    -- S'il ne parvient pas à chase, c'est qu'il a heurté quelque chose, il repasse en IDLE
     function ennemiAgent:chase(dt, ennemi, distance, targetX, targetY)
-        -- VERIFIER SI JE PERDS DE VUE LE HEROS
         if ennemi.animator:chase(dt, ennemi, targetX, targetY) then
             if ennemi.character.fight.weaponSlot:getWeaponRange() then
                 if distance <= ennemi.character.fight.weaponSlot:getWeaponRange() then
@@ -80,20 +90,15 @@ function ennemiAgent:create()
         end
     end
 
+    -- Fonction d'attaque quand il est en mode fire : s'il a une arme et que la distance entre le joueur et le range
+    -- de l'arme est suffisant, il attaque, sinon il repasse en ALERT.
     function ennemiAgent:attack(dt, ennemi, distance)
         if ennemi.character.fight.weaponSlot:getWeaponRange() then
             if distance > ennemi.character.fight.weaponSlot:getWeaponRange() then
                 ennemi.character:getCurrentWeapon().attack.isFiring = false
-                ennemi.character:setState(CHARACTERS.STATE.IDLE)
+                ennemi.character:setState(CHARACTERS.STATE.ALERT)
             else
                 ennemi.character:fire(dt)
-                --- A METTRE DANS WEAPON
-                if ennemi.character:getCurrentWeapon():getIsRangedWeapon() == false then
-                    ennemi.character.controller.target.fight:hit(
-                        ennemi.character,
-                        (ennemi.character:getCurrentWeapon():getDamage() * dt) / 30
-                    )
-                end
             end
         end
     end

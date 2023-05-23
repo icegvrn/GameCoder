@@ -1,3 +1,5 @@
+-- MODULE QUI GERE LES INPUT CONSACREE AU DEBUG
+
 debug = require(PATHS.DEBUG)
 
 debugManager = {}
@@ -6,10 +8,12 @@ debugManager.debugger = true
 function debugManager.load()
 end
 
+-- Update du module debug
 function debugManager.update(dt)
     debug.update(dt)
 end
 
+-- Permet d'activer ou désactiver des élémnets de debug selon la touche utilisée
 function debugManager.keypressed(key)
     if debugManager.debugger then
         if key == "1" then
@@ -38,6 +42,7 @@ function debugManager.keypressed(key)
     end
 end
 
+-- Draw le module debug
 function debugManager.draw()
     debug.draw()
 end

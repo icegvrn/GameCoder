@@ -9,25 +9,28 @@ mainCamera = {
     smooth = 0.1,
     target = nil,
     targetX = 0,
-    targetY = 0
+    targetY = 0,
+    destX = 0,
+    destY = 0
 }
 
-destX = 0
-destY = 0
-
+-- Intialisation de la cible que la caméra va devoir suivre
 function mainCamera.follow(target)
     mainCamera.originalTarget = target
     mainCamera.target = target
 end
 
+-- Récupération de la position actuelle de la cible et calcul du translate à effectuer
 function mainCamera.update(dt)
     mainCamera.targetX, mainCamera.targetY = mainCamera.target:getPosition()
-    destX, destY = mainCamera:calcSmoothDestination(dt)
+    mainCamera.destX, mainCamera.destY = mainCamera:calcSmoothDestination(dt)
 end
 
+-- Draw du translate une fois calculé 
 function mainCamera.draw()
-    love.graphics.translate(-destX, -destY)
+    love.graphics.translate(-mainCamera.destX, -mainCamera.destY)
 end
+
 
 function mainCamera:getPosition()
     -- Pour qu'elle s'appuie sur-elle même quand elle est en mode lock
@@ -42,8 +45,9 @@ function mainCamera:getPosition()
     end
 end
 
+-- Fonction permettant de lock la caméra en changeant sa cible : soit la cible originale (ici le joueur)
+-- soit elle est sur elle-même, donc elle ne bouge pas
 function mainCamera.lock(bool)
-    print(bool)
     if bool then
         mainCamera.target = mainCamera
         mainCamera.isLocked = true
@@ -53,15 +57,18 @@ function mainCamera.lock(bool)
     end
 end
 
+-- Calcul la destination de la caméra à chaque frame de façon smooth
 function mainCamera:calcSmoothDestination(dt)
     if self.target ~= nil then
-        local destX = self.targetX - (love.graphics.getWidth() / 2) - self.x
-        local destY = self.targetY - (love.graphics.getHeight() / 2) - self.y
+        -- On soustrait la cible à la position actuelle, ainsi que le centre de l'écran pour voir la cible au milieu
+        local destX = self.targetX - (Utils.screenWidth / 2) - self.x
+        local destY = self.targetY - (Utils.screenHeight / 2) - self.y
 
+        -- On calcul la position suivante via un calcul de vélocité
         self.x = self.x + (destX / self.smooth) * dt
         self.y = self.y + (destY / self.smooth) * dt
 
-        return math.ceil(self.x), math.ceil(self.y)
+        return math.floor(self.x), math.floor(self.y)
     end
 end
 

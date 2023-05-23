@@ -2,11 +2,13 @@
 local m_gameMap = {}
 local GameMap_mt = {__index = m_gameMap}
 
+-- Création de l'instance gameMap
 function m_gameMap.new()
     local gameMap = {}
     return setmetatable(gameMap, GameMap_mt)
 end
 
+-- Création d'une nouvelle carte
 function m_gameMap:create()
     local gameMap = {
         currentMap = {},
@@ -15,26 +17,19 @@ function m_gameMap:create()
         mapEnable = true
     }
 
+    -- Fonction pour récupérer la bonne carte et ses données via un index et un fichier de configuration
+    -- de map (mapList)
     function gameMap:setMapTo(list, mapNb)
         self.map = require(list[mapNb])
         self.data = {}
-        if self.map.layers[1] then
-            self.data[1] = self.map.layers[1].data
-        end
-        if self.map.layers[2] then
-            self.data[2] = self.map.layers[2].data
-        end
-        if self.map.layers[3] then
-            self.data[3] = self.map.layers[3].data
-        end
-        if self.map.layers[4] then
-            self.data[4] = self.map.layers[4].data
-        end
-        if self.map.layers[5] then
-            self.data[5] = self.map.layers[5].data
+        for n = 1, 5 do
+            if self.map.layers[n] then
+                self.data[n] = self.map.layers[n].data
+            end
         end
     end
 
+    -- Fonction qui créée les quads de tiles en fonction des données récupérées
     function gameMap:loadMap()
         local nbColumns = self.tileSheet:getWidth() / self.map.tilewidth
         local nbLine = self.tileSheet:getHeight() / self.map.tileheight
@@ -56,6 +51,7 @@ function m_gameMap:create()
         end
     end
 
+    -- Draw des tiles de la carte : pour chaque layer, on draw les tiles
     function gameMap:draw()
         if gameMap.mapEnable then
             for i = 1, #self.data do
@@ -66,6 +62,7 @@ function m_gameMap:create()
         end
     end
 
+    -- Draw des tiles de la carte sur un layer (i)
     function gameMap:drawTiles(i)
         for l = 1, self.map.height do
             for c = 1, self.map.width do
@@ -85,10 +82,7 @@ function m_gameMap:create()
         end
     end
 
-    function gameMap:getName()
-        return self.map.layers[3].name
-    end
-
+    -- Pour le debug : affiche visuellement le contenu des cellules d'un layer en particulier
     function gameMap:debug(nb)
         if i == nb then
             local x = (c - 1) * self.map.tilewidth

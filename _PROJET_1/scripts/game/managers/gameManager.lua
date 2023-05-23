@@ -1,12 +1,11 @@
 -- Chargement des modules
-soundManager = require(PATHS.SOUNDMANAGER)
-uiManager = require(PATHS.UIMANAGER)
 GAMESTATE = require(PATHS.GAMESTATE)
 debug = require(PATHS.DEBUG)
 require(PATHS.GAMEMAP)
 
-gameManager = {}
-
+gameManager = {
+    currentState = nil
+}
 gameManager.scenes = {
     start = require(PATHS.START),
     narrative = require(PATHS.NARRATIVE),
@@ -16,22 +15,14 @@ gameManager.scenes = {
     win = require(PATHS.WIN)
 }
 
-gameManager.currentState = gameManager.scenes.start
-
-function gameManager.debug(string)
-    print("GameManager : " .. string .. "")
-end
-
+--
 function gameManager.load()
-    gameManager.scenes.start:load()
-    uiManager.load()
-    soundManager:load()
+    gameManager.currentState = gameManager.scenes.start
+    gameManager.currentState:load()
 end
 
+-- Le GameManager charge le bon fichier .lua de en fonction de la scène
 function gameManager.update(dt)
-    uiManager.update(dt)
-    soundManager.update(dt)
-
     for sceneName, scene in pairs(gameManager.scenes) do
         if sceneName == GAMESTATE.currentState then
             if gameManager.currentState ~= scene then
@@ -42,18 +33,17 @@ function gameManager.update(dt)
             end
         end
     end
-
     gameManager.currentState:update(dt)
 end
 
+-- Draw du bon fichier scene LUA
 function gameManager.draw()
     gameManager.currentState:draw()
-    uiManager.draw()
 end
 
+-- Keypressed du bon fichier scene LUA
 function gameManager.keypressed(key)
     gameManager.currentState:keypressed(key)
-    uiManager.keypressed(key)
 end
 
 return gameManager

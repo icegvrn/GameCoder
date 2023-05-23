@@ -16,6 +16,8 @@ function c_WeaponSlot:create()
         weaponScaling = 1
     }
 
+    -- Fonction qui va appeler le move de l'arme en appliquant une transformation donnée par le personnage
+    -- Appelle l'update de Weapon
     function weaponSlot:moveWeapon(dt, parent, target)
         self.handPosition.x = parent.transform.position.x + (self.handOffset.x * parent.transform.scale.x)
         self.handPosition.y = parent.transform.position.y + self.handOffset.y
@@ -32,6 +34,12 @@ function c_WeaponSlot:create()
         end
     end
 
+    -- FOnction qui appelle le clear des bullets, utilisée quand on change d'arme notamment
+    function weaponSlot:clearFiringElements()
+        self.weapon[self.currentWeaponId].attack.bullets:clear()
+    end
+
+    -- Setters
     function weaponSlot:setHandOffset(array)
         self.handOffset.x = array[1]
         self.handOffset.y = array[2]
@@ -41,10 +49,7 @@ function c_WeaponSlot:create()
         self.weaponScaling = sc
     end
 
-    function weaponSlot:clearFiringElements()
-        self.weapon[self.currentWeaponId].attack.bullets:clear()
-    end
-
+    -- Getters
     function weaponSlot:getWeaponRange()
         if #self.weapon ~= 0 then
             return self.weapon[self.currentWeaponId]:getWeaponRange()
