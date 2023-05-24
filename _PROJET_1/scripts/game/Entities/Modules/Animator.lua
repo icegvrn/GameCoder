@@ -75,7 +75,7 @@ function c_Animator:create()
         self.angle = Utils.angle(x, y, self.destinationX, self.destinationY)
     end
 
-    -- Function qui permet au personnage d'essayer d'avancer. Il y parvient si pas de collision (boolean canMove modifié par le composant collider)
+    -- Function qui permet au personnage d'essayer d'avancer. Il y parvient si pas de collision (boolean canMove modifié par le composant)
     function animator:tryMove(dt, player)
         local initialPositionX, initialPositionY = player.character.transform:getPosition()
         local ennemiWidth, ennemiHeight =

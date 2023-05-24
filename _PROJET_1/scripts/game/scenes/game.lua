@@ -12,6 +12,7 @@ local isLoaded = false
 
 -- Au load, on charge le levelManager en lui demandant la carte 1. On indique à la caméra qu'elle doit suivre le personnage joueur, puis que cette scène a été chargée une fois.
 function game:load()
+    ui:load()
     levelManager:load(1)
     camera.follow(levelManager:getPlayer().character)
     isLoaded = true

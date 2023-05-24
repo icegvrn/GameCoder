@@ -14,10 +14,8 @@ function c_PlayerInput:create()
     -- sinon on le met à sa dernière position connue, puis on bouge le perso.
     -- Si le joueur utilise "action1" dans ses contrôles, on appelle la fonction Fire du personnage.
     function playerInput:update(dt, player)
-        if player.character.controller.canMove then
+        if player.character.controller.canMove or player.character.controller.isCinematicMode then
             player.lastX, player.lastY = player.character.transform:getPosition()
-        else
-            player.character.transform:setPosition(player.lastX, player.lastY)
         end
 
         self:move(dt, player)

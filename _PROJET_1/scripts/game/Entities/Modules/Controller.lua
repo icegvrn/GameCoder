@@ -1,4 +1,4 @@
--- MODULE QUI GERE LE CONTROLE DU PERSONNAGE : EST-IL CONTROLLE PAR IA OU INPUT, EST-IL EN CINEMATIQUE ? 
+-- MODULE QUI GERE LE CONTROLE DU PERSONNAGE : EST-IL CONTROLLE PAR IA OU INPUT, EST-IL EN CINEMATIQUE ?
 -- DANS QUEL DIRECTION VA-T-IL ALLER ?
 
 local mapManager = require(PATHS.MAPMANAGER)
@@ -46,7 +46,7 @@ function c_Controller:create()
         end
     end
 
-    -- Update l'IA ennemi si le controller a un ia ennemi, update la direction dans laquelle il doit regarder 
+    -- Update l'IA ennemi si le controller a un ia ennemi, update la direction dans laquelle il doit regarder
     function controller:update(dt, entity, character, characterState)
         if self.ennemiAgent then
             self.ennemiAgent:update(
@@ -67,14 +67,12 @@ function c_Controller:create()
         end
     end
 
-       -- Fonction qui permet de modifier le bool cinématique et qui replace le character un peu hors de l'écran près de la porte pour la cinématique si joueur
-       function controller:setInCinematicMode(parent, bool)
+    -- Fonction qui permet de modifier le bool cinématique et qui replace le character un peu hors de l'écran près de la porte pour la cinématique si joueur
+    function controller:setInCinematicMode(parent, bool)
         self.isCinematicMode = bool
         if self.player and bool then
-            parent.transform:setPosition(
-                -10,
-                (mapManager:getCurrentMap().height * mapManager:getCurrentMap().tileheight / 2)
-            )
+            local mapWidth, mapHeight = mapManager:getMapDimension()
+            parent.transform:setPosition(-10, (mapHeight / 2))
         end
     end
 
@@ -99,7 +97,6 @@ function c_Controller:create()
     function controller:getSpeed()
         return self.speed
     end
-
 
     function controller:isInCinematicMode()
         return self.isCinematicMode

@@ -155,7 +155,6 @@ function m_LevelManager:create()
             if levelManager.currentLevel == #levelsConfig then
                 ui:setPlayInformations(false)
             end
-        else
         end
     end
 

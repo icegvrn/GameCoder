@@ -18,7 +18,7 @@ uiGame.playInformations = true
 
 -- Modifie la couleur de fond lorsqu'on est en mode jeu
 function uiGame:load()
-    love.graphics.setBackgroundColor(0.08, 0.06, 0.05)
+    love.graphics.setBackgroundColor(0.1, 0.09, 0.07)
 end
 
 -- Draw d'un timer sur le jeu et du nombre d'ennemis restants dans chaque niveau.
