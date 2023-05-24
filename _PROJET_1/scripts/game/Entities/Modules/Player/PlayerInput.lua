@@ -81,7 +81,11 @@ function c_PlayerInput:create()
                 x = x + velocityX
             end
 
-            player.character.transform:setPosition(x, y)
+            player.character.collider:setNextMove(player.character, x, y)
+
+            if player.character.controller.canMove then
+                player.character.transform:setPosition(x, y)
+            end
         elseif player.character:getState() == CHARACTERS.STATE.WALKING or player.character:getMode() ~= lastMode then
             player.character:setState(CHARACTERS.STATE.IDLE)
             lastMode = player.character:getMode()

@@ -71,30 +71,27 @@ function c_Animator:create()
         local maxDestinationX, maxDestinationY = mapManager:getMapDimension()
         self.destinationX = love.math.random(0, maxDestinationX)
         self.destinationY = love.math.random(0, maxDestinationY)
-        -- Détermine l'angle que doit prendre le personnage 
+        -- Détermine l'angle que doit prendre le personnage
         self.angle = Utils.angle(x, y, self.destinationX, self.destinationY)
     end
 
-    -- Function qui permet au personnage d'essayer d'avancer. Il y parvient si pas de collision
+    -- Function qui permet au personnage d'essayer d'avancer. Il y parvient si pas de collision (boolean canMove modifié par le composant collider)
     function animator:tryMove(dt, player)
-        
         local initialPositionX, initialPositionY = player.character.transform:getPosition()
         local ennemiWidth, ennemiHeight =
             player.character.sprites:getDimension(player.character.mode, player.character.state)
         local newPositionX = initialPositionX + self.velocityX
         local newPositionY = initialPositionY + self.velocityY
-
-        -- Appel le map manager pour vérifier si collision
-        if (mapManager:isThereASolidElement(newPositionX, newPositionY, ennemiWidth, ennemiHeight)) == false then
+        player.character.collider:setNextMove(player.character, newPositionX, newPositionY)
+        if player.character.controller.canMove then
             self:move(dt, player, newPositionX, newPositionY)
             return true
         else
-            -- self:move(dt, player, self.lastPositionX, self.lastPositionY)
             return false
         end
     end
 
-    -- Fonction pour bouger le personnage : on update sa direction et aussi sa position. 
+    -- Fonction pour bouger le personnage : on update sa direction et aussi sa position.
     -- Petit temps de latence ajouté sur la direction pour pas que le personnage se retourne sans cesse lorsque le choix est border
     function animator:move(dt, player, newPositionX, newPositionY)
         if newPositionX - self.lastTurningPositionX > 2 or newPositionX - self.lastTurningPositionX < -2 then
@@ -114,7 +111,7 @@ function c_Animator:create()
         self.lastTurningPositionX = self.lastPositionX
     end
 
-    -- Fonction qui appel les fonction nécessaire pour le mode poursuite quand le personnage est alert: 
+    -- Fonction qui appel les fonction nécessaire pour le mode poursuite quand le personnage est alert:
     -- Change la vitesse du perso, ajoute un peu d'aléatoire sur son angle d'attaque puis essaie de bouger
     function animator:chase(dt, player, targetX, targetY)
         self.speed = self.boostedSpeed

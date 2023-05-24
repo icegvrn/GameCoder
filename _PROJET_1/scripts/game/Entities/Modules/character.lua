@@ -40,7 +40,6 @@ function Character:create()
         self.fight:update(dt, self, self.sprites, self.sound, self.controller.target)
         self.controller:update(dt, parent, self, self.state)
         self.sprites:animate(dt, self.mode, self.state)
-        self.collider:update(dt, self)
     end
 
     -- Draw du personnage : arme, personnage et appel au fight pour draw points ou signe d'alerte selon l'état du controller

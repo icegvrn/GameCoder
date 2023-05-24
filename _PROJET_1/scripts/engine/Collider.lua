@@ -10,50 +10,58 @@ function c_Collider.new()
 end
 
 function c_Collider:create()
-    local collider = {}
+    local collider = {
+        nextMoveX = 0,
+        nextMoveY = 0,
+        lastMoveKnowX = 0,
+        lastMoveKnowY = 0
+    }
 
-    -- Vérifie sur le personnage collide avec un élément (ici weapon)
-    function collider:isCharacterCollidedBy(parent, weaponX, weaponY, weaponWidth, weaponHeight)
-        local weaponTopRight = weaponX + weaponWidth
-        local weaponBottomLeft = weaponY + weaponHeight
-        local c_state = parent.mode .. "_" .. parent.state
+    -- Fonction raccourcie pour les collisions avec les personnages
+    function collider:isCharacterCollidedBy(character, elemX, elemY, elemWidth, elemHeight)
+        local weaponTopRight = elemX + elemWidth
+        local weaponBottomLeft = elemY + elemHeight
+        local c_state = character.mode .. "_" .. character.state
+        local spriteWidth =
+            character.sprites.spritestileSheets[c_state]:getWidth() / #character.sprites.spritesList[c_state]
+        local spriteHeight = character.sprites.spritestileSheets[c_state]:getHeight()
 
-        local spriteWidth = parent.sprites.spritestileSheets[c_state]:getWidth() / #parent.sprites.spritesList[c_state]
-        local spriteHeight = parent.sprites.spritestileSheets[c_state]:getHeight()
-
-        if
-            weaponX > parent.transform.position.x + spriteWidth / 2 or weaponTopRight < parent.transform.position.x or
-                weaponY > parent.transform.position.y + spriteHeight / 2 or
-                weaponBottomLeft < parent.transform.position.y
-         then
-            return false
-        else
-            return true
-        end
-        return false
+        return Utils.isCollision(
+            elemX,
+            elemY,
+            elemWidth,
+            elemHeight,
+            character.transform.position.x,
+            character.transform.position.y,
+            spriteWidth,
+            spriteHeight
+        )
     end
 
-    -- Vérifie les collision en permanence pour le joueur et la carte en utilisant une fonction spécifique
-    function collider:update(dt, character)
-        self:checkCollisions(character)
-    end
-
-    -- Vérifie s'il y a collision avec la carte si c'est un joueur
+    -- Vérifie s'il y a collision avec la carte
     function collider:checkCollisions(character)
-        if character.controller.player then
-            self:checkPlayerCollisions(character)
+        self:checkCollisionWithMap(character)
+    end
+
+    -- Fonction qui vérifie si y'a collision entre un personnage et la carte
+    function collider:checkCollisionWithMap(character)
+        if self.nextMoveX ~= self.lastMoveKnowX or self.nextMoveY ~= self.lastMoveKnowY then
+            local x, y = character.transform:getPosition()
+            local w, h = character.sprites:getDimension(character.mode, character.state)
+            if (mapManager:isThereASolidElement(self.nextMoveX, self.nextMoveY, w, h, character)) then
+                character.controller.canMove = false
+            else
+                character.controller.canMove = true
+            end
+            lastMoveKnowX = self.nextMoveX
+            lastMoveKnowY = self.nextMoveY
         end
     end
 
-    -- Fonction qui vérifie si y'a collision entre le joueur et la carte
-    function collider:checkPlayerCollisions(character)
-        local x, y = character.transform:getPosition()
-        local w, h = character.sprites:getDimension(character.mode, character.state)
-        if (mapManager:isThereASolidElement(x, y, w, h, character)) then
-            character.controller.canMove = false
-        else
-            character.controller.canMove = true
-        end
+    function collider:setNextMove(character, x, y)
+        self.nextMoveX = x
+        self.nextMoveY = y
+        self:checkCollisionWithMap(character)
     end
 
     return collider
