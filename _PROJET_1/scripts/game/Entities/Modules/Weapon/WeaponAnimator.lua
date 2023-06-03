@@ -110,7 +110,7 @@ function c_WeaponAnimator.create()
 
     -- Fonction pour lire une animation d'attaque en modifiant l'angle de l'arme (qui est lui par un sin qui permet une impression de va et vient)
     function weaponAnimator:playattackAnimation(dt, parent)
-        parent.sprites.rotationAngle = parent.sprites.rotationAngle + parent.attack.speed * 10 * dt
+        parent.sprites.rotationAngle = parent.sprites.rotationAngle + (20 * dt) / (parent.attack.speed * 4)
     end
 
     return weaponAnimator

@@ -19,6 +19,13 @@ function win:isAlreadyLoaded()
     return isLoaded
 end
 
+-- Permet avec escape de recommencer le jeu
+function win:keypressed(key)
+    if key == "escape" then
+        love.event.quit("restart")
+    end
+end
+
 function win:update(dt)
     --
 end

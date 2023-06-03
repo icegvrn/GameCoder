@@ -1,4 +1,4 @@
-PATHS = require("scripts/configs/PATHS")
+PATHS = require("scripts/Configs/PATHS")
 CONST = require(PATHS.CONST)
 UIAll = require(PATHS.UIALL)
 Utils = require(PATHS.UTILS)

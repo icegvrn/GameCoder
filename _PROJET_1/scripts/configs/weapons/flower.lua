@@ -1,8 +1,8 @@
 flower = {}
 
 flower.name = WEAPONS.TYPE.FLOWER
-flower.damageValue = 5
-flower.speed = 4
+flower.damageValue = 2
+flower.speed = 0.2
 flower.range = 7
 flower.isRangedWeapon = false
 flower.holdingOffset = {-15, 0}

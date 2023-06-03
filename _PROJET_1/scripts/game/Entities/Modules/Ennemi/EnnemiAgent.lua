@@ -11,7 +11,7 @@ end
 
 function ennemiAgent:create()
     local ennemiAgent = {}
-    ennemiAgent.range = love.math.random(10, 20)
+    ennemiAgent.range = love.math.random(10, 30)
     ennemiAgent.timer = 0
     ennemiAgent.timerIsStarted = false
 

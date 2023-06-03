@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CasseBrique": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\Simon\\Documents\\Cours\\GameCoder\\Monogame\\Briques\\CasseBrique\\CasseBrique\\bin\\Debug\\net6.0"
+    }
+  }
+}

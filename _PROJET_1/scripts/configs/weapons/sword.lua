@@ -1,8 +1,8 @@
 sword = {}
 
 sword.name = WEAPONS.TYPE.SWORD
-sword.damageValue = 15
-sword.speed = 1
+sword.damageValue = 5
+sword.speed = 0.4
 sword.range = 7
 sword.isRangedWeapon = false
 sword.holdingOffset = {-20, 0}

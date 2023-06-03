@@ -62,14 +62,12 @@ function EnnemiManager:create()
 
     -- Fonction permettant de trouver un point de spawn valide
     function ennemiManager:findSpawnPoint(mapManager, mapWidth, mapHeight, c_w, c_h)
-        local pX = love.math.random(0, mapWidth)
-        local pY = love.math.random(0, mapHeight)
         local spawnFounded = false
 
         -- Une boucle qui cherche un point de spawn sur la taille de la carte où il n'y a ni collision,
         -- ni absence de sol elle n'a de return true que si elle en trouve un
         while spawnFounded == false do
-            pX = love.math.random(0, mapWidth)
+            pX = love.math.random(200, mapWidth)
             pY = love.math.random(0, mapHeight)
 
             if

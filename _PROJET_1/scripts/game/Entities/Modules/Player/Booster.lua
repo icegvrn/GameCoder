@@ -42,8 +42,6 @@ function c_Booster:create()
             character:setMode(CHARACTERS.MODE.BOOSTED)
             self:init(character)
             character.sound:playBoostedSound()
-        else
-            character:setMode(CHARACTERS.MODE.NORMAL)
         end
     end
 
