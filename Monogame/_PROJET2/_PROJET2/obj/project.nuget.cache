@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "3gxnB4701IKm8Z8zJNK/7L9/aO8QeZ/p9YevXWQ9exWQZTcxQw8ttGNbegULuWlqREWku8e9o77fNUa8YnvZ2A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Simon\\Documents\\Cours\\GameCoder\\Monogame\\_PROJET2\\_PROJET2\\BricksGame.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Simon\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
+    "C:\\Users\\Simon\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512"
+  ],
+  "logs": []
+}

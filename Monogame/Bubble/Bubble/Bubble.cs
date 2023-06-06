@@ -1,16 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+
 
 
 namespace Bubble
@@ -39,8 +31,10 @@ namespace Bubble
             _spriteBatch.Draw(myBubbleSprite, myBubblePosition, bubbleColor);
         }
 
-        public void moveBubble(GraphicsDevice graphics)
+        public void moveBubble()
         {
+            GraphicsDevice graphics = ServiceLocator.GetService<GraphicsDevice>();
+
             if (myBubblePosition.X + myBubbleDirection.X < 0 || myBubblePosition.X + myBubbleDirection.X + myBubbleSprite.Width > graphics.Viewport.Width || myBubblePosition.Y + myBubbleDirection.Y < 0 || myBubblePosition.Y + myBubbleDirection.Y + myBubbleSprite.Height > graphics.Viewport.Height)
             {
                 findNewDirection();
@@ -63,6 +57,7 @@ namespace Bubble
 
         public virtual void findNewDirection()
         {
+          
             Random rand = new Random();
             int x = rand.Next(0, 2);
             int y = rand.Next(0, 2);

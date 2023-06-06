@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/ball.png</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/button_hover.png</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/button.png</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/cool.mp3</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/explode.wav</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/font.spritefont</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/brick.png</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/brickBreak.png</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/catapult.png</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/pad.png</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/ship.png</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/techno.mp3</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

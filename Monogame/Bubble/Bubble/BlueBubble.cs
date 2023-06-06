@@ -2,10 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Bubble
 {
@@ -23,6 +20,7 @@ namespace Bubble
 
         public override void findNewDirection()
         {
+
             Random rand = new Random();
             int x = rand.Next(0, 2);
             int y = rand.Next(0, 2);

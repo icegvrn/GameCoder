@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -27,7 +28,9 @@ namespace Bubble
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _bubbleList = new BubbleList();
-            _bubbleList.initBubbles(this.GraphicsDevice, this.Content, 25, 100, 13);
+            ServiceLocator.RegisterService(this.Content);
+            ServiceLocator.RegisterService(this.GraphicsDevice);
+            _bubbleList.initBubbles(25, 100, 13);
 
         }
 
@@ -35,7 +38,7 @@ namespace Bubble
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            _bubbleList.MoveAllBubble(this.GraphicsDevice);
+            _bubbleList.MoveAllBubble();
             base.Update(gameTime);
 
         }

@@ -2,10 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 
 namespace Bubble
@@ -14,8 +11,12 @@ namespace Bubble
     {
         private List<Bubble> bubbleList;
 
-        public void initBubbles(GraphicsDevice graphics, ContentManager content, int blueBubble, int redBubble, int greenBubble)
+        public void initBubbles(int blueBubble, int redBubble, int greenBubble)
         {
+
+           GraphicsDevice graphics = ServiceLocator.GetService<GraphicsDevice>();
+           ContentManager content = ServiceLocator.GetService<ContentManager>();
+
             bubbleList = new List<Bubble>();
 
                 Random rand = new Random();
@@ -55,11 +56,12 @@ namespace Bubble
             }
         }
 
-        public void MoveAllBubble(GraphicsDevice graphics)
+        public void MoveAllBubble()
         {
+         
             foreach (Bubble bubble in bubbleList)
             {
-                bubble.moveBubble(graphics);
+                bubble.moveBubble();
             }
         }
     }
