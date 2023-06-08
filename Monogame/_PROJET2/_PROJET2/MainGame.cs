@@ -23,7 +23,10 @@ namespace BricksGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-         
+            _graphics.IsFullScreen = false;
+            _graphics.PreferredBackBufferWidth = 600;
+            _graphics.PreferredBackBufferHeight = 800;
+            _graphics.ApplyChanges();
             base.Initialize();
         }
 
@@ -34,6 +37,7 @@ namespace BricksGame
             ServiceLocator.RegisterService(this.Content);
             ServiceLocator.RegisterService(this.GraphicsDevice);
           
+
             AssetsManager.Load(this.Content);
             gameState.ChangeScene(GameState.SceneType.Menu);
             // TODO: use this.Content to load your game content here
@@ -41,6 +45,7 @@ namespace BricksGame
 
         protected override void Update(GameTime gameTime)
         {
+            ServiceLocator.RegisterService(Mouse.GetState());
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             gameState.CurrentScene.Update(gameTime);
@@ -51,7 +56,7 @@ namespace BricksGame
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(new Color(34, 34, 34));
             _spriteBatch.Begin();
             // TODO: Add your drawing code here
             gameState.CurrentScene.Draw(gameTime);

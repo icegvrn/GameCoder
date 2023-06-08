@@ -15,7 +15,7 @@ namespace BricksGame
             Energy = 100;
         }
 
-        public void TouchedBy(IActor p_By)
+        public void TouchedBy(GameObject p_By)
         {
         
         }

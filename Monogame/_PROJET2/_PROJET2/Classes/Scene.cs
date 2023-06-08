@@ -13,62 +13,59 @@ namespace BricksGame
      abstract public class Scene
     {
         protected MainGame mainGame;
-        protected List<IActor> listActors;
+        protected List<GameObject> gameObjects;
 
-        public Scene(MainGame p_mainGame) { mainGame = p_mainGame; listActors = new List<IActor>(); }
+        public Scene(MainGame p_mainGame) { mainGame = p_mainGame; gameObjects = new List<GameObject>(); }
 
         public virtual void Load() { }
         public virtual void UnLoad() { }
         public virtual void Update(GameTime gameTime) 
         {
 
-            for (int i = listActors.Count - 1; i >= 0; i--)
+            for (int i = gameObjects.Count - 1; i >= 0; i--)
             {
-                listActors[i].Update(gameTime);
+                gameObjects[i].Update(gameTime);
 
-                foreach (IActor actor2 in listActors)
+                foreach (GameObject gameObj2 in gameObjects)
                 {
-                    if (actor2 != listActors[i])
+                    if (gameObj2 != gameObjects[i])
                     {
-                        if (listActors[i] is ICollider && actor2 is ICollider)
+                        if (gameObjects[i] is ICollider && gameObj2 is ICollider)
                         {
-                           ICollider c_actor = (ICollider)listActors[i];
-                            ICollider c_actor2 = (ICollider)actor2;
-                            if (Utils.CollideByBox(listActors[i], actor2))
+                           ICollider c_colliderObject = (ICollider)gameObjects[i];
+                            ICollider c_colliderObject2 = (ICollider)gameObj2;
+                            if (Utils.CollideByBox(gameObjects[i], gameObj2))
                             {
-                                c_actor.TouchedBy(actor2);
-                                c_actor2.TouchedBy(listActors[i]);
+                                c_colliderObject.TouchedBy(gameObj2);
+                                c_colliderObject2.TouchedBy(gameObjects[i]);
                             }
-                        }
-
-                       
+                        }  
                     }
                 }
               
-                if (listActors[i] is IDestroyable)
+                if (gameObjects[i] is IDestroyable)
                 {
-                    IDestroyable dActor = (IDestroyable)listActors[i];
+                    IDestroyable dActor = (IDestroyable)gameObjects[i];
                     if (dActor.IsDestroy)
                     {
-                        listActors.Remove(listActors[i]);
+                        gameObjects.Remove(gameObjects[i]);
                     }
                 }
-
-            }
-           
+            }    
         }
+
         public virtual void Draw(GameTime gameTime) 
         {
-            foreach (IActor actor in listActors)
+            foreach (GameObject gameObj in gameObjects)
             {
-                actor.Draw(mainGame._spriteBatch);
+                gameObj.Draw(mainGame._spriteBatch);
             }
 
         }
 
-        public void AddToActorList(IActor actor)
+        public void AddToGameObjectsList(GameObject gameObj)
         {
-            listActors.Add(actor);
+            gameObjects.Add(gameObj);
         }
 
     }

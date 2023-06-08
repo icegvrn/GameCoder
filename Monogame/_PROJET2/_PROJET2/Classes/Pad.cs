@@ -30,9 +30,9 @@ namespace BricksGame
                 Position = new Vector2(0, Position.Y);
             }
                 
-            else if ((Position.X + p_x * Speed) > 800 - BoundingBox.Width)
+            else if ((Position.X + p_x * Speed) > ServiceLocator.GetService<GraphicsDevice>().Viewport.Width - BoundingBox.Width)
             {
-                Position = new Vector2(800-BoundingBox.Width, Position.Y);
+                Position = new Vector2(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width - BoundingBox.Width, Position.Y);
             }
 
             else
@@ -43,7 +43,7 @@ namespace BricksGame
         }
 
 
-        public void TouchedBy(IActor p_By)
+        public void TouchedBy(GameObject p_By)
         {
             if (p_By is Ball)
             {

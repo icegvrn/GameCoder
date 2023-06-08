@@ -37,3 +37,4 @@ C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\ne
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\brick.xnb
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\brickBreak.xnb
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\pad.xnb
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\blank.xnb

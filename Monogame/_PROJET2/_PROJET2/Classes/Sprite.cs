@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BricksGame.Classes;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -9,15 +10,14 @@ using System.Threading.Tasks;
 
 namespace BricksGame
 {
-    public class Sprite : IActor
+    public class Sprite : GameObject
     {
-        public Vector2 Position { get; set; }
-        public Rectangle BoundingBox { get; private set; }
 
         public virtual bool CanMove { get; set; }
-     
-
         public virtual float Speed { get; set; }
+
+        protected virtual Sprite ObjectToFollow { get; set; }
+        private Vector2 distanceWidthObjectToFollow { get; set; }
 
         //Sprite 
         public List<Texture2D> Textures { get; }
@@ -32,19 +32,33 @@ namespace BricksGame
             Speed = 1f;
         }
 
-        public void Draw(SpriteBatch p_SpriteBatch)
+        public virtual void Move(float p_x, float p_y)
+        {
+                Position = new Vector2(Position.X + p_x * Speed, Position.Y + p_y * Speed);
+        }
+
+        public virtual void UpdatePositionIfFollowingSomething()
+        {
+            if (ObjectToFollow != null)
+            {
+                Position = ObjectToFollow.Position - distanceWidthObjectToFollow;
+            }
+        }
+
+        public void Following(Sprite sprite)
+        {
+            ObjectToFollow = sprite;
+            distanceWidthObjectToFollow = ObjectToFollow.Position - Position;
+        }
+
+        public override void Draw(SpriteBatch p_SpriteBatch)
         {
             p_SpriteBatch.Draw(currentTexture, Position, Color.White);
         }
 
-        public virtual void Update(GameTime p_GameTime)
+        public override void Update(GameTime p_GameTime)
         {
             BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, currentTexture.Width, currentTexture.Height);
-        }
-
-        public virtual void Move(float p_x, float p_y)
-        {
-                Position = new Vector2(Position.X + p_x * Speed, Position.Y + p_y * Speed);
         }
 
     }

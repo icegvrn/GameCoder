@@ -16,7 +16,7 @@ namespace BricksGame
         {
 
         }
-        public void TouchedBy(IActor p_By)
+        public void TouchedBy(GameObject p_By)
         {
             if (p_By is Ball)
             {

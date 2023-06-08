@@ -44,7 +44,7 @@ namespace BricksGame
             myButton.Position = new Vector2(screen.Width/2 - myButton.currentTexture.Width / 2, screen.Height/2 - myButton.currentTexture.Height/2);
             myButton.onClick = onClickPlay;
             myButton.onHover = onHover;
-            listActors.Add(myButton);
+            gameObjects.Add(myButton);
             myMusic = AssetsManager.menuMusic;
             MediaPlayer.IsRepeating = false;
             MediaPlayer.Play(myMusic);

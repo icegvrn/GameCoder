@@ -23,12 +23,13 @@ namespace BricksGame
         public void Load()
         {
             CreateNewPad();
+            CreateNewBall();
             brickList = new BricksList();
             brickList.CreateBricksWall();
 
             foreach (Bricks brick in brickList.ListOfBricks)
             {
-                currentScene.AddToActorList(brick);
+                currentScene.AddToGameObjectsList(brick);
             }
         }
 
@@ -38,7 +39,8 @@ namespace BricksGame
             myBallTextureList.Add(content.Load<Texture2D>("images/ball"));
             ball = new Ball(myBallTextureList);
             ball.Position = new Vector2(pad.Position.X + pad.currentTexture.Width / 2 - ball.currentTexture.Width / 2, pad.Position.Y - pad.currentTexture.Height / 2);
-            currentScene.AddToActorList(ball);
+            ball.Following(pad);
+            currentScene.AddToGameObjectsList(ball);
         }
 
         public void CreateNewPad()
@@ -47,14 +49,14 @@ namespace BricksGame
             myPadTextureList.Add(content.Load<Texture2D>("images/pad"));
             pad = new Pad(myPadTextureList);
             pad.Position = new Vector2(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 - pad.currentTexture.Width / 2, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - pad.currentTexture.Height * 2);
-            currentScene.AddToActorList(pad);
+            currentScene.AddToGameObjectsList(pad);
         }
 
         public void Update(GameTime gameTime)
         {
             if (GameKeyboard.IsKeyReleased(Keys.Space))
             {
-                CreateNewBall();
+                ball.Fire();
             }
 
 
