@@ -1,4 +1,4 @@
-﻿using BricksGame.Classes;
+﻿using BricksGame;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -14,22 +14,32 @@ namespace BricksGame
     {
 
         public virtual bool CanMove { get; set; }
+        public virtual Vector2 lastValidPosition { get; set; }
         public virtual float Speed { get; set; }
 
         protected virtual Sprite ObjectToFollow { get; set; }
         private Vector2 distanceWidthObjectToFollow { get; set; }
 
         //Sprite 
-        public List<Texture2D> Textures { get; }
+        public List<Texture2D> Textures { get; protected set; }
         public Texture2D currentTexture { get; protected set; }
   
-
+        
+        public Sprite(Texture2D p_texture)
+        {
+            currentTexture = p_texture;
+            Speed = 1f;
+        }
 
         public Sprite(List<Texture2D> p_texture)
         {
             Textures = p_texture;
             currentTexture = Textures[0];
             Speed = 1f;
+        }
+
+        public Sprite()
+        {
         }
 
         public virtual void Move(float p_x, float p_y)
@@ -60,6 +70,6 @@ namespace BricksGame
         {
             BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, currentTexture.Width, currentTexture.Height);
         }
-
+    
     }
 }

@@ -1,4 +1,4 @@
-﻿using BricksGame.Classes;
+﻿using BricksGame;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -66,6 +66,20 @@ namespace BricksGame
         public void AddToGameObjectsList(GameObject gameObj)
         {
             gameObjects.Add(gameObj);
+        }
+
+        public bool IsSceneContainsObjectTypeOf<T>()
+        {
+            foreach (GameObject gameObj in gameObjects)
+            {
+               
+                if (gameObj.GetType() == typeof(T))
+                {
+                    return true;
+                }
+            }
+            return false;
+           
         }
 
     }

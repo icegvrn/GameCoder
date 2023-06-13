@@ -25,7 +25,6 @@ namespace BricksGame
 
         public void onHover(Button p_Button)
         {
-            Debug.WriteLine("JE PAAAAAASSSE");
             sndExplode.Play();
     }
         public void onClickPlay(Button p_Button)
@@ -35,7 +34,6 @@ namespace BricksGame
 
         public override void Load()
         {
-            Debug.WriteLine("SCENE : JE PASSE");
             Rectangle screen = mainGame.Window.ClientBounds;
             List<Texture2D> myButtonTextureList = new List<Texture2D>();
             myButtonTextureList.Add(mainGame.Content.Load<Texture2D>("button"));

@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace BricksGame
 {
+
     public static class Utils
     {
+
         static Random RandomGen = new Random();
         public static int GetRandomInt(int p_Min, int p_Max)
         {

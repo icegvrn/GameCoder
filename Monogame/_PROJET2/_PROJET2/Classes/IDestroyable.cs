@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BricksGame.Classes
+namespace BricksGame
 {
     internal interface IDestroyable
     {

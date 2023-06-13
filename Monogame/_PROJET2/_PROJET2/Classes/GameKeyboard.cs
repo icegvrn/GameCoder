@@ -1,38 +1,36 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BricksGame
 {
     public static class GameKeyboard
     {
-        private static KeyboardState newKeyboardState;
-        private static KeyboardState oldKeyboardState;
+        private static Dictionary<Keys, KeyboardState> keyStates = new Dictionary<Keys, KeyboardState>();
 
         public static bool IsKeyReleased(Keys key)
         {
-            newKeyboardState = Keyboard.GetState();
+            KeyboardState currentKeyboardState = Keyboard.GetState();
 
-            if (Keyboard.GetState().IsKeyDown(key))
+            if (!keyStates.ContainsKey(key))
             {
-                if (oldKeyboardState != newKeyboardState) {
-                    oldKeyboardState = newKeyboardState;
-                    return true;
-                }
-                else
-                {
-                    oldKeyboardState = newKeyboardState;
-                    return false;
-                }
-            }
-            else
-            {
-                oldKeyboardState = newKeyboardState;
+                keyStates[key] = currentKeyboardState;
                 return false;
             }
+
+            if (currentKeyboardState.IsKeyUp(key) && keyStates[key].IsKeyDown(key))
+            {
+                keyStates[key] = currentKeyboardState;
+                return true;
+            }
+
+            keyStates[key] = currentKeyboardState;
+            return false;
         }
     }
 }

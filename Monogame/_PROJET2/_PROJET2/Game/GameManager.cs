@@ -1,8 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BricksGame.Classes;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace BricksGame
 {
@@ -13,7 +15,8 @@ namespace BricksGame
         private Pad pad;
         private ContentManager content;
         private BricksList brickList;
-
+        private Dice dice;
+        LevelManager levelManager;
         public GameManager(Scene p_currentScene)
         {
             currentScene = p_currentScene;
@@ -24,13 +27,23 @@ namespace BricksGame
         {
             CreateNewPad();
             CreateNewBall();
-            brickList = new BricksList();
-            brickList.CreateBricksWall();
+ 
+           // brickList = new BricksList();
+           // brickList.CreateBricksWall();
+        
+            //foreach (Bricks brick in brickList.ListOfBricks)
+            //{
+             //   currentScene.AddToGameObjectsList(brick);
+           // }
 
-            foreach (Bricks brick in brickList.ListOfBricks)
-            {
-                currentScene.AddToGameObjectsList(brick);
-            }
+          levelManager = new LevelManager(this);
+          levelManager.LoadLevel(1);
+       
+        }
+
+        public void RegisterActor(GameObject actor)
+        {
+            currentScene.AddToGameObjectsList(actor);
         }
 
         public void CreateNewBall()
@@ -45,6 +58,7 @@ namespace BricksGame
 
         public void CreateNewPad()
         {
+           
             List<Texture2D> myPadTextureList = new List<Texture2D>();
             myPadTextureList.Add(content.Load<Texture2D>("images/pad"));
             pad = new Pad(myPadTextureList);
@@ -54,9 +68,23 @@ namespace BricksGame
 
         public void Update(GameTime gameTime)
         {
+            levelManager.Update(gameTime);
+
+            if (!currentScene.IsSceneContainsObjectTypeOf<Ball>())
+            {
+                levelManager.NoBallActions();
+                CreateNewBall();
+            }
+
             if (GameKeyboard.IsKeyReleased(Keys.Space))
             {
                 ball.Fire();
+                
+            }
+
+            if (GameKeyboard.IsKeyReleased(Keys.O))
+            {
+              //  dice.RollDice();  
             }
 
 
@@ -68,6 +96,8 @@ namespace BricksGame
             {
                 pad.Move(1, 0);
             }
+
+         
         }
 
 
