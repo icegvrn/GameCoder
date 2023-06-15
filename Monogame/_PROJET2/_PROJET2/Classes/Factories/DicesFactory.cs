@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BricksGame
 {
-    public class DicesManager
+    public class DicesFactory
     {
         List<Dice> dicesList;
         List<Bricks> bricksList;
@@ -19,7 +19,7 @@ namespace BricksGame
             dicesList = new List<Dice>();
             foreach (int dice in dices)
             {
-                switch(dice)
+                switch (dice)
                 {
                     case 3:
                         c_dice = new Dice(Gamesystem.dice.d3);
@@ -49,7 +49,7 @@ namespace BricksGame
                         c_dice = new Dice(Gamesystem.dice.d20);
                         dicesList.Add(c_dice);
                         break;
-                    default : 
+                    default:
                         c_dice = new Dice(Gamesystem.dice.none);
                         dicesList.Add(c_dice);
                         break;
@@ -65,8 +65,8 @@ namespace BricksGame
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    dicesList[i+(n*6)].Position = new Vector2(bricks[i + (n * 6)].Position.X + bricks[i + (n * 6)].BoundingBox.Width/2, bricks[i + (n * 6)].Position.Y + bricks[i + (n * 6)].BoundingBox.Height/2) ;
-                    Debug.WriteLine(i + (n * 6));
+                    dicesList[i + n * 6].Position = new Vector2(bricks[i + n * 6].Position.X + bricks[i + n * 6].BoundingBox.Width / 2, bricks[i + n * 6].Position.Y + bricks[i + n * 6].BoundingBox.Height / 2);
+                    Debug.WriteLine(i + n * 6);
                 }
             }
         }

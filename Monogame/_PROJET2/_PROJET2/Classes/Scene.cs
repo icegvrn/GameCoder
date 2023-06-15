@@ -68,6 +68,11 @@ namespace BricksGame
             gameObjects.Add(gameObj);
         }
 
+        public void RemoveToGameObjectsList(GameObject gameObj)
+        {
+            gameObjects.Remove(gameObj);
+        }
+
         public bool IsSceneContainsObjectTypeOf<T>()
         {
             foreach (GameObject gameObj in gameObjects)

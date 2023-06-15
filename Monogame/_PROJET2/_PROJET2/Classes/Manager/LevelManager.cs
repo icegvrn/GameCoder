@@ -18,14 +18,18 @@ namespace BricksGame
         public int CurrentLevel { get { return currentLevel; } set { currentLevel = value; } }
         private List<int> currentLevelDices;
         private BaseGrid gameGrid;
-        private DicesManager dicesManager;
+        private DicesFactory dicesFactory;
         private GameManager gameManager;
-
+        private MonsterFactory monsterFactory;
         public LevelManager(GameManager gameManager) { this.gameManager = gameManager; }
+        public enum LevelState {dices, play, gameOver, win};
+        public LevelState currentState;
 
         public void LoadLevel(int level)
         {
-            dicesManager = new DicesManager();
+            currentState = LevelState.dices;
+            dicesFactory = new DicesFactory();
+            monsterFactory = new MonsterFactory();
             gameGrid = new BaseGrid(6,6);
             currentLevelDices = new List<int>();
 
@@ -34,14 +38,14 @@ namespace BricksGame
             
             foreach (int[] lines in levelData.Dices)
             {
-                Debug.WriteLine("TEST");
+
                 foreach (int dice in lines)
                 {
             
                     currentLevelDices.Add(dice);
                 }
             }
-            List<Dice> dicesList = dicesManager.Load(currentLevelDices);
+            List<Dice> dicesList = dicesFactory.Load(currentLevelDices);
           
             for (int n = 0; n < dicesList.Count; n++)
             {
@@ -58,25 +62,41 @@ namespace BricksGame
 
         public void Update(GameTime gameTime)
         {
+
+            int diceCount = 0;
+            int monsterCount = 0;
+
             for (int n= 0; n < gameGrid.GridElements.Count(); n++)
             {
                 if (gameGrid.GridElements[n] is Dice)
-                {
+                { 
                     Dice dice = (Dice)gameGrid.GridElements[n];
-                    if (dice.DiceRolled)
-                    {
-                        Debug.WriteLine("TRUE");
-                        List<Texture2D> list = new List<Texture2D>();
-                        Texture2D texture = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/brick");
-                        list.Add(texture);
-                        Bricks brick = new Bricks(list, dice.DiceResult);
-                        dice.Destroy();
-                        gameGrid.AddBrickable(brick, n);
-                        gameManager.RegisterActor(brick);
-                    }
 
+                    if (dice.facesNb != 0) {
+                        diceCount++;
+                        if (dice.DiceRolled)
+                        {
+                            Monster c_monster = monsterFactory.CreateMonster(dice.DiceResult);
+                             gameGrid.AddBrickable(c_monster, n);
+                            gameManager.RegisterActor(c_monster);
+                            gameGrid.GridElements[n] = null;
+                            dice.Destroy();
+                          
+                        }
+                    }
+                   
+                }
+
+                else if(gameGrid.GridElements[n] is Monster)
+                {
+                    monsterCount++;
                 }
             }
+            if ((diceCount == 0) && (monsterCount > 0)) {
+                currentState = LevelState.play;
+            }
+            Debug.WriteLine(diceCount);
+            Debug.WriteLine(currentState);
         }
     }
 }

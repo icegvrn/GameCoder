@@ -1,5 +1,4 @@
 ﻿using BricksGame;
-using BricksGame.Classes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -18,8 +17,9 @@ namespace BricksGame
     {
         private bool isDestroy;
         public bool IsDestroy { get { return isDestroy; } set { isDestroy = value; } }
-        public bool CollisionEvent = false;
+
         private int life = 4;
+        public bool CollisionEvent = false;
         private float timer = 0.2f;
         public Bricks(List<Texture2D> p_textures): base(p_textures) 
         {
@@ -35,7 +35,7 @@ namespace BricksGame
         }
         public void TouchedBy(GameObject p_By)
         { 
-              
+         
             
             if (p_By is Ball)
                 {
@@ -58,6 +58,7 @@ namespace BricksGame
 
                     if ((ball.Position.Y + ball.currentTexture.Height >= Position.Y) && (ball.Position.Y <= Position.Y + currentTexture.Height) && (ball.Position.X +ball.currentTexture.Width >= Position.X) && (ball.Position.X <= Position.X + currentTexture.Width))
                     {
+  
                         Debug.WriteLine("J'inverse la direction X");
                      
 
@@ -73,15 +74,17 @@ namespace BricksGame
                         {
                             ball.InverseHorizontalDirection();
                         }
-                        ball.Position = ball.lastValidPosition;
+                       
                         RemoveLife();
-                        
+                      
                         CollisionEvent = true;
                     }
-                   
                 }
             }
-           
+           else if (p_By is TimedParticles)
+            {
+                RemoveLife();
+            }
         }
 
       

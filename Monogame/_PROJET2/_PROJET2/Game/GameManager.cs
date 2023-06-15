@@ -1,4 +1,4 @@
-﻿using BricksGame.Classes;
+﻿using BricksGame;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,6 +12,7 @@ namespace BricksGame
     {
         Scene currentScene;
         private Ball ball;
+        private List<TimedParticles> ballTrail;
         private Pad pad;
         private ContentManager content;
         private BricksList brickList;
@@ -20,24 +21,18 @@ namespace BricksGame
         public GameManager(Scene p_currentScene)
         {
             currentScene = p_currentScene;
-            content = ServiceLocator.GetService<ContentManager>();  
+            content = ServiceLocator.GetService<ContentManager>();
+            ServiceLocator.RegisterService(currentScene);
+       
         }
 
         public void Load()
         {
-            CreateNewPad();
-            CreateNewBall();
- 
-           // brickList = new BricksList();
-           // brickList.CreateBricksWall();
-        
-            //foreach (Bricks brick in brickList.ListOfBricks)
-            //{
-             //   currentScene.AddToGameObjectsList(brick);
-           // }
-
+           CreateNewPad();
+          CreateNewBall();
           levelManager = new LevelManager(this);
-          levelManager.LoadLevel(1);
+            ServiceLocator.RegisterService(levelManager);
+            levelManager.LoadLevel(1);
        
         }
 
@@ -48,6 +43,7 @@ namespace BricksGame
 
         public void CreateNewBall()
         {
+            ballTrail = new List<TimedParticles>();
             List<Texture2D> myBallTextureList = new List<Texture2D>();
             myBallTextureList.Add(content.Load<Texture2D>("images/ball"));
             ball = new Ball(myBallTextureList);
@@ -70,36 +66,55 @@ namespace BricksGame
         {
             levelManager.Update(gameTime);
 
-            if (!currentScene.IsSceneContainsObjectTypeOf<Ball>())
+            if (levelManager.currentState == LevelManager.LevelState.play)
             {
-                levelManager.NoBallActions();
-                CreateNewBall();
-            }
 
-            if (GameKeyboard.IsKeyReleased(Keys.Space))
-            {
-                ball.Fire();
-                
-            }
-
-            if (GameKeyboard.IsKeyReleased(Keys.O))
-            {
-              //  dice.RollDice();  
-            }
+                for (int n = ballTrail.Count - 1; n >= 0; n--)
+                {
+                    if (ballTrail[n].timer <= 0)
+                    {
+                        ballTrail.Remove(ballTrail[n]);
+                    }
+                    else
+                    {
+                        ballTrail[n].timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    }
+                }
 
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Q))
-            {
-                pad.Move(-1, 0);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                pad.Move(1, 0);
+
+                if (!currentScene.IsSceneContainsObjectTypeOf<Ball>())
+                {
+                    levelManager.NoBallActions();
+                    CreateNewBall();
+                }
+
+                if (GameKeyboard.IsKeyReleased(Keys.Space))
+                {
+                    ball.Fire();
+
+                }
+
+                if (GameKeyboard.IsKeyReleased(Keys.O))
+                {
+                    //  dice.RollDice();  
+                }
+
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                {
+                    pad.Move(-1, 0);
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    pad.Move(1, 0);
+                }
+
+
             }
 
-         
+
+
         }
-
-
     }
 }

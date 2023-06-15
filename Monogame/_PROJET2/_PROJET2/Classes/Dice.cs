@@ -1,5 +1,5 @@
 ﻿
-using BricksGame.Classes;
+using BricksGame;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,7 +19,7 @@ namespace BricksGame
         Texture2D diceSheet;
         List<Rectangle> tiles;
         int currentNb = 1;
-        int facesNb;
+        public int facesNb { get; private set; }
         int lastMathCeil;
         Random rand;
        public bool IsDestroy { get; set; }

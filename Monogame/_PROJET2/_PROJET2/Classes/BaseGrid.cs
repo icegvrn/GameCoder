@@ -1,7 +1,8 @@
-﻿using BricksGame.Classes;
+﻿using BricksGame;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -43,9 +44,10 @@ namespace BricksGame
 
         public void AddBrickable(IBrickable elem, int index)
         {
-            gridElements.Add(elem);
+            gridElements.Add(elem);  
             elem.Position = GetPositionFromGrid(index);
         }
+
 
             private Vector2 GetPositionFromGrid(int index)
             {
@@ -55,7 +57,11 @@ namespace BricksGame
         {
             foreach (IBrickable brick in gridElements)
             {
-                brick.Position = new Vector2(brick.Position.X, brick.Position.Y + downSpeed);
+                if (brick != null)
+                {
+                    brick.Position = new Vector2(brick.Position.X, brick.Position.Y + downSpeed);
+                }
+               
             }
         }
 
