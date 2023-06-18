@@ -28,7 +28,7 @@ namespace BricksGame
 
         public void Load()
         {
-           CreateNewPad();
+          CreateNewPad();
           CreateNewBall();
           levelManager = new LevelManager(this);
             ServiceLocator.RegisterService(levelManager);
@@ -58,13 +58,18 @@ namespace BricksGame
             List<Texture2D> myPadTextureList = new List<Texture2D>();
             myPadTextureList.Add(content.Load<Texture2D>("images/pad"));
             pad = new Pad(myPadTextureList);
-            pad.Position = new Vector2(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 - pad.currentTexture.Width / 2, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - pad.currentTexture.Height * 2);
-            currentScene.AddToGameObjectsList(pad);
+              currentScene.AddToGameObjectsList(pad);
         }
 
         public void Update(GameTime gameTime)
         {
             levelManager.Update(gameTime);
+
+
+            if (GameKeyboard.IsKeyReleased(Keys.W))
+            {
+                NextLevel();
+            }
 
             if (levelManager.currentState == LevelManager.LevelState.play)
             {
@@ -111,10 +116,24 @@ namespace BricksGame
                 }
 
 
+
+            }
+
+            else if (levelManager.currentState == LevelManager.LevelState.win)
+            {
+                NextLevel();
             }
 
 
 
+        }
+
+        public void NextLevel()
+        {
+            ball.Destroy();
+            levelManager.NextLevel();
+            CreateNewBall();
+            pad.Reset();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace BricksGame
     public class Level
     {
         private int levelNb;
-        public int level { get { return levelNb; } set { levelNb = value; } }
+        public int LevelNb { get { return levelNb; } set { levelNb = value; } }
         private int[][] dices;
         public int[][] Dices { get { return dices; } set { dices = value; } }
     }

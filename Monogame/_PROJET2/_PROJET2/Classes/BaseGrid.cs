@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -20,23 +21,26 @@ namespace BricksGame
             private int linesNb;
             private float brickWidth = 56f;
             private float brickHeight = 56f;
-            private float bricksMargin = 30f;
-            private float downSpeed = 15f;
+            private float bricksMargin = 0f;
+            private float downSpeed = 56f;
+        private Vector2 Position;
 
         public BaseGrid(int colNb, int linNb)
             {
+            Position = new Vector2(brickWidth, brickHeight*2);
             slotPositions = new List<Vector2>();
             gridElements = new List<IBrickable>();
             columnsNb = colNb;
             linesNb = linNb;
-            float centerFactor = (ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2) - ((brickWidth + bricksMargin) * 6) / 2;
 
 
             for (int n=0; n<linesNb; n++)
             {
                 for (int i=0; i<columnsNb; i++)
                 {
-                    Vector2 vector = new Vector2((((centerFactor+(brickWidth + bricksMargin) * i - 1))) + brickWidth*0.5f, 10 + ((brickHeight + bricksMargin) * n)  +brickHeight * 0.5f);
+                    Debug.WriteLine(" POsition X " + Position.X + "Brick width " + brickWidth + " i " + (i));
+                    Debug.WriteLine(Position.X + ((brickWidth * 1.5f) * (i)));
+                    Vector2 vector = new Vector2(Position.X + brickWidth/2 +((brickWidth) * (i)), Position.Y + brickHeight/2+ (brickHeight * n));
                     slotPositions.Add(vector);
                 }
             }
@@ -64,6 +68,14 @@ namespace BricksGame
                
             }
         }
+
+        public void Clear()
+        {
+     
+    
+        }
+
+
 
     }
 

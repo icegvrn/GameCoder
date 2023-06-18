@@ -17,8 +17,9 @@ namespace BricksGame
             private bool isDestroy;
             public bool IsDestroy { get { return isDestroy; } set { isDestroy = value; } }
             public bool CollisionEvent = false;
+        public bool IsDead = false;
             private float life = 4;
-        private float initialLife;
+            private float initialLife;
             private float timer = 0.2f;
             private Rectangle lifeBar;
             private int lifeBarLenght = 56;
@@ -26,7 +27,7 @@ namespace BricksGame
             private Rectangle currentLife;
             private Color currentLifeColor;
             private Color[] lifeColors = { Color.Green, Color.Yellow, Color.Orange, Color.Red};
-        private Texture2D lifeBarTexture;
+            private Texture2D lifeBarTexture;
 
             public Monster(List<Texture2D> p_textures) : base(p_textures)
             {
@@ -80,6 +81,7 @@ namespace BricksGame
 
                 if (life <= 0)
                 {
+                IsDead = true;
                     Destroy();
                 }
 

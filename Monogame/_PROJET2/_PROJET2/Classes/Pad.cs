@@ -15,6 +15,7 @@ namespace BricksGame
         public override float Speed { get { return _speed; } set { _speed = value; } }
         public Pad(List<Texture2D> p_texture) : base(p_texture)
         {
+            Reset();
             Speed = 15;
         }
 
@@ -44,7 +45,7 @@ namespace BricksGame
 
         public override void Draw(SpriteBatch p_SpriteBatch)
         {
-            DrawBoundingBox(p_SpriteBatch);
+          
             base.Draw(p_SpriteBatch);
         }
 
@@ -63,13 +64,19 @@ namespace BricksGame
             Texture2D pixelTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
             pixelTexture.SetData(new Color[] { Color.White });
 
-            // Dessine les bords verticaux de la bounding box
+       
             spriteBatch.Draw(pixelTexture, new Rectangle(rect.Left, rect.Top, 1, rect.Height), Color.Red);
             spriteBatch.Draw(pixelTexture, new Rectangle(rect.Right, rect.Top, 1, rect.Height), Color.Red);
 
-            // Dessine les bords horizontaux de la bounding box
+           
             spriteBatch.Draw(pixelTexture, new Rectangle(rect.Left, rect.Top, rect.Width, 1), Color.Red);
             spriteBatch.Draw(pixelTexture, new Rectangle(rect.Left, rect.Bottom, rect.Width, 1), Color.Red);
+        }
+
+        public void Reset()
+        {
+            Position = new Vector2(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 - currentTexture.Width / 2, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - currentTexture.Height * 2);
+
         }
     }
 }

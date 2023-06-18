@@ -19,7 +19,6 @@ namespace BricksGame
         private Texture2D lineTexture;
         public List<TimedParticles> timedParticles { get; set; }
         private double angle;
-        private double angle2;
         private double distanceFromMouse;
         private Vector2 destination;
         private bool isFired;
@@ -59,20 +58,20 @@ namespace BricksGame
                 {
                     if (BoundingBox.Intersects(brick.BoundingBox))
                     {
-                        Debug.WriteLine("Collision détectée");
+                      //  Debug.WriteLine("Collision détectée");
 
                         if (lastValidPosition.X >= brick.BoundingBox.X && lastValidPosition.X <= brick.BoundingBox.X + brick.BoundingBox.Width)
                         {
-                            Debug.WriteLine("Inversion de direction verticale");
+                        //    Debug.WriteLine("Inversion de direction verticale");
                             InverseVerticalDirection();
                         }
                         else
                         {
-                            Debug.WriteLine("Inversion de direction horizontale");
+                         //   Debug.WriteLine("Inversion de direction horizontale");
                             InverseHorizontalDirection();
                         }
                         CollisionEvent = true;
-                        brick.RemoveLife(1);
+                        brick.RemoveLife(2);
 
 
                     }
@@ -84,10 +83,76 @@ namespace BricksGame
                 if (!CollisionEvent)
                 {
                     Pad brick = (Pad)p_By;
-                    InverseVerticalDirection();
+
+                    // Calcul de la position horizontale relative de la balle par rapport au pad
+                    float relativePositionX = Position.X - brick.Position.X;
+                    float padWidth = brick.BoundingBox.Width;
+                    float quarterWidth = padWidth / 6f;
+                  
+                    // Déterminer la partie du pad où la balle a touché
+                    if (relativePositionX < quarterWidth)
+                    {
+                        Debug.WriteLine("PREMIER QUART");
+                        // Premier quart (tout à gauche)
+                        angle = MathHelper.ToRadians(20f); // Angle de 60 degrés vers la gauche
+                        destination.X = -(float)Math.Cos(angle) * Speed;
+                        destination.Y = -(float)Math.Sin(angle) * Speed;
+
+
+                    }
+                    else if (relativePositionX < 2 * quarterWidth)
+                    {
+                        Debug.WriteLine("DEUXIEME QUART");
+                        // Deuxième quart (gauche)
+                        angle = MathHelper.ToRadians(30f); // Angle de 30 degrés vers la gauche
+                        destination.X = -(float)Math.Cos(angle) * Speed;
+                        destination.Y = -(float)Math.Sin(angle) * Speed;
+
+                    }
+                    else if (relativePositionX < 3 * quarterWidth)
+                    {
+                        Debug.WriteLine("TROISIEME QUART");
+                        // Troisième quart (droite)
+                        angle = MathHelper.ToRadians(70f); // Angle de 30 degrés vers la droite
+                        destination.X = (float)Math.Cos(angle) * Speed;
+                        destination.Y = -(float)Math.Sin(angle) * Speed;
+
+                    }
+                    else if (relativePositionX < 4 * quarterWidth)
+                    {
+                        Debug.WriteLine("TROISIEME QUART");
+                        // Troisième quart (droite)
+                        angle = MathHelper.ToRadians(70f); // Angle de 30 degrés vers la droite
+                        destination.X = (float)Math.Cos(angle) * Speed;
+                        destination.Y = -(float)Math.Sin(angle) * Speed;
+
+                    }
+                    else if (relativePositionX < 5 * quarterWidth)
+                    {
+                        Debug.WriteLine("TROISIEME QUART");
+                        // Troisième quart (droite)
+                        angle = MathHelper.ToRadians(30f); // Angle de 30 degrés vers la droite
+                        destination.X = (float)Math.Cos(angle) * Speed;
+                        destination.Y = -(float)Math.Sin(angle) * Speed;
+
+                    }
+                    else
+                    {
+                        Debug.WriteLine("QUATRIEME QUART");
+                        // Quatrième quart (tout à droite)
+                        angle = MathHelper.ToRadians(20f); // Angle de 60 degrés vers la droite
+                        destination.X =(float)Math.Cos(angle) * Speed;
+                        destination.Y = -(float)Math.Sin(angle) * Speed;
+
+                    }
+                    Debug.WriteLine("MA DESTINATION EST DE " + destination.X + " car j'avais un angle de " + angle);
+
+                   
                     CollisionEvent = true;
+
+
                 }
-                
+
             }
 
 
@@ -165,7 +230,6 @@ namespace BricksGame
             MouseState mouse = ServiceLocator.GetService<MouseState>();
             distanceFromMouse = Utils.calcDistance(Position.X, Position.Y, mouse.X, mouse.Y);
             angle = Utils.calcAngleWithMouse(Position.X, Position.Y);
-            angle2 = Utils.calcAngleWithMouse(-Position.X, Position.Y);
             destination = new Vector2(((float)Math.Cos(angle) * Speed), (float)Math.Sin(angle) * Speed);
             // Vérifier les collisions avec les bords de l'écran
 
@@ -201,27 +265,27 @@ namespace BricksGame
         public void TryMove()
         {
 
-            if (Position.X + currentTexture.Width >= ServiceLocator.GetService<GraphicsDevice>().Viewport.Width)
+            if (Position.X + currentTexture.Width >= ServiceLocator.GetService<GraphicsDevice>().Viewport.Width - 63)
             {
-                Debug.WriteLine("Ball sort à droite " + destination.X + " " + destination.Y);
+            //    Debug.WriteLine("Ball sort à droite " + destination.X + " " + destination.Y);
                 InverseHorizontalDirection();
             }
 
-            else if (Position.X <= 0)
+            else if (Position.X <= 63)
             {
-                Debug.WriteLine("Ball sort à gauche " + destination.X + " " + destination.Y);
+             //   Debug.WriteLine("Ball sort à gauche " + destination.X + " " + destination.Y);
                 InverseHorizontalDirection();
             }
 
-            else if (Position.Y <= 0)
+            else if (Position.Y <= 122)
             {
-                Debug.WriteLine("Ball sort en haut " + destination.X + " " + destination.Y);
+               // Debug.WriteLine("Ball sort en haut " + destination.X + " " + destination.Y);
                 InverseVerticalDirection();
             }
 
             else if (Position.Y >= ServiceLocator.GetService<GraphicsDevice>().Viewport.Height *1.5f)
             {
-                // Détruire la ball ici
+        
                 Destroy();
 
             }
@@ -237,13 +301,13 @@ namespace BricksGame
 
         public void InverseHorizontalDirection()
         {
-            Debug.WriteLine("J'INVERSE");
+          //  Debug.WriteLine("J'INVERSE");
             destination.X *= -1;
         }
 
         public void InverseVerticalDirection()
         {
-            Debug.WriteLine("J'INVERSE");
+            // Debug.WriteLine("J'INVERSE");
             destination.Y *= -1;
         }
 
@@ -256,6 +320,7 @@ namespace BricksGame
                 timedParticles.Remove(timedParticles[n]);
 
             }
+            ServiceLocator.GetService<Scene>().RemoveToGameObjectsList(this);
             IsDestroy = true;
 
 

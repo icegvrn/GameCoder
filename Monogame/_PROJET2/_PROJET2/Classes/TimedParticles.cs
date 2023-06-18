@@ -36,7 +36,7 @@ namespace BricksGame
                 if (p_By is Monster)
                 {
                     Monster brick = (Monster)p_By;
-                    brick.RemoveLife(0.07f); 
+                    brick.RemoveLife(1f); 
                 }
    
            
@@ -44,7 +44,7 @@ namespace BricksGame
 
         public override void Draw(SpriteBatch p_SpriteBatch)
         {
-            p_SpriteBatch.Draw(currentTexture, Position, new Color(timer, timer/2, timer, (timer/initialTimer)));
+            p_SpriteBatch.Draw(currentTexture, Position, Color.White);
 
         }
     }
