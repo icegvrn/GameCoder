@@ -18,10 +18,10 @@ namespace BricksGame
         public int CurrentLevel { get { return currentLevel; } set { currentLevel = value; } }
         private List<int> currentLevelDices;
         private BaseGrid gameGrid;
+        public BaseGrid GameGrid { get { return gameGrid; } }
+        public PlayingAera playingAera;
         private DicesFactory dicesFactory;
-        private GameManager gameManager;
         private MonsterFactory monsterFactory;
-        public LevelManager(GameManager gameManager) { this.gameManager = gameManager; }
         public enum LevelState { dices, play, gameOver, win, end };
         public LevelState currentState;
 
@@ -32,8 +32,9 @@ namespace BricksGame
 
         public void LoadLevel(int level)
         {
-            Debug.WriteLine("JE LOAD LE LEVEL : " + level);
             currentLevel = level;
+            playingAera = new PlayingAera(63,122, 483, 560);
+            ServiceLocator.RegisterService(playingAera);
             string json = File.ReadAllText("Content/Levels/level1.json");
             LevelList levelList = JsonSerializer.Deserialize<LevelList>(json);
 
@@ -57,8 +58,11 @@ namespace BricksGame
 
                     foreach (int dice in lines)
                     {
+                       
+                            currentLevelDices.Add(dice);
+                       
 
-                        currentLevelDices.Add(dice);
+                        
                     }
                 }
                 List<Dice> dicesList = dicesFactory.Load(currentLevelDices);
@@ -66,11 +70,9 @@ namespace BricksGame
                 for (int n = 0; n < dicesList.Count; n++)
                 {
                     gameGrid.AddBrickable(dicesList[n], n);
-                    gameManager.RegisterActor(dicesList[n]);
+                    ServiceLocator.GetService<Scene>().AddToGameObjectsList(dicesList[n]);
                 }
-
             }
-
         }
 
         public void NextLevel()
@@ -98,7 +100,7 @@ namespace BricksGame
             {
                 for (int n = 0; n < gameGrid.GridElements.Count(); n++)
                 {
-                    if (gameGrid.GridElements[n] is Dice)
+                    if (gameGrid.GridElements[n] is Dice )
                     {
                         Dice dice = (Dice)gameGrid.GridElements[n];
 
@@ -109,10 +111,9 @@ namespace BricksGame
                             {
                                 Monster c_monster = monsterFactory.CreateMonster(dice.DiceResult);
                                 gameGrid.AddBrickable(c_monster, n);
-                                gameManager.RegisterActor(c_monster);
+                                ServiceLocator.GetService<Scene>().AddToGameObjectsList(c_monster);
                                 gameGrid.GridElements[n] = null;
                                 dice.Destroy();
-
                             }
                         }
 
@@ -132,6 +133,10 @@ namespace BricksGame
                         if (gameGrid.GridElements[n] is Monster)
                         {
                             monsterCount++;
+                        }
+                        else if ((gameGrid.GridElements[n] is Dice))
+                        {
+                            gameGrid.GridElements[n] = null; // Enlève les dès "0" qui sont restés sur la grille
                         }
                         currentState = LevelState.play;
                     }
@@ -158,7 +163,6 @@ namespace BricksGame
               
                 if (monsterCount == 0)
                 {
-              
                     currentState = LevelState.win;
                 }
 

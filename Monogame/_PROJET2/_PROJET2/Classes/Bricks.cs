@@ -1,15 +1,9 @@
-﻿using BricksGame;
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
+
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Timers;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace BricksGame
 {
@@ -36,55 +30,7 @@ namespace BricksGame
         public void TouchedBy(GameObject p_By)
         { 
          
-            
-            if (p_By is Ball)
-                {
-                Ball ball = (Ball)p_By;
-              
-
-                if (timer <= 0)
-                {
-                    CollisionEvent = false;
-                    timer = 0.05f;
-                }
-
-                if (!CollisionEvent)
-                  {
-                  
-                    Debug.WriteLine(Position.Y + ":" + currentTexture.Height + " et en total " + (Position.Y + currentTexture.Height));
-                    Debug.WriteLine(Position.X + ":" + currentTexture.Width + " et en total " + (Position.X + currentTexture.Width));
-                    Debug.WriteLine("Ball position X et Y " + ball.Position.X + ":" + ball.Position.Y + " et brick : " + (Position.X + currentTexture.Width) + "," + (Position.Y + currentTexture.Height));
-                    Debug.WriteLine("La dernière position de la balle était :" + ball.lastValidPosition.X + ":"+ ball.lastValidPosition.Y);
-
-                    if ((ball.Position.Y + ball.currentTexture.Height >= Position.Y) && (ball.Position.Y <= Position.Y + currentTexture.Height) && (ball.Position.X +ball.currentTexture.Width >= Position.X) && (ball.Position.X <= Position.X + currentTexture.Width))
-                    {
-  
-                        Debug.WriteLine("J'inverse la direction X");
-                     
-
-                        if ((ball.lastValidPosition.X >= Position.X) && (ball.lastValidPosition.X <= Position.X + currentTexture.Width))
-                        {
-
-                            Debug.WriteLine("J'inverse la direction Y");
-                            ball.InverseVerticalDirection();
-                           
-                        }
-
-                        else
-                        {
-                            ball.InverseHorizontalDirection();
-                        }
-                       
-                        RemoveLife();
-                      
-                        CollisionEvent = true;
-                    }
-                }
-            }
-           else if (p_By is TimedParticles)
-            {
-                RemoveLife();
-            }
+         
         }
 
       
@@ -93,7 +39,7 @@ namespace BricksGame
         {
             if  (life <= 0)
             {
-                Destroy();
+                Destroy(this);
             }
 
             if (CollisionEvent)
@@ -113,16 +59,18 @@ namespace BricksGame
         }
 
     
-        public void Destroy()
+         public void Destroy(IDestroyable brick)
         {
             isDestroy = true;
+            brick = null;
+        }
+        public void Destroy()
+        {
+            Destroy(this);
         }
 
-        public void RemoveLife()
-        {
-            life--;
-            CollisionEvent = false;
-        }
+
+        
     }
 }
 

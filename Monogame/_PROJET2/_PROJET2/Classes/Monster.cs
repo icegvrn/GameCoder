@@ -3,31 +3,32 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using BricksGame.Classes;
+using System;
 
 namespace BricksGame
     {
-        public class Monster : Sprite, ICollider, IDestroyable, IBrickable
+        public class Monster : Bricks, ICollider, IDestroyable
         {
-            private bool isDestroy;
-            public bool IsDestroy { get { return isDestroy; } set { isDestroy = value; } }
-            public bool CollisionEvent = false;
+
             public bool IsDead = false;
             private float life = 4;
             private float initialLife;
-            private float timer = 0.2f;
-            private Rectangle lifeBar;
-            private int lifeBarLenght = 56;
-            private int lifeBarHeight = 4;
-            private Rectangle currentLife;
-            private Color currentLifeColor;
-            private Color[] lifeColors = { Color.Green, Color.Yellow, Color.Orange, Color.Red};
-            private Texture2D lifeBarTexture;
             private Animator animator;
+            public bool isAttacking = false;
+            private float attackTimer = 0f;
+            private float attackCooldown = 2f;
 
-            public Monster(List<Texture2D> p_textures) : base(p_textures)
+        // Jauge du monstre
+            private EvolutiveColoredGauge gauge;
+            int lifeBarLenght = 56;
+            int lifeBarHeight = 4;
+            Color[] lifeColors = { Color.Green, Color.Yellow, Color.Orange, Color.Red };
+            float[] threshold = { 0.65f, 0.55f, 0.35f };
+
+        public Monster(List<Texture2D> p_textures) : base(p_textures)
             {
             BoundingBox = new Rectangle((int)(Position.X - currentTexture.Width / 2), (int)(Position.Y - currentTexture.Height / 2), currentTexture.Width, currentTexture.Height);
-        CanMove = true;    
+            CanMove = true;    
         }
 
             public Monster(List<Texture2D> p_textures, int Power) : base(p_textures)
@@ -35,17 +36,15 @@ namespace BricksGame
             life = Power * Power * 50;
             initialLife = life;
             BoundingBox = new Rectangle((int)(Position.X), (int)(Position.Y), (currentTexture.Width/(currentTexture.Width/currentTexture.Height)), currentTexture.Height);
-            lifeBarTexture = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/blank");
-            lifeBar = new Rectangle((int)Position.X - BoundingBox.Width/2, (int)Position.Y, lifeBarLenght, lifeBarHeight);
-            currentLife = new Rectangle((int)Position.X - BoundingBox.Width / 2, (int)Position.Y, (int)((life / initialLife) * lifeBarLenght), lifeBarHeight);
+
+
+            AddGauge();
+           
             animator = new Animator(p_textures[0], 0.15f);
             SetSpeed(Power);
             CanMove = true;
         }
-            public void TouchedBy(GameObject p_By)
-        {
-            
-        }
+         
 
         public void SetSpeed(int power)
         {
@@ -72,40 +71,25 @@ namespace BricksGame
         }
        
             public override void Update(GameTime p_GameTime)
-            {
+        {
+
+       
+            attackTimer += (float)p_GameTime.ElapsedGameTime.TotalSeconds;
 
             if (Position.Y > ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - BoundingBox.Width*4)
             {
                 CanMove = false;
-                PlayerState.SubsLife(1);
+                Attack();
             }
             
             animator.Update(p_GameTime);
 
-            lifeBar.X = (int)(Position.X - (currentTexture.Width / (currentTexture.Width / currentTexture.Height)) / 2);
-            lifeBar.Y = ((int)Position.Y + BoundingBox.Height/2) + 2; 
-            currentLife.X = lifeBar.X;
-            currentLife.Y = lifeBar.Y;
-            currentLife.Width = (int)((life / initialLife) * lifeBarLenght);
-       
-
-                if (life >= initialLife * 0.65f)
-                {
-                    currentLifeColor = lifeColors[0];
-                }
-                else if (life >= initialLife * 0.55f)
-                {
-                    currentLifeColor = lifeColors[1];
-                }
-                else if (life >= initialLife * 0.35f)
-                {
-                    currentLifeColor = lifeColors[2];
-                }
-                else
-                {
-                    currentLifeColor = lifeColors[3];
-                }
-
+      
+            
+            gauge.CurrentValue = life;
+            gauge.Position = new Vector2(((int)(Position.X - (currentTexture.Width / (currentTexture.Width / currentTexture.Height)) / 2)), (((int)Position.Y + BoundingBox.Height / 2) + 2));
+            gauge.Update(p_GameTime);
+     
 
                 if (life <= 0)
                 {
@@ -120,23 +104,11 @@ namespace BricksGame
                 }
 
         public override void Draw(SpriteBatch p_SpriteBatch)
-            {
-                animator.Draw(p_SpriteBatch, new Vector2((int)(Position.X - (currentTexture.Width / (currentTexture.Width / currentTexture.Height)) / 2), (int)(Position.Y - currentTexture.Height / 2)));
-              //  p_SpriteBatch.Draw(currentTexture, new Vector2((int)(Position.X - currentTexture.Width/2), (int)(Position.Y - currentTexture.Height/2)), Color.White);
-
-                p_SpriteBatch.DrawString(AssetsManager.Font14, ((int)life).ToString(), new Vector2(Position.X, Position.Y + currentTexture.Height/1.8f), currentLifeColor);
-               
-                p_SpriteBatch.Draw(lifeBarTexture, lifeBar, Color.Gray);
-
-                p_SpriteBatch.Draw(lifeBarTexture, currentLife, currentLifeColor);
-              //   DrawBoundingBox(p_SpriteBatch);
+        {
+            animator.Draw(p_SpriteBatch, new Vector2((int)(Position.X - (currentTexture.Width / (currentTexture.Width / currentTexture.Height)) / 2), (int)(Position.Y - currentTexture.Height / 2)));
+            gauge.Draw(p_SpriteBatch);
         }
 
-
-            public void Destroy()
-            {
-                isDestroy = true;
-            }
 
             public void RemoveLife(float lifeFactor)
             {
@@ -144,6 +116,28 @@ namespace BricksGame
                 life -= lifeFactor;
                 CollisionEvent = false;
             }
+
+
+        public void Attack()
+        {
+            if (attackTimer >= attackCooldown)
+            { 
+                isAttacking = true;
+                attackTimer = 0f;
+            }
+            else
+            {
+                isAttacking = false;
+            }
+           
+        }
+
+        public void AddGauge()
+        {
+            Rectangle lifeBar = new Rectangle((int)Position.X - BoundingBox.Width / 2, (int)Position.Y, lifeBarLenght, lifeBarHeight); 
+            gauge = new EvolutiveColoredGauge(initialLife, lifeBar, Color.White, threshold, lifeColors, true, new Vector2(Position.X, Position.Y), Color.White);
+        }
+
 
         private void DrawBoundingBox(SpriteBatch spriteBatch)
         {
@@ -159,6 +153,7 @@ namespace BricksGame
             spriteBatch.Draw(pixelTexture, new Rectangle(rect.Left, rect.Top, rect.Width, 1), Color.Red);
             spriteBatch.Draw(pixelTexture, new Rectangle(rect.Left, rect.Bottom, rect.Width, 1), Color.Red);
         }
+
     }
 
 

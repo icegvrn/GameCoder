@@ -199,10 +199,16 @@ namespace BricksGame
             lastMathCeil = (int)Math.Ceiling(diceAnimationTimer);
         }
 
-        public void Destroy()
+        public void Destroy(IDestroyable dice)
         {
             IsDestroy = true;
             DiceRolled = false;
+            dice = null;
+        }
+
+        public void Destroy()
+        {
+            Destroy(this);
         }
     }
 }

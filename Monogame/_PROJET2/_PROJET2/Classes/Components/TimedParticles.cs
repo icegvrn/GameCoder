@@ -31,15 +31,11 @@ namespace BricksGame
 
         public void TouchedBy(GameObject p_By)
         {
-            
-         
                 if (p_By is Monster)
                 {
                     Monster brick = (Monster)p_By;
                     brick.RemoveLife(1f); 
                 }
-   
-           
         }
 
         public override void Draw(SpriteBatch p_SpriteBatch)

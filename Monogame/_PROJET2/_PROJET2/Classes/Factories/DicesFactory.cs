@@ -66,6 +66,7 @@ namespace BricksGame
                 for (int i = 0; i < 6; i++)
                 {
                     dicesList[i + n * 6].Position = new Vector2(bricks[i + n * 6].Position.X + bricks[i + n * 6].BoundingBox.Width / 2, bricks[i + n * 6].Position.Y + bricks[i + n * 6].BoundingBox.Height / 2);
+
                 }
             }
         }

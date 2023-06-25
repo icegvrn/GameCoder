@@ -20,7 +20,6 @@ namespace BricksGame
         private bool isFired;
         public bool collide = false;
         public bool IsDestroy { get; set; }
-        private List<Rectangle> lines;
         public bool CollisionEvent = false;
         private float timer = 0.2f;
 
@@ -31,9 +30,8 @@ namespace BricksGame
             lineTexture = (ServiceLocator.GetService<ContentManager>()).Load<Texture2D>("images/blank");
             Speed = 3f;
             CanMove = false;
-            lines = new List<Rectangle>();
+    
         }
-
 
 
         public void TouchedBy(GameObject p_By)
@@ -72,15 +70,15 @@ namespace BricksGame
                 }
             }
 
-            else if (p_By is Pad)
+            else if (p_By is Player)
             {
                 if (!CollisionEvent)
                 {
-                    Pad brick = (Pad)p_By;
+                    Player player = (Player)p_By;
 
                     // Calcul de la position horizontale relative de la balle par rapport au pad
-                    float relativePositionX = Position.X - brick.Position.X;
-                    float padWidth = brick.BoundingBox.Width;
+                    float relativePositionX = Position.X - player.Position.X;
+                    float padWidth = player.BoundingBox.Width;
                     float quarterWidth = padWidth / 6f;
                   
                     // Déterminer la partie du pad où la balle a touché
@@ -140,8 +138,6 @@ namespace BricksGame
 
                     }
                     Debug.WriteLine("MA DESTINATION EST DE " + destination.X + " car j'avais un angle de " + angle);
-
-                   
                     CollisionEvent = true;
 
 
@@ -258,35 +254,42 @@ namespace BricksGame
         public void TryMove()
         {
 
-            if (Position.X + currentTexture.Width >= ServiceLocator.GetService<GraphicsDevice>().Viewport.Width - 63)
+            if (Position.X + currentTexture.Width > ServiceLocator.GetService<PlayingAera>().aera.Right)
             {
-            //    Debug.WriteLine("Ball sort à droite " + destination.X + " " + destination.Y);
+                Position = new Vector2(ServiceLocator.GetService<PlayingAera>().aera.Right - currentTexture.Width, Position.Y);
+                //    Debug.WriteLine("Ball sort à droite " + destination.X + " " + destination.Y);
                 InverseHorizontalDirection();
             }
 
-            else if (Position.X <= 63)
+            if (Position.X < ServiceLocator.GetService<PlayingAera>().aera.X)
             {
+                Position = new Vector2(ServiceLocator.GetService<PlayingAera>().aera.X, Position.Y);
              //   Debug.WriteLine("Ball sort à gauche " + destination.X + " " + destination.Y);
                 InverseHorizontalDirection();
             }
 
-            else if (Position.Y <= 122)
+             if (Position.Y < ServiceLocator.GetService<PlayingAera>().aera.Y)
             {
-               // Debug.WriteLine("Ball sort en haut " + destination.X + " " + destination.Y);
+                Position = new Vector2(Position.X, ServiceLocator.GetService<PlayingAera>().aera.Y);
+                // Debug.WriteLine("Ball sort en haut " + destination.X + " " + destination.Y);
                 InverseVerticalDirection();
             }
 
-            else if (Position.Y >= ServiceLocator.GetService<GraphicsDevice>().Viewport.Height *1.5f)
+             if (Position.Y > ServiceLocator.GetService<GraphicsDevice>().Viewport.Height * 1.5f)
             {
         
-                Destroy();
+                Destroy(this);
 
             }
 
-            else
+             if (Position.Y < 0)
             {
-            lastValidPosition = Position;
+                Destroy(this);
             }
+
+         
+            lastValidPosition = Position;
+           
          
             Move(destination.X, destination.Y);
            
@@ -294,17 +297,15 @@ namespace BricksGame
 
         public void InverseHorizontalDirection()
         {
-          //  Debug.WriteLine("J'INVERSE");
             destination.X *= -1;
         }
 
         public void InverseVerticalDirection()
         {
-            // Debug.WriteLine("J'INVERSE");
             destination.Y *= -1;
         }
 
-        public void Destroy()
+        public void Destroy(IDestroyable ball)
         {
                for (int n = timedParticles.Count() - 1; n >= 0; n--)
             {
@@ -314,12 +315,17 @@ namespace BricksGame
 
             }
             ServiceLocator.GetService<Scene>().RemoveToGameObjectsList(this);
+
             IsDestroy = true;
-
-
-         
-
+            ball = null;
         }
+
+        public void Destroy()
+        {
+            Destroy(this);
+        }
+
+      
         private void DrawBoundingBox(SpriteBatch spriteBatch)
         {
             Rectangle rect = BoundingBox;

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace BricksGame
 {
-    internal interface IDestroyable
+    public interface IDestroyable
     {
         bool IsDestroy { get; set; }
+        void Destroy(IDestroyable destroyable);
         void Destroy();
+
     }
 }

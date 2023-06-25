@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace BricksGame
 {
-    internal interface ICollider
+    public interface ICollider
     {
         Vector2 Position { get; }
         Rectangle BoundingBox { get; }
         void TouchedBy(GameObject p_By);
+
+
     }
 }
