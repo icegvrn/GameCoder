@@ -1,12 +1,7 @@
 ﻿using BricksGame;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BricksGame
 {
@@ -85,6 +80,11 @@ namespace BricksGame
             }
             return false;
            
+        }
+
+        public virtual void End()
+        {
+
         }
 
     }

@@ -81,7 +81,7 @@ namespace BricksGame
 
         public void EndLevel()
         {
-            gameGrid.Clear();
+           gameGrid.Clear();
         }
 
         public void NoBallActions()

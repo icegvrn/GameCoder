@@ -25,7 +25,7 @@ namespace BricksGame
             // TODO: Add your initialization logic here
             _graphics.IsFullScreen = false;
             _graphics.PreferredBackBufferWidth = 600;
-            _graphics.PreferredBackBufferHeight = 800;
+            _graphics.PreferredBackBufferHeight = 820;
             _graphics.ApplyChanges();
             base.Initialize();
         }

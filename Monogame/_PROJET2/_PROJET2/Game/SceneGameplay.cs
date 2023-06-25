@@ -15,8 +15,7 @@ namespace BricksGame
 {
     internal class SceneGameplay : Scene
     {
-        private Ball ball;
-        private Pad pad;
+
         private Song myMusic;
         private GameManager gameManager;
         private Texture2D background;
@@ -35,7 +34,7 @@ namespace BricksGame
             MediaPlayer.Play(myMusic);
             gameManager.Load();
             ContentManager content = ServiceLocator.GetService<ContentManager>();
-             background = content.Load<Texture2D>("images/map1");
+            background = content.Load<Texture2D>("images/map1");
             grid = content.Load<Texture2D>("images/grid");
             base.Load();
         }
@@ -48,11 +47,13 @@ namespace BricksGame
 
         public override void Update(GameTime gameTime)
         {
-
-
             gameManager.Update(gameTime);
-             base.Update(gameTime);
+            base.Update(gameTime);
+        }
 
+        public override void End()
+        {
+            mainGame.gameState.ChangeScene(GameState.SceneType.GameOver);
         }
 
         public override void Draw(GameTime gameTime)

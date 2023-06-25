@@ -38,6 +38,7 @@ namespace BricksGame
            ContentManager content = ServiceLocator.GetService<ContentManager>();
             List<Texture2D> spritesTexture = new List<Texture2D>();
             tiles = new List<Rectangle>();
+           
             switch (value)
             {
                 case Gamesystem.dice.d3:

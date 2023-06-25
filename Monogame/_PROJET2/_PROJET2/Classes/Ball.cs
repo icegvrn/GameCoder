@@ -1,16 +1,12 @@
-﻿using BricksGame;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BricksGame
 {
@@ -72,8 +68,6 @@ namespace BricksGame
                         }
                         CollisionEvent = true;
                         brick.RemoveLife(2);
-
-
                     }
                 }
             }
@@ -219,8 +213,10 @@ namespace BricksGame
         public void addTrailToBall(GameTime p_GameTime)
         {
             List<Texture2D> textures = new List<Texture2D>();
-            textures.Add(currentTexture);
-            TimedParticles particle = new TimedParticles(textures, (int)Position.X, (int)Position.Y, currentTexture.Width, currentTexture.Height, 0.6f) ;
+            textures.Add((ServiceLocator.GetService<ContentManager>()).Load<Texture2D>("images/round"));
+
+
+            TimedParticles particle = new TimedParticles(textures, (int)Position.X, (int)Position.Y, currentTexture.Width, currentTexture.Height, 1.3f);
             timedParticles.Add(particle);
             ServiceLocator.GetService<Scene>().AddToGameObjectsList(particle);
         }
@@ -256,10 +252,7 @@ namespace BricksGame
    
           base.Draw(p_SpriteBatch);
 
-            foreach (TimedParticles particle in timedParticles)
-            {
-                p_SpriteBatch.Draw(currentTexture, new Vector2(particle.BoundingBox.X, particle.BoundingBox.Y), Color.White);
-            }
+         
         }
 
         public void TryMove()

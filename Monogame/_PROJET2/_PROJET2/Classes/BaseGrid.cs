@@ -1,14 +1,8 @@
-﻿using BricksGame;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
+
 using System.Numerics;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace BricksGame
 {
@@ -23,7 +17,7 @@ namespace BricksGame
             private float brickHeight = 56f;
             private float bricksMargin = 0f;
             private float downSpeed = 56f;
-        private Vector2 Position;
+            private Vector2 Position;
 
         public BaseGrid(int colNb, int linNb)
             {
@@ -38,8 +32,6 @@ namespace BricksGame
             {
                 for (int i=0; i<columnsNb; i++)
                 {
-                    Debug.WriteLine(" POsition X " + Position.X + "Brick width " + brickWidth + " i " + (i));
-                    Debug.WriteLine(Position.X + ((brickWidth * 1.5f) * (i)));
                     Vector2 vector = new Vector2(Position.X + brickWidth/2 +((brickWidth) * (i)), Position.Y + brickHeight/2+ (brickHeight * n));
                     slotPositions.Add(vector);
                 }
@@ -57,25 +49,56 @@ namespace BricksGame
             {
                 return slotPositions[index];
             }
+
+        public void Clear()
+        {
+
+        }
         public void Down()
         {
             foreach (IBrickable brick in gridElements)
             {
-                if (brick != null)
+                if (brick != null && brick is not Dice)
                 {
-                    brick.Position = new Vector2(brick.Position.X, brick.Position.Y + downSpeed);
+                    Vector2 destination = new Vector2(brick.Position.X, brick.Position.Y + downSpeed * brick.Speed);
+
+                    if (destination.Y >= brickHeight * (linesNb - 1))
+                    {
+                        destination = new Vector2(brick.Position.X, brickHeight * (linesNb - 1));
+                    }
+
+
+
+                    bool pathFind = false;
+                    while (!pathFind)
+                    {
+                        bool occuped = false;
+
+                        foreach (IBrickable brick2 in gridElements)
+                        {
+                            if (brick2 != null && brick2 != brick && brick2.Position == destination && brick2 is not Dice)
+                            {
+                                
+                                occuped = true;
+                                break;
+                            }
+                        }
+
+                        if (!occuped)
+                        {
+                            pathFind = true;
+                            break;
+                        }
+                        else
+                        {
+                            destination = new Vector2(destination.X, destination.Y - brickHeight);
+                        }
+                    }
+
+                    brick.Position = destination;
                 }
-               
             }
         }
-
-        public void Clear()
-        {
-     
-    
-        }
-
-
 
     }
 

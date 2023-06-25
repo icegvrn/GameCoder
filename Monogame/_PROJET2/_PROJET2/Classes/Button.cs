@@ -36,13 +36,11 @@ namespace BricksGame
                 {
                     isHover = true;
                     changeSprite(1);
-                    Debug.WriteLine("The button is now Hover");
                 }
                 else
                 {
                     if (newMouseState != oldMouseState && newMouseState.LeftButton == ButtonState.Pressed)
                     {               
-                        Debug.WriteLine("Clic !");
                         if (onClick != null)
                         {
                             onClick(this);
@@ -61,11 +59,18 @@ namespace BricksGame
 
         private void changeSprite(int nb)
         {
-            if (Textures[nb] != null)
-            {
-                currentTexture = Textures[nb];
+            if (nb <= Textures.Count()-1) {
+                if (Textures[nb] != null)
+                {
+                    currentTexture = Textures[nb];
+                }
+
             }
-          
+        }
+
+        public void ChangeSpriteEffects(SpriteEffects sFX)
+        {
+            spriteEffects = sFX;
         }
     }
 }

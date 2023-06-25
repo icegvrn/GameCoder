@@ -10,5 +10,7 @@ namespace BricksGame
     public interface IBrickable
     {
        Vector2 Position { get; set; }
+        float Speed { get; set; }
+        bool CanMove { get; set; }
     }
 }
