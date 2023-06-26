@@ -168,7 +168,7 @@ namespace BricksGame
                     BlinkOnHit(p_GameTime, false);
                 }
             }
-            BoundingBox = new Rectangle((int)(Position.X), (int)(Position.Y), (int)Size.X, (int)Size.Y);
+            BoundingBox = new Rectangle((int)(Position.X), (int)(Position.Y), (int)Size.X, (int)Size.Y/3);
             animator.Update(p_GameTime);
 
 
@@ -202,7 +202,7 @@ namespace BricksGame
         {
 
             animator.Draw(p_SpriteBatch, Position, playerColor);
-           //  DrawBoundingBox(p_SpriteBatch);
+           // DrawBoundingBox(p_SpriteBatch);
 
             barLife.Draw(p_SpriteBatch);
             p_SpriteBatch.Draw(lifeIcon, new Vector2((barLife.Position.X + barsLenght) - lifeIcon.Width*0.5f, barLife.Position.Y - lifeIcon.Height/3), Color.White);
@@ -247,7 +247,9 @@ namespace BricksGame
         public void Reset()
         {
             Position = new Vector2(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 - Size.X/2, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - Size.Y*2f);
+            playerColor = Color.White;
             
+
             if (BallsList is not null)
             {
                 foreach (Ball ball in BallsList)

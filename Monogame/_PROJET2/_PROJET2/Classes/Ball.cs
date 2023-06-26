@@ -140,7 +140,6 @@ namespace BricksGame
                     Debug.WriteLine("MA DESTINATION EST DE " + destination.X + " car j'avais un angle de " + angle);
                     CollisionEvent = true;
 
-
                 }
 
             }
@@ -340,7 +339,6 @@ namespace BricksGame
             spriteBatch.Draw(pixelTexture, new Rectangle(rect.Left, rect.Top, rect.Width, 1), Color.Red);
             spriteBatch.Draw(pixelTexture, new Rectangle(rect.Left, rect.Bottom, rect.Width, 1), Color.Red);
         }
-
 
     }
 }

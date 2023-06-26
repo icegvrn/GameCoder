@@ -85,3 +85,5 @@ C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\ne
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\icon_counter_true.xnb
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\icon_heart.xnb
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\icon_power.xnb
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\pad_attack_left.xnb
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\pad_die_left.xnb

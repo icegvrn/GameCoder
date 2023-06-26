@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/pad_attack.png</SourceFile>
-  <SourceTime>2023-06-23T00:55:28.4387409+02:00</SourceTime>
+  <SourceTime>2023-06-26T13:28:48.515077+02:00</SourceTime>
   <DestFile>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/bin/DesktopGL/images/pad_attack.xnb</DestFile>
-  <DestTime>2023-06-23T00:56:01.9674659+02:00</DestTime>
+  <DestTime>2023-06-26T13:31:35.1241426+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

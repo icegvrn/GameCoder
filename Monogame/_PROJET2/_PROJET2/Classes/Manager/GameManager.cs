@@ -71,10 +71,15 @@ namespace BricksGame
                 NextLevel();
             }
 
-            if (levelManager.currentState == LevelManager.LevelState.play)
+            if (levelManager.currentState == LevelManager.LevelState.dices)
+            {
+                player.ChangeState(Gamesystem.CharacterState.idle);
+            }
+           else if (levelManager.currentState == LevelManager.LevelState.play)
             {
            if (!player.IsReady)
                 {
+                
                     player.IsReady = true;
                     player.Prepare();
                 }
@@ -97,8 +102,9 @@ namespace BricksGame
         public void NextLevel()
         {
             levelManager.NextLevel();
-            player.Reset();
             player.IsReady = false;
+            player.Reset();
+            
            
         }
     }

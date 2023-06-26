@@ -4,6 +4,13 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/pad_attack_left.png</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/pad_attack.png</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/pad_die_left.png</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/pad_left.png</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/pad_walk_left.png</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/pad_walk.png</File>
+    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/pad.png</File>
     <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/character_portrait.png</File>
     <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/dMagic.png</File>
     <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/icon_counter_true.png</File>
@@ -15,11 +22,6 @@
     <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/button_hover.png</File>
     <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/button_load_hover.png</File>
     <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/button_load.png</File>
-    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/pad_attack.png</File>
-    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/pad_left.png</File>
-    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/pad_walk_left.png</File>
-    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/pad_walk.png</File>
-    <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/pad.png</File>
     <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/ball.png</File>
     <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/round.png</File>
     <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/images/Monsters/2.png</File>
@@ -65,6 +67,8 @@
     <File>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/techno.mp3</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
