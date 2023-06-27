@@ -25,6 +25,8 @@
   <ItemGroup>
     <Folder Include="Content\bin\DesktopGL\images\" />
     <Folder Include="Content\bin\DesktopGL\images\Monsters\" />
+    <Folder Include="Content\bin\DesktopGL\images\Monsters\attack\" />
+    <Folder Include="Content\bin\DesktopGL\images\Monsters\die\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

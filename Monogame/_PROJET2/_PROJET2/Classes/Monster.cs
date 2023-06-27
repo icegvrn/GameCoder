@@ -10,7 +10,10 @@ namespace BricksGame
         public class Monster : Bricks, ICollider, IDestroyable
         {
 
-            public bool IsDead = false;
+        public Gamesystem.CharacterState currentState;
+        private Gamesystem.CharacterState lastState;
+
+        public bool IsDead = false;
             private float life = 4;
             private float initialLife;
             private Animator animator;
@@ -18,29 +21,28 @@ namespace BricksGame
             private float attackTimer = 0f;
             private float attackCooldown = 2f;
 
+
+        private List<Texture2D> textures;
+        private Texture2D attackIcon;
+
         // Jauge du monstre
-            private EvolutiveColoredGauge gauge;
+        private EvolutiveColoredGauge gauge;
             int lifeBarLenght = 56;
             int lifeBarHeight = 4;
             Color[] lifeColors = { Color.Green, Color.Yellow, Color.Orange, Color.Red };
             float[] threshold = { 0.65f, 0.55f, 0.35f };
 
-        public Monster(List<Texture2D> p_textures) : base(p_textures)
-            {
-            BoundingBox = new Rectangle((int)(Position.X - currentTexture.Width / 2), (int)(Position.Y - currentTexture.Height / 2), currentTexture.Width, currentTexture.Height);
-            CanMove = true;    
-        }
+
 
             public Monster(List<Texture2D> p_textures, int Power) : base(p_textures)
             {
             life = Power * Power * 50;
             initialLife = life;
             BoundingBox = new Rectangle((int)(Position.X), (int)(Position.Y), (currentTexture.Width/(currentTexture.Width/currentTexture.Height)), currentTexture.Height);
-
-
+            textures = p_textures;
+            attackIcon = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/icon_ennemi");
             AddGauge();
-           
-            animator = new Animator(p_textures[0], 0.15f);
+            animator = new Animator(p_textures[(int)Gamesystem.CharacterState.idle], 0.15f);
             SetSpeed(Power);
             CanMove = true;
         }
@@ -73,7 +75,13 @@ namespace BricksGame
             public override void Update(GameTime p_GameTime)
         {
 
-       
+            if (lastState != currentState)
+            {
+                animator.ChangeSpriteSheet(textures[(int)currentState]);
+                lastState = currentState;
+            }
+
+
             attackTimer += (float)p_GameTime.ElapsedGameTime.TotalSeconds;
 
             if (Position.Y > ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - BoundingBox.Width*4)
@@ -81,6 +89,12 @@ namespace BricksGame
                 CanMove = false;
                 Attack();
             }
+
+            else if (currentState != Gamesystem.CharacterState.idle)
+            {
+                currentState = Gamesystem.CharacterState.idle;
+            }
+      
             
             animator.Update(p_GameTime);
 
@@ -107,10 +121,15 @@ namespace BricksGame
         {
             animator.Draw(p_SpriteBatch, new Vector2((int)(Position.X - (currentTexture.Width / (currentTexture.Width / currentTexture.Height)) / 2), (int)(Position.Y - currentTexture.Height / 2)));
             gauge.Draw(p_SpriteBatch);
+            if (currentState == Gamesystem.CharacterState.fire)
+            {
+                p_SpriteBatch.Draw(attackIcon, new Vector2((int)(Position.X), (int)(Position.Y - currentTexture.Height / 2)), Color.White);
+            }
+
         }
 
 
-            public void RemoveLife(float lifeFactor)
+        public void RemoveLife(float lifeFactor)
             {
                 PlayerState.AddPoints((int)lifeFactor);
                 life -= lifeFactor;
@@ -120,16 +139,28 @@ namespace BricksGame
 
         public void Attack()
         {
+            if (currentState != Gamesystem.CharacterState.fire)
+            {
+                ChangeState(Gamesystem.CharacterState.fire);
+            }
+          
             if (attackTimer >= attackCooldown)
             { 
                 isAttacking = true;
                 attackTimer = 0f;
+            
             }
             else
             {
                 isAttacking = false;
+              
             }
            
+        }
+
+        public void ChangeState(Gamesystem.CharacterState state)
+        {
+            currentState = state;
         }
 
         public void AddGauge()

@@ -48,7 +48,7 @@ namespace BricksGame
 
                 Monster brick = (Monster)p_By;
 
-                if (!CollisionEvent)
+                if (!CollisionEvent && isFired)
                 {
                     if (BoundingBox.Intersects(brick.BoundingBox))
                     {
@@ -167,6 +167,7 @@ namespace BricksGame
             {
                 addTrailToBall(p_GameTime);
             }
+        
          
 
             if (CollisionEvent)

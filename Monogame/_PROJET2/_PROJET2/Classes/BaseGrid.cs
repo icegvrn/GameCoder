@@ -85,7 +85,7 @@ namespace BricksGame
 
                         foreach (Bricks brick2 in gridElements)
                         {
-                            if (brick2 != null && brick2 != gridElements[n] && brick2.Position == new Vector2(gridElements[n].Position.X, wantedCase))
+                            if (brick2 != null && brick2 != gridElements[n] && brick2.Position == new Vector2(gridElements[n].Position.X, wantedCase) && !brick2.IsDestroy)
                             {
                                 occupied = true;
                                 break;

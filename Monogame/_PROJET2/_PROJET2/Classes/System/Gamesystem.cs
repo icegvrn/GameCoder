@@ -19,7 +19,7 @@ namespace BricksGame
             d12,
             d20
         }
-        public enum CharacterState { idle, l_idle, walk, l_walk, fire }
+        public enum CharacterState { idle, l_idle, walk, l_walk, fire, die }
     }
 
   
