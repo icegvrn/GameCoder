@@ -1,5 +1,7 @@
 ﻿using BricksGame;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 
@@ -8,71 +10,95 @@ namespace BricksGame
      abstract public class Scene
     {
         protected MainGame mainGame;
-        protected List<GameObject> gameObjects;
-
-        public Scene(MainGame p_mainGame) { mainGame = p_mainGame; gameObjects = new List<GameObject>(); }
+        protected List<GameObject> gameObjectsList;
+        protected Texture2D background;
+        public Scene(MainGame p_mainGame) {
+            mainGame = p_mainGame; 
+            gameObjectsList = new List<GameObject>(); 
+        }
 
         public virtual void Load() { }
         public virtual void UnLoad() { }
         public virtual void Update(GameTime gameTime) 
         {
-
-            for (int i = gameObjects.Count - 1; i >= 0; i--)
-            {
-                gameObjects[i].Update(gameTime);
-
-                foreach (GameObject gameObj2 in gameObjects)
-                {
-                    if (gameObj2 != gameObjects[i])
-                    {
-                        if (gameObjects[i] is ICollider && gameObj2 is ICollider)
-                        {
-                           ICollider c_colliderObject = (ICollider)gameObjects[i];
-                            ICollider c_colliderObject2 = (ICollider)gameObj2;
-                            if (Utils.CollideByBox(gameObjects[i], gameObj2))
-                            {
-                                c_colliderObject.TouchedBy(gameObj2);
-                                c_colliderObject2.TouchedBy(gameObjects[i]);
-                            }
-                        }  
-                    }
-                }
-              
-                if (gameObjects[i] is IDestroyable)
-                {
-                    IDestroyable dActor = (IDestroyable)gameObjects[i];
-                    if (dActor.IsDestroy)
-                    {
-                        gameObjects.Remove(gameObjects[i]);
-                    }
-                }
-            }    
+            UpdateGameObjects(gameTime);
+            RegisterCollisions();
+            RegisterDestroyedGameObjects();
         }
 
         public virtual void Draw(GameTime gameTime) 
         {
-            foreach (GameObject gameObj in gameObjects)
-            {
-                gameObj.Draw(mainGame._spriteBatch);
-            }
-
+            DrawAllGameObjects();
         }
 
         public void AddToGameObjectsList(GameObject gameObj)
         {
-            gameObjects.Add(gameObj);
+            gameObjectsList.Add(gameObj);
         }
 
         public void RemoveToGameObjectsList(GameObject gameObj)
         {
-            gameObjects.Remove(gameObj);
+            gameObjectsList.Remove(gameObj);
+        }
+
+        public void UpdateGameObjects(GameTime gameTime)
+        {
+            for (int i = gameObjectsList.Count - 1; i >= 0; i--)
+            {
+                gameObjectsList[i].Update(gameTime);
+            }
+        }
+
+        public void RegisterCollisions()
+        {
+            for (int i = gameObjectsList.Count - 1; i >= 0; i--)
+            {
+                foreach (GameObject gameObj2 in gameObjectsList)
+                {
+                    if (gameObj2 != gameObjectsList[i])
+                    {
+                        if (gameObjectsList[i] is ICollider && gameObj2 is ICollider)
+                        {
+                            ICollider c_colliderObject = (ICollider)gameObjectsList[i];
+                            ICollider c_colliderObject2 = (ICollider)gameObj2;
+                            if (Utils.CollideByBox(gameObjectsList[i], gameObj2))
+                            {
+                                c_colliderObject.TouchedBy(gameObj2);
+                                c_colliderObject2.TouchedBy(gameObjectsList[i]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public void RegisterDestroyedGameObjects()
+        {
+            for (int i = gameObjectsList.Count - 1; i >= 0; i--)
+            {
+                if (gameObjectsList[i] is IDestroyable)
+                {
+                    IDestroyable dActor = (IDestroyable)gameObjectsList[i];
+                    if (dActor.IsDestroy)
+                    {
+                        gameObjectsList.Remove(gameObjectsList[i]);
+                    }
+                }
+            }
+        }
+
+        public void DrawAllGameObjects()
+        {
+            foreach (GameObject gameObj in gameObjectsList)
+            {
+                gameObj.Draw(mainGame._spriteBatch);
+            }
         }
 
         public bool IsSceneContainsObjectTypeOf<T>()
         {
-            foreach (GameObject gameObj in gameObjects)
+            foreach (GameObject gameObj in gameObjectsList)
             {
-               
                 if (gameObj.GetType() == typeof(T))
                 {
                     return true;
@@ -86,6 +112,8 @@ namespace BricksGame
         {
 
         }
+
+     
 
     }
 }

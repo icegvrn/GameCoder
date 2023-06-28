@@ -63,15 +63,14 @@ namespace BricksGame
 
 
         private Texture2D munitionCounter;
-        public Player(List<Texture2D> p_texture) : base(p_texture)
+        public Player(Texture2D p_texture) : base(p_texture)
         {
      
             Speed = 15;
             currentState = Gamesystem.CharacterState.idle;
             lastState = currentState;
             textures = new List<Texture2D>();
-            textures = p_texture;
-            animator = new Animator(p_texture[(int)Gamesystem.CharacterState.idle], 0.15f);
+            animator = new Animator(this, 0.15f);
             Size = new Vector2((currentTexture.Width / (currentTexture.Width / currentTexture.Height)), currentTexture.Height);
             Reset();
 
@@ -101,6 +100,12 @@ namespace BricksGame
 
         }
 
+        public void ChangeState(Gamesystem.CharacterState state)
+        {
+         currentState = state;
+         animator.ChangeState(state);
+        }
+
         public override void Update(GameTime p_GameTime)
         {
             if (IsReady)
@@ -128,7 +133,7 @@ namespace BricksGame
                 }
                 if (GameKeyboard.IsKeyReleased(Keys.Q))
                 {
-                    ChangeState(Gamesystem.CharacterState.l_idle);
+                   ChangeState(Gamesystem.CharacterState.l_idle);
                 }
                 else if (GameKeyboard.IsKeyReleased(Keys.D))
                 {
@@ -149,14 +154,7 @@ namespace BricksGame
                 pointsBar.Update(p_GameTime);
 
 
-                if (lastState != currentState)
-                {
-                    animator.ChangeSpriteSheet(textures[(int)currentState]);
-                    lastState = currentState;
-                }
-
-               
-
+           
 
                 if (isHit)
                 {
@@ -168,12 +166,9 @@ namespace BricksGame
                     BlinkOnHit(p_GameTime, false);
                 }
             }
-            BoundingBox = new Rectangle((int)(Position.X), (int)(Position.Y), (int)Size.X, (int)Size.Y/3);
+
+            BoundingBox = new Rectangle((int)(Position.X), (int)(Position.Y), (int)Size.X, (int)Size.Y/3); 
             animator.Update(p_GameTime);
-
-
-
-
 
         }
 
@@ -181,14 +176,14 @@ namespace BricksGame
 
         public override void Move(float p_x, float p_y)
         {
-            if (Position.X + p_x * Speed < ServiceLocator.GetService<PlayingAera>().aera.X) 
+            if (Position.X + p_x * Speed < ServiceLocator.GetService<PlayerArea>().area.X) 
             {
-                Position = new Vector2(ServiceLocator.GetService<PlayingAera>().aera.X, Position.Y);
+                Position = new Vector2(ServiceLocator.GetService<PlayerArea>().area.X, Position.Y);
             }
                 
-            else if ((Position.X + p_x * Speed) > ServiceLocator.GetService<PlayingAera>().aera.Right - Size.X)
+            else if ((Position.X + p_x * Speed) > ServiceLocator.GetService<PlayerArea>().area.Right - Size.X)
             {
-                Position = new Vector2(ServiceLocator.GetService<PlayingAera>().aera.Right - Size.X, Position.Y);
+                Position = new Vector2(ServiceLocator.GetService<PlayerArea>().area.Right - Size.X, Position.Y);
             }
 
             else
@@ -262,10 +257,7 @@ namespace BricksGame
             BallsList = new List<Ball>();
         }
 
-        public void ChangeState(Gamesystem.CharacterState state )
-        {
-            currentState = state;
-        }
+  
 
         public void RemoveMunition(int nb)
         {
@@ -286,7 +278,7 @@ namespace BricksGame
         {
             if (!HasMunition)
             {
-                ServiceLocator.GetService<Scene>().End();
+                ServiceLocator.GetService<GameState>().CurrentScene.End();
             }
 
             List<Texture2D> myBallTextureList = new List<Texture2D>();
@@ -294,7 +286,7 @@ namespace BricksGame
             Ball ball = new Ball(myBallTextureList);
             ball.Position = new Vector2(Position.X + Size.X / 2, Position.Y - 20f);
             ball.Following(this);
-            ServiceLocator.GetService<Scene>().AddToGameObjectsList(ball);
+            ServiceLocator.GetService<GameState>().CurrentScene.AddToGameObjectsList(ball);
             BallsList.Add(ball);
     
             

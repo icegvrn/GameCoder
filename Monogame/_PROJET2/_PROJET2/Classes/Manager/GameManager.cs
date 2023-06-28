@@ -1,51 +1,68 @@
-﻿using BricksGame;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace BricksGame
 {
     public class GameManager
     {
         Scene currentScene;
-   
         private Player player; 
         private ContentManager content;
         LevelManager levelManager;
-        public GameManager(Scene p_currentScene)
+        public GameManager()
         {
-            currentScene = p_currentScene;
+            currentScene = ServiceLocator.GetService<GameState>().CurrentScene;
             content = ServiceLocator.GetService<ContentManager>();
-            ServiceLocator.RegisterService(currentScene);
         }
 
         public void Load()
         {
-          CreateNewPlayer();
-          levelManager = new LevelManager();
-          ServiceLocator.RegisterService(levelManager);
-          levelManager.LoadLevel(1);
+          LoadNewPlayer();
+          LoadLevelManager();
         }
  
-        public void CreateNewPlayer()
+   
+        public void Update(GameTime gameTime)
         {
-            List<Texture2D> myPadTextureList = new List<Texture2D>();
-            myPadTextureList.Insert((int)Gamesystem.CharacterState.idle, content.Load<Texture2D>("images/pad"));
-            myPadTextureList.Insert((int)Gamesystem.CharacterState.l_idle, content.Load<Texture2D>("images/pad_left"));
-            myPadTextureList.Insert((int)Gamesystem.CharacterState.walk, content.Load<Texture2D>("images/pad_walk"));
-            myPadTextureList.Insert((int)Gamesystem.CharacterState.l_walk, content.Load<Texture2D>("images/pad_walk_left"));
-            myPadTextureList.Insert((int)Gamesystem.CharacterState.fire, content.Load<Texture2D>("images/pad_attack"));
+            RegisterInput();
+            ManageMonstersAttack();
+            CheckPlayerDeath();
+            UpdateCurrentLevel(gameTime);
+            DoEventsOnLevelState();   
+        }
 
-            player = new Player(myPadTextureList);
+        private void LoadNewPlayer()
+        {
+            player = new Player(content.Load<Texture2D>("images/pad"));
             currentScene.AddToGameObjectsList(player);
         }
 
-        public void Update(GameTime gameTime)
+        private void LoadLevelManager()
         {
+            levelManager = new LevelManager();
+            levelManager.LoadLevel(1);
+            ServiceLocator.RegisterService(levelManager);
+        }
 
+        public void NextLevel()
+        {
+            levelManager.NextLevel();
+            player.IsReady = false;
+            player.Reset();
+        }
+
+        private void RegisterInput()
+        {
+            if (GameKeyboard.IsKeyReleased(Keys.W))
+            {
+                NextLevel();
+            }
+        }
+
+        private void ManageMonstersAttack()
+        {
             foreach (IBrickable brick in levelManager.GameGrid.GridElements)
             {
                 if (brick is Monster)
@@ -54,58 +71,70 @@ namespace BricksGame
                     if (monster.isAttacking)
                     {
                         player.IsHit(monster, 20);
-                        
                     }
                 }
             }
-
+        }
+        private void CheckPlayerDeath() 
+        {
             if (player.IsDead)
             {
                 currentScene.End();
             }
-
+        }
+        private void UpdateCurrentLevel(GameTime gameTime)         
+        {  
             levelManager.Update(gameTime);
+        }
+        private void DoEventsOnLevelState() 
+        {
+            DoEventsOnStateDices();
+            DoEventsOnStatePlay();
+            DoEventsOnStateWin();  
+        }
 
-            if (GameKeyboard.IsKeyReleased(Keys.W))
-            {
-                NextLevel();
-            }
-
+        private void DoEventsOnStateDices()
+        {
             if (levelManager.currentState == LevelManager.LevelState.dices)
             {
                 player.ChangeState(Gamesystem.CharacterState.idle);
             }
-           else if (levelManager.currentState == LevelManager.LevelState.play)
+        }
+
+        private void DoEventsOnStatePlay()
+        {
+           if (levelManager.currentState == LevelManager.LevelState.play)
             {
-           if (!player.IsReady)
-                {
-                
-                    player.IsReady = true;
-                    player.Prepare();
-                }
-
-                if (!currentScene.IsSceneContainsObjectTypeOf<Ball>())
-                {
-                    levelManager.NoBallActions();
-                    player.Reset();
-                    player.Prepare();
-                }
-
-            }
-
-            else if (levelManager.currentState == LevelManager.LevelState.win)
-            {
-                NextLevel();
+                SetPlayerReady();
+                DoActionsIfNoBall();
             }
         }
 
-        public void NextLevel()
+        private void SetPlayerReady()
         {
-            levelManager.NextLevel();
-            player.IsReady = false;
-            player.Reset();
-            
-           
+            if (!player.IsReady)
+            {
+                player.IsReady = true;
+                player.Prepare();
+            }
+        }
+
+        private void DoActionsIfNoBall()
+        {
+            if (!currentScene.IsSceneContainsObjectTypeOf<Ball>())
+            {
+                levelManager.NoBallActions();
+                player.Reset();
+                player.Prepare();
+            }
+        }
+
+        private void DoEventsOnStateWin()
+        {
+             if (levelManager.currentState == LevelManager.LevelState.win)
+            {
+                NextLevel();
+            }
         }
     }
 }

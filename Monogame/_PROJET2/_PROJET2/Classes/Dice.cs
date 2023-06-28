@@ -15,7 +15,7 @@ namespace BricksGame
 {
     public class Dice : Sprite, IBrickable, IDestroyable
     {
-
+        public float GridSlotNb { get; set; }
         Texture2D diceSheet;
         List<Rectangle> tiles;
         int currentNb = 1;

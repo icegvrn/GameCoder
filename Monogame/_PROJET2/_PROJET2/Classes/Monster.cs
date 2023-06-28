@@ -13,7 +13,7 @@ namespace BricksGame
         public Gamesystem.CharacterState currentState;
         private Gamesystem.CharacterState lastState;
 
-        public bool IsDead = false;
+            public bool IsDead = false;
             private float life = 4;
             private float initialLife;
             private Animator animator;
@@ -34,18 +34,18 @@ namespace BricksGame
 
 
 
-            public Monster(List<Texture2D> p_textures, int Power) : base(p_textures)
+            public Monster(Texture2D p_texture, int Power) : base(p_texture)
             {
             life = Power * Power * 50;
             initialLife = life;
             BoundingBox = new Rectangle((int)(Position.X), (int)(Position.Y), (currentTexture.Width/(currentTexture.Width/currentTexture.Height)), currentTexture.Height);
-            textures = p_textures;
+      
             attackIcon = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/icon_ennemi");
             AddGauge();
-            animator = new Animator(p_textures[(int)Gamesystem.CharacterState.idle], 0.15f);
+            animator = new Animator(this, Power, 0.15f);
             SetSpeed(Power);
             CanMove = true;
-        }
+            }
          
 
         public void SetSpeed(int power)
@@ -74,14 +74,6 @@ namespace BricksGame
        
             public override void Update(GameTime p_GameTime)
         {
-
-            if (lastState != currentState)
-            {
-                animator.ChangeSpriteSheet(textures[(int)currentState]);
-                lastState = currentState;
-            }
-
-
             attackTimer += (float)p_GameTime.ElapsedGameTime.TotalSeconds;
 
             if (Position.Y > ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - BoundingBox.Width*4)
@@ -121,6 +113,7 @@ namespace BricksGame
         {
             animator.Draw(p_SpriteBatch, new Vector2((int)(Position.X - (currentTexture.Width / (currentTexture.Width / currentTexture.Height)) / 2), (int)(Position.Y - currentTexture.Height / 2)));
             gauge.Draw(p_SpriteBatch);
+
             if (currentState == Gamesystem.CharacterState.fire)
             {
                 p_SpriteBatch.Draw(attackIcon, new Vector2((int)(Position.X), (int)(Position.Y - currentTexture.Height / 2)), Color.White);
@@ -136,6 +129,11 @@ namespace BricksGame
                 CollisionEvent = false;
             }
 
+        public void ChangeState(Gamesystem.CharacterState state)
+        {
+            currentState = state;
+            animator.ChangeState(state);
+        }
 
         public void Attack()
         {
@@ -158,10 +156,7 @@ namespace BricksGame
            
         }
 
-        public void ChangeState(Gamesystem.CharacterState state)
-        {
-            currentState = state;
-        }
+   
 
         public void AddGauge()
         {

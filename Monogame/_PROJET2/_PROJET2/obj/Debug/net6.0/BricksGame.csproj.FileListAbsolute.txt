@@ -148,3 +148,10 @@ C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\ne
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\Monsters\idle\9.xnb
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\Monsters\die\2.xnb
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\Monsters\icon_ennemi.xnb
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\map1_1.xnb
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\home_background.xnb
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\home_background2.xnb
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\screen_gameover.xnb
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\screen_home.xnb
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\screen_victory.xnb
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\map1_2.xnb

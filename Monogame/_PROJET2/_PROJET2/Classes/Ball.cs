@@ -48,7 +48,7 @@ namespace BricksGame
 
                 Monster brick = (Monster)p_By;
 
-                if (!CollisionEvent && isFired)
+                if (!CollisionEvent && isFired && !IsDestroy)
                 {
                     if (BoundingBox.Intersects(brick.BoundingBox))
                     {
@@ -194,7 +194,7 @@ namespace BricksGame
                 if (timedParticles[n].timer <= 0)
                 {
                     timedParticles.Remove(timedParticles[n]);
-                    ServiceLocator.GetService<Scene>().RemoveToGameObjectsList(timedParticles[n]);
+                    ServiceLocator.GetService<GameState>().CurrentScene.RemoveToGameObjectsList(timedParticles[n]);
                 }
                 else
                 {
@@ -214,7 +214,7 @@ namespace BricksGame
 
             TimedParticles particle = new TimedParticles(textures, (int)Position.X, (int)Position.Y, currentTexture.Width, currentTexture.Height, 1.3f);
             timedParticles.Add(particle);
-            ServiceLocator.GetService<Scene>().AddToGameObjectsList(particle);
+            ServiceLocator.GetService<GameState>().CurrentScene.AddToGameObjectsList(particle);
         }
 
         public void CalcTrajectory()
@@ -254,23 +254,23 @@ namespace BricksGame
         public void TryMove()
         {
 
-            if (Position.X + currentTexture.Width > ServiceLocator.GetService<PlayingAera>().aera.Right)
+            if (Position.X + currentTexture.Width > ServiceLocator.GetService<PlayerArea>().area.Right)
             {
-                Position = new Vector2(ServiceLocator.GetService<PlayingAera>().aera.Right - currentTexture.Width, Position.Y);
+                Position = new Vector2(ServiceLocator.GetService<PlayerArea>().area.Right - currentTexture.Width, Position.Y);
                 //    Debug.WriteLine("Ball sort à droite " + destination.X + " " + destination.Y);
                 InverseHorizontalDirection();
             }
 
-            if (Position.X < ServiceLocator.GetService<PlayingAera>().aera.X)
+            if (Position.X < ServiceLocator.GetService<PlayerArea>().area.X)
             {
-                Position = new Vector2(ServiceLocator.GetService<PlayingAera>().aera.X, Position.Y);
+                Position = new Vector2(ServiceLocator.GetService<PlayerArea>().area.X, Position.Y);
              //   Debug.WriteLine("Ball sort à gauche " + destination.X + " " + destination.Y);
                 InverseHorizontalDirection();
             }
 
-             if (Position.Y < ServiceLocator.GetService<PlayingAera>().aera.Y)
+             if (Position.Y < ServiceLocator.GetService<PlayerArea>().area.Y)
             {
-                Position = new Vector2(Position.X, ServiceLocator.GetService<PlayingAera>().aera.Y);
+                Position = new Vector2(Position.X, ServiceLocator.GetService<PlayerArea>().area.Y);
                 // Debug.WriteLine("Ball sort en haut " + destination.X + " " + destination.Y);
                 InverseVerticalDirection();
             }
@@ -309,12 +309,12 @@ namespace BricksGame
         {
                for (int n = timedParticles.Count() - 1; n >= 0; n--)
             {
-                
-                    ServiceLocator.GetService<Scene>().RemoveToGameObjectsList(timedParticles[n]);
+
+                ServiceLocator.GetService<GameState>().CurrentScene.RemoveToGameObjectsList(timedParticles[n]);
                 timedParticles.Remove(timedParticles[n]);
 
             }
-            ServiceLocator.GetService<Scene>().RemoveToGameObjectsList(this);
+            ServiceLocator.GetService<GameState>().CurrentScene.RemoveToGameObjectsList(this);
 
             IsDestroy = true;
             ball = null;

@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
+
 
 namespace BricksGame
 {
@@ -16,6 +13,7 @@ namespace BricksGame
 
         public override void Load()
         {
+            LoadBackgroundImage();
             base.Load();
         }
 
@@ -31,8 +29,14 @@ namespace BricksGame
 
         public override void Draw(GameTime gameTime)
         {
+            mainGame._spriteBatch.Draw(background, Vector2.Zero, Color.White);
             mainGame._spriteBatch.DrawString(AssetsManager.MainFont, "This is the Gameover !", new Vector2(1, 1), Color.White);
             base.Draw(gameTime);
+        }
+
+        public void LoadBackgroundImage()
+        {
+            background = mainGame.Content.Load<Texture2D>("images/screen_gameover");
         }
     }
 }

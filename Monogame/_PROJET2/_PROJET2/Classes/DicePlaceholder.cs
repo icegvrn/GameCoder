@@ -15,6 +15,7 @@ namespace BricksGame
 {
     public class DicePlaceholder : Sprite, IBrickable, IDestroyable
     {
+        public float GridSlotNb { get; set; }
         bool isVisible = false;
         Texture2D diceSheet;
         public Gamesystem.dice value;

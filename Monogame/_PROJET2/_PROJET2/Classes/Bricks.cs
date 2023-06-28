@@ -10,18 +10,20 @@ namespace BricksGame
     public class Bricks : Sprite, ICollider, IDestroyable, IBrickable
     {
         private bool isDestroy;
+
+        public float GridSlotNb { get; set; }
         public bool IsDestroy { get { return isDestroy; } set { isDestroy = value; } }
 
         private int life = 4;
         public bool CollisionEvent = false;
         private float timer = 0.2f;
-        public Bricks(List<Texture2D> p_textures): base(p_textures) 
+        public Bricks(Texture2D p_texture) : base(p_texture) 
         {
             BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, currentTexture.Width, currentTexture.Height);
 
         }
 
-        public Bricks(List<Texture2D> p_textures, int Power) : base(p_textures)
+        public Bricks(Texture2D p_texture, int Power) : base(p_texture)
         {
             life = Power;
             BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, currentTexture.Width, currentTexture.Height);
