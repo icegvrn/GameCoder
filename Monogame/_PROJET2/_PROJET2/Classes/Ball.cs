@@ -23,13 +23,15 @@ namespace BricksGame
         public bool CollisionEvent = false;
         private float timer = 0.2f;
 
+        public Vector2 Vitesse;
 
         public Ball(List<Texture2D> p_texture) : base(p_texture)
         {
             timedParticles = new List<TimedParticles>();
             lineTexture = AssetsManager.blankTexture;
-            Speed = 3f;
+            Speed = 10f;
             CanMove = false;
+            Vitesse = new Vector2(6, -6);
 
         }
 
@@ -37,115 +39,123 @@ namespace BricksGame
         public void TouchedBy(GameObject p_By)
         {
 
-            if (p_By is Monster)
+        }
+
+        public void CheckCollision(List<IBrickable> brick)
+        {
+            for (int i = 0; i < brick.Count; i++)
             {
-
-                Monster brick = (Monster)p_By;
-
-                if (!CollisionEvent && isFired)
+                if (brick[i] is Monster && !((Bricks)brick[i]).IsDestroy)
                 {
-                    if (BoundingBox.Intersects(brick.BoundingBox))
+                    Monster c_Brick = (Monster)brick[i];   
+                    if (c_Brick.BoundingBox.Intersects(NextPositionX()))
                     {
-                        //  Debug.WriteLine("Collision détectée");
+                        InverseHorizontalDirection();
+                        c_Brick.RemoveLife(50);
+                       
+                    }
+                    if (c_Brick.BoundingBox.Intersects(NextPositionY()))
+                    {  
+                        InverseVerticalDirection();
+                        c_Brick.RemoveLife(50);
 
-                        if (lastValidPosition.Y >= brick.BoundingBox.Y && lastValidPosition.Y <= brick.BoundingBox.Y + brick.BoundingBox.Height)
-                        {
-                            //    Debug.WriteLine("Inversion de direction verticale");
-                            InverseHorizontalDirection();
-                        }
-                        else if (lastValidPosition.X >= brick.BoundingBox.X && lastValidPosition.X <= brick.BoundingBox.X + brick.BoundingBox.Width) 
-                        {
-                            //   Debug.WriteLine("Inversion de direction horizontale");
-                            InverseVerticalDirection();
-                        }
-
-                        else
-                        {
-                       //  InverseHorizontalDirection();
-                         InverseVerticalDirection();
-
-                        }
-                        CollisionEvent = true;
                       
-                        brick.RemoveLife(2);
+
                     }
                 }
+             
             }
-
-            else if (p_By is Player)
-            {
-                if (!CollisionEvent)
-                {
-                    Player player = (Player)p_By;
-
-                    float relativePositionX = Position.X - player.Position.X;
-                    float padDivideBySix = player.BoundingBox.Width / 6f;
-
-            
-                    if (relativePositionX < padDivideBySix)
-                    {
-                  
-                        angle = MathHelper.ToRadians(20f); 
-                        destination.X = -(float)Math.Cos(angle) * Speed;
-                        destination.Y = -(float)Math.Sin(angle) * Speed;
-
-
-                    }
-                    else if (relativePositionX < 2 * padDivideBySix)
-                    {
-                 
-                        angle = MathHelper.ToRadians(35f);
-                        destination.X = -(float)Math.Cos(angle) * Speed;
-                        destination.Y = -(float)Math.Sin(angle) * Speed;
-
-                    }
-                    else if (relativePositionX < 3 * padDivideBySix)
-                    {
-                
-                        angle = MathHelper.ToRadians(75f);
-                        destination.X = (float)Math.Cos(angle) * Speed;
-                        destination.Y = -(float)Math.Sin(angle) * Speed;
-
-                    }
-                    else if (relativePositionX < 4 * padDivideBySix)
-                    {
-            
-                        angle = MathHelper.ToRadians(75f); 
-                        destination.X = (float)Math.Cos(angle) * Speed;
-                        destination.Y = -(float)Math.Sin(angle) * Speed;
-
-                    }
-                    else if (relativePositionX < 5 * padDivideBySix)
-                    {
-                    
-                        angle = MathHelper.ToRadians(35f); 
-                        destination.X = (float)Math.Cos(angle) * Speed;
-                        destination.Y = -(float)Math.Sin(angle) * Speed;
-
-                    }
-                    else
-                    {
-        
-                        angle = MathHelper.ToRadians(20f);
-                        destination.X = (float)Math.Cos(angle) * Speed;
-                        destination.Y = -(float)Math.Sin(angle) * Speed;
-
-                    }
-                 //   Debug.WriteLine("MA DESTINATION EST DE " + destination.X + " car j'avais un angle de " + angle);
-                    CollisionEvent = true;
-
-                }
-
-            }
-
 
         }
 
-   
+        public void CheckCollision(Player player)
+        {
+
+            float relativePositionX = Position.X - player.Position.X;
+            float padDivideBySix = player.BoundingBox.Width / 6f;
+
+
+            if (player.BoundingBox.Intersects(NextPositionX()) || player.BoundingBox.Intersects(NextPositionY()))
+            {
+                if (relativePositionX < padDivideBySix)
+                {
+
+                    angle = MathHelper.ToRadians(20f);
+                    Vitesse.X = -(float)Math.Cos(angle) * Speed;
+                    Vitesse.Y = -(float)Math.Sin(angle) * Speed;
+
+
+                }
+                else if (relativePositionX < 2 * padDivideBySix)
+                {
+
+                    angle = MathHelper.ToRadians(35f);
+                    Vitesse.X = -(float)Math.Cos(angle) * Speed;
+                    Vitesse.Y = -(float)Math.Sin(angle) * Speed;
+
+                }
+                else if (relativePositionX < 3 * padDivideBySix)
+                {
+
+                    angle = MathHelper.ToRadians(75f);
+                    Vitesse.X = (float)Math.Cos(angle) * Speed;
+                    Vitesse.Y = -(float)Math.Sin(angle) * Speed;
+
+                }
+                else if (relativePositionX < 4 * padDivideBySix)
+                {
+
+                    angle = MathHelper.ToRadians(75f);
+                    Vitesse.X = (float)Math.Cos(angle) * Speed;
+                    Vitesse.Y = -(float)Math.Sin(angle) * Speed;
+
+                }
+                else if (relativePositionX < 5 * padDivideBySix)
+                {
+
+                    angle = MathHelper.ToRadians(35f);
+                    Vitesse.X = (float)Math.Cos(angle) * Speed;
+                    Vitesse.Y = -(float)Math.Sin(angle) * Speed;
+
+                }
+                else
+                {
+
+                    angle = MathHelper.ToRadians(20f);
+                    Vitesse.X = (float)Math.Cos(angle) * Speed;
+                    Vitesse.Y = -(float)Math.Sin(angle) * Speed;
+
+                }
+
+
+            }
+
+            
+
+            }
+
+        public Rectangle NextPositionX()
+        {
+            Rectangle nextPosition = BoundingBox;
+            nextPosition.Offset(new Point((int)Vitesse.X, 0));
+            return nextPosition;
+        }
+
+        public Rectangle NextPositionY()
+        {
+            Rectangle nextPosition = BoundingBox;
+            nextPosition.Offset(new Point(0, (int)Vitesse.Y));
+            return nextPosition;
+        }
+
+
         public override void Update(GameTime p_GameTime)
         {
+
+        
             if (isFired)
             {
+                CanMove = true;
                 addTrailToBall(p_GameTime);
             }
 
@@ -217,22 +227,22 @@ namespace BricksGame
             {
                 if (Position.X + currentTexture.Width > ServiceLocator.GetService<PlayerArea>().area.Right)
                 {
-                    Position = new Vector2(ServiceLocator.GetService<PlayerArea>().area.Right - currentTexture.Width, Position.Y);
-                    //    Debug.WriteLine("Ball sort à droite " + destination.X + " " + destination.Y);
+                    Position = new Vector2(ServiceLocator.GetService<PlayerArea>().area.Right - BoundingBox.Width, Position.Y);
+                    Debug.WriteLine("Ball sort à droite " + destination.X + " " + destination.Y);
                     InverseHorizontalDirection();
                 }
 
                 if (Position.X < ServiceLocator.GetService<PlayerArea>().area.X)
                 {
                     Position = new Vector2(ServiceLocator.GetService<PlayerArea>().area.X, Position.Y);
-                    //   Debug.WriteLine("Ball sort à gauche " + destination.X + " " + destination.Y);
+                     Debug.WriteLine("Ball sort à gauche " + destination.X + " " + destination.Y);
                     InverseHorizontalDirection();
                 }
 
                 if (Position.Y < ServiceLocator.GetService<PlayerArea>().area.Y)
                 {
                     Position = new Vector2(Position.X, ServiceLocator.GetService<PlayerArea>().area.Y);
-                    // Debug.WriteLine("Ball sort en haut " + destination.X + " " + destination.Y);
+                    Debug.WriteLine("Ball sort en haut " + destination.X + " " + destination.Y);
                     InverseVerticalDirection();
                 }
 
@@ -248,8 +258,8 @@ namespace BricksGame
                     Destroy(this);
                 }
 
-                Move(destination.X, destination.Y);
-
+                //   Move(destination.X, destination.Y);
+                Move(Vitesse);
 
 
             }
@@ -261,12 +271,14 @@ namespace BricksGame
 
         public void InverseHorizontalDirection()
         {
-            destination.X *= -1;
+            //  destination.X *= -1;
+            Vitesse = new Vector2(-Vitesse.X, Vitesse.Y);
         }
 
         public void InverseVerticalDirection()
         {
-            destination.Y *= -1;
+            // destination.Y *= -1;
+            Vitesse = new Vector2(Vitesse.X, -Vitesse.Y);
         }
 
         public void Fire()
@@ -299,7 +311,7 @@ namespace BricksGame
             MouseState mouse = ServiceLocator.GetService<MouseState>();
             distanceFromMouse = Utils.calcDistance(Position.X, Position.Y, mouse.X, mouse.Y);
             angle = Utils.calcAngleWithMouse(Position.X, Position.Y);
-            destination = new Vector2(((float)Math.Cos(angle) * Speed), (float)Math.Sin(angle) * Speed);
+            Vitesse = new Vector2(((float)Math.Cos(angle) * Speed), (float)Math.Sin(angle) * Speed);
       
         }
 
@@ -342,5 +354,13 @@ namespace BricksGame
             spriteBatch.Draw(AssetsManager.blankTexture, new Rectangle(rect.Left, rect.Bottom, rect.Width, 1), Color.Red);
         }
 
+        public void Move(Vector2 vitesse)
+        {
+            Position = new Vector2(Position.X + vitesse.X, Position.Y + vitesse.Y);
+        }
+
     }
+
+  
+
 }

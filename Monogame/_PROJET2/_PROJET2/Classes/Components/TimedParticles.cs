@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -27,16 +28,13 @@ namespace BricksGame
 
         public override void Update(GameTime gameTime)
         {
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, currentTexture.Width*2, currentTexture.Height*2);
             base.Update(gameTime);
         }
 
         public void TouchedBy(GameObject p_By)
         {
-                if (p_By is Monster)
-                {
-                    Monster brick = (Monster)p_By;
-                    brick.RemoveLife(1f); 
-                }
+             
         }
         public void EndOfTouch() 
         { 

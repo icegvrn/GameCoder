@@ -30,10 +30,11 @@ namespace BricksGame
 
         public void LoadLevel(int level)
         {
+            CreatePlayingArea();
             currentLevel = level;
             ReadLevelsData();
             CreateDicesIfLevelIsPlayable(level);
-            CreatePlayingArea();
+            
         }
 
         public void Update(GameTime gameTime)

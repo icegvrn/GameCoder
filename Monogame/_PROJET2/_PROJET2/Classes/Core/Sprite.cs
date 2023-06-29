@@ -24,7 +24,7 @@ namespace BricksGame
         public List<Texture2D> Textures { get; protected set; }
         public Texture2D currentTexture { get; protected set; }
 
-       public SpriteEffects spriteEffects { get; protected set; }
+        public SpriteEffects spriteEffects { get; protected set; }
         public Vector2 origin { get; protected set; }
 
         public float rotation { get; protected set; }
@@ -32,9 +32,9 @@ namespace BricksGame
         public Nullable<Rectangle> rectSource { get; protected set; }
 
         public Color color { get; protected set; }
-        
+
         public Vector2 scale { get; protected set; }
-    
+
 
         public Sprite(Texture2D p_texture)
         {
@@ -70,8 +70,10 @@ namespace BricksGame
 
         public virtual void Move(float p_x, float p_y)
         {
-                Position = new Vector2(Position.X + p_x * Speed, Position.Y + p_y * Speed);
+            Position = new Vector2(Position.X + p_x * Speed, Position.Y + p_y * Speed);
         }
+
+      
 
         public virtual void UpdatePositionIfFollowingSomething()
         {
@@ -96,6 +98,6 @@ namespace BricksGame
         {
             BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, currentTexture.Width, currentTexture.Height);
         }
-    
+
     }
 }

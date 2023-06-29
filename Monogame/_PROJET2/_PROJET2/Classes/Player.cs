@@ -49,7 +49,7 @@ namespace BricksGame
         private Texture2D pointsIcon;
         private ColoredGauge pointsBar;
 
-
+        private float provisoryLife;
 
         private float timer = 0.2f;
 
@@ -109,6 +109,15 @@ namespace BricksGame
 
         public override void Update(GameTime p_GameTime)
         {
+
+            if (PlayerState.Life != provisoryLife)
+            {
+                if (PlayerState.Life > 0)
+                {
+                    PlayerState.SubsLife(1); // Perte de vie d'une unité
+                               // Autres actions à effectuer lorsque la vie est perdue
+                }
+            }
             if (IsReady)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Q))
@@ -301,7 +310,8 @@ namespace BricksGame
             if (h_By is Monster)
             {
                 isHit = true;
-                PlayerState.SubsLife(hitForce);
+                provisoryLife = PlayerState.Life - hitForce;
+             
             }
         }
         public void BlinkOnHit(GameTime p_GameTime, bool b)

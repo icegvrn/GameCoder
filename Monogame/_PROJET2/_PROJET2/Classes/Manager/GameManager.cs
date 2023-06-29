@@ -2,13 +2,14 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 
 namespace BricksGame
 {
     public class GameManager
     {
         Scene currentScene;
-        private Player player; 
+        private Player player;
         private ContentManager content;
         LevelManager levelManager;
         public GameManager()
@@ -19,18 +20,28 @@ namespace BricksGame
 
         public void Load()
         {
-          LoadNewPlayer();
-          LoadLevelManager();
+            LoadNewPlayer();
+            LoadLevelManager();
         }
- 
-   
+
+
         public void Update(GameTime gameTime)
         {
+            if (GameKeyboard.IsKeyReleased(Keys.M))
+            {
+                levelManager.GameGrid.Down();
+            }
+
+            if (levelManager.currentState == LevelManager.LevelState.play)
+            {
+                player.BallsList[0].CheckCollision(levelManager.GameGrid.GridElements);
+                player.BallsList[0].CheckCollision(player);
+            }   
             RegisterInput();
             ManageMonstersAttack();
             CheckPlayerDeath();
             UpdateCurrentLevel(gameTime);
-            DoEventsOnLevelState();   
+            DoEventsOnLevelState();
         }
 
         private void LoadNewPlayer()
@@ -68,34 +79,41 @@ namespace BricksGame
                 if (brick is Monster)
                 {
                     Monster monster = (Monster)brick;
-                    if (monster.isAttacking)
+                    if (monster.Position.Y >= levelManager.GameGrid.maxDestination)
                     {
-                        player.IsHit(monster, 20);
+                       monster.Attack();
+
+                        if (monster.isAttacking)
+                        {
+                                player.IsHit(monster, monster.Power);
+                        }
+
                     }
+                  
                 }
             }
         }
-        private void CheckPlayerDeath() 
+        private void CheckPlayerDeath()
         {
             if (player.IsDead)
             {
                 currentScene.End();
             }
         }
-        private void UpdateCurrentLevel(GameTime gameTime)         
+        private void UpdateCurrentLevel(GameTime gameTime)
         {
             levelManager.Update(gameTime);
         }
-        private void DoEventsOnLevelState() 
+        private void DoEventsOnLevelState()
         {
             DoEventsOnStateDices();
             DoEventsOnStatePlay();
-            DoEventsOnStateWin();  
+            DoEventsOnStateWin();
         }
 
-       
 
-        
+
+
         private void DoEventsOnStateDices()
         {
             if (levelManager.currentState == LevelManager.LevelState.dices)
@@ -106,7 +124,7 @@ namespace BricksGame
 
         private void DoEventsOnStatePlay()
         {
-           if (levelManager.currentState == LevelManager.LevelState.play)
+            if (levelManager.currentState == LevelManager.LevelState.play)
             {
                 SetPlayerReady();
                 DoActionsIfNoBall();
@@ -134,7 +152,7 @@ namespace BricksGame
 
         private void DoEventsOnStateWin()
         {
-             if (levelManager.currentState == LevelManager.LevelState.win)
+            if (levelManager.currentState == LevelManager.LevelState.win)
             {
                 NextLevel();
             }

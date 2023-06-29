@@ -19,6 +19,8 @@ namespace BricksGame
         private const int brickHeight = 56;
         private const int downSpeed = 56;
         private Vector2 Position;
+        public int minDestination;
+       public int maxDestination;
 
         public BaseGrid(int colNb, int linNb)
         {
@@ -33,10 +35,12 @@ namespace BricksGame
             gridElements = new List<IBrickable>();
             columnsNb = colNb;
             linesNb = linNb;
-        }
+    }
 
         private void CreateSlotsFromGrid(int columnsNb, int linesNb)
         {
+            minDestination = ServiceLocator.GetService<PlayerArea>().area.Top;
+            maxDestination = brickHeight / 2 + (brickHeight * (linesNb - 2));
             for (int n = 0; n < linesNb; n++)
             {
                 for (int i = 0; i < columnsNb; i++)
@@ -72,20 +76,20 @@ namespace BricksGame
             return -1;
         }
 
- 
+
 
         public void Down()
         {
             for (int n = gridElements.Count - 1; n >= 0; n--)
-            { 
+            {
                 if (gridElements[n] != null && gridElements[n] is not Dice)
                 {
                     int wantedPosition = (int)gridElements[n].Position.Y + downSpeed * (int)gridElements[n].Speed;
-                    
+
                     wantedPosition = ClampWantedPosition(wantedPosition);
-   
+
                     int wantedCaseIndex = GetSlotIndexFromPosition(new Vector2(gridElements[n].Position.X, wantedPosition));
- 
+
                     if (wantedCaseIndex >= 0)
                     {
                         int destIndex = GetDestinationIndex((Bricks)gridElements[n], wantedCaseIndex);
@@ -98,9 +102,6 @@ namespace BricksGame
 
         private int ClampWantedPosition(int wantedPosition)
         {
-            int minDestination = ServiceLocator.GetService<PlayerArea>().area.Top;
-            int maxDestination = brickHeight / 2 + (brickHeight * (linesNb - 2));
-
             if (wantedPosition > maxDestination)
             {
                 wantedPosition = maxDestination;
@@ -112,7 +113,7 @@ namespace BricksGame
             return wantedPosition;
         }
 
-       private void MoveElements(int n, int destIndex)
+        private void MoveElements(int n, int destIndex)
         {
             gridElements[n].Move(GetPositionFromGrid(destIndex));
             gridElements[n].GridSlotNb = destIndex;
@@ -152,9 +153,9 @@ namespace BricksGame
 
             if (line == 0)
             {
-                return -1; 
-            } 
-            
+                return -1;
+            }
+
             else
             {
                 index = (line - 1) * columnsNb + col;
@@ -175,5 +176,4 @@ namespace BricksGame
         }
     }
 
-    }
-
+}

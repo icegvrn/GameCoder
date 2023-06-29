@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using BricksGame.Classes;
 using System;
+using System.Diagnostics;
 
 namespace BricksGame
     {
@@ -19,8 +20,12 @@ namespace BricksGame
             private Animator animator;
             public bool isAttacking = false;
             private float attackTimer = 0f;
-            private float attackCooldown = 2f;
+            private float attackCooldown = 7f;
 
+        public int Power;
+        private float lifeLossDelay = 0.05f; 
+        private float elapsedLifeLossTime = 0f;
+        private float provisoryLife = 0;
 
         private List<Texture2D> textures;
         private Texture2D attackIcon;
@@ -34,16 +39,18 @@ namespace BricksGame
 
 
 
-            public Monster(Texture2D p_texture, int Power) : base(p_texture)
+            public Monster(Texture2D p_texture, int lvl) : base(p_texture)
             {
-            life = Power * Power * 50;
+            life = lvl * 50;
+            Power = lvl* 25;
             initialLife = life;
+            provisoryLife = life;
             BoundingBox = new Rectangle((int)(Position.X), (int)(Position.Y), (currentTexture.Width/(currentTexture.Width/currentTexture.Height)), currentTexture.Height);
       
             attackIcon = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/icon_ennemi");
             AddGauge();
-            animator = new Animator(this, Power, 0.15f);
-            SetSpeed(Power);
+            animator = new Animator(this, lvl, 0.15f);
+            SetSpeed(lvl);
             CanMove = true;
             }
          
@@ -74,19 +81,17 @@ namespace BricksGame
        
             public override void Update(GameTime p_GameTime)
         {
+
             attackTimer += (float)p_GameTime.ElapsedGameTime.TotalSeconds;
-
-            if (Position.Y > ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - BoundingBox.Width*4)
+            if (life != provisoryLife)
             {
-                CanMove = false;
-                Attack();
+                if (life > 0)
+                {
+                    life -= 1; // Perte de vie d'une unité
+                               // Autres actions à effectuer lorsque la vie est perdue
+                }
             }
 
-            else if (currentState != Gamesystem.CharacterState.idle)
-            {
-                currentState = Gamesystem.CharacterState.idle;
-            }
-      
             
             animator.Update(p_GameTime);
 
@@ -127,9 +132,11 @@ namespace BricksGame
         public void RemoveLife(float lifeFactor)
             {
                 PlayerState.AddPoints((int)lifeFactor);
-                life -= lifeFactor;
+                provisoryLife = life - lifeFactor;
                 CollisionEvent = false;
-            }
+                elapsedLifeLossTime = 0f; 
+
+        }
 
         public void ChangeState(Gamesystem.CharacterState state)
         {
@@ -145,7 +152,7 @@ namespace BricksGame
             }
           
             if (attackTimer >= attackCooldown)
-            { 
+            {
                 isAttacking = true;
                 attackTimer = 0f;
             
@@ -178,6 +185,8 @@ namespace BricksGame
             spriteBatch.Draw(boxTexture, new Rectangle(rect.Left, rect.Top, rect.Width, 1), Color.Red);
             spriteBatch.Draw(boxTexture, new Rectangle(rect.Left, rect.Bottom, rect.Width, 1), Color.Red);
         }
+
+
 
     }
 
