@@ -11,8 +11,7 @@ namespace BricksGame
     {
         Vector2 Position { get; }
         Rectangle BoundingBox { get; }
+    
         void TouchedBy(GameObject p_By);
-
-
     }
 }

@@ -119,6 +119,8 @@ namespace BricksGame
                 p_SpriteBatch.Draw(attackIcon, new Vector2((int)(Position.X), (int)(Position.Y - currentTexture.Height / 2)), Color.White);
             }
 
+            DrawBoundingBox(p_SpriteBatch);
+
         }
 
 
@@ -168,16 +170,13 @@ namespace BricksGame
         private void DrawBoundingBox(SpriteBatch spriteBatch)
         {
             Rectangle rect = BoundingBox;
-            Texture2D pixelTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
-            pixelTexture.SetData(new Color[] { Color.White });
+            Texture2D boxTexture = AssetsManager.blankTexture;
+            spriteBatch.Draw(boxTexture, new Rectangle(rect.Left, rect.Top, 1, rect.Height), Color.Red);
+            spriteBatch.Draw(boxTexture, new Rectangle(rect.Right, rect.Top, 1, rect.Height), Color.Red);
 
-            // Dessine les bords verticaux de la bounding box
-            spriteBatch.Draw(pixelTexture, new Rectangle(rect.Left, rect.Top, 1, rect.Height), Color.Red);
-            spriteBatch.Draw(pixelTexture, new Rectangle(rect.Right, rect.Top, 1, rect.Height), Color.Red);
 
-            // Dessine les bords horizontaux de la bounding box
-            spriteBatch.Draw(pixelTexture, new Rectangle(rect.Left, rect.Top, rect.Width, 1), Color.Red);
-            spriteBatch.Draw(pixelTexture, new Rectangle(rect.Left, rect.Bottom, rect.Width, 1), Color.Red);
+            spriteBatch.Draw(boxTexture, new Rectangle(rect.Left, rect.Top, rect.Width, 1), Color.Red);
+            spriteBatch.Draw(boxTexture, new Rectangle(rect.Left, rect.Bottom, rect.Width, 1), Color.Red);
         }
 
     }

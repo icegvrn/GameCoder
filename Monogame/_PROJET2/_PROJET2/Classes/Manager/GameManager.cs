@@ -83,7 +83,7 @@ namespace BricksGame
             }
         }
         private void UpdateCurrentLevel(GameTime gameTime)         
-        {  
+        {
             levelManager.Update(gameTime);
         }
         private void DoEventsOnLevelState() 
@@ -93,6 +93,9 @@ namespace BricksGame
             DoEventsOnStateWin();  
         }
 
+       
+
+        
         private void DoEventsOnStateDices()
         {
             if (levelManager.currentState == LevelManager.LevelState.dices)

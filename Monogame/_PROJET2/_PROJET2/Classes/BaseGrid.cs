@@ -99,7 +99,7 @@ namespace BricksGame
         private int ClampWantedPosition(int wantedPosition)
         {
             int minDestination = ServiceLocator.GetService<PlayerArea>().area.Top;
-            int maxDestination = brickHeight / 2 + (brickHeight * (linesNb - 1));
+            int maxDestination = brickHeight / 2 + (brickHeight * (linesNb - 2));
 
             if (wantedPosition > maxDestination)
             {

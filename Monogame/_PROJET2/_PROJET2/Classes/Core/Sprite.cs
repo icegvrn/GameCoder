@@ -38,7 +38,7 @@ namespace BricksGame
 
         public Sprite(Texture2D p_texture)
         {
-            Speed = 1f;
+            Speed = 0f;
             currentTexture = p_texture;
             origin = Vector2.Zero;
             rotation = 0;
@@ -54,7 +54,7 @@ namespace BricksGame
 
             Textures = p_texture;
             currentTexture = Textures[0];
-            Speed = 1f;
+            Speed = 0f;
             origin = Vector2.Zero;
             rotation = 0;
             scale = Vector2.One;

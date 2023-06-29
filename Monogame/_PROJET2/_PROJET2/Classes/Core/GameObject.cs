@@ -14,6 +14,7 @@ namespace BricksGame
         public Vector2 Position { get { return position; } set { position = value; } }
         private Rectangle boundingBox { get; set; }
         public Rectangle BoundingBox { get { return boundingBox; }  set { boundingBox = value; }}
+
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(SpriteBatch p_SpriteBatch);
 

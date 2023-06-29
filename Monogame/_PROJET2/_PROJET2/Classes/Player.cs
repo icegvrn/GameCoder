@@ -16,7 +16,8 @@ namespace BricksGame
         private List<Ball> balls;
         public List<Ball> BallsList { get { return balls; } private set { balls = value; } }
 
-    
+        public bool isCollide { private set; get; }
+
         private bool isHit = false;
         private float _speed = 15;
         public override float Speed { get { return _speed; } set { _speed = value; } }
@@ -193,6 +194,10 @@ namespace BricksGame
             
         }
 
+        public void EndOfTouch()
+        {
+        }
+
         public override void Draw(SpriteBatch p_SpriteBatch)
         {
 
@@ -229,14 +234,13 @@ namespace BricksGame
         private void DrawBoundingBox(SpriteBatch spriteBatch)
         {
             Rectangle rect = BoundingBox;
-            Texture2D pixelTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
-            pixelTexture.SetData(new Color[] { Color.White });
+            Texture2D boxTexture = AssetsManager.blankTexture;
+            spriteBatch.Draw(boxTexture, new Rectangle(rect.Left, rect.Top, 1, rect.Height), Color.Red);
+            spriteBatch.Draw(boxTexture, new Rectangle(rect.Right, rect.Top, 1, rect.Height), Color.Red);
 
-            spriteBatch.Draw(pixelTexture, new Rectangle(rect.Left, rect.Top, 1, rect.Height), Color.Red);
-            spriteBatch.Draw(pixelTexture, new Rectangle(rect.Right, rect.Top, 1, rect.Height), Color.Red);
-            spriteBatch.Draw(pixelTexture, new Rectangle(rect.Left, rect.Top, rect.Width, 1), Color.Red);
-            spriteBatch.Draw(pixelTexture, new Rectangle(rect.Left, rect.Bottom, rect.Width, 1), Color.Red);
-          
+
+            spriteBatch.Draw(boxTexture, new Rectangle(rect.Left, rect.Top, rect.Width, 1), Color.Red);
+            spriteBatch.Draw(boxTexture, new Rectangle(rect.Left, rect.Bottom, rect.Width, 1), Color.Red);
         }
 
         public void Reset()
@@ -343,6 +347,19 @@ namespace BricksGame
             }
         }
 
+        public Rectangle NextPositionX()
+        {
+            Rectangle nextPosition = BoundingBox;
+            nextPosition.Offset(new Point((int)(Speed), 0));
+            return nextPosition;
+        }
+
+        public Rectangle NextPositionY()
+        {
+            Rectangle nextPosition = BoundingBox;
+            nextPosition.Offset(new Point(0, (int)(Speed)));
+            return nextPosition;
+        }
 
     }
 }

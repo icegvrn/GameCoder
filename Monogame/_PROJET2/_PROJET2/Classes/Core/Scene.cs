@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 
 namespace BricksGame
 {
@@ -21,9 +21,9 @@ namespace BricksGame
         public virtual void UnLoad() { }
         public virtual void Update(GameTime gameTime) 
         {
-            UpdateGameObjects(gameTime);
-            RegisterCollisions();
             RegisterDestroyedGameObjects();
+            RegisterCollisions();
+            UpdateGameObjects(gameTime);   
         }
 
         public virtual void Draw(GameTime gameTime) 
@@ -53,6 +53,7 @@ namespace BricksGame
         {
             for (int i = gameObjectsList.Count - 1; i >= 0; i--)
             {
+
                 foreach (GameObject gameObj2 in gameObjectsList)
                 {
                     if (gameObj2 != gameObjectsList[i])
@@ -64,13 +65,15 @@ namespace BricksGame
                             if (Utils.CollideByBox(gameObjectsList[i], gameObj2))
                             {
                                 c_colliderObject.TouchedBy(gameObj2);
-                                c_colliderObject2.TouchedBy(gameObjectsList[i]);
+                              //  c_colliderObject2.TouchedBy(gameObjectsList[i]);
                             }
                         }
                     }
                 }
+             
             }
         }
+
 
         public void RegisterDestroyedGameObjects()
         {
