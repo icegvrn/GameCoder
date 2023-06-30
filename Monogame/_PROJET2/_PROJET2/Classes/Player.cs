@@ -24,7 +24,7 @@ namespace BricksGame
         private Animator animator;
         private List<Texture2D> textures;
         public Gamesystem.CharacterState currentState;
-        private Gamesystem.CharacterState lastState;
+        private Gamesystem.CharacterDirection currentDirection;
         
         public Vector2 Size;
         private Color playerColor = Color.White;
@@ -63,6 +63,12 @@ namespace BricksGame
         private int baseMunition = 10;
         public bool HasMunition { get { if (munitionNb <= 0) { return false; } else { return true; } } }
 
+        //Etat du joueur
+        private float destroyDelay = 2f;
+        private float destroyTimer = 0f;
+        public bool startDying;
+
+
 
         private Texture2D munitionCounter;
         public Player(Texture2D p_texture) : base(p_texture)
@@ -70,7 +76,7 @@ namespace BricksGame
             
             Speed = 15;
             currentState = Gamesystem.CharacterState.idle;
-            lastState = currentState;
+            currentDirection = Gamesystem.CharacterDirection.right;
             textures = new List<Texture2D>();
             animator = new Animator(this, 0.15f);
             Size = new Vector2((currentTexture.Width / (currentTexture.Width / currentTexture.Height)), currentTexture.Height);
@@ -78,7 +84,7 @@ namespace BricksGame
 
             // Vie
             lifeIcon = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/icon_heart");
-            initialLife = 3000f;
+            initialLife = 3f;
             provisoryLife = initialLife;
             PlayerState.SetLife((int)initialLife);
 
@@ -126,23 +132,41 @@ namespace BricksGame
                 if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 {
                     Move(-1, 0);
+                    currentDirection = Gamesystem.CharacterDirection.left;
                     ChangeState(Gamesystem.CharacterState.l_walk);
                 }
                 else if (Keyboard.GetState().IsKeyDown(Keys.D))
                 {
                     Move(1, 0);
+                    currentDirection = Gamesystem.CharacterDirection.right;
                     ChangeState(Gamesystem.CharacterState.walk);
                 }
                 else if (GameKeyboard.IsKeyReleased(Keys.Space))
                 {
                     Fire(BallsList[0]);
                     RemoveMunition(1);
-                    ChangeState(Gamesystem.CharacterState.idle);
+                    if (currentDirection == Gamesystem.CharacterDirection.left)
+                    {
+                        ChangeState(Gamesystem.CharacterState.l_idle);
+                    }
+                    else
+                    {
+                        ChangeState(Gamesystem.CharacterState.idle);
+                    }
+                   
                 }
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
-                    ChangeState(Gamesystem.CharacterState.fire);
+                    if (currentDirection == Gamesystem.CharacterDirection.left)
+                    {
+                        ChangeState(Gamesystem.CharacterState.l_fire);
+                    }
+                    else
+                    {
+                        ChangeState(Gamesystem.CharacterState.fire);
+                    }
+                 
                 }
                 if (GameKeyboard.IsKeyReleased(Keys.Q))
                 {
@@ -155,7 +179,37 @@ namespace BricksGame
 
                 if (PlayerState.Life <= 0)
                 {
-                    IsDead = true;
+                    if ((currentState != Gamesystem.CharacterState.die || currentState != Gamesystem.CharacterState.l_die) && !startDying)
+                    {
+                        animator.SetLoop(false);
+                        destroyTimer = 0f;
+                        startDying = true;
+                        if (currentDirection == Gamesystem.CharacterDirection.left)
+                        {
+                            ChangeState(Gamesystem.CharacterState.l_die);
+                        }
+                        else
+                        {
+                            ChangeState(Gamesystem.CharacterState.die);
+                        }
+                    }
+                    
+                if (startDying)
+                    {
+                        if (destroyTimer >= destroyDelay)
+                        {
+                            IsDead = true;
+                        }
+                        else
+                        {
+                            destroyTimer += (float)p_GameTime.ElapsedGameTime.TotalSeconds;
+                        }
+                    }
+                   
+                
+                  
+      
+                 
                 }
 
                

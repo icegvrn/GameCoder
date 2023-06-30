@@ -32,6 +32,7 @@ namespace BricksGame.Classes
             myPadTextureList.Insert((int)Gamesystem.CharacterState.walk, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_walk"));
             myPadTextureList.Insert((int)Gamesystem.CharacterState.l_walk, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_walk_left"));
             myPadTextureList.Insert((int)Gamesystem.CharacterState.fire, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_attack"));
+            myPadTextureList.Insert((int)Gamesystem.CharacterState.l_fire, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_attack_left"));
             myPadTextureList.Insert((int)Gamesystem.CharacterState.hit, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_walk_left"));
             myPadTextureList.Insert((int)Gamesystem.CharacterState.die, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_die"));
             myPadTextureList.Insert((int)Gamesystem.CharacterState.l_die, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_die_left"));
@@ -53,6 +54,7 @@ namespace BricksGame.Classes
             monsterTextures.Insert((int)Gamesystem.CharacterState.walk, null);
             monsterTextures.Insert((int)Gamesystem.CharacterState.l_walk, null);
             monsterTextures.Insert((int)Gamesystem.CharacterState.fire, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/attack/" + lvl + ""));
+            monsterTextures.Insert((int)Gamesystem.CharacterState.l_fire, null);
             monsterTextures.Insert((int)Gamesystem.CharacterState.hit, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/hit/" + lvl + ""));
             monsterTextures.Insert((int)Gamesystem.CharacterState.die, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/die/" + lvl + ""));
             foreach (Texture2D texture in monsterTextures)

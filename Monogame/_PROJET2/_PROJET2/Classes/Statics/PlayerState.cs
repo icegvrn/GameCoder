@@ -13,7 +13,7 @@ namespace BricksGame
         private static int points;
         private static int life;
         public static int Points { get { return points; } private set { points = value; } }
-        public static int Life { get { return life; } private set { if (life < 0) { life = 0;} else { life = value;} } }
+        public static int Life { get { return life; } private set { life = value;} }
 
         static PlayerState()
         {
