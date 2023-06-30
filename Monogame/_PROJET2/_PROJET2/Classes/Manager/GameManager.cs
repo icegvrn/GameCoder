@@ -12,6 +12,7 @@ namespace BricksGame
         private Player player;
         private ContentManager content;
         LevelManager levelManager;
+        public bool IsGameWin;
         public GameManager()
         {
             currentScene = ServiceLocator.GetService<GameState>().CurrentScene;
@@ -26,7 +27,8 @@ namespace BricksGame
 
 
         public void Update(GameTime gameTime)
-        {
+        {   
+            
             if (GameKeyboard.IsKeyReleased(Keys.M))
             {
                 levelManager.GameGrid.Down();
@@ -37,9 +39,10 @@ namespace BricksGame
                 player.BallsList[0].CheckCollision(levelManager.GameGrid.GridElements);
                 player.BallsList[0].CheckCollision(player);
             }   
+            
+            CheckPlayerDeath();
             RegisterInput();
             ManageMonstersAttack();
-            CheckPlayerDeath();
             UpdateCurrentLevel(gameTime);
             DoEventsOnLevelState();
         }
@@ -62,6 +65,7 @@ namespace BricksGame
             levelManager.NextLevel();
             player.IsReady = false;
             player.Reset();
+            player.ResetMunition();
         }
 
         private void RegisterInput()
@@ -79,17 +83,14 @@ namespace BricksGame
                 if (brick is Monster)
                 {
                     Monster monster = (Monster)brick;
-                    if (monster.Position.Y >= levelManager.GameGrid.maxDestination)
+                    if (monster.Position.Y >= levelManager.GameGrid.maxDestination && !monster.IsDead)
                     {
                        monster.Attack();
-
                         if (monster.isAttacking)
                         {
-                                player.IsHit(monster, monster.Power);
+                        player.IsHit(monster, monster.Power);
                         }
-
                     }
-                  
                 }
             }
         }
@@ -97,6 +98,7 @@ namespace BricksGame
         {
             if (player.IsDead)
             {
+                levelManager.currentState = LevelManager.LevelState.gameOver;
                 currentScene.End();
             }
         }
@@ -156,6 +158,13 @@ namespace BricksGame
             {
                 NextLevel();
             }
+
+            if (levelManager.currentState == LevelManager.LevelState.end)
+            {
+                IsGameWin = true;
+            }
+
+           
         }
     }
 }

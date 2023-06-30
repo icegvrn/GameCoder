@@ -10,7 +10,7 @@ namespace BricksGame
 {
     public class LevelManager
     {
-        private int currentLevel = 1;
+        private int currentLevel;
         public int CurrentLevel { get { return currentLevel; } set { currentLevel = value; } }
         private List<int> currentLevelDices;
         private BaseGrid gameGrid;
@@ -25,7 +25,8 @@ namespace BricksGame
 
         public LevelManager()
         {
-
+            currentLevel = 1;
+            currentState = LevelState.dices;
         }
 
         public void LoadLevel(int level)

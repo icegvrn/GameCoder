@@ -24,8 +24,11 @@ namespace BricksGame
             thresholds = p_thresholds;
         }
 
-        public override void Update(GameTime gameTime )
+        public override void Update(GameTime gameTime, int value, Vector2 position)
         {
+            Position = position;
+            CurrentValue = value;
+
             for (int i=thresholds.Length; i >= 0; i--)
             {
                 if (i != thresholds.Length)
@@ -46,6 +49,7 @@ namespace BricksGame
             base.Update(gameTime );
 
         }
+
 
         public override void Draw(SpriteBatch spriteBatch)
         {

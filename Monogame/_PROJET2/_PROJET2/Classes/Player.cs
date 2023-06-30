@@ -60,13 +60,14 @@ namespace BricksGame
 
         //Ball count
         private int munitionNb = 10;
+        private int baseMunition = 10;
         public bool HasMunition { get { if (munitionNb <= 0) { return false; } else { return true; } } }
 
 
         private Texture2D munitionCounter;
         public Player(Texture2D p_texture) : base(p_texture)
         {
-     
+            
             Speed = 15;
             currentState = Gamesystem.CharacterState.idle;
             lastState = currentState;
@@ -78,13 +79,15 @@ namespace BricksGame
             // Vie
             lifeIcon = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/icon_heart");
             initialLife = 3000f;
-        
+            provisoryLife = initialLife;
             PlayerState.SetLife((int)initialLife);
+
             Rectangle lifeBar = new Rectangle(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 + 50, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - 50, barsLenght, barsHeight);
             barLife = new EvolutiveColoredGauge(initialLife, lifeBar, Color.White, threshold, lifeColors);
 
             //Points
             pointsIcon = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/icon_power");
+            PlayerState.SetPoints(0);
             maxPoints = 3000f;
 
            
@@ -114,8 +117,8 @@ namespace BricksGame
             {
                 if (PlayerState.Life > 0)
                 {
-                    PlayerState.SubsLife(1); // Perte de vie d'une unité
-                               // Autres actions à effectuer lorsque la vie est perdue
+                    PlayerState.SubsLife(1); 
+                        
                 }
             }
             if (IsReady)
@@ -150,21 +153,12 @@ namespace BricksGame
                     ChangeState(Gamesystem.CharacterState.idle);
                 }
 
-
-
-
                 if (PlayerState.Life <= 0)
                 {
                     IsDead = true;
                 }
 
-                barLife.CurrentValue = PlayerState.Life;
-                barLife.Update(p_GameTime);
-                pointsBar.CurrentValue = PlayerState.Points;
-                pointsBar.Update(p_GameTime);
-
-
-           
+               
 
                 if (isHit)
                 {
@@ -175,7 +169,13 @@ namespace BricksGame
                 {
                     BlinkOnHit(p_GameTime, false);
                 }
+
+              
             }
+
+            barLife.Update(p_GameTime, PlayerState.Life, barLife.Position);
+            pointsBar.CurrentValue = PlayerState.Points;
+            pointsBar.Update(p_GameTime);
 
             BoundingBox = new Rectangle((int)(Position.X), (int)(Position.Y), (int)Size.X, (int)Size.Y/3); 
             animator.Update(p_GameTime);
@@ -257,17 +257,21 @@ namespace BricksGame
             Position = new Vector2(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 - Size.X/2, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - Size.Y*2f);
             playerColor = Color.White;
             
-
             if (BallsList is not null)
             {
                 foreach (Ball ball in BallsList)
                 {
                     ball.Destroy();
+                    ServiceLocator.GetService<GameState>().CurrentScene.RemoveToGameObjectsList(ball);
                 }
 
             }
-
             BallsList = new List<Ball>();
+        }
+
+        public void ResetMunition()
+        {
+            munitionNb = baseMunition;
         }
 
   

@@ -13,7 +13,8 @@ namespace BricksGame
             Menu,
             Gameplay,
             GameOver, 
-            Editor
+            Editor,
+            Win
         }
         public Scene CurrentScene { get; private set; }
 
@@ -46,6 +47,9 @@ namespace BricksGame
                     break;
                 case (SceneType.Editor):
                     CurrentScene = new SceneEditor(mainGame);
+                    break;
+                case (SceneType.Win):
+                    CurrentScene = new SceneGameWin(mainGame);
                     break;
                 default:
                 break;

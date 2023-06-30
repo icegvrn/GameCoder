@@ -24,13 +24,19 @@ namespace BricksGame
 
         public override void Update(GameTime gameTime)
         {
+            if (GameKeyboard.IsKeyReleased(Microsoft.Xna.Framework.Input.Keys.Space))
+            {
+                mainGame.gameState.ChangeScene(GameState.SceneType.Menu);
+            }
+
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
             mainGame._spriteBatch.Draw(background, Vector2.Zero, Color.White);
-            mainGame._spriteBatch.DrawString(AssetsManager.MainFont, "This is theVictory !", new Vector2(1, 1), Color.White);
+            mainGame._spriteBatch.DrawString(AssetsManager.Font14, "[SPACE]", new Vector2(10, 11), Color.White);
+            mainGame._spriteBatch.DrawString(AssetsManager.Font10, "to restart", new Vector2(10, 25), Color.White);
             base.Draw(gameTime);
         }
 

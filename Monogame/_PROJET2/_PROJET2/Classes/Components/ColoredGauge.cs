@@ -57,6 +57,19 @@ namespace BricksGame
             currentValueRectangle.Width = (int)((currentValue/maxValue) * gaugeRectangle.Width);
         }
 
+        public virtual void Update(GameTime gameTime, int value, Vector2 p_position)
+        {
+            Position = p_position;
+            currentValue = value;
+            gaugeRectangle.X = (int)Position.X;
+            gaugeRectangle.Y = (int)Position.Y;
+            textPosition.X = Position.X + textOffest.X;
+            textPosition.Y = Position.Y + textOffest.Y;
+            currentValueRectangle.X = gaugeRectangle.X;
+            currentValueRectangle.Y = gaugeRectangle.Y;
+            currentValueRectangle.Width = (int)((currentValue / maxValue) * gaugeRectangle.Width);
+        }
+
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {

@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
-
+using System.Diagnostics;
 
 namespace BricksGame
 {
@@ -28,6 +28,10 @@ namespace BricksGame
         public override void Update(GameTime gameTime)
         {
             gameManager.Update(gameTime);
+            if (gameManager.IsGameWin)
+            {
+                mainGame.gameState.ChangeScene(GameState.SceneType.Win);
+            }
             base.Update(gameTime);
         }
 
@@ -46,7 +50,8 @@ namespace BricksGame
         }
 
         public override void End()
-        {     
+        {
+
             mainGame.gameState.ChangeScene(GameState.SceneType.GameOver);
         }
 

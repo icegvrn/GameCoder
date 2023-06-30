@@ -25,6 +25,11 @@ namespace BricksGame
             Life = p_life;
         }
 
+        public static void SetPoints(int p_points)
+        {
+            Points = p_points;
+        }
+
         public static void AddLife(int p_life)
         {
             Life += p_life;

@@ -18,7 +18,14 @@ namespace BricksGame
         }
 
         public virtual void Load() { }
-        public virtual void UnLoad() { }
+        public virtual void UnLoad() 
+        {
+            for (int i = gameObjectsList.Count - 1; i >= 0; i--)
+            {
+                RemoveToGameObjectsList(gameObjectsList[i]);
+            }
+
+        }
         public virtual void Update(GameTime gameTime) 
         {
             RegisterDestroyedGameObjects();
@@ -53,7 +60,6 @@ namespace BricksGame
         {
             for (int i = gameObjectsList.Count - 1; i >= 0; i--)
             {
-
                 foreach (GameObject gameObj2 in gameObjectsList)
                 {
                     if (gameObj2 != gameObjectsList[i])
@@ -65,7 +71,6 @@ namespace BricksGame
                             if (Utils.CollideByBox(gameObjectsList[i], gameObj2))
                             {
                                 c_colliderObject.TouchedBy(gameObj2);
-                              //  c_colliderObject2.TouchedBy(gameObjectsList[i]);
                             }
                         }
                     }
