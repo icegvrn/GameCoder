@@ -22,7 +22,7 @@ namespace BricksGame
         public static void Load(ContentManager content) 
         {
             menuMusic = content.Load<Song>("cool");
-            gamePlayMusic = content.Load<Song>("techno");
+            gamePlayMusic = content.Load<Song>("background_gameplay");
             MainFont = content.Load<SpriteFont>("font");
             Font10 = content.Load<SpriteFont>("font10");
             Font14 = content.Load<SpriteFont>("font14");

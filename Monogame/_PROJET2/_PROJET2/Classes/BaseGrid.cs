@@ -30,7 +30,7 @@ namespace BricksGame
 
         private void InitGrid(int colNb, int linNb)
         {
-            Position = new Vector2(brickWidth, brickHeight * 2);
+            Position = new Vector2(brickWidth, (brickHeight * 2));
             slotPositions = new List<Vector2>();
             gridElements = new List<IBrickable>();
             columnsNb = colNb;

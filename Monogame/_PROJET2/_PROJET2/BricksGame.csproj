@@ -27,6 +27,9 @@
     <Folder Include="Content\bin\DesktopGL\images\Monsters\" />
     <Folder Include="Content\bin\DesktopGL\images\Monsters\attack\" />
     <Folder Include="Content\bin\DesktopGL\images\Monsters\die\" />
+    <Folder Include="Content\bin\DesktopGL\Sounds\Ball\" />
+    <Folder Include="Content\bin\DesktopGL\Sounds\Monsters\fire\" />
+    <Folder Include="Content\bin\DesktopGL\Sounds\Player\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

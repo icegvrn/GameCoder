@@ -63,7 +63,7 @@ namespace BricksGame
        private void LoadAudio()
         {
             myMusic = AssetsManager.gamePlayMusic;
-            MediaPlayer.IsRepeating = false;
+            MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(myMusic);
         }
 

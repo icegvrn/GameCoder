@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 
 namespace BricksGame
 {
@@ -12,7 +12,7 @@ namespace BricksGame
         private Button bttn_Start;
         private Button bttn_Create;
         private Song myMusic;
-        private SoundEffect sndExplode;
+        private SoundEffect sndButton;
         
         public SceneMenu(MainGame p_mainGame) : base(p_mainGame) 
         { 
@@ -54,9 +54,9 @@ namespace BricksGame
         private void LoadAudio()
         {
             myMusic = AssetsManager.menuMusic;
-            MediaPlayer.IsRepeating = false;
+            MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(myMusic);
-            sndExplode = mainGame.Content.Load<SoundEffect>("explode");
+            sndButton = mainGame.Content.Load<SoundEffect>("Sounds/button");
         }
 
         private void StopAudio()
@@ -87,15 +87,17 @@ namespace BricksGame
 
         public void onHover(Button p_Button)
         {
-            sndExplode.Play();
+            sndButton.Play();
         }
         public void StartGame(Button p_Button)
         {
+            sndButton.Play();
             mainGame.gameState.ChangeScene(GameState.SceneType.Gameplay);
         }
 
         public void StartEditor(Button p_Button)
         {
+            sndButton.Play();
             mainGame.gameState.ChangeScene(GameState.SceneType.Editor);
         }
     }

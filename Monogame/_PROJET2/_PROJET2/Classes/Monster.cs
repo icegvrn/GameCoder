@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Content;
 using BricksGame.Classes;
 using System;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.Audio;
 
 namespace BricksGame
 {
@@ -40,11 +41,14 @@ namespace BricksGame
         // Attaque
         private Texture2D attackIcon;
         private float attackTimer = 0f;
-        private float attackCooldown = 7f;
+        private float attackCooldown = 1.5f;
 
         //Dimensions
         private int monsterWidth;
         private int monsterHeight;
+
+        //Son
+        SoundContainer soundContainer;
 
 
 
@@ -61,6 +65,8 @@ namespace BricksGame
             animator = new Animator(this, lvl, 0.15f);
             SetSpeed(lvl);
             CanMove = true;
+            soundContainer = new SoundContainer(this, lvl);
+            soundContainer.Play(Gamesystem.CharacterState.idle, 1);
         }
 
 
@@ -106,6 +112,7 @@ namespace BricksGame
                 {
                     isAttacking = true;
                     attackTimer = 0f;
+                    soundContainer.Play(Gamesystem.CharacterState.fire, 1);
                 }
                 else
                 {
@@ -123,7 +130,9 @@ namespace BricksGame
             provisoryLife = life - lifeFactor;
             CollisionEvent = false;
             ChangeState(Gamesystem.CharacterState.hit);
-            hitDurationTimer = hitDuration; 
+            hitDurationTimer = hitDuration;
+            soundContainer.Play(Gamesystem.CharacterState.hit, 1);
+            soundContainer.Play(Gamesystem.CharacterState.idle, 1);
         }
 
 
@@ -158,14 +167,16 @@ namespace BricksGame
                     animator.SetLoop(false);
                     destroyTimer = 0f;
                     IsDead = true;
-                  
+                    soundContainer.Play(Gamesystem.CharacterState.die, 1);
+
                 }
                 else
                 {
                     destroyTimer += (float)p_GameTime.ElapsedGameTime.TotalSeconds;
                     if (destroyTimer >= destroyDelay)
                     {
-                     
+
+                    
                         Destroy();
                     }
                 }

@@ -14,6 +14,8 @@ namespace BricksGame
     {
 
         // Etats de la balle
+        private Gamesystem.BallState currentSate;
+
         private bool isFired;
         public bool IsDestroy { get; set; }
 
@@ -28,6 +30,12 @@ namespace BricksGame
         // Particules de la balle
         public List<TimedParticles> timedParticles { get; set; }
 
+        // Son
+        private bool hit;
+        private float hitSoundDelay = 1f;
+        private float hitTimer = 0f;
+        private SoundContainer soundContainer;
+
 
         public Ball(List<Texture2D> p_texture) : base(p_texture)
         {
@@ -36,6 +44,8 @@ namespace BricksGame
             CanMove = false;
             Speed = 10f;
             SpeedVector = new Vector2(Speed, -Speed);
+            currentSate = Gamesystem.BallState.idle;
+            soundContainer= new SoundContainer(this);
         }
 
         public override void Update(GameTime p_GameTime)
@@ -50,6 +60,19 @@ namespace BricksGame
             {
                 UpdatePositionIfFollowingSomething();
             }
+
+            if (hit)
+            {
+                hitTimer += (float)p_GameTime.ElapsedGameTime.TotalSeconds;
+                if (hitTimer >= hitSoundDelay)
+                {
+                    currentSate = Gamesystem.BallState.fired;
+                    hit = false;
+                    hitTimer = 0;
+                }
+            }
+
+
 
             UpdateParticles(p_GameTime);
             base.Update(p_GameTime);
@@ -77,12 +100,14 @@ namespace BricksGame
                     {
                         InverseVerticalDirection();
                         c_Brick.RemoveLife(50);
+                        
                     }
 
                     if (c_Brick.BoundingBox.Intersects(NextPositionX()))
                     {
                         InverseHorizontalDirection();
                         c_Brick.RemoveLife(50);
+                       
                     }
 
                 }
@@ -156,6 +181,8 @@ namespace BricksGame
                     SpeedVector.X = (float)Math.Cos(angle) * Speed;
                     SpeedVector.Y = -(float)Math.Sin(angle) * Speed;
                 }
+                
+                
             }
         }
       
@@ -173,11 +200,13 @@ namespace BricksGame
         public void InverseHorizontalDirection()
         {
             SpeedVector = new Vector2(-SpeedVector.X, SpeedVector.Y);
+            HitEvents();
         }
 
         public void InverseVerticalDirection()
         {
             SpeedVector = new Vector2(SpeedVector.X, -SpeedVector.Y);
+            HitEvents();
         }
 
         public void Fire()
@@ -188,6 +217,8 @@ namespace BricksGame
                 CalcTrajectory();
                 CanMove = true;
                 isFired = true;
+                currentSate = Gamesystem.BallState.fired;
+                soundContainer.Play(Gamesystem.BallState.fired);
             }
 
         }
@@ -197,7 +228,6 @@ namespace BricksGame
             if (Position.X + currentTexture.Width > ServiceLocator.GetService<PlayerArea>().area.Right)
             {
                 Position = new Vector2(ServiceLocator.GetService<PlayerArea>().area.Right - BoundingBox.Width, Position.Y);
-
                 InverseHorizontalDirection();
             }
 
@@ -261,6 +291,13 @@ namespace BricksGame
             SpeedVector = new Vector2(((float)Math.Cos(angle) * Speed), (float)Math.Sin(angle) * Speed);
         }
 
+        private void HitEvents()
+        {
+            currentSate = Gamesystem.BallState.hit;
+            hit = true;
+            soundContainer.Play(Gamesystem.BallState.hit);
+        }
+
         public void DrawTrajectory(SpriteBatch p_SpriteBatch)
         {
             CalcTrajectory();
@@ -279,7 +316,8 @@ namespace BricksGame
             }
 
             ServiceLocator.GetService<GameState>().CurrentScene.RemoveToGameObjectsList(this);
-
+            currentSate = Gamesystem.BallState.destroyed;
+            soundContainer.Play(Gamesystem.BallState.destroyed);
             IsDestroy = true;
             ball = null;
         }
@@ -287,6 +325,7 @@ namespace BricksGame
         public void Destroy()
         {
             Destroy(this);
+            soundContainer.Play(Gamesystem.BallState.destroyed);
         }
 
 

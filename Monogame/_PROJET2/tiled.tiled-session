@@ -3,33 +3,60 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "map1.tmx",
     "expandedProjectPaths": [
     ],
+    "file.lastUsedOpenFilter": "Tous les Fichiers (*)",
     "fileStates": {
+        "C:/Users/Simon/Desktop/tile_atlas.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "TX Plant.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "TX Props.tsx": {
+            "scaleInDock": 1
+        },
+        "TX Shadow Plant.tsx": {
+            "scaleInDock": 1
+        },
+        "TX Struct.tsx": {
+            "scaleInDock": 1
+        },
+        "TX Tileset Grass.tsx": {
+            "scaleInDock": 1
+        },
+        "TX Tileset Stone Ground.tsx": {
+            "scaleInDock": 1
+        },
+        "TX Tileset Wall.tsx": {
+            "scaleInDock": 1
+        },
         "map1.tmx": {
             "scale": 0.8572619047619048,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
                 "x": 309.1237328148869,
                 "y": 421.10817941952513
             }
         }
     },
-    "last.imagePath": "C:/Users/Simon/Downloads/Pixel Art Top Down - Basic/Texture",
+    "last.imagePath": "C:/Users/Simon/Desktop",
     "map.height": 26,
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 32,
     "map.tileWidth": 32,
     "map.width": 19,
     "openFiles": [
+        "map1.tmx",
+        "C:/Users/Simon/Desktop/tile_atlas.tsx"
     ],
     "project": "tiled.tiled-project",
     "recentFiles": [
+        "C:/Users/Simon/Desktop/tile_atlas.tsx",
+        "map1.tmx",
         "TX Plant.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",

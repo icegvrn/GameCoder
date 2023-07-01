@@ -1,6 +1,7 @@
 ﻿
 using BricksGame;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -32,13 +33,19 @@ namespace BricksGame
         MouseState oldMouseState;
         Vector2 diceScale = new Vector2(0.8f, 0.8f);
 
+        private SoundEffect sndRoll;
+        private SoundEffect sndHover;
+
         public Dice(Gamesystem.dice value) :  base()
         { 
             rand = new Random();
            ContentManager content = ServiceLocator.GetService<ContentManager>();
             List<Texture2D> spritesTexture = new List<Texture2D>();
             tiles = new List<Rectangle>();
-           
+
+            sndRoll = ServiceLocator.GetService<ContentManager>().Load<SoundEffect>("Sounds/diceRoll");
+            sndHover = ServiceLocator.GetService<ContentManager>().Load<SoundEffect>("Sounds/diceHover");
+
             switch (value)
             {
                 case Gamesystem.dice.d3:
@@ -136,7 +143,7 @@ namespace BricksGame
                     {
                         diceScale = Vector2.One;
                         isHover = true;
-
+                        sndHover.Play();
                     }
                     else
                     {
@@ -177,6 +184,7 @@ namespace BricksGame
         public void RollDice()
         {
             diceAnimationStarted = true;
+   
         }
 
         private void AnimateTheDice(GameTime p_GameTime)
@@ -185,6 +193,7 @@ namespace BricksGame
 
             if (diceAnimationTimer > 5f + facesNb/4)
             {
+                sndRoll.Play();
                 currentNb = rand.Next(1, facesNb + 1);
                 diceAnimationStarted = false;
                 diceAnimationTimer = 0f;
@@ -194,6 +203,7 @@ namespace BricksGame
             else if ((int)Math.Ceiling(diceAnimationTimer) != lastMathCeil)
             {
                 currentNb = rand.Next(1, facesNb + 1);
+                sndRoll.Play();
             }
 
             lastMathCeil = (int)Math.Ceiling(diceAnimationTimer);

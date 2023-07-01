@@ -1,5 +1,6 @@
 ﻿using BricksGame.Classes;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -68,12 +69,18 @@ namespace BricksGame
         private float destroyTimer = 0f;
         public bool startDying;
 
+        private SoundContainer soundContainer;
+        private SoundEffect sndCriticalLife;
+        private bool criticalLifeAnnounced;
+
 
 
         private Texture2D munitionCounter;
         public Player(Texture2D p_texture) : base(p_texture)
         {
-            
+
+            soundContainer = new SoundContainer(this);
+            sndCriticalLife = ServiceLocator.GetService<ContentManager>().Load<SoundEffect>("Sounds/critical_life");
             Speed = 15;
             currentState = Gamesystem.CharacterState.idle;
             currentDirection = Gamesystem.CharacterDirection.right;
@@ -84,7 +91,7 @@ namespace BricksGame
 
             // Vie
             lifeIcon = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/icon_heart");
-            initialLife = 3f;
+            initialLife = 3000f;
             provisoryLife = initialLife;
             PlayerState.SetLife((int)initialLife);
 
@@ -184,6 +191,7 @@ namespace BricksGame
                         animator.SetLoop(false);
                         destroyTimer = 0f;
                         startDying = true;
+                       
                         if (currentDirection == Gamesystem.CharacterDirection.left)
                         {
                             ChangeState(Gamesystem.CharacterState.l_die);
@@ -192,6 +200,7 @@ namespace BricksGame
                         {
                             ChangeState(Gamesystem.CharacterState.die);
                         }
+                        soundContainer.Play(Gamesystem.CharacterState.die);
                     }
                     
                 if (startDying)
@@ -210,6 +219,16 @@ namespace BricksGame
                   
       
                  
+                }
+
+                else if (PlayerState.Life <= initialLife/4)
+                {
+                    if (!criticalLifeAnnounced)
+                    {
+sndCriticalLife.Play();
+                        criticalLifeAnnounced = true;
+                    }
+                    
                 }
 
                
@@ -289,7 +308,7 @@ namespace BricksGame
         {
             if (p_By is Ball)
             {
-                Debug.WriteLine("PLAYER : J'ai touché la balle !");
+              //  Debug.WriteLine("PLAYER : J'ai touché la balle !");
             }
 
       

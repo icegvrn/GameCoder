@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,10 +14,12 @@ namespace BricksGame
         private ContentManager content;
         LevelManager levelManager;
         public bool IsGameWin;
+        private SoundEffect sndWinLevel;
         public GameManager()
         {
             currentScene = ServiceLocator.GetService<GameState>().CurrentScene;
             content = ServiceLocator.GetService<ContentManager>();
+            sndWinLevel = content.Load<SoundEffect>("Sounds/nextLevel");
         }
 
         public void Load()
@@ -157,6 +160,7 @@ namespace BricksGame
             if (levelManager.currentState == LevelManager.LevelState.win)
             {
                 NextLevel();
+                sndWinLevel.Play();
             }
 
             if (levelManager.currentState == LevelManager.LevelState.end)

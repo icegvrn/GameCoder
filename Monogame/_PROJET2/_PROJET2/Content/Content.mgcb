@@ -25,6 +25,12 @@
 /processorParam:TextureFormat=Color
 /build:arrow.png
 
+#begin background_gameplay.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:background_gameplay.mp3
+
 #begin button_editor_hover.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1766,6 +1772,558 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:ship.png
+
+#begin Sounds/Ball/destroyed.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Ball/destroyed.wav
+
+#begin Sounds/Ball/fire.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Ball/fire.wav
+
+#begin Sounds/Ball/hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Ball/hit.wav
+
+#begin Sounds/button.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/button.wav
+
+#begin Sounds/critical_life.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/critical_life.wav
+
+#begin Sounds/diceHover.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/diceHover.wav
+
+#begin Sounds/diceRoll.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/diceRoll.wav
+
+#begin Sounds/Monsters/die/1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/1.wav
+
+#begin Sounds/Monsters/die/10.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/10.wav
+
+#begin Sounds/Monsters/die/11.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/11.wav
+
+#begin Sounds/Monsters/die/12.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/12.wav
+
+#begin Sounds/Monsters/die/13.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/13.wav
+
+#begin Sounds/Monsters/die/14.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/14.wav
+
+#begin Sounds/Monsters/die/15.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/15.wav
+
+#begin Sounds/Monsters/die/16.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/16.wav
+
+#begin Sounds/Monsters/die/17.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/17.wav
+
+#begin Sounds/Monsters/die/18.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/18.wav
+
+#begin Sounds/Monsters/die/19.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/19.wav
+
+#begin Sounds/Monsters/die/2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/2.wav
+
+#begin Sounds/Monsters/die/20.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/20.wav
+
+#begin Sounds/Monsters/die/3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/3.wav
+
+#begin Sounds/Monsters/die/4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/4.wav
+
+#begin Sounds/Monsters/die/5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/5.wav
+
+#begin Sounds/Monsters/die/6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/6.wav
+
+#begin Sounds/Monsters/die/7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/7.wav
+
+#begin Sounds/Monsters/die/8.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/8.wav
+
+#begin Sounds/Monsters/die/9.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/die/9.wav
+
+#begin Sounds/Monsters/fire/1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/1.wav
+
+#begin Sounds/Monsters/fire/1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/1.wav
+
+#begin Sounds/Monsters/fire/10.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/10.wav
+
+#begin Sounds/Monsters/fire/11.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/11.wav
+
+#begin Sounds/Monsters/fire/12.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/12.wav
+
+#begin Sounds/Monsters/fire/13.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/13.wav
+
+#begin Sounds/Monsters/fire/14.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/14.wav
+
+#begin Sounds/Monsters/fire/15.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/15.wav
+
+#begin Sounds/Monsters/fire/16.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/16.wav
+
+#begin Sounds/Monsters/fire/17.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/17.wav
+
+#begin Sounds/Monsters/fire/18.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/18.wav
+
+#begin Sounds/Monsters/fire/19.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/19.wav
+
+#begin Sounds/Monsters/fire/2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/2.wav
+
+#begin Sounds/Monsters/fire/2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/2.wav
+
+#begin Sounds/Monsters/fire/20.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/20.wav
+
+#begin Sounds/Monsters/fire/3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/3.wav
+
+#begin Sounds/Monsters/fire/3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/3.wav
+
+#begin Sounds/Monsters/fire/4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/4.wav
+
+#begin Sounds/Monsters/fire/5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/5.wav
+
+#begin Sounds/Monsters/fire/6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/6.wav
+
+#begin Sounds/Monsters/fire/7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/7.wav
+
+#begin Sounds/Monsters/fire/8.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/8.wav
+
+#begin Sounds/Monsters/fire/9.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/fire/9.wav
+
+#begin Sounds/Monsters/hit/1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/1.wav
+
+#begin Sounds/Monsters/hit/10.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/10.wav
+
+#begin Sounds/Monsters/hit/11.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/11.wav
+
+#begin Sounds/Monsters/hit/12.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/12.wav
+
+#begin Sounds/Monsters/hit/13.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/13.wav
+
+#begin Sounds/Monsters/hit/14.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/14.wav
+
+#begin Sounds/Monsters/hit/15.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/15.wav
+
+#begin Sounds/Monsters/hit/16.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/16.wav
+
+#begin Sounds/Monsters/hit/17.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/17.wav
+
+#begin Sounds/Monsters/hit/18.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/18.wav
+
+#begin Sounds/Monsters/hit/19.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/19.wav
+
+#begin Sounds/Monsters/hit/2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/2.wav
+
+#begin Sounds/Monsters/hit/20.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/20.wav
+
+#begin Sounds/Monsters/hit/3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/3.wav
+
+#begin Sounds/Monsters/hit/4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/4.wav
+
+#begin Sounds/Monsters/hit/5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/5.wav
+
+#begin Sounds/Monsters/hit/6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/6.wav
+
+#begin Sounds/Monsters/hit/7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/7.wav
+
+#begin Sounds/Monsters/hit/8.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/8.wav
+
+#begin Sounds/Monsters/hit/9.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/hit/9.wav
+
+#begin Sounds/Monsters/idle/1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/1.wav
+
+#begin Sounds/Monsters/idle/10.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/10.wav
+
+#begin Sounds/Monsters/idle/11.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/11.wav
+
+#begin Sounds/Monsters/idle/12.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/12.wav
+
+#begin Sounds/Monsters/idle/13.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/13.wav
+
+#begin Sounds/Monsters/idle/14.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/14.wav
+
+#begin Sounds/Monsters/idle/15.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/15.wav
+
+#begin Sounds/Monsters/idle/16.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/16.wav
+
+#begin Sounds/Monsters/idle/17.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/17.wav
+
+#begin Sounds/Monsters/idle/18.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/18.wav
+
+#begin Sounds/Monsters/idle/19.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/19.wav
+
+#begin Sounds/Monsters/idle/2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/2.wav
+
+#begin Sounds/Monsters/idle/20.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/20.wav
+
+#begin Sounds/Monsters/idle/3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/3.wav
+
+#begin Sounds/Monsters/idle/4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/4.wav
+
+#begin Sounds/Monsters/idle/5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/5.wav
+
+#begin Sounds/Monsters/idle/6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/6.wav
+
+#begin Sounds/Monsters/idle/7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/7.wav
+
+#begin Sounds/Monsters/idle/8.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/8.wav
+
+#begin Sounds/Monsters/idle/9.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monsters/idle/9.wav
+
+#begin Sounds/nextLevel.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/nextLevel.wav
+
+#begin Sounds/Player/die.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Player/die.wav
 
 #begin techno.mp3
 /importer:Mp3Importer

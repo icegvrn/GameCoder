@@ -23,6 +23,8 @@ namespace BricksGame
         public enum LevelState { dices, play, gameOver, win, end };
         public LevelState currentState;
 
+
+
         public LevelManager()
         {
             currentLevel = 1;
