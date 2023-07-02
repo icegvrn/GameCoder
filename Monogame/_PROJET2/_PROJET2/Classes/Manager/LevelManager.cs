@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -33,6 +35,7 @@ namespace BricksGame
 
         public void LoadLevel(int level)
         {
+
             CreatePlayingArea();
             currentLevel = level;
             ReadLevelsData();
@@ -83,7 +86,7 @@ namespace BricksGame
 
         private void ReadLevelsData()
         {
-            string json = File.ReadAllText("Content/Levels/level1.json");
+            string json = File.ReadAllText(ServiceLocator.GetService<GameState>().currentLevelsJSON);
             listOfLevels = JsonSerializer.Deserialize<LevelList>(json);
         }
 
@@ -137,7 +140,7 @@ namespace BricksGame
         {
             InitDicesFactory();
 
-            List<Dice> dicesList = dicesFactory.Load(dices);
+            List<Dice> dicesList = dicesFactory.Load(dices, true);
             for (int n = 0; n < dicesList.Count; n++)
             {
                 grid.AddBrickable(dicesList[n], n);

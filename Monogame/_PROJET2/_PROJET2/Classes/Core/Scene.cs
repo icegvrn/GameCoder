@@ -50,10 +50,14 @@ namespace BricksGame
 
         public void UpdateGameObjects(GameTime gameTime)
         {
-            for (int i = gameObjectsList.Count - 1; i >= 0; i--)
-            {
-                gameObjectsList[i].Update(gameTime);
+                for (int i = 0; i <= gameObjectsList.Count - 1; i++)
+                {
+                if (gameObjectsList[i] != null)
+                {
+                    gameObjectsList[i].Update(gameTime);
+                }
             }
+           
         }
 
         public void RegisterCollisions()

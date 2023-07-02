@@ -42,7 +42,7 @@ namespace BricksGame
 
         public override void Draw(SpriteBatch p_SpriteBatch)
         {
-         p_SpriteBatch.Draw(currentTexture, Position, null, Color.Purple, 0, Vector2.Zero, new Vector2(timer/2, timer / 2), SpriteEffects.None, 1); ;
+         p_SpriteBatch.Draw(currentTexture, Position, null, Color.CornflowerBlue, 0, Vector2.Zero, new Vector2(timer/2, timer / 2), SpriteEffects.None, 1); ;
 
         }
 

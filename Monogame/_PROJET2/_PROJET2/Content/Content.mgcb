@@ -91,6 +91,30 @@
 /processorParam:TextureFormat=Color
 /build:button_load.png
 
+#begin button_save_hover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:button_save_hover.png
+
+#begin button_save.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:button_save.png
+
 #begin button.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1941,12 +1965,6 @@
 /processorParam:Quality=Best
 /build:Sounds/Monsters/fire/1.wav
 
-#begin Sounds/Monsters/fire/1.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/Monsters/fire/1.wav
-
 #begin Sounds/Monsters/fire/10.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -2013,23 +2031,11 @@
 /processorParam:Quality=Best
 /build:Sounds/Monsters/fire/2.wav
 
-#begin Sounds/Monsters/fire/2.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/Monsters/fire/2.wav
-
 #begin Sounds/Monsters/fire/20.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/Monsters/fire/20.wav
-
-#begin Sounds/Monsters/fire/3.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/Monsters/fire/3.wav
 
 #begin Sounds/Monsters/fire/3.wav
 /importer:WavImporter

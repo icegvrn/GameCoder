@@ -19,6 +19,10 @@ namespace BricksGame
         public static Song gamePlayMusic { get; private set; }
 
         public static Texture2D blankTexture { get; private set; }
+
+        public static string levelsPath { get; private set; }
+        public static string savedLevelsPath { get; private set; }
+        public static string absoluteSavedLevelsPath { get; private set; }
         public static void Load(ContentManager content) 
         {
             menuMusic = content.Load<Song>("cool");
@@ -27,6 +31,8 @@ namespace BricksGame
             Font10 = content.Load<SpriteFont>("font10");
             Font14 = content.Load<SpriteFont>("font14");
             blankTexture = content.Load<Texture2D>("images/blank");
+            levelsPath = "Content/Levels/levels.json";
+            savedLevelsPath = "Content/Levels/savedLevel.json";
         }
 
     }

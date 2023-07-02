@@ -69,7 +69,7 @@ namespace BricksGame
         private float destroyTimer = 0f;
         public bool startDying;
 
-        private SoundContainer soundContainer;
+        private SoundManager soundContainer;
         private SoundEffect sndCriticalLife;
         private bool criticalLifeAnnounced;
 
@@ -79,7 +79,7 @@ namespace BricksGame
         public Player(Texture2D p_texture) : base(p_texture)
         {
 
-            soundContainer = new SoundContainer(this);
+            soundContainer = new SoundManager(this);
             sndCriticalLife = ServiceLocator.GetService<ContentManager>().Load<SoundEffect>("Sounds/critical_life");
             Speed = 15;
             currentState = Gamesystem.CharacterState.idle;
@@ -105,7 +105,7 @@ namespace BricksGame
 
            
             Rectangle rectPointsBar = new Rectangle(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width/2 - 50 - barsLenght - pointsIcon.Width/2, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - 50, barsLenght, barsHeight);
-            pointsBar = new ColoredGauge(maxPoints, rectPointsBar, Color.Purple);
+            pointsBar = new ColoredGauge(maxPoints, rectPointsBar, Color.CornflowerBlue);
             
           
             // Portrait
@@ -327,7 +327,7 @@ sndCriticalLife.Play();
 
         public void Reset()
         {
-            Position = new Vector2(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 - Size.X/2, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - Size.Y*2f);
+            Position = new Vector2(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 - Size.X/2, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - Size.Y*1.8f);
             playerColor = Color.White;
             
             if (BallsList is not null)
@@ -366,11 +366,6 @@ sndCriticalLife.Play();
 
         public void CreateNewBall()
         {
-            if (!HasMunition)
-            {
-                ServiceLocator.GetService<GameState>().CurrentScene.End();
-            }
-
             List<Texture2D> myBallTextureList = new List<Texture2D>();
             myBallTextureList.Add(ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/ball"));
             Ball ball = new Ball(myBallTextureList);

@@ -12,5 +12,13 @@ namespace BricksGame
         public int LevelNb { get { return levelNb; } set { levelNb = value; } }
         private int[][] dices;
         public int[][] Dices { get { return dices; } set { dices = value; } }
+
+        public Level()
+        {
+            levelNb = 1;
+        }
+
     }
+
+   
 }

@@ -50,6 +50,12 @@ namespace BricksGame
             DoEventsOnLevelState();
         }
 
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            levelManager.GameGrid.DrawGrid(spriteBatch);
+            //levelManager.GameGrid.DrawSlots(spriteBatch);
+        }
+
         private void LoadNewPlayer()
         {
             player = new Player(content.Load<Texture2D>("images/pad"));
@@ -149,10 +155,20 @@ namespace BricksGame
         {
             if (!currentScene.IsSceneContainsObjectTypeOf<Ball>())
             {
-                levelManager.NoBallActions();
-                player.Reset();
-                player.Prepare();
+                if (player.HasMunition)
+            {
+                    levelManager.NoBallActions();
+                    player.Reset();
+                    player.Prepare();
+              
             }
+            else
+            {
+                    levelManager.currentState = LevelManager.LevelState.gameOver;
+                    currentScene.End();
+                }
+            }
+
         }
 
         private void DoEventsOnStateWin()

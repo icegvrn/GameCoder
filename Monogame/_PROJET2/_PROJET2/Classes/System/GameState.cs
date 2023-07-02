@@ -19,6 +19,11 @@ namespace BricksGame
         public Scene CurrentScene { get; private set; }
 
         protected MainGame mainGame;
+
+        public enum GameMode { normal, saved };
+        public GameMode currentGameMode;
+        public bool hasASavedGame;
+        public string currentLevelsJSON;
     
 
         public GameState(MainGame p_mainGame)

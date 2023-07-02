@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 
 namespace BricksGame
 {
@@ -11,6 +12,7 @@ namespace BricksGame
     {
         private Button bttn_Start;
         private Button bttn_Create;
+        private Button bttn_Load;
         private Song myMusic;
         private SoundEffect sndButton;
         
@@ -24,6 +26,7 @@ namespace BricksGame
             LoadAudio();
             LoadStartButton();
             LoadEditorButton();
+            LoadLoadButton();
             base.Load();
         }
 
@@ -35,7 +38,7 @@ namespace BricksGame
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+           base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
@@ -70,7 +73,7 @@ namespace BricksGame
             bttn_Start = new Button(myButtonTextureList);
             bttn_Start.onClick = StartGame;
             bttn_Start.onHover = onHover;
-            bttn_Start.Position = new Vector2(mainGame.Window.ClientBounds.Width / 2 - bttn_Start.currentTexture.Width / 2, mainGame.Window.ClientBounds.Height / 2 - bttn_Start.currentTexture.Height);
+            bttn_Start.Position = new Vector2(mainGame.Window.ClientBounds.Width / 2 - bttn_Start.currentTexture.Width / 2, mainGame.Window.ClientBounds.Height / 2 - bttn_Start.currentTexture.Height/1.2f);
             gameObjectsList.Add(bttn_Start);
 
         }
@@ -80,8 +83,23 @@ namespace BricksGame
             bttn_Create = new Button(myButtonTextureList);
             bttn_Create.onClick = StartEditor;
             bttn_Create.onHover = onHover;
-            bttn_Create.Position = new Vector2(mainGame.Window.ClientBounds.Width / 2 - bttn_Create.currentTexture.Width / 2, mainGame.Window.ClientBounds.Height / 2 + bttn_Create.currentTexture.Height);
+            bttn_Create.Position = new Vector2(mainGame.Window.ClientBounds.Width / 2 - bttn_Create.currentTexture.Width / 2, mainGame.Window.ClientBounds.Height / 2 + bttn_Create.currentTexture.Height/3f);
             gameObjectsList.Add(bttn_Create);
+
+        }
+
+        private void LoadLoadButton()
+        {
+            List<Texture2D> myButtonTextureList = new List<Texture2D>() { mainGame.Content.Load<Texture2D>("button_load"), mainGame.Content.Load<Texture2D>("button_load_hover") };
+            bttn_Load = new Button(myButtonTextureList);
+            bttn_Load.onClick = StartSavedLevel;
+            bttn_Load.onHover = onHover;
+            bttn_Load.Position = new Vector2(mainGame.Window.ClientBounds.Width / 2 - bttn_Load.currentTexture.Width / 2, mainGame.Window.ClientBounds.Height / 2 + bttn_Load.currentTexture.Height*1.5f);
+            if (File.Exists(AssetsManager.savedLevelsPath))
+            {
+                gameObjectsList.Add(bttn_Load);
+            }
+
 
         }
 
@@ -92,6 +110,15 @@ namespace BricksGame
         public void StartGame(Button p_Button)
         {
             sndButton.Play();
+            ServiceLocator.GetService<GameState>().currentLevelsJSON = AssetsManager.levelsPath;
+            mainGame.gameState.ChangeScene(GameState.SceneType.Gameplay);
+  
+        }
+
+        public void StartSavedLevel(Button p_Button)
+        {
+            sndButton.Play();
+            ServiceLocator.GetService<GameState>().currentLevelsJSON = AssetsManager.savedLevelsPath;
             mainGame.gameState.ChangeScene(GameState.SceneType.Gameplay);
         }
 

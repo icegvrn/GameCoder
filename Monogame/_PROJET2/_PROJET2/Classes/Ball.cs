@@ -34,7 +34,7 @@ namespace BricksGame
         private bool hit;
         private float hitSoundDelay = 1f;
         private float hitTimer = 0f;
-        private SoundContainer soundContainer;
+        private SoundManager soundContainer;
 
 
         public Ball(List<Texture2D> p_texture) : base(p_texture)
@@ -45,7 +45,7 @@ namespace BricksGame
             Speed = 10f;
             SpeedVector = new Vector2(Speed, -Speed);
             currentSate = Gamesystem.BallState.idle;
-            soundContainer= new SoundContainer(this);
+            soundContainer= new SoundManager(this);
         }
 
         public override void Update(GameTime p_GameTime)
@@ -181,8 +181,8 @@ namespace BricksGame
                     SpeedVector.X = (float)Math.Cos(angle) * Speed;
                     SpeedVector.Y = -(float)Math.Sin(angle) * Speed;
                 }
-                
-                
+                soundContainer.Play(Gamesystem.BallState.fired);
+
             }
         }
       
@@ -303,7 +303,7 @@ namespace BricksGame
             CalcTrajectory();
             Rectangle line = new Rectangle((int)Position.X + currentTexture.Width / 2, (int)Position.Y + currentTexture.Height / 2, (int)distanceFromMouse, 2);
             Rectangle reflectLine = new Rectangle((int)Position.X + currentTexture.Width / 2, (int)Position.Y + currentTexture.Height / 2, (int)distanceFromMouse, 2);
-            p_SpriteBatch.Draw(lineTexture, line, line, Color.White, (float)angle, Vector2.Zero, SpriteEffects.None, 1);
+            p_SpriteBatch.Draw(lineTexture, line, line, Color.CornflowerBlue, (float)angle, Vector2.Zero, SpriteEffects.None, 1);
 
         }
 

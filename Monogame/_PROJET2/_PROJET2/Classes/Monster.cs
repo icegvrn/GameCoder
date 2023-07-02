@@ -32,7 +32,7 @@ namespace BricksGame
         private EvolutiveColoredGauge gauge;
         int lifeBarLenght = 56;
         int lifeBarHeight = 4;
-        Color[] lifeColors = { Color.Green, Color.Yellow, Color.Orange, Color.Red };
+        Color[] lifeColors = { new Color( 51, 225, 51 ), Color.Yellow, Color.Orange, Color.Red };
         float[] threshold = { 0.65f, 0.55f, 0.35f };
 
         // Animation 
@@ -48,7 +48,7 @@ namespace BricksGame
         private int monsterHeight;
 
         //Son
-        SoundContainer soundContainer;
+        SoundManager soundContainer;
 
 
 
@@ -65,7 +65,7 @@ namespace BricksGame
             animator = new Animator(this, lvl, 0.15f);
             SetSpeed(lvl);
             CanMove = true;
-            soundContainer = new SoundContainer(this, lvl);
+            soundContainer = new SoundManager(this, lvl);
             soundContainer.Play(Gamesystem.CharacterState.idle, 1);
         }
 
@@ -94,7 +94,7 @@ namespace BricksGame
         {
             animator.Draw(p_SpriteBatch, new Vector2((int)(Position.X - monsterWidth / 2), (int)(Position.Y - monsterHeight / 2)));
             DrawLifeGauge(p_SpriteBatch);
-            DrawBoundingBox(p_SpriteBatch);
+          //  DrawBoundingBox(p_SpriteBatch);
 
         }
 
@@ -206,7 +206,7 @@ namespace BricksGame
             switch ((lvl - 1) / 5)
             {
                 case 0:
-                    Speed = 3f;
+                    Speed = 2f;
                     break;
                 case 1:
                     Speed = 2f;

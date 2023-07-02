@@ -20,6 +20,8 @@ namespace BricksGame
         Texture2D diceSheet;
         List<Rectangle> tiles;
         int currentNb = 1;
+        public Gamesystem.dice value;
+        bool isVisible = true;
         public int facesNb { get; private set; }
         int lastMathCeil;
         Random rand;
@@ -30,13 +32,14 @@ namespace BricksGame
         public bool DiceRolled { get;  private set; }
         public int DiceResult { get { return currentNb; } }
         bool isHover = false;
+        public bool isRollable;
         MouseState oldMouseState;
         Vector2 diceScale = new Vector2(0.8f, 0.8f);
 
         private SoundEffect sndRoll;
         private SoundEffect sndHover;
 
-        public Dice(Gamesystem.dice value) :  base()
+        public Dice(Gamesystem.dice p_value, bool rollable) :  base()
         { 
             rand = new Random();
            ContentManager content = ServiceLocator.GetService<ContentManager>();
@@ -45,40 +48,48 @@ namespace BricksGame
 
             sndRoll = ServiceLocator.GetService<ContentManager>().Load<SoundEffect>("Sounds/diceRoll");
             sndHover = ServiceLocator.GetService<ContentManager>().Load<SoundEffect>("Sounds/diceHover");
+            isRollable = rollable;
 
-            switch (value)
+            switch (p_value)
             {
                 case Gamesystem.dice.d3:
+                    value = Gamesystem.dice.d3;
                     facesNb = 3;
                     diceSheet = content.Load<Texture2D>("images/d3");
                     break;
 
-                case Gamesystem.dice.d4 :
+                case Gamesystem.dice.d4:
+                    value = Gamesystem.dice.d4;
                     facesNb = 4;
                     diceSheet = content.Load<Texture2D>("images/d4");
                     break;
 
                 case Gamesystem.dice.d6:
+                    value = Gamesystem.dice.d6;
                     facesNb = 6;
                     diceSheet = content.Load<Texture2D>("images/d6");
                     break;
 
                 case Gamesystem.dice.d8:
+                    value = Gamesystem.dice.d8;
                     facesNb = 8;
                     diceSheet = content.Load<Texture2D>("images/d8");
                     break;
 
                 case Gamesystem.dice.d10:
+                    value = Gamesystem.dice.d10;
                     facesNb = 10;
                     diceSheet = content.Load<Texture2D>("images/d10");
                     break;
 
                 case Gamesystem.dice.d12:
+                    value = Gamesystem.dice.d12;
                     facesNb = 12;
                     diceSheet = content.Load<Texture2D>("images/d12");
                     break;
 
                 case Gamesystem.dice.d20:
+                    value = Gamesystem.dice.d20;
                     facesNb = 20;
                     diceSheet = content.Load<Texture2D>("images/d20");
                     break;
@@ -104,7 +115,7 @@ namespace BricksGame
 
         public override void Draw(SpriteBatch p_SpriteBatch)
         {
-            if (diceSheet != null)
+            if (diceSheet != null && isVisible)
             {
                 p_SpriteBatch.Draw(diceSheet, Position, tiles[currentNb - 1], Color.White, 0, new Vector2(tiles[currentNb - 1].Width / 2, tiles[currentNb - 1].Height / 2), diceScale, SpriteEffects.None, 1f);
             }
@@ -139,7 +150,7 @@ namespace BricksGame
                 if (BoundingBox.Contains(MousePos))
                 {
 
-                    if (!isHover)
+                    if (!isHover && newMouseState.LeftButton != ButtonState.Pressed)
                     {
                         diceScale = Vector2.One;
                         isHover = true;
@@ -147,9 +158,8 @@ namespace BricksGame
                     }
                     else
                     {
-                        if (newMouseState != oldMouseState && newMouseState.LeftButton == ButtonState.Pressed)
+                        if (newMouseState != oldMouseState && newMouseState.LeftButton == ButtonState.Pressed && isRollable)
                         {
-                            // Debug.WriteLine("Clic !");
                             RollDice();
                         }
                     }
@@ -219,6 +229,11 @@ namespace BricksGame
         public void Destroy()
         {
             Destroy(this);
+        }
+
+        public void SetVisible(bool visible)
+        {
+            isVisible = visible;
         }
     }
 }

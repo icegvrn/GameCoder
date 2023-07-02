@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using System.Diagnostics;
 
 namespace BricksGame
 {
@@ -71,9 +71,27 @@ namespace BricksGame
         private void RegisterInput()
         { 
             ServiceLocator.RegisterService(Mouse.GetState());
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GameKeyboard.IsKeyReleased(Keys.Escape))
             {
-                Exit();
+                Debug.WriteLine(gameState.CurrentScene);
+                if (gameState.CurrentScene is SceneMenu)
+                {
+                    Exit();
+                }
+                else
+                {
+                    if (gameState.CurrentScene is SceneGameplay && !((SceneGameplay)gameState.CurrentScene).GamePaused)
+                    {
+                        ((SceneGameplay)gameState.CurrentScene).GamePaused = true;
+                        ((SceneGameplay)gameState.CurrentScene).PauseAudio();
+                    }
+                    else
+                    {
+                        gameState.ChangeScene(GameState.SceneType.Menu);
+                    }
+                   
+                }
+
             }
         }
 

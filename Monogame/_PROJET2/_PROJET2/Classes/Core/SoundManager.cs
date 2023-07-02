@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
-public class SoundContainer
+public class SoundManager
 {
     private List<SoundEffect?> sounds;
     public List<SoundEffect?> Sounds { get { return sounds; } private set { sounds = value; } }
@@ -15,7 +15,7 @@ public class SoundContainer
     private SoundEffect? sound; 
     public SoundEffect? Sound { get { return sound;  } private set { sound = value; } }
 
-    public SoundContainer(GameObject gameObject, int lvl)
+    public SoundManager(GameObject gameObject, int lvl)
     {
         sounds = new List<SoundEffect?>();
         string rootFolder = GetFolder(gameObject);
@@ -48,13 +48,13 @@ public class SoundContainer
         }
     }
 
-    public SoundContainer()
+    public SoundManager()
     {
         sounds = new List<SoundEffect?>();
     }
 
 
-    public SoundContainer(GameObject gameObject)
+    public SoundManager(GameObject gameObject)
     {
         Sounds = new List<SoundEffect?>();
 
@@ -176,7 +176,6 @@ public class SoundContainer
 
     public static bool Exists(string path)
     {
-        Debug.WriteLine("SOUNDCONTAINGER : Je regarde si : " + ServiceLocator.GetService<ContentManager>().RootDirectory + "/" + path + ".xnb" + " existe et je dis " + File.Exists(ServiceLocator.GetService<ContentManager>().RootDirectory + "/" + path + ".xnb"));
-      return File.Exists(ServiceLocator.GetService<ContentManager>().RootDirectory + "/" + path + ".xnb");
+              return File.Exists(ServiceLocator.GetService<ContentManager>().RootDirectory + "/" + path + ".xnb");
     }
 }

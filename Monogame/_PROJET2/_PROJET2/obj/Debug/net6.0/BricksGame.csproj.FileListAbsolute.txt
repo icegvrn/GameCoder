@@ -40,7 +40,6 @@ C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\ne
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\Monsters\8.xnb
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\Monsters\9.xnb
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\images\pad.xnb
-C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\Levels\level1.json
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\ship.xnb
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\techno.ogg
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\techno.xnb
@@ -267,3 +266,6 @@ C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\ne
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\Sounds\nextLevel.xnb
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\Sounds\critical_life.xnb
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\Sounds\button.xnb
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\Levels\levels.json
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\button_save.xnb
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\button_save_hover.xnb
