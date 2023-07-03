@@ -1,20 +1,28 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using Microsoft.Xna.Framework.Media;
 
 namespace BricksGame
 {
     internal class SceneGameWin : Scene
     {
-
+        Song backgroundMusic;
         public SceneGameWin(MainGame p_mainGame) : base(p_mainGame) 
         { 
         }
 
         public override void Load()
         {
+            LoadAudio();
             LoadBackgroundImage();
             base.Load();
+        }
+
+        private void LoadAudio()
+        {
+            backgroundMusic = AssetsManager.victoryPlayMusic;
+            MediaPlayer.IsRepeating = false;
+            MediaPlayer.Play(backgroundMusic);
         }
 
         public override void UnLoad()

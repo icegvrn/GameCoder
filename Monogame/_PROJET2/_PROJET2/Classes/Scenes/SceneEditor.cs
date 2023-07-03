@@ -425,7 +425,7 @@ namespace BricksGame
         {
             List<int[]> array = new List<int[]>();
             int col = 0;
-        
+            bool empty = true;
             
             for (int i=0; i < tempDicesGrid.Count; i++)
             {
@@ -439,6 +439,18 @@ namespace BricksGame
 
                 array[array.Count - 1][col] = tempDicesGrid[i];
                 col++;
+
+                if (tempDicesGrid[i] != 0) {
+                    empty = false;
+                }
+            }
+
+            if (empty)
+            {
+                int[] tempArray = new int[GameGrid.WidthInColumns];
+                tempArray[0] = 3;
+                array.RemoveAt(0);
+                array.Insert(0, tempArray);
             }
 
             int[][] level = array.ToArray();

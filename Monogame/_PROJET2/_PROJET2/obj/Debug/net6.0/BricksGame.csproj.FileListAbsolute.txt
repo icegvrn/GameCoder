@@ -269,3 +269,7 @@ C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\ne
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\Levels\levels.json
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\button_save.xnb
 C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\button_save_hover.xnb
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\Sounds\Musics\defeat.ogg
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\Sounds\Musics\defeat.xnb
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\Sounds\Musics\victory.ogg
+C:\Users\Simon\Documents\Cours\GameCoder\Monogame\_PROJET2\_PROJET2\bin\Debug\net6.0\Content\Sounds\Musics\victory.xnb

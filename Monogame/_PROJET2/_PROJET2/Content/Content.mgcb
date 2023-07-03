@@ -2319,6 +2319,18 @@
 /processorParam:Quality=Best
 /build:Sounds/Monsters/idle/9.wav
 
+#begin Sounds/Musics/defeat.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/Musics/defeat.mp3
+
+#begin Sounds/Musics/victory.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/Musics/victory.mp3
+
 #begin Sounds/nextLevel.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

@@ -1,11 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using Microsoft.Xna.Framework.Media;
 
 namespace BricksGame
 {
     internal class SceneGameOver : Scene
     {
+        Song backgroundMusic;
 
         public SceneGameOver(MainGame p_mainGame) : base(p_mainGame) 
         { 
@@ -13,8 +14,16 @@ namespace BricksGame
 
         public override void Load()
         {
+            LoadAudio();
             LoadBackgroundImage();
             base.Load();
+        }
+
+        private void LoadAudio()
+        {
+            backgroundMusic = AssetsManager.defeatPlayMusic;
+            MediaPlayer.IsRepeating = false;
+            MediaPlayer.Play(backgroundMusic);
         }
 
         public override void UnLoad()

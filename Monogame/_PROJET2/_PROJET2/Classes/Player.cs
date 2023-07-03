@@ -73,6 +73,10 @@ namespace BricksGame
         private SoundEffect sndCriticalLife;
         private bool criticalLifeAnnounced;
 
+        private MouseState oldMouseState;
+
+        private bool hasFired;
+
 
 
         private Texture2D munitionCounter;
@@ -136,50 +140,60 @@ namespace BricksGame
             }
             if (IsReady)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                if (Keyboard.GetState().IsKeyDown(Keys.Q) || Keyboard.GetState().IsKeyDown(Keys.Left))
                 {
                     Move(-1, 0);
                     currentDirection = Gamesystem.CharacterDirection.left;
                     ChangeState(Gamesystem.CharacterState.l_walk);
                 }
-                else if (Keyboard.GetState().IsKeyDown(Keys.D))
+                else if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right))
                 {
                     Move(1, 0);
                     currentDirection = Gamesystem.CharacterDirection.right;
                     ChangeState(Gamesystem.CharacterState.walk);
                 }
-                else if (GameKeyboard.IsKeyReleased(Keys.Space))
-                {
-                    Fire(BallsList[0]);
-                    RemoveMunition(1);
-                    if (currentDirection == Gamesystem.CharacterDirection.left)
-                    {
-                        ChangeState(Gamesystem.CharacterState.l_idle);
-                    }
-                    else
-                    {
-                        ChangeState(Gamesystem.CharacterState.idle);
-                    }
-                   
-                }
+           
 
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                {
-                    if (currentDirection == Gamesystem.CharacterDirection.left)
+                MouseState newMouseState = Mouse.GetState();
+                Point MousePos = newMouseState.Position;
+
+                if ((newMouseState != oldMouseState && newMouseState.LeftButton == ButtonState.Pressed) || GameKeyboard.IsKeyReleased(Keys.Space))
+                {   
+                    if (!hasFired)
                     {
-                        ChangeState(Gamesystem.CharacterState.l_fire);
+                        if (currentDirection == Gamesystem.CharacterDirection.left)
+                        {
+                            ChangeState(Gamesystem.CharacterState.l_fire);
+                        }
+                        else
+                        {
+                            ChangeState(Gamesystem.CharacterState.fire);
+                        }
+                        Fire(BallsList[0]);
+                        RemoveMunition(1);
+                        hasFired = true;
+                        if (currentDirection == Gamesystem.CharacterDirection.left)
+                        {
+                            ChangeState(Gamesystem.CharacterState.l_idle);
+                        }
+                        else
+                        {
+                            ChangeState(Gamesystem.CharacterState.idle);
+                        }
                     }
-                    else
-                    {
-                        ChangeState(Gamesystem.CharacterState.fire);
-                    }
-                 
+                    
+
+                  
                 }
-                if (GameKeyboard.IsKeyReleased(Keys.Q))
+                oldMouseState = newMouseState;
+
+
+              
+                if (GameKeyboard.IsKeyReleased(Keys.Q) || GameKeyboard.IsKeyReleased(Keys.Left))
                 {
                    ChangeState(Gamesystem.CharacterState.l_idle);
                 }
-                else if (GameKeyboard.IsKeyReleased(Keys.D))
+                else if (GameKeyboard.IsKeyReleased(Keys.D)  ||GameKeyboard.IsKeyReleased(Keys.Left))
                 {
                     ChangeState(Gamesystem.CharacterState.idle);
                 }
@@ -225,7 +239,7 @@ namespace BricksGame
                 {
                     if (!criticalLifeAnnounced)
                     {
-sndCriticalLife.Play();
+                        sndCriticalLife.Play();
                         criticalLifeAnnounced = true;
                     }
                     
@@ -362,6 +376,7 @@ sndCriticalLife.Play();
         public void Prepare()
         {
             CreateNewBall();
+            hasFired = false;
         }
 
         public void CreateNewBall()

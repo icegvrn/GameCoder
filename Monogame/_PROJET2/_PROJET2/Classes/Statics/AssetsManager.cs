@@ -18,6 +18,9 @@ namespace BricksGame
         public static Song menuMusic { get; private set; }
         public static Song gamePlayMusic { get; private set; }
 
+        public static Song victoryPlayMusic { get; private set; }
+
+        public static Song defeatPlayMusic { get; private set; }
         public static Texture2D blankTexture { get; private set; }
 
         public static string levelsPath { get; private set; }
@@ -27,6 +30,8 @@ namespace BricksGame
         {
             menuMusic = content.Load<Song>("cool");
             gamePlayMusic = content.Load<Song>("background_gameplay");
+            victoryPlayMusic = content.Load<Song>("Sounds/Musics/victory");
+            defeatPlayMusic = content.Load<Song>("Sounds/Musics/defeat");
             MainFont = content.Load<SpriteFont>("font");
             Font10 = content.Load<SpriteFont>("font10");
             Font14 = content.Load<SpriteFont>("font14");
