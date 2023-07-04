@@ -20,7 +20,7 @@ namespace BricksGame
         // Etats de la balle
         private Gamesystem.BallState currentSate;
 
-        private bool isFired;
+        public bool isFired;
         public bool IsDestroy { get; set; }
 
         // Direction de la balle

@@ -1,138 +1,110 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
-using BricksGame.Classes;
-using System;
-using System.Diagnostics;
-using Microsoft.Xna.Framework.Audio;
+
 
 namespace BricksGame
 {
     public class Monster : Bricks, ICollider, IDestroyable
     {
+
+        // Composants
+        private MonsterHealth health;
+        public MonsterFighter Fighter { get; set; }
+        private MonsterAnimator animator;
+
         // Etat du monstre 
         public Gamesystem.CharacterState currentState;
-        public bool IsDead = false;
-        public bool isAttacking = false;
-        private float hitDuration = 1f;
-        private float hitDurationTimer;
-        private float destroyDelay = 0.8f; 
-        private float destroyTimer = 0f;
         public bool startDying;
+        public bool IsDead = false;
 
+        private float destroyDelay = 0.8f;
+        private float destroyTimer = 0f;
 
-        // Vie et force 
-        private float life = 4;
-        private float initialLife;
-        private float provisoryLife = 0;
-        public int Power;
-
-        // Jauge de vie
-        private EvolutiveColoredGauge gauge;
-        int lifeBarLenght = 56;
-        int lifeBarHeight = 4;
-        Color[] lifeColors = { new Color( 51, 225, 51 ), Color.Yellow, Color.Orange, Color.Red };
-        float[] threshold = { 0.65f, 0.55f, 0.35f };
-
-        // Animation 
-        private Animator animator;
-
-        // Attaque
-        private Texture2D attackIcon;
-        private float attackTimer = 0f;
-        private float attackCooldown = 1.5f;
+        // Caractéristique
+        public int level;
 
         //Dimensions
-        private int monsterWidth;
-        private int monsterHeight;
-
-        //Son
-        SoundManager soundContainer;
-
+        public int monsterWidth;
+        public int monsterHeight;
 
 
         public Monster(Texture2D p_texture, int lvl) : base(p_texture)
         {
-            InitLife(lvl);
-            monsterHeight = currentTexture.Height;
-            monsterWidth = currentTexture.Width / (currentTexture.Width / currentTexture.Height);
-            BoundingBox = new Rectangle((int)(Position.X), (int)(Position.Y), monsterWidth, monsterHeight);
-
-            attackIcon = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/icon_ennemi");
-            AddGauge();
-
-            animator = new Animator(this, lvl, 0.15f);
-            SetSpeed(lvl);
-            CanMove = true;
-            soundContainer = new SoundManager(this, lvl);
-            soundContainer.Play(Gamesystem.CharacterState.idle, 1);
+            InitDefaultValues(lvl);
+            InitComponents(lvl);
+            CalcMonsterDimensions();
+            InitBoundingBox();
         }
-
 
         public override void Update(GameTime p_GameTime)
         {
-
-            UpdateAttackTimer(p_GameTime);
-            UpdateLife(p_GameTime);
+            health.Update(p_GameTime);
+            Fighter.Update(p_GameTime);
             animator.Update(p_GameTime);
-            gauge.Update(p_GameTime, (int)life, new Vector2(((int)(Position.X - monsterWidth / 2)), (((int)Position.Y + monsterHeight / 2) + 2)));
             UpdateBoundingBox();
-            if (currentState == Gamesystem.CharacterState.hit)
-            {
-                hitDurationTimer -= (float)p_GameTime.ElapsedGameTime.TotalSeconds;
-                if (hitDurationTimer <= 0f)
-                {
-                    ChangeState(Gamesystem.CharacterState.idle); 
-                }
-            }
+            CheckMonsterDying(p_GameTime);
         }
-
-
 
         public override void Draw(SpriteBatch p_SpriteBatch)
         {
             animator.Draw(p_SpriteBatch, new Vector2((int)(Position.X - monsterWidth / 2), (int)(Position.Y - monsterHeight / 2)));
-            DrawLifeGauge(p_SpriteBatch);
-          //  DrawBoundingBox(p_SpriteBatch);
-
+            health.Draw(p_SpriteBatch);
         }
+
+
+        public void InitDefaultValues(int lvl)
+        {
+            level = lvl;
+            SetSpeed(lvl);
+            CanMove = true;
+        }
+
+        public void InitComponents(int lvl)
+        {
+            health = new MonsterHealth(this, lvl);
+            Fighter = new MonsterFighter(this, lvl);
+            animator = new MonsterAnimator(this, 0.15f);
+        }
+
+        public void CalcMonsterDimensions()
+        {
+            monsterHeight = currentTexture.Height;
+            monsterWidth = currentTexture.Width / (currentTexture.Width / currentTexture.Height);
+        }
+
+        public void InitBoundingBox()
+        {
+            BoundingBox = new Rectangle((int)(Position.X), (int)(Position.Y), monsterWidth, monsterHeight);
+        }
+
 
         public void Attack()
         {
             if (currentState != Gamesystem.CharacterState.fire)
             {
+                Fighter.StartAttack();
+                animator.Attack();
                 ChangeState(Gamesystem.CharacterState.fire);
-                isAttacking = true;
-                attackTimer = 0f;
-            } 
-            else
-            {
-                if (attackTimer >= attackCooldown)
-                {
-                    isAttacking = true;
-                    attackTimer = 0f;
-                    soundContainer.Play(Gamesystem.CharacterState.fire, 1);
-                }
-                else
-                {
-                    isAttacking = false;
-                }
             }
 
+            else
+            {
+                Fighter.Attack();
 
+                if (Fighter.Attacks)
+                {
+                    animator.AttackWithSound();
+                }
+            }
         }
 
 
         public void RemoveLife(float lifeFactor)
         {
+            health.RemoveLife(lifeFactor);
             PlayerState.AddPoints((int)lifeFactor);
-            provisoryLife = life - lifeFactor;
             CollisionEvent = false;
-            ChangeState(Gamesystem.CharacterState.hit);
-            hitDurationTimer = hitDuration;
-            soundContainer.Play(Gamesystem.CharacterState.hit, 1);
-            soundContainer.Play(Gamesystem.CharacterState.idle, 1);
+            animator.Hit();
         }
 
 
@@ -142,58 +114,39 @@ namespace BricksGame
             animator.ChangeState(state);
         }
 
-        private void InitLife(int lvl)
-        {
-            life = lvl * 50;
-            initialLife = life;
-            provisoryLife = life;
-            Power = lvl * 35;
-        }
 
-        private void UpdateLife(GameTime p_GameTime)
+        private void CheckMonsterDying(GameTime p_GameTime)
         {
-            if (life > 0)
+            if (health.IsDead)
             {
-                if (life != provisoryLife)
+                if (!IsDead)
                 {
-                    life -= 1;
+                    StartDying();
                 }
-            }
-            else
-            {
-                if (currentState != Gamesystem.CharacterState.die && !IsDead)
-                {
-                    ChangeState(Gamesystem.CharacterState.die);
-                    animator.SetLoop(false);
-                    destroyTimer = 0f;
-                    IsDead = true;
-                    soundContainer.Play(Gamesystem.CharacterState.die, 1);
 
-                }
                 else
                 {
-                    destroyTimer += (float)p_GameTime.ElapsedGameTime.TotalSeconds;
-                    if (destroyTimer >= destroyDelay)
-                    {
-
-                    
-                        Destroy();
-                    }
+                    UpdateDying(p_GameTime);
                 }
-               
-            
-             
+            }
+
+        }
+
+        public void StartDying()
+        {
+            animator.Die();
+            destroyTimer = 0f;
+            IsDead = true;
+        }
+
+        public void UpdateDying(GameTime p_GameTime)
+        {
+            destroyTimer += (float)p_GameTime.ElapsedGameTime.TotalSeconds;
+            if (destroyTimer >= destroyDelay)
+            {
+                Destroy();
             }
         }
-
-        private void UpdateAttackTimer(GameTime p_GameTime)
-        {
-
-                attackTimer += (float)p_GameTime.ElapsedGameTime.TotalSeconds;
-        
-         
-        }
-
 
         private void UpdateBoundingBox()
         {
@@ -227,25 +180,8 @@ namespace BricksGame
 
         public void Kill()
         {
-            life = 0;
+            health.Kill();
         }
-
-        private void AddGauge()
-        {
-            Rectangle lifeBar = new Rectangle((int)Position.X - BoundingBox.Width / 2, (int)Position.Y, lifeBarLenght, lifeBarHeight);
-            gauge = new EvolutiveColoredGauge(initialLife, lifeBar, Color.White, threshold, lifeColors, true, new Vector2(Position.X, Position.Y), Color.White);
-        }
-
-        private void DrawLifeGauge(SpriteBatch p_SpriteBatch)
-        {
-            gauge.Draw(p_SpriteBatch);
-
-            if (currentState == Gamesystem.CharacterState.fire)
-            {
-                p_SpriteBatch.Draw(attackIcon, new Vector2((int)(Position.X), (int)(Position.Y - monsterHeight / 2)), Color.White);
-            }
-        }
-
 
         private void DrawBoundingBox(SpriteBatch spriteBatch)
         {
@@ -256,8 +192,6 @@ namespace BricksGame
             spriteBatch.Draw(boxTexture, new Rectangle(rect.Left, rect.Top, rect.Width, 1), Color.Red);
             spriteBatch.Draw(boxTexture, new Rectangle(rect.Left, rect.Bottom, rect.Width, 1), Color.Red);
         }
-
-
 
     }
 

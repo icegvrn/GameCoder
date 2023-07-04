@@ -110,7 +110,7 @@ namespace BricksGame
 
                     if (blinkTimer >= 2f)
                     {
-                        player.isHit = false; // A changer d'endroit
+                        player.IsPlayerHit = false; // A changer d'endroit
                         isBlinking = false;
                         playerColor = Color.White;
                     }

@@ -19,16 +19,17 @@ namespace BricksGame
         // Barre de vie
         private EvolutiveColoredGauge barLife;
         private Texture2D lifeIcon;
+
         private Color[] lifeColors = { Color.Green, Color.Yellow, Color.Orange, Color.Red };
         float[] threshold = { 0.65f, 0.55f, 0.35f };
 
         public PlayerHealthUI(PlayerHealth p_health) 
         {
             playerHealth = p_health;
-
             lifeIcon = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/icon_heart");
             Rectangle lifeBar = new Rectangle(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 + 50, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - 50, barsLenght, barsHeight);
             barLife = new EvolutiveColoredGauge(playerHealth.InitialLife, lifeBar, Color.White, threshold, lifeColors);
+
         }
 
         public void Update(GameTime p_gameTime)

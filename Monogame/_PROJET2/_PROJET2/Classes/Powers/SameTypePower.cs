@@ -27,7 +27,7 @@ namespace BricksGame
                         if (grid.GridElements[i] != null && grid.GridElements[i] is Monster)
                         {
                             Monster element = (Monster)grid.GridElements[i];
-                            if (element.Power == m_brick.Power)
+                            if (element.Fighter.Power == m_brick.Fighter.Power)
                             {
                                 element.Kill();
                             }

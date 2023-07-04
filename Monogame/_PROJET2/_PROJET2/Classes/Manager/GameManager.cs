@@ -39,7 +39,7 @@ namespace BricksGame
 
             if (levelManager.currentState == LevelManager.LevelState.play)
             {
-                foreach (Ball ball in player.BallsList)
+                foreach (Ball ball in player.playerFighter.BallsList)
                 {
                    ball.CheckCollision(levelManager.GameGrid.GridElements);
                     ball.CheckCollision(player);
@@ -78,7 +78,7 @@ namespace BricksGame
             levelManager.NextLevel();
             player.IsReady = false;
             player.Reset();
-            player.ResetMunition();
+            player.playerFighter.ResetMunition();
         }
 
         private void RegisterInput()
@@ -99,9 +99,9 @@ namespace BricksGame
                     if (monster.Position.Y >= levelManager.GameGrid.maxDestination && !monster.IsDead)
                     {
                        monster.Attack();
-                        if (monster.isAttacking)
+                        if (monster.Fighter.IsAttacker)
                         {
-                        player.IsHit(monster, monster.Power);
+                        player.IsHit(monster, monster.Fighter.Power);
                         }
                     }
                 }
@@ -159,7 +159,7 @@ namespace BricksGame
         {
             if (!currentScene.IsSceneContainsObjectTypeOf<Ball>())
             {
-                if (player.HasMunition)
+                if (player.playerFighter.HasMunition)
             {
                     levelManager.NoBallActions();
                     player.Reset();

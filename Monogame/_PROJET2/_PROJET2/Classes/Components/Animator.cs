@@ -1,8 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework.Content;
-using System.Diagnostics;
+
 
 namespace BricksGame.Classes
 {
@@ -26,28 +25,6 @@ namespace BricksGame.Classes
             frameTime = p_frameTime;
             loop = true;
             currentState = Gamesystem.CharacterState.idle;
-        }
-
-        public Animator(Monster monster, int lvl, float p_frameTime)
-        {
-            textureList = new List<Texture2D>();
-            frameTime = p_frameTime;
-            loop = true;
-            List<Texture2D> monsterTextures = new List<Texture2D>();
-            monsterTextures.Insert((int)Gamesystem.CharacterState.idle, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/idle/" + lvl + ""));
-            monsterTextures.Insert((int)Gamesystem.CharacterState.l_idle, null);
-            monsterTextures.Insert((int)Gamesystem.CharacterState.walk, null);
-            monsterTextures.Insert((int)Gamesystem.CharacterState.l_walk, null);
-            monsterTextures.Insert((int)Gamesystem.CharacterState.fire, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/attack/" + lvl + ""));
-            monsterTextures.Insert((int)Gamesystem.CharacterState.l_fire, null);
-            monsterTextures.Insert((int)Gamesystem.CharacterState.hit, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/hit/" + lvl + ""));
-            monsterTextures.Insert((int)Gamesystem.CharacterState.die, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/die/" + lvl + ""));
-            foreach (Texture2D texture in monsterTextures)
-            {
-                textureList.Add(texture);
-            }
-
-            ChangeSpriteSheet(textureList[(int)Gamesystem.CharacterState.idle]);
         }
 
         public void ChangeSpriteSheet(Texture2D p_spritesSheet)
@@ -76,7 +53,7 @@ namespace BricksGame.Classes
             currentState = state;
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             if (lastState != currentState)
             {

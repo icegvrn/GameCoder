@@ -52,7 +52,7 @@ namespace BricksGame
                 case 1:
                     power = new DoubleBallsPower();
                     power.powerAvailable = true;
-                    player.CreateNewBall();
+                    player.playerFighter.CreateNewBall();
                     break;
                 case 2:
                     power = new LinePower();
@@ -81,31 +81,31 @@ namespace BricksGame
 
         public void ActivatePower()
         {
-
+       
             if (power is not null)
             {
                 if (power is not DoubleBallsPower)
                 {
                     if (power.powerAvailable)
                     {
-                        player.BallsList[0].power = power;
-                        player.BallsList[0].power.powerAvailable = true;
-                        player.BallsList[0].ActivePower();
-                        player.BallsList[0].power.powerCharged = true;
+                        player.playerFighter.BallsList[0].power = power;
+                        player.playerFighter.BallsList[0].power.powerAvailable = true;
+                        player.playerFighter.BallsList[0].ActivePower();
+                        player.playerFighter.BallsList[0].power.powerCharged = true;
                         PlayerState.SetPoints(0);
                     }
                     else if (power.powerCharged)
                     {
-                        player.BallsList[0].TriggerPower();
+                        player.playerFighter.BallsList[0].TriggerPower();
                     }
                 }
                 else if (power is DoubleBallsPower)
                 {
                     if (power.powerAvailable)
                     {
-                        player.BallsList[1].Fire();
-                        player.BallsList[1].SpeedVector *= 0.5f;
-                        player.BallsList[1].Speed *= 0.5f;
+                        player.playerFighter.BallsList[1].Fire();
+                        player.playerFighter.BallsList[1].SpeedVector *= 0.5f;
+                        player.playerFighter.BallsList[1].Speed *= 0.5f;
                         power.powerAvailable = false;
                         power.powerUsed = true;
                         PlayerState.SetPoints(0);

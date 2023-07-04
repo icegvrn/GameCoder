@@ -50,7 +50,7 @@ namespace BricksGame
             }
 
             // Gestion des actions du joueur
-            if ((newMouseState != oldMouseState && newMouseState.LeftButton == ButtonState.Pressed) || GameKeyboard.IsKeyReleased(Keys.Space))
+            if ((newMouseState.LeftButton != oldMouseState.LeftButton && newMouseState.LeftButton == ButtonState.Pressed) || GameKeyboard.IsKeyReleased(Keys.Space))
             {
                 player.Action();
             }
