@@ -11,13 +11,17 @@ namespace BricksGame
         private MagicalDice magicalDice;
         private Power power;
         private bool magicalDiceResultChecked;
+        private PlayerPowerUI powerUI;
 
         public PlayerPowerManager(Player player)
         {
+            PlayerState.SetPoints(2950);
+            PlayerState.SetMaxPoints(3000);
             this.player = player;
             magicalDice = new MagicalDice();
             magicalDice.Position = new Vector2(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 - 125, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - 80);
             ServiceLocator.GetService<GameState>().CurrentScene.AddToGameObjectsList(magicalDice);
+            powerUI = new PlayerPowerUI(this);
         }
 
         public void Update(GameTime gameTime)
@@ -32,6 +36,12 @@ namespace BricksGame
                 CheckMagicalDiceResult();
                 magicalDiceResultChecked = false;
             }
+            powerUI.Update(gameTime);
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            powerUI.Draw(spriteBatch);
         }
 
         private void CheckMagicalDiceResult()

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 
 namespace BricksGame
 {
@@ -17,42 +17,21 @@ namespace BricksGame
 
         public bool isCollide { private set; get; }
 
-        private bool isHit = false;
+        public bool isHit = false;
         private float _speed = 15;
         public override float Speed { get { return _speed; } set { _speed = value; } }
-        private Animator animator;
         private List<Texture2D> textures;
         public Gamesystem.CharacterState currentState;
         private Gamesystem.CharacterDirection currentDirection;
 
         public Vector2 Size;
-        private Color playerColor = Color.White;
-
+ 
         //Vie du joueur
         public bool IsDead = false;
         public bool IsReady = false;
 
-        //Points du joueur
-        private float initialLife;
-
-        // Barres du joueur
-        private int barsLenght = 100;
-        private int barsHeight = 12;
-        // Barre de vie
-        private EvolutiveColoredGauge barLife;
-        private Texture2D lifeIcon;
-        private Color[] lifeColors = { Color.Green, Color.Yellow, Color.Orange, Color.Red };
-        float[] threshold = { 0.65f, 0.55f, 0.35f };
-        // Barre de points
-        private Texture2D pointsIcon;
-        private ColoredGauge pointsBar;
-
-        private float provisoryLife;
-
         private float timer = 0.2f;
 
-        private bool isBlinking = false;
-        private float blinkTimer = 0f;
         //Portrait
         private Texture2D portrait;
 
@@ -66,55 +45,37 @@ namespace BricksGame
         private float destroyTimer = 0f;
         public bool startDying;
 
-        private SoundManager soundContainer;
-        private SoundEffect sndCriticalLife;
-        private bool criticalLifeAnnounced;
-
         private MouseState oldMouseState;
 
         private bool hasFired;
 
         private MagicalDice magicDice;
 
-
         private PlayerPowerManager playerPowerManager;
-
+        private PlayerMouvement playerMouvement;
+        private PlayerAnimator playerAnimator;
+        private PlayerInput playerInput;
+        private PlayerHealth playerHealth;
+        
 
         private Texture2D munitionCounter;
         public Player(Texture2D p_texture) : base(p_texture)
         {
             playerPowerManager = new PlayerPowerManager(this);
-            soundContainer = new SoundManager(this);
-            sndCriticalLife = ServiceLocator.GetService<ContentManager>().Load<SoundEffect>("Sounds/critical_life");
+            playerMouvement = new PlayerMouvement(this);
+            playerAnimator = new PlayerAnimator(this, 0.15f);
+            playerInput = new PlayerInput(this);
+            playerHealth = new PlayerHealth(this, 500f);
+          
             Speed = 15;
             currentState = Gamesystem.CharacterState.idle;
             currentDirection = Gamesystem.CharacterDirection.right;
             textures = new List<Texture2D>();
-            animator = new Animator(this, 0.15f);
+        
             Size = new Vector2((currentTexture.Width / (currentTexture.Width / currentTexture.Height)), currentTexture.Height);
             Reset();
 
-            // Vie
-            lifeIcon = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/icon_heart");
-            initialLife = 3000f;
-            provisoryLife = initialLife;
-            PlayerState.SetLife((int)initialLife);
-
-            Rectangle lifeBar = new Rectangle(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 + 50, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - 50, barsLenght, barsHeight);
-            barLife = new EvolutiveColoredGauge(initialLife, lifeBar, Color.White, threshold, lifeColors);
-
-            //Points
-            pointsIcon = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/icon_power");
-            PlayerState.SetPoints(2950);
-            PlayerState.SetMaxPoints(3000);
-
-
-
-
-            Rectangle rectPointsBar = new Rectangle(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 - 50 - barsLenght - pointsIcon.Width / 2, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - 50, barsLenght, barsHeight);
-            pointsBar = new ColoredGauge(PlayerState.MaxPoints, rectPointsBar, Color.CornflowerBlue);
-
-
+   
             // Portrait
             portrait = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/character_portrait");
 
@@ -125,166 +86,73 @@ namespace BricksGame
             magicDice = new MagicalDice();
             magicDice.Position = new Vector2(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 - 125, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - 80);
             ServiceLocator.GetService<GameState>().CurrentScene.AddToGameObjectsList(magicDice);
-
+            ChangeState(Gamesystem.CharacterState.idle);
         }
 
         public void ChangeState(Gamesystem.CharacterState state)
         {
             currentState = state;
-            animator.ChangeState(state);
+        
         }
 
         public override void Update(GameTime p_GameTime)
         {
+            playerAnimator.Update(p_GameTime);
+            playerInput.Update(p_GameTime);
+            playerHealth.Update(p_GameTime);
+            playerPowerManager.Update(p_GameTime);
 
-
-
-            if (PlayerState.Life != provisoryLife)
-            {
-                if (PlayerState.Life > 0)
-                {
-                    PlayerState.SubsLife(1);
-
-                }
-            }
+  
             if (IsReady)
             {
-                MouseState newMouseState = Mouse.GetState();
-                Point MousePos = newMouseState.Position;
-
-                playerPowerManager.Update(p_GameTime);
-          
-
-
-                if (Keyboard.GetState().IsKeyDown(Keys.Q) || Keyboard.GetState().IsKeyDown(Keys.Left))
+                if (playerHealth.IsDead)
                 {
-                    Move(-1, 0);
-                    currentDirection = Gamesystem.CharacterDirection.left;
-                    ChangeState(Gamesystem.CharacterState.l_walk);
+                    playerAnimator.Die();
+                    Destroy(p_GameTime);      
                 }
-                else if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right))
-                {
-                    Move(1, 0);
-                    currentDirection = Gamesystem.CharacterDirection.right;
-                    ChangeState(Gamesystem.CharacterState.walk);
-                }
-
-
-                if ((newMouseState != oldMouseState && newMouseState.LeftButton == ButtonState.Pressed) || GameKeyboard.IsKeyReleased(Keys.Space))
-                {
-                    if (!hasFired)
-                    {
-                        if (currentDirection == Gamesystem.CharacterDirection.left)
-                        {
-                            ChangeState(Gamesystem.CharacterState.l_fire);
-                        }
-                        else
-                        {
-                            ChangeState(Gamesystem.CharacterState.fire);
-                        }
-                        Fire(BallsList[0]);
-                        RemoveMunition(1);
-                        hasFired = true;
-                        if (currentDirection == Gamesystem.CharacterDirection.left)
-                        {
-                            ChangeState(Gamesystem.CharacterState.l_idle);
-                        }
-                        else
-                        {
-                            ChangeState(Gamesystem.CharacterState.idle);
-                        }
-                    }
-                    else
-                    {
-                        playerPowerManager.ActivatePower();
-                    }
-                }
-
-
-                oldMouseState = newMouseState;
-
-
-                if (GameKeyboard.IsKeyReleased(Keys.Q) || GameKeyboard.IsKeyReleased(Keys.Left))
-                {
-                    ChangeState(Gamesystem.CharacterState.l_idle);
-                }
-                else if (GameKeyboard.IsKeyReleased(Keys.D) || GameKeyboard.IsKeyReleased(Keys.Left))
-                {
-                    ChangeState(Gamesystem.CharacterState.idle);
-                }
-
-                if (PlayerState.Life <= 0)
-                {
-                    if ((currentState != Gamesystem.CharacterState.die || currentState != Gamesystem.CharacterState.l_die) && !startDying)
-                    {
-                        animator.SetLoop(false);
-                        destroyTimer = 0f;
-                        startDying = true;
-
-                        if (currentDirection == Gamesystem.CharacterDirection.left)
-                        {
-                            ChangeState(Gamesystem.CharacterState.l_die);
-                        }
-                        else
-                        {
-                            ChangeState(Gamesystem.CharacterState.die);
-                        }
-                        soundContainer.Play(Gamesystem.CharacterState.die);
-                    }
-
-                    if (startDying)
-                    {
-                        if (destroyTimer >= destroyDelay)
-                        {
-                            IsDead = true;
-                        }
-                        else
-                        {
-                            destroyTimer += (float)p_GameTime.ElapsedGameTime.TotalSeconds;
-                        }
-                    }
-
-
-
-
-
-                }
-
-                else if (PlayerState.Life <= initialLife / 4)
-                {
-                    if (!criticalLifeAnnounced)
-                    {
-                        sndCriticalLife.Play();
-                        criticalLifeAnnounced = true;
-                    }
-
-                }
-
-
-
-                if (isHit)
-                {
-                    BlinkOnHit(p_GameTime, true);
-                }
-
                 else
                 {
-                    BlinkOnHit(p_GameTime, false);
+                    MouseState newMouseState = Mouse.GetState();
+                    Point MousePos = newMouseState.Position;
+
+                    playerPowerManager.Update(p_GameTime);
+
+                    if ((newMouseState != oldMouseState && newMouseState.LeftButton == ButtonState.Pressed) || GameKeyboard.IsKeyReleased(Keys.Space))
+                    {
+                        if (!hasFired)
+                        {
+                            Action();
+
+                            Fire(BallsList[0]);
+                            RemoveMunition(1);
+                            hasFired = true;
+
+                            Stay();
+ 
+                        }
+                        else
+                        {
+                            playerPowerManager.ActivatePower();
+                        }
+                    }
+
+                    oldMouseState = newMouseState;
+
+
+
+                    if (isHit)
+                    {
+                       playerAnimator.Blink(p_GameTime, true);
+                    }
+
+                    else
+                    {
+                        playerAnimator.Blink(p_GameTime, false);
+                    }
+
                 }
 
-
-            }
-
-            barLife.Update(p_GameTime, PlayerState.Life, barLife.Position);
-            pointsBar.CurrentValue = PlayerState.Points;
-            pointsBar.Update(p_GameTime);
-
-            BoundingBox = new Rectangle((int)(Position.X), (int)(Position.Y), (int)Size.X, (int)Size.Y / 3);
-            animator.Update(p_GameTime);
-
-            if (Keyboard.GetState().IsKeyDown(Keys.P))
-            {
-                PlayerState.SetPoints(2950);
+                BoundingBox = new Rectangle((int)(Position.X), (int)(Position.Y), (int)Size.X, (int)Size.Y / 3);
             }
 
         }
@@ -308,22 +176,14 @@ namespace BricksGame
 
         }
 
-        public void EndOfTouch()
-        {
-        }
+
 
         public override void Draw(SpriteBatch p_SpriteBatch)
         {
-
-            animator.Draw(p_SpriteBatch, Position, playerColor);
-            // DrawBoundingBox(p_SpriteBatch);
-
-            barLife.Draw(p_SpriteBatch);
-            p_SpriteBatch.Draw(lifeIcon, new Vector2((barLife.Position.X + barsLenght) - lifeIcon.Width * 0.5f, barLife.Position.Y - lifeIcon.Height / 3), Color.White);
-
-            pointsBar.Draw(p_SpriteBatch);
-            p_SpriteBatch.Draw(pointsIcon, new Vector2((pointsBar.Position.X + barsLenght) - pointsIcon.Width * 0.5f, pointsBar.Position.Y - pointsIcon.Height / 2), Color.White);
-
+            playerAnimator.Draw(p_SpriteBatch, Position);
+            playerHealth.Draw(p_SpriteBatch);
+            playerPowerManager.Draw(p_SpriteBatch);
+          
             //Draw portrait
             Vector2 portraitPosition = new Vector2(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 - portrait.Width / 2, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - portrait.Height * 1.25f);
             p_SpriteBatch.Draw(portrait, portraitPosition, Color.White);
@@ -336,15 +196,7 @@ namespace BricksGame
 
         }
 
-        public void TouchedBy(GameObject p_By)
-        {
-            if (p_By is Ball)
-            {
-                //  Debug.WriteLine("PLAYER : J'ai touché la balle !");
-            }
-
-
-        }
+      
         private void DrawBoundingBox(SpriteBatch spriteBatch)
         {
             Rectangle rect = BoundingBox;
@@ -359,8 +211,9 @@ namespace BricksGame
 
         public void Reset()
         {
+            playerAnimator.Reset();
             Position = new Vector2(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 - Size.X / 2, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - Size.Y * 1.8f);
-            playerColor = Color.White;
+           
 
             if (BallsList is not null)
             {
@@ -415,53 +268,10 @@ namespace BricksGame
             if (h_By is Monster)
             {
                 isHit = true;
-                provisoryLife = PlayerState.Life - hitForce;
-
+                playerHealth.Damage(hitForce);
             }
         }
-        public void BlinkOnHit(GameTime p_GameTime, bool b)
-        {
-            if (b)
-            {
-                if (!isBlinking)
-                {
-                    isBlinking = true;
-                    blinkTimer = 0f;
-                }
-
-                if (isBlinking)
-                {
-                    blinkTimer += (float)p_GameTime.ElapsedGameTime.TotalSeconds;
-
-                    if (blinkTimer >= 2f)
-                    {
-                        isBlinking = false;
-                        isHit = false;
-                        playerColor = Color.White;
-                    }
-
-                    else
-                    {
-                        if (blinkTimer % 1f <= 0.5f)
-                        {
-                            playerColor = Color.White;
-                        }
-
-                        else
-                        {
-                            playerColor = Color.Red;
-                        }
-
-                    }
-                }
-            }
-
-            else
-            {
-                playerColor = Color.White;
-            }
-        }
-
+    
         public Rectangle NextPositionX()
         {
             Rectangle nextPosition = BoundingBox;
@@ -474,6 +284,58 @@ namespace BricksGame
             Rectangle nextPosition = BoundingBox;
             nextPosition.Offset(new Point(0, (int)(Speed)));
             return nextPosition;
+        }
+
+        public void Left()
+        {
+            playerMouvement.Move(-1, 0);
+            playerAnimator.ChangeDirection(Gamesystem.CharacterDirection.left);
+            
+        }
+
+        public void Right()
+        {
+            playerMouvement.Move(1, 0);
+            playerAnimator.ChangeDirection(Gamesystem.CharacterDirection.right);
+        }
+
+        public void Stay()
+        {
+            playerAnimator.Idle();
+        }
+
+        public void Action()
+        {
+            playerAnimator.Action();
+        }
+
+        public void StartDying()
+        {
+            playerInput.CanMove = false;
+            destroyTimer = 0f;  
+        }
+
+        public void Destroy(GameTime p_GameTime)
+        {
+            if (playerAnimator.startDying)
+            {
+                if (destroyTimer >= destroyDelay)
+                {
+                    IsDead = true;
+                }
+                else
+                {
+                    destroyTimer += (float)p_GameTime.ElapsedGameTime.TotalSeconds;
+                }
+            }
+        }
+
+        public void TouchedBy(GameObject p_By)
+        {
+            if (p_By is Ball)
+            {
+                //  Debug.WriteLine("PLAYER : J'ai touché la balle !");
+            }
         }
 
     }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Content;
+using System.Diagnostics;
 
 namespace BricksGame.Classes
 {
@@ -15,32 +16,16 @@ namespace BricksGame.Classes
         private int frameNb;
         private int frameWidth;
         private int frameHeight;
-        private List<Texture2D> textureList;
+        protected List<Texture2D> textureList;
         public Gamesystem.CharacterState currentState;
         private Gamesystem.CharacterState lastState;
         private bool loop;
 
-
-        public Animator(Player player, float p_frameTime)
+        public Animator(float p_frameTime)
         {
-            textureList = new List<Texture2D>();
             frameTime = p_frameTime;
             loop = true;
-            List<Texture2D> myPadTextureList = new List<Texture2D>();
-            myPadTextureList.Insert((int)Gamesystem.CharacterState.idle, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad"));
-            myPadTextureList.Insert((int)Gamesystem.CharacterState.l_idle, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_left"));
-            myPadTextureList.Insert((int)Gamesystem.CharacterState.walk, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_walk"));
-            myPadTextureList.Insert((int)Gamesystem.CharacterState.l_walk, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_walk_left"));
-            myPadTextureList.Insert((int)Gamesystem.CharacterState.fire, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_attack"));
-            myPadTextureList.Insert((int)Gamesystem.CharacterState.l_fire, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_attack_left"));
-            myPadTextureList.Insert((int)Gamesystem.CharacterState.hit, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_walk_left"));
-            myPadTextureList.Insert((int)Gamesystem.CharacterState.die, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_die"));
-            myPadTextureList.Insert((int)Gamesystem.CharacterState.l_die, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_die_left"));
-            foreach (Texture2D texture in myPadTextureList)
-            {
-                textureList.Add(texture);
-            }
-            ChangeSpriteSheet(textureList[(int)Gamesystem.CharacterState.idle]);
+            currentState = Gamesystem.CharacterState.idle;
         }
 
         public Animator(Monster monster, int lvl, float p_frameTime)
@@ -67,15 +52,14 @@ namespace BricksGame.Classes
 
         public void ChangeSpriteSheet(Texture2D p_spritesSheet)
         {
-
             if (p_spritesSheet != spriteSheet)
             {
                 spriteSheet = p_spritesSheet;
                 currentFrame = 0;
                 timer = 0f;
                 frameNb = spriteSheet.Width / spriteSheet.Height;
-                frameWidth = spriteSheet.Width / frameNb; // Largeur d'une frame
-                frameHeight = spriteSheet.Height; // Hauteur de la spritesheet
+                frameWidth = spriteSheet.Width / frameNb; 
+                frameHeight = spriteSheet.Height; 
                 frames = new Rectangle[frameNb];
 
                 for (int i = 0; i < frameNb; i++)
@@ -94,7 +78,6 @@ namespace BricksGame.Classes
 
         public void Update(GameTime gameTime)
         {
-
             if (lastState != currentState)
             {
                 ChangeSpriteSheet(textureList[(int)currentState]);
@@ -123,14 +106,14 @@ namespace BricksGame.Classes
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
 
             spriteBatch.Draw(spriteSheet, position, frames[currentFrame], Color.White);
 
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color)
+        public virtual void Draw(SpriteBatch spriteBatch, Vector2 position, Color color)
         {
             spriteBatch.Draw(spriteSheet, position, frames[currentFrame], color);
         }
