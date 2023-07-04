@@ -16,6 +16,8 @@ namespace BricksGame
         public float timer { get; set; }
         private float initialTimer;
         public bool isCollide { private set; get; }
+        public Color[] colors = new Color[] { Color.CornflowerBlue, Color.Red };
+        public Color currentColor;
 
         public TimedParticles(List<Texture2D> p_texture, int x, int y, int width, int height, float duration) : base(p_texture)
         {
@@ -23,7 +25,7 @@ namespace BricksGame
             Position = new Vector2(x, y);
             timer = duration;
             initialTimer = timer;
-
+            currentColor = colors[0];
         }
 
         public override void Update(GameTime gameTime)
@@ -42,7 +44,7 @@ namespace BricksGame
 
         public override void Draw(SpriteBatch p_SpriteBatch)
         {
-         p_SpriteBatch.Draw(currentTexture, Position, null, Color.CornflowerBlue, 0, Vector2.Zero, new Vector2(timer/2, timer / 2), SpriteEffects.None, 1); ;
+         p_SpriteBatch.Draw(currentTexture, Position, null, currentColor, 0, Vector2.Zero, new Vector2(timer/2, timer / 2), SpriteEffects.None, 1); ;
 
         }
 

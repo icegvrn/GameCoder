@@ -17,19 +17,19 @@ namespace BricksGame
     public class Dice : Sprite, IBrickable, IDestroyable
     {
         public float GridSlotNb { get; set; }
-        Texture2D diceSheet;
+        protected Texture2D diceSheet;
         List<Rectangle> tiles;
         int currentNb = 1;
         public Gamesystem.dice value;
         bool isVisible = true;
-        public int facesNb { get; private set; }
+        public int facesNb { get; protected set; }
         int lastMathCeil;
         Random rand;
        public bool IsDestroy { get; set; }
         float diceAnimationTimer = 0f;
         float diceSpeed = 3.5f;
-        bool diceAnimationStarted = false;
-        public bool DiceRolled { get;  private set; }
+       public bool diceAnimationStarted = false;
+        public bool DiceRolled { get;  protected set; }
         public int DiceResult { get { return currentNb; } }
         bool isHover = false;
         public bool isRollable;
@@ -92,6 +92,12 @@ namespace BricksGame
                     value = Gamesystem.dice.d20;
                     facesNb = 20;
                     diceSheet = content.Load<Texture2D>("images/d20");
+                    break;
+
+                case Gamesystem.dice.dMagic:
+                    value = Gamesystem.dice.dMagic;
+                    facesNb = 6;
+                    diceSheet = content.Load<Texture2D>("images/dMagic");
                     break;
 
                 default:

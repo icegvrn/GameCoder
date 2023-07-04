@@ -225,6 +225,11 @@ namespace BricksGame
 
         }
 
+        public void Kill()
+        {
+            life = 0;
+        }
+
         private void AddGauge()
         {
             Rectangle lifeBar = new Rectangle((int)Position.X - BoundingBox.Width / 2, (int)Position.Y, lifeBarLenght, lifeBarHeight);

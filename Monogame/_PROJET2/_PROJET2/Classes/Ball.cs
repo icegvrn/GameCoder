@@ -13,6 +13,10 @@ namespace BricksGame
     public class Ball : Sprite, ICollider, IDestroyable
     {
 
+        public Power power;
+        private int strenght;
+        private int initialStrenght;
+
         // Etats de la balle
         private Gamesystem.BallState currentSate;
 
@@ -46,6 +50,9 @@ namespace BricksGame
             SpeedVector = new Vector2(Speed, -Speed);
             currentSate = Gamesystem.BallState.idle;
             soundContainer= new SoundManager(this);
+            power = null;
+            strenght = 50;
+            initialStrenght = 50;
         }
 
         public override void Update(GameTime p_GameTime)
@@ -72,7 +79,35 @@ namespace BricksGame
                 }
             }
 
+            if (power is not null && power.powerCharged)
+            {
+                foreach (TimedParticles particle in timedParticles)
+                {
+                    particle.currentColor = particle.colors[1];
+                }
+            }
+            else
+            {
+                foreach (TimedParticles particle in timedParticles)
+                {
+                    particle.currentColor = particle.colors[0];
+                }
+            }
+            if (power != null && power is DamagePower)
+            {
+                DamagePower dmgPower = ((DamagePower)power);
 
+               if (dmgPower.powerIsOn)
+                {
+                    strenght = initialStrenght * dmgPower.multiplicator;
+                }
+               else
+                {
+                    strenght = initialStrenght;
+                }
+
+                dmgPower.Update(p_GameTime);
+            }
 
             UpdateParticles(p_GameTime);
             base.Update(p_GameTime);
@@ -86,6 +121,15 @@ namespace BricksGame
             }
 
             base.Draw(p_SpriteBatch);
+
+            if (power != null && power is DamagePower)
+            {
+                DamagePower dmgPower = ((DamagePower)power);
+                if (dmgPower.powerIsOn)
+                {
+                    p_SpriteBatch.DrawString(AssetsManager.MainFont, ((int)dmgPower.timer).ToString(), new Vector2(Position.X - 10, Position.Y - 10), Color.Red);
+                } 
+            }
         }
 
     
@@ -99,15 +143,24 @@ namespace BricksGame
                     if (c_Brick.BoundingBox.Intersects(NextPositionY()))
                     {
                         InverseVerticalDirection();
-                        c_Brick.RemoveLife(50);
+                        c_Brick.RemoveLife(strenght);
+                        if (power is not null && power.powerCharged)
+                        {
+                            power.Trigger(c_Brick, ServiceLocator.GetService<LevelManager>().GameGrid);
+                        }
                         
                     }
 
                     if (c_Brick.BoundingBox.Intersects(NextPositionX()))
                     {
                         InverseHorizontalDirection();
-                        c_Brick.RemoveLife(50);
-                       
+                        c_Brick.RemoveLife(strenght);
+
+                        if (power is not null && power.powerCharged)
+                        {
+                            power.Trigger(c_Brick, ServiceLocator.GetService<LevelManager>().GameGrid);
+                        }
+
                     }
 
                 }
@@ -341,6 +394,26 @@ namespace BricksGame
         public void TouchedBy(GameObject p_By)
         {
 //
+        }
+
+        public void ActivePower()
+        {
+            power.Activate();
+        }
+
+        public void TriggerPower()
+        {
+            if (power != null)
+            {
+                power.powerUsed = true;
+            }
+        
+
+        }
+
+        public void SetSpeed(float speed)
+        {
+            SpeedVector = new Vector2(speed, -speed);
         }
 
 

@@ -39,8 +39,12 @@ namespace BricksGame
 
             if (levelManager.currentState == LevelManager.LevelState.play)
             {
-                player.BallsList[0].CheckCollision(levelManager.GameGrid.GridElements);
-                player.BallsList[0].CheckCollision(player);
+                foreach (Ball ball in player.BallsList)
+                {
+                   ball.CheckCollision(levelManager.GameGrid.GridElements);
+                    ball.CheckCollision(player);
+                }
+               
             }   
             
             CheckPlayerDeath();

@@ -11,8 +11,10 @@ namespace BricksGame
     public static class PlayerState
     {
         private static int points;
+        private static int maxPoints;
         private static int life;
         public static int Points { get { return points; } private set { points = value; } }
+        public static int MaxPoints { get { return maxPoints; } private set { maxPoints = value; } }
         public static int Life { get { return life; } private set { life = value;} }
 
         static PlayerState()
@@ -28,6 +30,11 @@ namespace BricksGame
         public static void SetPoints(int p_points)
         {
             Points = p_points;
+        }
+
+        public static void SetMaxPoints(int p_points)
+        {
+            MaxPoints = p_points;
         }
 
         public static void AddLife(int p_life)

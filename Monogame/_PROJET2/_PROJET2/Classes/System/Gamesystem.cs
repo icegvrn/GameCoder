@@ -17,7 +17,8 @@ namespace BricksGame
             d8,
             d10,
             d12,
-            d20
+            d20,
+            dMagic
         }
         public enum CharacterState { idle, l_idle, walk, l_walk, fire, l_fire, hit, die, l_die }
         public enum CharacterDirection { left, right }
