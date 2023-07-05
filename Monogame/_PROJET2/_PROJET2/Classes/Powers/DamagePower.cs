@@ -1,10 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BricksGame
 {
@@ -46,7 +41,6 @@ namespace BricksGame
         }
         public override void Trigger(Bricks brick, BaseGrid grid)
         {
-
             if (!powerUsed)
             {
                 timerStarted = true;

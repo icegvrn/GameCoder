@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 
 
+
 namespace BricksGame
 {
     public class Player : Sprite, ICollider
@@ -123,7 +124,7 @@ namespace BricksGame
         private void DrawBoundingBox(SpriteBatch spriteBatch)
         {
             Rectangle rect = BoundingBox;
-            Texture2D boxTexture = AssetsManager.blankTexture;
+            Texture2D boxTexture = ServiceLocator.GetService<IAssetsServices>().GetGameTexture(IAssetsServices.textures.blank);
             spriteBatch.Draw(boxTexture, new Rectangle(rect.Left, rect.Top, 1, rect.Height), Color.Red);
             spriteBatch.Draw(boxTexture, new Rectangle(rect.Right, rect.Top, 1, rect.Height), Color.Red);
             spriteBatch.Draw(boxTexture, new Rectangle(rect.Left, rect.Top, rect.Width, 1), Color.Red);
@@ -138,6 +139,22 @@ namespace BricksGame
 
         }
 
+
+        public void ResetAll()
+        {
+            IsReady = false;
+            Reset();
+            playerFighter.ResetMunition();
+        }
+
+        public void SetReady()
+        {
+            if (!IsReady)
+            {
+                IsReady = true;
+                Prepare();
+            }
+        }
 
         public void Prepare()
         {
@@ -165,9 +182,9 @@ namespace BricksGame
         {
             playerAnimator.Action();
 
-            if (!playerFighter.hasFired)
+            if (!playerFighter.IsAttacker)
             {
-                playerFighter.Fire();
+                playerFighter.Attack();
                 Stay();
             }
             else

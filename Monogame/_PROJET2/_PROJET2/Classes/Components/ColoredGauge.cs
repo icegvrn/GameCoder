@@ -78,7 +78,7 @@ namespace BricksGame
 
             if (displayText)
             {
-                spriteBatch.DrawString(AssetsManager.Font14, ((int)currentValue).ToString(), new Vector2(textPosition.X, textPosition.Y), textColor);
+                spriteBatch.DrawString(ServiceLocator.GetService<IFontService>().GetFont(IFontService.Fonts.Font14), ((int)currentValue).ToString(), new Vector2(textPosition.X, textPosition.Y), textColor);
             }
         }
     }

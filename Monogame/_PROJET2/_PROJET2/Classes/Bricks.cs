@@ -62,7 +62,7 @@ namespace BricksGame
        
             p_SpriteBatch.Draw(currentTexture, new Vector2(Position.X - currentTexture.Width/2, Position.Y-currentTexture.Height/2), Color.White);
 
-            p_SpriteBatch.DrawString(AssetsManager.MainFont, life.ToString(), Position, Color.Black);
+            p_SpriteBatch.DrawString(ServiceLocator.GetService<IFontService>().GetFont(IFontService.Fonts.MainFont), life.ToString(), Position, Color.Black);
            
         }
 

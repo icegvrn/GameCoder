@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BricksGame
 {
+    /// <summary>
+    /// Content les différentes scènes du jeu sous forme d'enum et les méthodes pour changer de scène.
+    /// </summary>
      public class GameState
     {
         public enum SceneType

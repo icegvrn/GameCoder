@@ -1,37 +1,41 @@
 ﻿using BricksGame.Classes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Diagnostics;
+
 
 namespace BricksGame
 {
-    public class PlayerPowerManager
+    public class PlayerPowerManager : PowerManager
     {
         private Player player;
         private MagicalDice magicalDice;
-        private Power power;
+
         private bool magicalDiceResultChecked;
         private PlayerPowerUI powerUI;
-
-        public PlayerPowerManager(Player player)
+        private ISessionService playerState;
+        public PlayerPowerManager(Player p_player)
         {
-            PlayerState.SetPoints(2950);
-            PlayerState.SetMaxPoints(3000);
-            this.player = player;
+            playerState = ServiceLocator.GetService<ISessionService>();
+            playerState.SetPoints(2950);
+            playerState.SetMaxPoints(3000);
+
+            player = p_player;
+
             magicalDice = new MagicalDice();
             magicalDice.Position = new Vector2(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 - 125, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - 80);
             ServiceLocator.GetService<GameState>().CurrentScene.AddToGameObjectsList(magicalDice);
             powerUI = new PlayerPowerUI(this);
+
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            if (!magicalDiceResultChecked && player.IsReady && PlayerState.Points == PlayerState.MaxPoints && magicalDice.diceCanBeUsed)
+            if (!magicalDiceResultChecked && player.IsReady && playerState.GetPoints() == playerState.GetMaxPoints() && magicalDice.diceCanBeUsed)
             {
                 magicalDice.EnableMagicalDice(true);
                 magicalDiceResultChecked = true;
             }
-            else if (magicalDice.DiceRolled && power is null)
+            else if (magicalDice.DiceRolled && Power is null)
             {
                 CheckMagicalDiceResult();
                 magicalDiceResultChecked = false;
@@ -39,7 +43,7 @@ namespace BricksGame
             powerUI.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             powerUI.Draw(spriteBatch);
         }
@@ -50,65 +54,60 @@ namespace BricksGame
             switch (magicalDice.DiceResult)
             {
                 case 1:
-                    power = new DoubleBallsPower();
-                    power.powerAvailable = true;
+                    Power = new DoubleBallsPower();
+                    Power.powerAvailable = true;
                     player.playerFighter.CreateNewBall();
                     break;
                 case 2:
-                    power = new LinePower();
-                    power.powerAvailable = true;
+                    Power = new LinePower();
+                    Power.powerAvailable = true;
                     break;
                 case 3:
-                    power = new KillPower();
-                    power.powerAvailable = true;
+                    Power = new KillPower();
+                    Power.powerAvailable = true;
                     break;
                 case 4:
-                    power = new SameTypePower();
-                    power.powerAvailable = true;
+                    Power = new SameTypePower();
+                    Power.powerAvailable = true;
                     break;
                 case 5:
-                    power = new ExplodePower();
-                    power.powerAvailable = true;
+                    Power = new ExplodePower();
+                    Power.powerAvailable = true;
                     break;
                 case 6:
-                    power = new DamagePower();
-                    power.powerAvailable = true;
+                    Power = new DamagePower();
+                    Power.powerAvailable = true;
                     break;
                 default:
                     break;
             }
         }
 
-        public void ActivatePower()
+        public override void ActivatePower()
         {
        
-            if (power is not null)
+            if (Power is not null)
             {
-                if (power is not DoubleBallsPower)
+                if (Power is not DoubleBallsPower)
                 {
-                    if (power.powerAvailable)
+                    if (Power.powerAvailable)
                     {
-                        player.playerFighter.BallsList[0].power = power;
-                        player.playerFighter.BallsList[0].power.powerAvailable = true;
-                        player.playerFighter.BallsList[0].ActivePower();
-                        player.playerFighter.BallsList[0].power.powerCharged = true;
-                        PlayerState.SetPoints(0);
+                        player.playerFighter.ActivatePowerOnBall(Power);
+                        playerState.SetPoints(0);
                     }
-                    else if (power.powerCharged)
+                    else if (Power.powerCharged)
                     {
-                        player.playerFighter.BallsList[0].TriggerPower();
+                        player.playerFighter.TriggerPower();
                     }
                 }
-                else if (power is DoubleBallsPower)
+                else if (Power is DoubleBallsPower)
                 {
-                    if (power.powerAvailable)
+                    if (Power.powerAvailable)
                     {
-                        player.playerFighter.BallsList[1].Fire();
-                        player.playerFighter.BallsList[1].SpeedVector *= 0.5f;
-                        player.playerFighter.BallsList[1].Speed *= 0.5f;
-                        power.powerAvailable = false;
-                        power.powerUsed = true;
-                        PlayerState.SetPoints(0);
+                        player.playerFighter.FireASecondaryBall();
+                        Power.powerAvailable = false;
+                        Power.powerUsed = true;
+                        playerState.SetPoints(0);
 
                     }
                 }
@@ -116,9 +115,14 @@ namespace BricksGame
             }
         }
 
-        public void ResetPower()
+        public override void TriggerPower()
         {
-            power = null;
+            ResetPower();
+        }
+
+        public override void ResetPower()
+        {
+            Power = null;
             magicalDice.EnableMagicalDice(false);
         }
     }

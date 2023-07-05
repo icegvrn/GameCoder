@@ -1,9 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BricksGame
 {
@@ -17,10 +13,8 @@ namespace BricksGame
             return RandomGen.Next(p_Min, p_Max + 1);
         }
 
-        /// <summary>
-        /// Permet de "fixer" l'aléatoire, pratique pour les beugs
-        /// </summary>
-        /// <param name="p_Seed"></param>
+
+        // Permet de "fixer" l'aléatoire, pratique pour les beugs
         public static void SetRandomSeed(int p_Seed)
         {
             RandomGen = new Random(p_Seed);
@@ -52,7 +46,7 @@ namespace BricksGame
         //Même formule mais qui prend directement la souris comme second point de référence
         public static double calcAngleWithMouse(float x1, float y1)
         {
-           MouseState mouse = ServiceLocator.GetService<MouseState>();
+           Vector2 mouse = ServiceLocator.GetService<IInputService>().GetMousePosition();
             float x2 = mouse.X;
             float y2 = mouse.Y;
             return Math.Atan2(y2 - y1, x2 - x1);

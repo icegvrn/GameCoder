@@ -6,41 +6,39 @@ using System.Collections.Generic;
 
 namespace BricksGame
 {
-    public class PlayerFighter
+    public class PlayerFighter : Fighter
     {
         private Player player;
         private List<Ball> balls;
         public List<Ball> BallsList { get { return balls; } private set { balls = value; } }
         private int munitionNb;
         private int baseMunition;
-        public bool hasFired;
        
         public bool HasMunition { get { if (munitionNb <= 0) { return false; } else { return true; } } }
 
         private Texture2D munitionCounter;
         private Texture2D portrait;
 
+        private string imgPath;
+
         public PlayerFighter(Player p_player) {
+
             player = p_player;
             balls = new List<Ball>();
             munitionNb = 10;
             baseMunition = 10;
-            hasFired = false;
-
+            IsAttacker = false;
+            imgPath = ServiceLocator.GetService<IPathsService>().GetImagesRoot();
             // Portrait
-            portrait = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/character_portrait");
+            portrait = ServiceLocator.GetService<ContentManager>().Load<Texture2D>(imgPath + "character_portrait");
 
             // Munitions
-            munitionCounter = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/icon_counter_true");
+            munitionCounter = ServiceLocator.GetService<ContentManager>().Load<Texture2D>(imgPath + "icon_counter_true");
             BallsList = new List<Ball>();
 
         }
 
-        public void Update(GameTime gameTime)
-        {
-
-        }
-
+     
         public void Draw(SpriteBatch spriteBatch)
         {
             //Draw portrait
@@ -55,18 +53,17 @@ namespace BricksGame
         }
 
 
-        public void Fire()
+        public override void Attack()
         {
-            if (!hasFired && HasMunition)
+            if (!IsAttacker && HasMunition)
             {
                 foreach (Ball ball in BallsList)
                 {
                     if (!ball.isFired)
                     {
+                        StartAttack(); 
                         ball.Fire();
-                        RemoveMunition(1);
-                        hasFired = true;
-                        player.Stay();
+                                
                         return;
                     }
                 }
@@ -74,10 +71,17 @@ namespace BricksGame
             }
         }
 
+        public override void StartAttack()
+        {
+            RemoveMunition(1);
+            IsAttacker = true;
+            player.Stay();
+        }
+
         public Ball CreateNewBall()
         {
             List<Texture2D> ballTextureList = new List<Texture2D>();
-            ballTextureList.Add(ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/ball"));
+            ballTextureList.Add(ServiceLocator.GetService<ContentManager>().Load<Texture2D>(imgPath + "ball"));
             Ball ball = new Ball(ballTextureList);
             ball.Position = new Vector2(player.Position.X + player.Size.X / 2, player.Position.Y - 20f);
             ball.Following(player);
@@ -89,7 +93,7 @@ namespace BricksGame
         public void Prepare()
         {
             CreateNewBall();
-            hasFired = false;
+            IsAttacker = false;
         }
 
         public void ResetMunition()
@@ -115,6 +119,29 @@ namespace BricksGame
             }
             BallsList = new List<Ball>();
         }
+
+        public void ActivatePowerOnBall(Power power)
+        {
+            BallsList[0].ActivatePower(power); 
+        }
+
+        public void TriggerPower()
+        {
+            BallsList[0].TriggerPower();
+        }
+
+        public void FireASecondaryBall()
+        {
+            BallsList[1].ChangeSpeed(0.5f);
+            BallsList[1].Fire();
+
+        }
+
+           public override void Update(GameTime gameTime)
+        {
+
+        }
+
     }
 }
 

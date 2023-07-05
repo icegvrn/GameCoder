@@ -12,7 +12,6 @@ namespace BricksGame
        Vector2 Position { get; set; }
         float Speed { get; set; }
         bool CanMove { get; set; }
-
         float GridSlotNb { get; set; }
         public virtual void Move(Vector2 destination) 
         {

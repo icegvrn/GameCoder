@@ -7,43 +7,42 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BricksGame
 {
-    public class PlayerHealth
+    public class PlayerHealth : Health
     { 
-        public float InitialLife { get; private set; }
-        public float ProvisoryLife { get; private set; }
         public PlayerHealthUI playerHealthUI;
 
         private Player player;
+        private ISessionService playerState;
 
-        public bool IsDead { get; private set; }
         private bool criticalLifeAnnounced;
         private SoundEffect sndCriticalLife;
+
         public PlayerHealth(Player p_player, float initialLife) 
         {
+        playerState = ServiceLocator.GetService<ISessionService>();
         player = p_player;
-        InitialLife = initialLife;
-        ProvisoryLife = InitialLife;
+        InitLife(initialLife);
         playerHealthUI = new PlayerHealthUI(this);
-        PlayerState.SetLife((int)initialLife);
-        sndCriticalLife = ServiceLocator.GetService<ContentManager>().Load<SoundEffect>("Sounds/critical_life");
+        sndCriticalLife = ServiceLocator.GetService<ContentManager>().Load<SoundEffect>(ServiceLocator.GetService<IPathsService>().GetSoundsRoot()+"critical_life");
+
         }
 
-        public void Update(GameTime p_gameTime)
+        public override void Update(GameTime p_gameTime)
         {
        
-            if (PlayerState.Life != ProvisoryLife)
+            if (playerState.GetLife() != ProvisoryLife)
             {
-                if (PlayerState.Life > 0)
+                if (playerState.GetLife() > 0)
                 {
-                    PlayerState.SubsLife(1);
+                    playerState.SubsLife(1);
                 }
             }
 
-            if (PlayerState.Life <= 0)
+            if (playerState.GetLife() <= 0)
             {
                 IsDead = true;
             }
-            else if (PlayerState.Life <= InitialLife / 4)
+            else if (playerState.GetLife() <= InitialLife / 4)
             {
                 if (!criticalLifeAnnounced)
                 {
@@ -56,18 +55,25 @@ namespace BricksGame
 
             if (Keyboard.GetState().IsKeyDown(Keys.P))
             {
-                PlayerState.SetPoints(2950);
+                playerState.SetPoints(2950);
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             playerHealthUI.Draw(spriteBatch);
         }
 
-        public void Damage(float damage)
+        public override void Damage(float damage)
         {
-            ProvisoryLife = PlayerState.Life - damage;
+            ProvisoryLife = playerState.GetLife() - damage;
+        }
+
+        public override void InitLife(float initialLife)
+        {
+            InitialLife = initialLife;
+            ProvisoryLife = InitialLife;
+            playerState.SetLife((int)initialLife);
         }
 
     }

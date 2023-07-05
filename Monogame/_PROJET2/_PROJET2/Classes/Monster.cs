@@ -101,8 +101,8 @@ namespace BricksGame
 
         public void RemoveLife(float lifeFactor)
         {
-            health.RemoveLife(lifeFactor);
-            PlayerState.AddPoints((int)lifeFactor);
+            health.Damage(lifeFactor);
+            ServiceLocator.GetService<ISessionService>().AddPoints((int)lifeFactor);
             CollisionEvent = false;
             animator.Hit();
         }
@@ -186,7 +186,7 @@ namespace BricksGame
         private void DrawBoundingBox(SpriteBatch spriteBatch)
         {
             Rectangle rect = BoundingBox;
-            Texture2D boxTexture = AssetsManager.blankTexture;
+            Texture2D boxTexture = ServiceLocator.GetService<IAssetsServices>().GetGameTexture(IAssetsServices.textures.blank);
             spriteBatch.Draw(boxTexture, new Rectangle(rect.Left, rect.Top, 1, rect.Height), Color.Red);
             spriteBatch.Draw(boxTexture, new Rectangle(rect.Right, rect.Top, 1, rect.Height), Color.Red);
             spriteBatch.Draw(boxTexture, new Rectangle(rect.Left, rect.Top, rect.Width, 1), Color.Red);

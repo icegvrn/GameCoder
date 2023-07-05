@@ -4,8 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
+
 
 namespace BricksGame
 {
@@ -14,7 +13,7 @@ namespace BricksGame
         private Gamesystem.CharacterDirection currentDirection;
         private Player player;
         public bool startDying;
-        private SoundManager soundContainer;
+        private MediaPlayerService soundContainer;
         private bool isBlinking = false;
         private float blinkTimer = 0f;
         private Color playerColor = Color.White;
@@ -25,7 +24,7 @@ namespace BricksGame
             currentDirection = Gamesystem.CharacterDirection.right;
             LoadTextures();
             ChangeState(Gamesystem.CharacterState.idle);
-            soundContainer = new SoundManager(p_player);
+            soundContainer = new MediaPlayerService(p_player);
         }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 position)
@@ -126,7 +125,6 @@ namespace BricksGame
                         {
                             playerColor = Color.Red;
                         }
-
                     }
                 }
             }
@@ -145,16 +143,18 @@ namespace BricksGame
 
         public void LoadTextures()
         {
+            ContentManager content = ServiceLocator.GetService<ContentManager>();
+            string imgPath = ServiceLocator.GetService<IPathsService>().GetPlayerImagesPathRoot();
             textureList = new List<Texture2D>();
-            textureList.Insert((int)Gamesystem.CharacterState.idle, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad"));
-            textureList.Insert((int)Gamesystem.CharacterState.l_idle, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_left"));
-            textureList.Insert((int)Gamesystem.CharacterState.walk, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_walk"));
-            textureList.Insert((int)Gamesystem.CharacterState.l_walk, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_walk_left"));
-            textureList.Insert((int)Gamesystem.CharacterState.fire, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_attack"));
-            textureList.Insert((int)Gamesystem.CharacterState.l_fire, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_attack_left"));
-            textureList.Insert((int)Gamesystem.CharacterState.hit, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_walk_left"));
-            textureList.Insert((int)Gamesystem.CharacterState.die, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_die"));
-            textureList.Insert((int)Gamesystem.CharacterState.l_die, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/pad_die_left"));
+            textureList.Insert((int)Gamesystem.CharacterState.idle, content.Load<Texture2D>(imgPath+"pad"));
+            textureList.Insert((int)Gamesystem.CharacterState.l_idle, content.Load<Texture2D>(imgPath + "pad_left"));
+            textureList.Insert((int)Gamesystem.CharacterState.walk, content.Load<Texture2D>(imgPath + "pad_walk"));
+            textureList.Insert((int)Gamesystem.CharacterState.l_walk, content.Load<Texture2D>(imgPath + "pad_walk_left"));
+            textureList.Insert((int)Gamesystem.CharacterState.fire, content.Load<Texture2D>(imgPath + "pad_attack"));
+            textureList.Insert((int)Gamesystem.CharacterState.l_fire, content.Load<Texture2D>(imgPath + "pad_attack_left"));
+            textureList.Insert((int)Gamesystem.CharacterState.hit, content.Load<Texture2D>(imgPath + "pad_walk_left"));
+            textureList.Insert((int)Gamesystem.CharacterState.die, content.Load<Texture2D>(imgPath + "pad_die"));
+            textureList.Insert((int)Gamesystem.CharacterState.l_die, content.Load<Texture2D>(imgPath + "pad_die_left"));
       
             ChangeSpriteSheet(textureList[(int)Gamesystem.CharacterState.idle]);
         }

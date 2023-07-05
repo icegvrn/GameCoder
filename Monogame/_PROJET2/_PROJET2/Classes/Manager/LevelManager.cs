@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,71 +14,72 @@ namespace BricksGame
 {
     public class LevelManager
     {
-        private int currentLevel;
-        public int CurrentLevel { get { return currentLevel; } set { currentLevel = value; } }
-        private List<int> currentLevelDices;
-        private BaseGrid gameGrid;
-        public BaseGrid GameGrid { get { return gameGrid; } }
-        public PlayerArea playingArea;
-        private DicesFactory dicesFactory;
-        private MonsterFactory monsterFactory;
-
-        private LevelList listOfLevels;
+        public int CurrentLevel { get; private set; }
         public enum LevelState { dices, play, gameOver, win, end };
-        public LevelState currentState;
+        public LevelState CurrentState { get; set; }
 
+        public BaseGrid GameGrid { get; private set; }
+        private PlayerArea playingArea;
+        private Texture2D map;
+
+        private List<int> currentLevelDices;
+
+        private DicesManager dicesManager;
+        private LevelLoader levelLoader;
 
 
         public LevelManager()
         {
-            currentLevel = 1;
-            currentState = LevelState.dices;
+            CurrentLevel = 1;
+            CurrentState = LevelState.dices;
+            InitLevelLoader();
         }
 
         public void LoadLevel(int level)
         {
-
             CreatePlayingArea();
-            currentLevel = level;
-            ReadLevelsData();
-            CreateDicesIfLevelIsPlayable(level);
-            
+            CurrentLevel = level;
+            CreateLevelIfIsPlayable(level);
         }
 
         public void Update(GameTime gameTime)
         {
+            dicesManager.Update(gameTime);
+            CheckIfTheLevelIsWin(GameGrid);
 
-            int diceCount = 0;
-            int monsterCount = 0;
-
-            if (currentState == LevelState.dices)
+            if (ServiceLocator.GetService<IInputService>().IsKeyReleased(Keys.M))
             {
-                CheckIfDicesBecameMonsters(gameGrid, diceCount, monsterCount);
+                GameGrid.Down();
             }
+        }
 
-            else if (currentState == LevelState.play)
-            {
-                CheckIfTheLevelIsWin(gameGrid);
-            }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(map, Vector2.Zero, Color.White);
+            GameGrid.DrawGrid(spriteBatch);
+            //GameGrid.DrawSlots(spriteBatch);
+        }
 
+        public void InitLevelLoader()
+        {
+            levelLoader = new LevelLoader(this);
         }
 
         public void NextLevel()
         {
             EndLevel();
-            LoadLevel(currentLevel + 1);
+            LoadLevel(CurrentLevel + 1);
         }
 
         public void EndLevel()
         {
-            gameGrid.Clear();
+            GameGrid.Clear();
         }
 
-        public void NoBallActions()
+        public void OnNoBallInGame()
         {
-            gameGrid.Down();
+            GameGrid.Down();
         }
-
 
         private void CreatePlayingArea()
         {
@@ -84,104 +87,50 @@ namespace BricksGame
             ServiceLocator.RegisterService(playingArea);
         }
 
-        private void ReadLevelsData()
+        private void CreateLevelIfIsPlayable(int level)
         {
-            string json = File.ReadAllText(ServiceLocator.GetService<GameState>().currentLevelsJSON);
-            listOfLevels = JsonSerializer.Deserialize<LevelList>(json);
-        }
-
-        private void CreateDicesIfLevelIsPlayable(int level)
-        {
-            if (level > listOfLevels.LevelsNb)
+            if (level > levelLoader.GetLevelsNb())
             {
-                currentState = LevelState.end;
+                CurrentState = LevelState.end;
             }
 
-            else if (listOfLevels != null)
+            else if (levelLoader.IsThereLevels())
             {
                 CreateLevel(level);
-            }
-            else
-            {
-                throw new Exception("Il n'y a pas de niveau de défini");
             }
         }
 
         private void CreateLevel(int level)
         {
-            currentState = LevelState.dices;
-            CreateBaseGrid(9, 12); 
-            CreateDicesFromData(level, gameGrid);
-            InitMonsterFactory();
+            CurrentState = LevelState.dices;
+            CreateBaseGrid(9, 12);
+            InitDicesManager();
+            CreateDicesFromData(level, GameGrid);
+            LoadMap();
+        }
+
+        public void InitDicesManager()
+        {
+            dicesManager = new DicesManager(this, GameGrid);
         }
 
         private void CreateDicesFromData(int level, BaseGrid grid)
         {
-            currentLevelDices = ReadDicesData(level);
-            CreateDices(grid, currentLevelDices);  
-        }
-
-        private List<int> ReadDicesData(int level)
-        {
-            Level levelData = listOfLevels.Levels[level - 1];
-            List<int> levelDices = new List<int>();
-
-            foreach (int[] lines in levelData.Dices)
-            {
-                foreach (int dice in lines)
-                {
-                    levelDices.Add(dice);
-                }
-            }
-            return levelDices;
-        }
-
-        private void CreateDices(BaseGrid grid, List<int> dices)
-        {
-            InitDicesFactory();
-
-            List<Dice> dicesList = dicesFactory.Load(dices, true);
-            for (int n = 0; n < dicesList.Count; n++)
-            {
-                grid.AddBrickable(dicesList[n], n);
-                ServiceLocator.GetService<GameState>().CurrentScene.AddToGameObjectsList(dicesList[n]);
-            }
-        }
-
-        private void InitMonsterFactory()
-        {
-            monsterFactory = new MonsterFactory();
-        }
-
-        private void InitDicesFactory()
-        {
-            dicesFactory = new DicesFactory();
+            currentLevelDices = levelLoader.ReadDicesData(level);
+            dicesManager.CreateDices(grid, currentLevelDices);  
         }
 
         private void CreateBaseGrid(int lin, int col)
         {
-            gameGrid = new BaseGrid(lin,col);
+            GameGrid = new BaseGrid(lin,col);
         }
 
-   
-        private void CheckIfDicesBecameMonsters(BaseGrid gameGrid, int diceCount, int monsterCount)
-        {
-           
-           diceCount = RegisterDice(gameGrid, diceCount);
-           monsterCount = RegisterMonster(gameGrid, monsterCount);
-            
-            if ((diceCount == 0) && (monsterCount > 0))
-            {
-                ActionsIfAllDicesRolled(gameGrid, monsterCount);
-            }
-
-        }
 
         private int RegisterMonster(BaseGrid p_gameGrid, int monsterCount)
         {
-            for (int n = 0; n < gameGrid.GridElements.Count(); n++)
+            for (int n = 0; n < GameGrid.GridElements.Count(); n++)
             {
-                if (p_gameGrid.GridElements[n] is Monster && !((Monster)gameGrid.GridElements[n]).IsDead)
+                if (p_gameGrid.GridElements[n] is Monster && !((Monster)GameGrid.GridElements[n]).IsDead)
                 {
                     monsterCount++;
                 }
@@ -189,66 +138,30 @@ namespace BricksGame
             return monsterCount;
         }
 
-        private int RegisterDice(BaseGrid p_gameGrid, int diceCount)
-        {
-            for (int n = 0; n < gameGrid.GridElements.Count(); n++)
-            {
-                if (p_gameGrid.GridElements[n] is Dice)
-                {
-                    Dice dice = (Dice)p_gameGrid.GridElements[n];
-
-                    if (dice.facesNb != 0)
-                    {
-                        diceCount++;
-
-                        if (dice.DiceRolled)
-                        {
-                            ConvertDiceToMonster(p_gameGrid, dice, n);
-                        }
-                    }
-                }
-            }
-            return diceCount;
-        }
-
-
-        private void ActionsIfAllDicesRolled(BaseGrid gameGrid, int monsterCount)
-        {
-            monsterCount = RegisterMonster(gameGrid, monsterCount);
-            DeleteDicesFromGrid(gameGrid);
-            currentState = LevelState.play;
-
-        }
-
-        private void DeleteDicesFromGrid(BaseGrid gameGrid)
-        {
-            for (int n = 0; n < gameGrid.GridElements.Count(); n++)
-            {
-                if ((gameGrid.GridElements[n] is Dice))
-                {
-                    gameGrid.GridElements[n] = null; // Enlève les dès "0" qui sont restés sur la grille
-                }
-            }
-        }
-
-        private void ConvertDiceToMonster(BaseGrid gameGrid, Dice dice, int index)
-        {
-            Monster c_monster = monsterFactory.CreateMonster(dice.DiceResult);
-            gameGrid.AddBrickable(c_monster, index);
-            ServiceLocator.GetService<GameState>().CurrentScene.AddToGameObjectsList(c_monster);
-            gameGrid.GridElements[index] = null;
-            dice.Destroy();
-        }
-
+     
         private void CheckIfTheLevelIsWin(BaseGrid gameGrid)
         {
-           int monsterCount = 0;
-            monsterCount = RegisterMonster(gameGrid, monsterCount);
-
-            if (monsterCount == 0)
+            if (CurrentState == LevelState.play)
             {
-                currentState = LevelState.win;
+                int monsterCount = 0;
+                monsterCount = RegisterMonster(gameGrid, monsterCount);
+
+                if (monsterCount == 0)
+                {
+                    CurrentState = LevelState.win;
+                }
             }
+        }
+
+        public void OnAllDicesRolled()
+        {
+            CurrentState = LevelState.play;
+
+        }
+
+        private void LoadMap()
+        {
+                map = ServiceLocator.GetService<ContentManager>().Load<Texture2D>(ServiceLocator.GetService<IPathsService>().GetImagesRoot() + "map1");
         }
 
     }

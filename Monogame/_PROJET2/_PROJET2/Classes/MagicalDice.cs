@@ -49,7 +49,7 @@ namespace BricksGame.Classes
         {
             if (powerAvailable)
             {
-                p_SpriteBatch.DrawString(AssetsManager.Font10, "Press SPACE to use power", new Vector2(Position.X-50, Position.Y + 50), Color.White);
+                p_SpriteBatch.DrawString(ServiceLocator.GetService<IFontService>().GetFont(IFontService.Fonts.Font10), "Clic left to use power", new Vector2(Position.X-50, Position.Y + 50), Color.White);
             }
           
             base.Draw(p_SpriteBatch);

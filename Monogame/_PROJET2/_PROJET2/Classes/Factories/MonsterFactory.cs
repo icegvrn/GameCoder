@@ -1,11 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BricksGame
 {
@@ -15,11 +9,12 @@ namespace BricksGame
         {
             
             ContentManager content = ServiceLocator.GetService<ContentManager>();
+            string imgPath = ServiceLocator.GetService<IPathsService>().GetMonstersImagesPathRoot();
 
-            if (content.Load<Texture2D>("images/Monsters/idle/" + lvl) != null)
+            if (content.Load<Texture2D>(imgPath+"idle/" + lvl) != null)
             {
                
-              Monster newMonster = new Monster(content.Load<Texture2D>("images/Monsters/idle/" + lvl), lvl);
+              Monster newMonster = new Monster(content.Load<Texture2D>(imgPath+"idle/" + lvl), lvl);
 
                 return newMonster;
             }

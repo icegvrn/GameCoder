@@ -6,12 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BricksGame { 
-    public class MonsterFighter
+    public class MonsterFighter : Fighter
     {
         private Monster monster;
 
         public int Power { get; private set; }
-        public bool IsAttacker { get; private set; }
         public bool Attacks { get; private set; }
 
         private float attackTimer = 0f;
@@ -24,18 +23,18 @@ namespace BricksGame {
             IsAttacker = false;
         }
 
-        public void Update(GameTime p_GameTime)
+        public override void Update(GameTime p_GameTime)
         {
             UpdateAttackTimer(p_GameTime);
         }
 
-        public void StartAttack()
+        public override void StartAttack()
         {
             IsAttacker = true;
             Attacks = true;
             attackTimer = 0f;
         }
-        public void Attack()
+        public override void Attack()
         {
                 if (attackTimer >= attackCooldown)
                 {

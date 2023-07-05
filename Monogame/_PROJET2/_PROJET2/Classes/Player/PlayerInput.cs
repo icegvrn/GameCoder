@@ -11,7 +11,6 @@ namespace BricksGame
     public class PlayerInput
     {
         private Player player;
-        private MouseState oldMouseState;
         public bool CanMove;
         public PlayerInput(Player p_player)
         {
@@ -23,15 +22,13 @@ namespace BricksGame
         {
             if (player.IsReady && CanMove)
             {
-            MouseState newMouseState = Mouse.GetState();
-            Point mousePos = newMouseState.Position;
 
             // Gestion des mouvements du joueur
-            if (Keyboard.GetState().IsKeyDown(Keys.Q) || Keyboard.GetState().IsKeyDown(Keys.Left))
+            if (ServiceLocator.GetService<IInputService>().OnLeftDown())
             {
                 player.Left();
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right))
+            else if (ServiceLocator.GetService<IInputService>().OnRightDown())
             {
                 player.Right();
             }
@@ -40,22 +37,20 @@ namespace BricksGame
                 player.Stay();
             }
 
-            if (GameKeyboard.IsKeyReleased(Keys.Q) || GameKeyboard.IsKeyReleased(Keys.Left))
+            if (ServiceLocator.GetService<IInputService>().OnLeftReleased())
             {
                 player.Stay();
             }
-            else if (GameKeyboard.IsKeyReleased(Keys.D) || GameKeyboard.IsKeyReleased(Keys.Left))
+            else if (ServiceLocator.GetService<IInputService>().OnRightReleased())
             {
                 player.Stay();
             }
 
             // Gestion des actions du joueur
-            if ((newMouseState.LeftButton != oldMouseState.LeftButton && newMouseState.LeftButton == ButtonState.Pressed) || GameKeyboard.IsKeyReleased(Keys.Space))
+            if (ServiceLocator.GetService<IInputService>().OnActionReleased())
             {
                 player.Action();
             }
-
-            oldMouseState = newMouseState;
         }
         }
     }

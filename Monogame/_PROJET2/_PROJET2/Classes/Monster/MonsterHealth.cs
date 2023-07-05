@@ -5,16 +5,10 @@ using System.Threading;
 
 namespace BricksGame
 {
-    public class MonsterHealth
+    public class MonsterHealth : Health
     {
-        public float InitialLife { get; private set; }
-        public float ProvisoryLife { get; private set; }
-
-        public float Life { get; private set; }
+    
         public MonsterHealthUI monsterHealthUI;
-
-        public bool IsDead { get; private set; }
-
         public Monster Monster { get; private set; }
 
         public MonsterHealth(Monster p_monster, int lvl)
@@ -24,7 +18,7 @@ namespace BricksGame
             monsterHealthUI = new MonsterHealthUI(this);
     }
 
-        public void Update(GameTime p_gameTime)
+        public override void Update(GameTime p_gameTime)
         {
             if (Life > 0)
             {
@@ -44,20 +38,19 @@ namespace BricksGame
             monsterHealthUI.Update(p_gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             monsterHealthUI.Draw(spriteBatch);
         }
 
-        private void InitLife(int lvl)
+        public override void InitLife(float lvl)
         {
             Life = lvl * 50;
             InitialLife = Life;
             ProvisoryLife = Life;
         }
 
-
-        public void RemoveLife(float lifeFactor)
+        public override void Damage(float lifeFactor)
         {
             ProvisoryLife = Life - lifeFactor;
         }
@@ -66,6 +59,8 @@ namespace BricksGame
         {
             Life = 0;
         }
+
+
 
     }
 }

@@ -21,13 +21,13 @@ namespace BricksGame
             playerPowerManager = p_playerPowerManager;
             pointsIcon = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/icon_power");
             Rectangle rectPointsBar = new Rectangle(ServiceLocator.GetService<GraphicsDevice>().Viewport.Width / 2 - 50 - barsLenght - pointsIcon.Width / 2, ServiceLocator.GetService<GraphicsDevice>().Viewport.Height - 50, barsLenght, barsHeight);
-            pointsBar = new ColoredGauge(PlayerState.MaxPoints, rectPointsBar, Color.CornflowerBlue);
+            pointsBar = new ColoredGauge(ServiceLocator.GetService<ISessionService>().GetMaxPoints(), rectPointsBar, Color.CornflowerBlue) ;
 
         }
 
         public void Update(GameTime gameTime)
         {
-            pointsBar.CurrentValue = PlayerState.Points;
+            pointsBar.CurrentValue = ServiceLocator.GetService<ISessionService>().GetPoints();
             pointsBar.Update(gameTime);
         }
 

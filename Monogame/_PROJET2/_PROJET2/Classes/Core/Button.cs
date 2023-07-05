@@ -1,14 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Diagnostics;
+
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BricksGame
 {
@@ -17,7 +12,6 @@ namespace BricksGame
     public class Button : Sprite
     {
         public bool isHover { get; private set; }
-        private MouseState oldMouseState;
 
         public OnClick onClick { get; set; }
         public OnHover onHover { get; set; }
@@ -28,10 +22,9 @@ namespace BricksGame
 
         public override void Update(GameTime gameTime)
         {
-            MouseState newMouseState = Mouse.GetState();
-            Point MousePos = newMouseState.Position;
+      
 
-            if (BoundingBox.Contains(MousePos))
+            if (BoundingBox.Contains(ServiceLocator.GetService<IInputService>().GetMousePosition()))
             {
                 if (!isHover)
                 {
@@ -41,7 +34,7 @@ namespace BricksGame
                 }
                 else
                 {
-                    if (newMouseState != oldMouseState && newMouseState.LeftButton == ButtonState.Pressed)
+                    if (ServiceLocator.GetService<IInputService>().OnActionReleased())
                     {
                         if (onClick != null)
                         {
@@ -55,7 +48,7 @@ namespace BricksGame
                 isHover = false;
                 changeSprite(0);
             }
-            oldMouseState = newMouseState;
+  
             base.Update(gameTime);
         }
 

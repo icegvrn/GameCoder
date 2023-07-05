@@ -13,7 +13,7 @@ namespace BricksGame
     {
         private Monster monster;
         public bool startDying;
-        private SoundManager soundContainer;
+        private MediaPlayerService soundContainer;
         private Color playerColor = Color.White;
         private float hitDuration = 1f;
         private float hitDurationTimer;
@@ -24,9 +24,9 @@ namespace BricksGame
             monster = p_monster;
             LoadTextures();
             ChangeState(Gamesystem.CharacterState.idle);
-            soundContainer = new SoundManager(monster, monster.level);
+            soundContainer = new MediaPlayerService(monster, monster.level);
             soundContainer.Play(Gamesystem.CharacterState.idle, 1);
-            attackIcon = ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/icon_ennemi");
+            attackIcon = ServiceLocator.GetService<ContentManager>().Load<Texture2D>(ServiceLocator.GetService<IPathsService>().GetMonstersImagesPathRoot()+"icon_ennemi");
         }
 
         public override void Update(GameTime gametime)
@@ -99,15 +99,17 @@ namespace BricksGame
 
         public void LoadTextures()
         {
+            ContentManager content = ServiceLocator.GetService<ContentManager>();
+            string imgPath = ServiceLocator.GetService<IPathsService>().GetMonstersImagesPathRoot();
             textureList = new List<Texture2D>();
-            textureList.Insert((int)Gamesystem.CharacterState.idle, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/idle/" + monster.level + ""));
+            textureList.Insert((int)Gamesystem.CharacterState.idle, content.Load<Texture2D>(imgPath+"idle/" + monster.level + ""));
             textureList.Insert((int)Gamesystem.CharacterState.l_idle, null);
             textureList.Insert((int)Gamesystem.CharacterState.walk, null);
             textureList.Insert((int)Gamesystem.CharacterState.l_walk, null);
-            textureList.Insert((int)Gamesystem.CharacterState.fire, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/attack/" + monster.level + ""));
+            textureList.Insert((int)Gamesystem.CharacterState.fire, content.Load<Texture2D>(imgPath + "attack/" + monster.level + ""));
             textureList.Insert((int)Gamesystem.CharacterState.l_fire, null);
-            textureList.Insert((int)Gamesystem.CharacterState.hit, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/hit/" + monster.level + ""));
-            textureList.Insert((int)Gamesystem.CharacterState.die, ServiceLocator.GetService<ContentManager>().Load<Texture2D>("images/Monsters/die/" + monster.level + ""));
+            textureList.Insert((int)Gamesystem.CharacterState.hit, content.Load<Texture2D>(imgPath+ "hit/" + monster.level + ""));
+            textureList.Insert((int)Gamesystem.CharacterState.die, content.Load<Texture2D>(imgPath+"die/" + monster.level + ""));
 
             ChangeSpriteSheet(textureList[(int)Gamesystem.CharacterState.idle]);
         }

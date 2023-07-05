@@ -2,108 +2,79 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 
 
 namespace BricksGame
 {
-    internal class SceneEditor : Scene
+    /// <summary>
+    /// La scène editor permet l'édition d'un nouveau niveau de jeu. Affiche une grille et offre la possibilité de venir y placer des dés, puis de sauvegarder.
+    /// </summary>
+    public class SceneEditor : Scene
     {
-        private GameManager gameManager;
-        private Song myMusic;
-        private Texture2D grid;
-        public List<Dice> listOfDices;
-        private Gamesystem.dice currentDice;
-        private Button previousDice;
-        private Button nextDice;
-        private float buttonsMargin = 40f;
 
-        private LevelList listOfLevels;
-        private List<int> tempDicesGrid;
-        private DicesFactory dicesFactory;
+        private EditorUI editorUI;
+        public Gamesystem.dice currentDice;
 
+        // Création de la grille de base
+        public BaseGrid GameGrid { get; private set; }
         private int gridCol = 9;
         private int gridLines = 12;
 
-        private BaseGrid gameGrid;
-        public BaseGrid GameGrid { get { return gameGrid; } }
+        // Pour la création des dés sur la grille
+        private DicesFactory dicesFactory;
 
-        private int currentNb;
+        // Chargement des levels déjà sauvegardés
+        private string savedLevelsPath;
+        private LevelList listOfLevels;
 
-        private MouseState oldMouseState;
+        //Nombre du dé actuellement choisi par l'utilisateur
+        public int currentNb { get; set; }
 
-        private Button bttn_Save;
+        // List contenant temporairement les données générées par l'utilisateur
+        private List<int> tempDicesGrid;
 
+   
+    
         public SceneEditor(MainGame p_mainGame) : base(p_mainGame) 
         {
-           
+            savedLevelsPath = ServiceLocator.GetService<IPathsService>().GetJSONSavedLevelPath();
         }
 
         public override void Load()
         {
             CreateSavedLevelFile();
             LoadBackgroundImage();
-            CreateSwitchDicesButtons();
-            CreateDices();
-            CreatePlayingArea();
+            editorUI = new EditorUI(this);
             CreateBaseGrid(gridCol, gridLines);
             LoadDices();
-            LoadSaveButton();
-
         }
 
-        private void LoadSaveButton()
+        public override void Update(GameTime gameTime)
         {
-            List<Texture2D> myButtonTextureList = new List<Texture2D>() { mainGame.Content.Load<Texture2D>("button_save"), mainGame.Content.Load<Texture2D>("button_save_hover") };
-            bttn_Save = new Button(myButtonTextureList);
-            bttn_Save.onClick = Save;
-            bttn_Save.onHover = onHover;
-            bttn_Save.Position = new Vector2(mainGame.Window.ClientBounds.Width / 2 - bttn_Save.currentTexture.Width / 2, 50);
-            gameObjectsList.Add(bttn_Save);
-
+            GetSlotRectFromMouse();
+            base.Update(gameTime);
         }
 
-        private void CreateSavedLevelFile()
+        public override void Draw(GameTime gameTime)
         {
-            if (!File.Exists(AssetsManager.savedLevelsPath))
-            {
-                LevelList levelList = new LevelList();
-                levelList.Levels[0].Dices = new int[gridLines][];
-
-                for (int i = 0; i < gridLines; i++)
-                {
-                    levelList.Levels[0].Dices[i] = new int[gridCol];
-                }
-
-                string json = JsonSerializer.Serialize(levelList);
-                File.WriteAllText(AssetsManager.savedLevelsPath, json);      
-            }
-          
+            mainGame._spriteBatch.Draw(background, Vector2.Zero, Color.LightGray);
+            mainGame._spriteBatch.DrawString(ServiceLocator.GetService<IFontService>().GetFont(IFontService.Fonts.MainFont), "E-D-I-T-O-R M-O-D-E", new Vector2(mainGame.Window.ClientBounds.Width / 2 - 110, 1), Color.White);
+            GameGrid.DrawSlots(mainGame._spriteBatch, false);
+            base.Draw(gameTime);
         }
 
-        private void LoadDices()
-        {
-            ReadLevelsData();
-            InitDicesFactory();
-            CreateDicesFromData(1, GameGrid);
-        }
 
-        private void InitDicesFactory() 
-        {
-            dicesFactory = new DicesFactory();
-        } 
-
+        // Crée la grille de base avec le nombre de lignes et de colonnes spécifié
         private void CreateBaseGrid(int lin, int col)
         {
-            gameGrid = new BaseGrid(lin, col);
+            CreatePlayingArea();
+            GameGrid = new BaseGrid(lin, col);
         }
 
+        // Création d'un playingArea pour positionner la grille
         private void CreatePlayingArea()
         {
             PlayerArea playingArea = new PlayerArea(63, 122, 483, 560);
@@ -111,268 +82,38 @@ namespace BricksGame
         }
 
 
-        public override void UnLoad()
-        {
-            base.UnLoad();
+        // Charge les dés à partir des données déjà sauvegardés
+        private void LoadDices()
+        { 
+            InitDicesFactory();
+            ReadLevelsData();
+            CreateDicesFromData(1, GameGrid);
         }
 
-        public override void Update(GameTime gameTime)
+        // Initialise la Factory de dés
+        private void InitDicesFactory()
         {
-
-            if (GameKeyboard.IsKeyReleased(Keys.Space))
-            {
-                Save(bttn_Save);
-            }
-
-            GetSlotRectFromMouse();
-            base.Update(gameTime);
+            dicesFactory = new DicesFactory();
         }
 
-    
-        private void GetSlotRectFromMouse()
-        {
-            MouseState newMouseState = Mouse.GetState();
-            MouseState mouse = ServiceLocator.GetService<MouseState>();
-            foreach (Rectangle rectangle in GameGrid.SlotRectangles)
-            {
-                if (rectangle.Contains(mouse.X, mouse.Y) && rectangle.Y <= gameGrid.maxDestination)
-                {
-                    int slotIndex = GameGrid.GetSlotIndexFromPosition(new Vector2(rectangle.X, rectangle.Y));
-
-                    if (newMouseState != oldMouseState && newMouseState.LeftButton == ButtonState.Pressed)
-                    {
-                        UpdateDiceNumber(slotIndex, currentNb);
-                    }
-                    else if (newMouseState != oldMouseState && newMouseState.RightButton == ButtonState.Pressed)
-                    {
-                        UpdateDiceNumber(slotIndex, 0);
-                    }
-                }
-            } 
-            oldMouseState = newMouseState;
-        }
-
-    
-
-        public override void Draw(GameTime gameTime)
-        {
-            mainGame._spriteBatch.Draw(background, Vector2.Zero, Color.LightGray);   
-            mainGame._spriteBatch.DrawString(AssetsManager.MainFont, "E-D-I-T-O-R M-O-D-E", new Vector2(mainGame.Window.ClientBounds.Width / 2 - 110, 1), Color.White);
-            GameGrid.DrawSlots(mainGame._spriteBatch, false);  
-            base.Draw(gameTime);
-        }
-
-        public void CreateDicesList()
-        {
-            listOfDices = new List<Dice>();
-            Dice d3 = new Dice(Gamesystem.dice.d3, false);
-            Dice d4 = new Dice(Gamesystem.dice.d4, false);
-            Dice d6 = new Dice(Gamesystem.dice.d6, false);
-            Dice d8 = new Dice(Gamesystem.dice.d8, false);
-            Dice d10 = new Dice(Gamesystem.dice.d10, false);
-            Dice d12 = new Dice(Gamesystem.dice.d12, false);
-            Dice d20 = new Dice(Gamesystem.dice.d20, false);
-            listOfDices.Add(d3);
-            listOfDices.Add(d4);
-            listOfDices.Add(d6);
-            listOfDices.Add(d8);
-            listOfDices.Add(d10);
-            listOfDices.Add(d12);
-            listOfDices.Add(d20);
-        }
-
-
-        public void AddDices()
-        {
-            Rectangle Screen = mainGame.Window.ClientBounds;
-            for (int i = 0; i < listOfDices.Count; i++)
-            {
-                listOfDices[i].Position = new Vector2(Screen.Width/2, Screen.Height - listOfDices[i].BoundingBox.Height);
-                AddToGameObjectsList(listOfDices[i]);
-            }
-        }
-
-        public void SetToDice(Gamesystem.dice d)
-        {
-            currentDice = d;
-
-            foreach (Dice dice in listOfDices)
-            {
-
-                if (dice.value == d)
-                {
-                    dice.SetVisible(true);
-                }
-                else
-                {
-                    dice.SetVisible(false);
-                }
-            }  
-        }
-
-        public void NextDice(Button p_Button)
-        {
-         
-            switch (currentDice)
-            {
-                case Gamesystem.dice.d3:
-                   SetToDice(Gamesystem.dice.d4);
-                    currentNb = 4;
-                    break;
-                case Gamesystem.dice.d4:
-                    SetToDice(Gamesystem.dice.d6);
-                    currentNb = 6;
-                    break;
-                case Gamesystem.dice.d6:
-                    SetToDice(Gamesystem.dice.d8);
-                    currentNb = 8;
-                    break;
-                case Gamesystem.dice.d8:
-                    SetToDice(Gamesystem.dice.d10);
-                    currentNb = 10;
-                    break;
-                case Gamesystem.dice.d10:
-                    SetToDice(Gamesystem.dice.d12);
-                    currentNb = 12;
-                    break;
-                case Gamesystem.dice.d12:
-                    SetToDice(Gamesystem.dice.d20);
-                    currentNb = 20;
-                    break;
-                case Gamesystem.dice.d20:
-                    SetToDice(Gamesystem.dice.d3);
-                    currentNb = 3;
-                    break;
-                 default:
-                    SetToDice(Gamesystem.dice.d3);
-                    currentNb = 3;
-                    break;
-            }
-        }
-
-        public void PreviousDice(Button p_Button)
-        {
-     
-            switch (currentDice)
-            {
-                case Gamesystem.dice.d3:
-                    SetToDice(Gamesystem.dice.d20);
-                    currentNb = 20;
-                    break;
-                case Gamesystem.dice.d4:
-                    SetToDice(Gamesystem.dice.d3);
-                    currentNb = 3;
-                    break;
-                case Gamesystem.dice.d6:
-                    SetToDice(Gamesystem.dice.d4);
-                    currentNb = 4;
-                    break;
-                case Gamesystem.dice.d8:
-                    SetToDice(Gamesystem.dice.d6);
-                    currentNb = 6;
-                    break;
-                case Gamesystem.dice.d10:
-                    SetToDice(Gamesystem.dice.d8);
-                    currentNb = 8;
-                    break;
-                case Gamesystem.dice.d12:
-                    SetToDice(Gamesystem.dice.d10);
-                    currentNb = 10;
-                    break;
-                case Gamesystem.dice.d20:
-                    SetToDice(Gamesystem.dice.d12);
-                    currentNb = 12;
-                    break;
-                default:
-                    SetToDice(Gamesystem.dice.d3);
-                    currentNb = 3;
-                    break;
-            }
-
-        }
-
-        private void CreateDices()
-        {
-            CreateDicesList();
-            AddDices();
-            SetToDice(Gamesystem.dice.d3);
-            currentNb = 3;
-        }
-
-        private void CreateSwitchDicesButtons()
-        {
-            List<Texture2D> myButtonTextureList = new List<Texture2D>();
-            myButtonTextureList.Add(mainGame.Content.Load<Texture2D>("arrow"));
-            LoadPreviousDiceButton(myButtonTextureList);
-            LoadNextDiceButton(myButtonTextureList);
-           
-        }
-
-        private void LoadPreviousDiceButton(List<Texture2D> myButtonTextureList)
-        {
-            previousDice = new Button(myButtonTextureList);
-            previousDice.Position = new Vector2(mainGame.Window.ClientBounds.Width / 2 - previousDice.currentTexture.Width - buttonsMargin,  mainGame.Window.ClientBounds.Height - previousDice.currentTexture.Height*2);
-            previousDice.onClick = PreviousDice;
-            previousDice.onHover = OnHover;
-            gameObjectsList.Add(previousDice);
-      
-        }
-
-        private void LoadNextDiceButton(List<Texture2D> myButtonTextureList)
-        {
-           
-            nextDice = new Button(myButtonTextureList);
-            nextDice.Position = new Vector2(mainGame.Window.ClientBounds.Width / 2 + buttonsMargin, mainGame.Window.ClientBounds.Height - previousDice.currentTexture.Height*2);
-            nextDice.onClick = NextDice;
-            nextDice.onHover = OnHover;
-            nextDice.ChangeSpriteEffects(SpriteEffects.FlipHorizontally);
-            gameObjectsList.Add(nextDice);
-        }
-
-        private void LoadGameManager()
-        {
-            gameManager = new GameManager();
-            gameManager.Load();
-        }
-        private void LoadAudio()
-        {
-            myMusic = AssetsManager.gamePlayMusic;
-            MediaPlayer.IsRepeating = false;
-            MediaPlayer.Play(myMusic);
-        }
-
-        private void StopAudio()
-        {
-            MediaPlayer.Stop();
-        }
-
-        public void OnHover(Button p_Button)
-        {
-
-        }
-
-        private void LoadBackgroundImage()
-        {
-            ContentManager content = ServiceLocator.GetService<ContentManager>();
-            background = content.Load<Texture2D>("images/map1");
-        }
-
-
+        // Lit toutes les données des niveaux sauvegardés
         private void ReadLevelsData()
         {
-            string json = File.ReadAllText(AssetsManager.savedLevelsPath);
+            string json = File.ReadAllText(savedLevelsPath);
             listOfLevels = JsonSerializer.Deserialize<LevelList>(json);
         }
 
+        // Créé les dés d'un niveau donné en passant le niveau en paramètre
         private void CreateDicesFromData(int level, BaseGrid grid)
         {
             CreateDices(grid, ReadDicesData(level));
         }
 
+        // Retourne un tableau de dés à partir d'un niveau spécifiés
         private List<int> ReadDicesData(int level)
         {
             Level levelData = listOfLevels.Levels[level - 1];
-           tempDicesGrid = new List<int>();
+            tempDicesGrid = new List<int>();
 
             foreach (int[] lines in levelData.Dices)
             {
@@ -384,29 +125,8 @@ namespace BricksGame
             return tempDicesGrid;
         }
 
-        private void DrawDicesNumber()
-        {
-            Level levelData = listOfLevels.Levels[0];
-            List<int> levelDices = new List<int>();
 
-            int nb = 0;
-            foreach (int[] lines in levelData.Dices)
-            {
-                foreach (int dice in lines)
-                {
-                    mainGame._spriteBatch.DrawString(AssetsManager.MainFont, dice.ToString(), GameGrid.GetPositionFromGrid(nb), Color.White);
-                    nb++;
-                }
-            }
-        }
-
-        private void UpdateDiceNumber(int index, int nb)
-        {
-           tempDicesGrid[index] = nb;
-           GameGrid.Clear();
-           CreateDices(GameGrid, tempDicesGrid);
-        }
-
+        // Crée de nouveaux dés à partir d'une liste de valeurs fournies
         private void CreateDices(BaseGrid grid, List<int> dices)
         {
             List<Dice> dicesList = dicesFactory.Load(dices, false);
@@ -417,19 +137,67 @@ namespace BricksGame
             }
         }
 
-        private void onHover(Button p_Button)
+        // Converti la position de la souris en slot de grille et update le dé au clic
+        private void GetSlotRectFromMouse()
         {
+            Vector2 mouse = ServiceLocator.GetService<IInputService>().GetMousePosition();
 
+            foreach (Rectangle rectangle in GameGrid.GetSlotsByRectangles())
+            {
+                if (rectangle.Contains(mouse.X, mouse.Y) && rectangle.Y <= GameGrid.maxDestination)
+                {
+                    int slotIndex = GameGrid.GetSlotIndexFromPosition(new Vector2(rectangle.X, rectangle.Y));
+
+                    if (ServiceLocator.GetService<IInputService>().OnActionDown())
+                    {
+                        UpdateDiceNumber(slotIndex, currentNb);
+                    }
+                    else if (ServiceLocator.GetService<IInputService>().OnSecondaryActionDown())
+                    {
+                        UpdateDiceNumber(slotIndex, 0);
+                    }
+                }
+            }
         }
-        private void Save(Button p_Button)
+
+        // Met à jour le dés d'une case donnée par numéro d'index slot.
+        private void UpdateDiceNumber(int index, int nb)
         {
+            tempDicesGrid[index] = nb;
+            GameGrid.Clear();
+            CreateDices(GameGrid, tempDicesGrid);
+        }
+
+        // Crée un fichier vierge de niveau sauvegardé si le fichier est inexistant
+        private void CreateSavedLevelFile()
+        {
+            if (!File.Exists(savedLevelsPath))
+            {
+                LevelList levelList = new LevelList();
+                levelList.Levels[0].Dices = new int[gridLines][];
+
+                for (int i = 0; i < gridLines; i++)
+                {
+                    levelList.Levels[0].Dices[i] = new int[gridCol];
+                }
+
+                string json = JsonSerializer.Serialize(levelList);
+                File.WriteAllText(savedLevelsPath, json);
+            }
+        }
+
+
+        // Méthode de sauvegarde de ce qu'à fait l'utilisateur en convertissant le tempsDicesGrid en format compatible JSON. 
+        public void Save(Button p_Button)
+        {
+            // Conversion du tempDicesGrid en un tableau à deux entrées
             List<int[]> array = new List<int[]>();
             int col = 0;
             bool empty = true;
             
             for (int i=0; i < tempDicesGrid.Count; i++)
             {
-              
+                // Si l'entrée est un multiple du nombre de colones de la grille, ça veut dire qu'on est arrivé au bout d'une ligne et on en crée une nouvelle
                 if (i % GameGrid.WidthInColumns == 0)
                 {  
                     int[] colArray = new int[GameGrid.WidthInColumns];
@@ -437,6 +205,7 @@ namespace BricksGame
                     col = 0;
                 }
 
+                // Ajout l'entrée dans le JSON
                 array[array.Count - 1][col] = tempDicesGrid[i];
                 col++;
 
@@ -445,6 +214,7 @@ namespace BricksGame
                 }
             }
 
+            // Permet de s'assurer de ne pas afficher une grille vide quand on load une grille sauvegardée, même si on l'a sauvegardée vide en ajoutant un d3 sur la première case.
             if (empty)
             {
                 int[] tempArray = new int[GameGrid.WidthInColumns];
@@ -457,10 +227,37 @@ namespace BricksGame
        
             listOfLevels.Levels[0].Dices = level;   
             string json = JsonSerializer.Serialize(listOfLevels);
-            File.WriteAllText(AssetsManager.savedLevelsPath, json);
+            File.WriteAllText(savedLevelsPath, json);
             mainGame.gameState.ChangeScene(GameState.SceneType.Menu);
-            
+        }
 
+
+        // Principalement utilisé en debug : Permet de dessiner une grille avec le numéro de chaque dés issus du JSON. 
+        private void DrawDicesNumber()
+        {
+            Level levelData = listOfLevels.Levels[0];
+            List<int> levelDices = new List<int>();
+
+            int nb = 0;
+            foreach (int[] lines in levelData.Dices)
+            {
+                foreach (int dice in lines)
+                {
+                    mainGame._spriteBatch.DrawString(ServiceLocator.GetService<IFontService>().GetFont(IFontService.Fonts.MainFont), dice.ToString(), GameGrid.GetPositionFromGrid(nb), Color.White);
+                    nb++;
+                }
+            }
+        }
+
+        private void LoadBackgroundImage()
+        {
+            ContentManager content = ServiceLocator.GetService<ContentManager>();
+            background = content.Load<Texture2D>(ServiceLocator.GetService<IPathsService>().GetImagesRoot() + "map1");
+        }
+
+        public override void UnLoad()
+        {
+            base.UnLoad();
         }
 
     }

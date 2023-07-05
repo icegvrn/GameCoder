@@ -1,18 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using System.Diagnostics;
 
 namespace BricksGame
 {
+    /// <summary>
+    /// Scène contenant tout le gameplay et la partie jeu pur.
+    /// </summary>
     internal class SceneGameplay : Scene
     {
-
-        private Song myMusic;
         private GameManager gameManager;
-        public bool GamePaused;
+
+        private Song backgroundMusic;
+        public bool GamePaused { get; set; }
   
         public SceneGameplay(MainGame p_mainGame) : base(p_mainGame) 
         { 
@@ -22,7 +22,6 @@ namespace BricksGame
         {
             LoadGameManager();
             LoadAudio();
-            LoadBackgroundImage();
             base.Load();
         }
 
@@ -39,7 +38,7 @@ namespace BricksGame
             }
             else
             {
-                if (GameKeyboard.IsKeyReleased(Keys.Space))
+                if (ServiceLocator.GetService<IInputService>().OnPauseReleased())
                 {
                     MediaPlayer.Resume(); ;
                     GamePaused = false;
@@ -49,19 +48,52 @@ namespace BricksGame
         }
         public override void Draw(GameTime gameTime)
         {
-            mainGame._spriteBatch.Draw(background, Vector2.Zero, Color.White); 
+
             gameManager.Draw(mainGame._spriteBatch);
             base.Draw(gameTime);  
             DrawPauseMessage();
         }
 
+        // Chargement du GameManager, qui gère la logique du jeu. 
+        private void LoadGameManager()
+        {
+            gameManager = new GameManager();
+            gameManager.Load();
+        }
+
+
+        // Chargement de la musique de fond
+        private void LoadAudio()
+        {
+            backgroundMusic = ServiceLocator.GetService<IMediaPlayerService>().GetMusic(IMediaPlayerService.Musics.game);
+            ServiceLocator.GetService<IMediaPlayerService>().PlayMusic(backgroundMusic, true);
+        }
+
+
+        public void PlayAudio()
+        {
+            ServiceLocator.GetService<IMediaPlayerService>().PlayMusic(backgroundMusic, true);
+        }
+
+        public void StopAudio()
+        {
+            ServiceLocator.GetService<IMediaPlayerService>().StopMusic();
+        }
+
+        public void PauseAudio()
+        {
+            ServiceLocator.GetService<IMediaPlayerService>().PauseMusic();
+        }
+
+        // Dessin du message de pause en cours de jeu
         public void DrawPauseMessage()
         {
             if (GamePaused)
             {
-                mainGame._spriteBatch.Draw(AssetsManager.blankTexture, new Rectangle(0, 0, mainGame.Window.ClientBounds.Width, mainGame.Window.ClientBounds.Height), Color.Gray*0.5f);
-                mainGame._spriteBatch.DrawString(AssetsManager.MainFont, "PAUSE", new Vector2(mainGame.Window.ClientBounds.Width/2-30, mainGame.Window.ClientBounds.Height/2), Color.White);
-                mainGame._spriteBatch.DrawString(AssetsManager.MainFont, "Press [SPACE] to continue or [ESC] to quit", new Vector2(mainGame.Window.ClientBounds.Width / 2-220, mainGame.Window.ClientBounds.Height / 2 + 30), Color.White);
+               Texture2D blankTexture = ServiceLocator.GetService<IAssetsServices>().GetGameTexture(IAssetsServices.textures.blank);
+                mainGame._spriteBatch.Draw(blankTexture, new Rectangle(0, 0, mainGame.Window.ClientBounds.Width, mainGame.Window.ClientBounds.Height), Color.Gray*0.5f);
+                mainGame._spriteBatch.DrawString(ServiceLocator.GetService<IFontService>().GetFont(IFontService.Fonts.MainFont), "PAUSE", new Vector2(mainGame.Window.ClientBounds.Width/2-30, mainGame.Window.ClientBounds.Height/2), Color.White);
+                mainGame._spriteBatch.DrawString(ServiceLocator.GetService<IFontService>().GetFont(IFontService.Fonts.MainFont), "Press [SPACE] to continue or [ESC] to quit", new Vector2(mainGame.Window.ClientBounds.Width / 2-220, mainGame.Window.ClientBounds.Height / 2 + 30), Color.White);
             }
         }
 
@@ -71,43 +103,10 @@ namespace BricksGame
             base.UnLoad();
         }
 
+        // Déclanché par le GameManager lorsque le joueur a perdu : change de scène pour aller sur le GameOver.
         public override void End()
         {
-
             mainGame.gameState.ChangeScene(GameState.SceneType.GameOver);
-        }
-
-        private void LoadGameManager()
-        {
-            gameManager = new GameManager();
-            gameManager.Load();
-        }
-       private void LoadAudio()
-        {
-            myMusic = AssetsManager.gamePlayMusic;
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(myMusic);
-        }
-
-        public void PlayAudio()
-        {
-            MediaPlayer.Play(myMusic);
-        }
-
-        public void StopAudio()
-        {
-            MediaPlayer.Stop();
-        }
-
-        public void PauseAudio()
-        {
-            MediaPlayer.Pause();
-        }
-
-
-        private void LoadBackgroundImage()
-        {
-            background = mainGame.Content.Load<Texture2D>("images/map1");
         }
     }
 }
