@@ -66,7 +66,7 @@ namespace BricksGame
             playerCollisionsManager = new PlayerCollisionsManager(this);
             playerAnimator = new PlayerAnimator(this, 0.15f);
             playerInput = new PlayerInput(this);
-            playerHealth = new PlayerHealth(this, 500f);
+            playerHealth = new PlayerHealth(this, 3000f);
             playerFighter = new PlayerFighter(this);
         }
 
