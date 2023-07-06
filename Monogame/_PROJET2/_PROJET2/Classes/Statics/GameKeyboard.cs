@@ -1,14 +1,12 @@
 ﻿using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace BricksGame
 {
+    /// <summary>
+    /// Classe static permettant de vérifier qu'une touche a été released et pas juste down
+    /// </summary>
     public static class GameKeyboard
     {
         private static Dictionary<Keys, KeyboardState> keyStates = new Dictionary<Keys, KeyboardState>();

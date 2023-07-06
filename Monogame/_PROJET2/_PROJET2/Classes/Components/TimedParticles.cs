@@ -1,45 +1,42 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace BricksGame
 {
+    /// <summary>
+    /// Classe de particles, permet de différencier la balle de ses particules. Possède des informations de couleur et un timer.
+    /// </summary>
     public class TimedParticles : Sprite, ICollider
     {
-
         public float timer { get; set; }
-        private float initialTimer;
+        public float duration { get; set; }
         public bool isCollide { private set; get; }
         public Color[] colors = new Color[] { Color.CornflowerBlue, Color.Red };
         public Color currentColor;
 
         public TimedParticles(List<Texture2D> p_texture, int x, int y, int width, int height, float duration) : base(p_texture)
         {
+            timer = duration;
             BoundingBox = new Rectangle(x, y, width, height);
             Position = new Vector2(x, y);
-            timer = duration;
-            initialTimer = timer;
             currentColor = colors[0];
         }
 
         public override void Update(GameTime gameTime)
         {
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, currentTexture.Width*2, currentTexture.Height*2);
-            base.Update(gameTime);
-        }
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, currentTexture.Width, currentTexture.Height);
 
-        public void TouchedBy(GameObject p_By)
-        {
-             
-        }
-        public void EndOfTouch() 
-        { 
+            if (timer <= 0)
+            {
+                ServiceLocator.GetService<GameState>().CurrentScene.RemoveToGameObjectsList(this);
+            }
+            else
+            {
+               timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch p_SpriteBatch)
@@ -48,18 +45,10 @@ namespace BricksGame
 
         }
 
-        public Rectangle NextPositionX()
+        //Méthode propre aux gameObjects avec un collider
+        public void TouchedBy(GameObject p_By)
         {
-            Rectangle nextPosition = BoundingBox;
-            nextPosition.Offset(new Point((int)(Speed), 0));
-            return nextPosition;
-        }
-
-        public Rectangle NextPositionY()
-        {
-            Rectangle nextPosition = BoundingBox;
-            nextPosition.Offset(new Point(0, (int)(Speed)));
-            return nextPosition;
+            // Non utilisée
         }
     }
 }

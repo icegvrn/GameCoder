@@ -1,13 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BricksGame
 {
+    /// <summary>
+    /// Classe abstraite GameObject, contient une position et une boundingBox, un update et un draw
+    /// </summary>
     public abstract class GameObject
     {
         private Vector2 position { get; set; }

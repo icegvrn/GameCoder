@@ -6,8 +6,9 @@ namespace BricksGame
 
     public static class Utils
     {
-
         static Random RandomGen = new Random();
+
+        // Permet de générer un chiffre random
         public static int GetRandomInt(int p_Min, int p_Max)
         {
             return RandomGen.Next(p_Min, p_Max + 1);
@@ -41,7 +42,7 @@ namespace BricksGame
         public static double calcAngle(float x1, float y1, float x2, float y2)
         {
             return Math.Atan2(y2 - y1, x2 - x1);
-                }
+        }
 
         //Même formule mais qui prend directement la souris comme second point de référence
         public static double calcAngleWithMouse(float x1, float y1)

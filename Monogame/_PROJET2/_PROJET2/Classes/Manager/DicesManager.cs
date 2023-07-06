@@ -1,17 +1,15 @@
-﻿
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using static BricksGame.LevelManager;
+﻿using static BricksGame.LevelManager;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 using Microsoft.Xna.Framework;
 
 namespace BricksGame
 {
+    /// <summary>
+    /// Le DicesManager gère le spawn des dés sur la grille et leur conversion en IBrickable de type monstre. Il connait le nombre de dés présents etc.
+    /// </summary>
     public class DicesManager
     {
-        private List<int> currentLevelDices;
         private BaseGrid gameGrid;
         private DicesFactory dicesFactory;
         private MonsterFactory monsterFactory;
@@ -25,6 +23,19 @@ namespace BricksGame
             InitDicesFactory();
         }
 
+        // Vérification à chaque instant s'il reste encore des dés où s'il n'y a plus que des monstres (= tous les dés lancés = début du jeu)
+        public void Update(GameTime gameTime)
+        {
+            int diceCount = 0;
+            int monsterCount = 0;
+
+            if (levelManager.CurrentState == LevelState.dices)
+            {
+                CheckIfDicesBecameMonsters(gameGrid, diceCount, monsterCount);
+            }
+        }
+
+        // Créé des dés sur une grille à partir d'une liste de valeurs (souvent issu du JSON)
         public void CreateDices(BaseGrid grid, List<int> dices)
         {
             InitDicesFactory();
@@ -34,17 +45,6 @@ namespace BricksGame
             {
                 grid.AddBrickable(dicesList[n], n);
                 ServiceLocator.GetService<GameState>().CurrentScene.AddToGameObjectsList(dicesList[n]);
-            }
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            int diceCount = 0;
-            int monsterCount = 0;
-
-            if (levelManager.CurrentState == LevelState.dices)
-            {
-                CheckIfDicesBecameMonsters(gameGrid, diceCount, monsterCount);
             }
         }
 
@@ -58,10 +58,9 @@ namespace BricksGame
             monsterFactory = new MonsterFactory();
         }
 
-       
+       // Méthode qui vérifie si tous les dés ont été lancé et s'il y a des monstres : si oui, cela signifie qu'on est dans la phase de début de jeu et on appelle la méthode indiquant que tous les dés ont été lancés.
         public void CheckIfDicesBecameMonsters(BaseGrid gameGrid, int diceCount, int monsterCount)
         {
-
             diceCount = RegisterDice(gameGrid, diceCount);
             monsterCount = RegisterMonster(gameGrid, monsterCount);
 
@@ -71,6 +70,7 @@ namespace BricksGame
             }
         }
 
+        // Methode permettant de compter le nombre de monstres restant dans la grille.
         private int RegisterMonster(BaseGrid p_gameGrid, int monsterCount)
         {
             for (int n = 0; n < gameGrid.GridElements.Count(); n++)
@@ -83,6 +83,7 @@ namespace BricksGame
             return monsterCount;
         }
 
+        // Méthode permettant de compter le nombre de dés restant dans la grille et son état. Si un dés a été lancé, on le converti en monstre.
         private int RegisterDice(BaseGrid p_gameGrid, int diceCount)
         {
             for (int n = 0; n < gameGrid.GridElements.Count(); n++)
@@ -105,13 +106,14 @@ namespace BricksGame
             return diceCount;
         }
 
+        // Quand tous les dés ont été lancé, on supprime tous les dés, on compte le nombre de monstres et on signal au levelManager que tous les dés ont été lancés
         private void ActionsIfAllDicesRolled(BaseGrid gameGrid, int monsterCount)
-        {
-            monsterCount = RegisterMonster(gameGrid, monsterCount);
+        { 
             DeleteDicesFromGrid(gameGrid);
             levelManager.OnAllDicesRolled();
         }
 
+        // Méthode permettant de supprimer tous les dés de la grille. 
         private void DeleteDicesFromGrid(BaseGrid gameGrid)
         {
             for (int n = 0; n < gameGrid.GridElements.Count(); n++)
@@ -123,6 +125,7 @@ namespace BricksGame
             }
         }
 
+        // Méthode permettant de remplacer le dé situé à un index donné par un monstre selon la valeur du dés
         private void ConvertDiceToMonster(BaseGrid gameGrid, Dice dice, int index)
         {
             Monster c_monster = monsterFactory.CreateMonster(dice.DiceResult);

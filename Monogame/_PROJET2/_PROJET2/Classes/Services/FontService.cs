@@ -16,8 +16,6 @@ namespace BricksGame
             font14 = content.Load<SpriteFont>("font14");
         }
         
-
-
         public SpriteFont GetFont(IFontService.Fonts myFont)
         {
            switch (myFont)

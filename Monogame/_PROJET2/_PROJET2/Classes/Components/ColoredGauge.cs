@@ -5,6 +5,9 @@ using Microsoft.Xna.Framework.Content;
 
 namespace BricksGame
 {
+    /// <summary>
+    /// Classe représentant une barre de couleur dont la valeur peut varier. Utilisée pour les points et utilisée comme classe parente des barre évolutive (EvolutiveColoredGauge) qui elles changent en plus de couleur en fonction de leur valeur
+    /// </summary>
     public class ColoredGauge
     {
         private float currentValue;

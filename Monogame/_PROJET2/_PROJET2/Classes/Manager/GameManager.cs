@@ -152,7 +152,7 @@ namespace BricksGame
 
                         if (monster.Fighter.IsAttacker)
                         {
-                            player.IsHit(monster, monster.Fighter.Power);
+                            player.IsHit(monster, monster.Fighter.Strenght);
                         }
                     }
                 }

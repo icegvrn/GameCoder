@@ -4,8 +4,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BricksGame
 {
+    /// <summary>
+    /// Classe héritante de ColoredGauge qui permet d'avoir une jauge dont la couleur varie selon sa valeur. 
+    /// </summary>
     public class EvolutiveColoredGauge : ColoredGauge
     {
+        // Couleurs de la jauge et seuils pour changer de couleur
         private Color[] colors;
         private float[] thresholds;
         
@@ -20,12 +24,21 @@ namespace BricksGame
             thresholds = p_thresholds;
         }
 
+
+        
         public override void Update(GameTime gameTime, int value, Vector2 position)
+        {
+            UpdateGaugeAndColor(value, position);
+            base.Update(gameTime );
+        }
+
+        // Update permettant d'update la position, la valeur et de faire varier la couleur selon si la valeur courante est passé sous un seuil ou non
+        private void UpdateGaugeAndColor(int value, Vector2 position)
         {
             Position = position;
             CurrentValue = value;
 
-            for (int i=thresholds.Length; i >= 0; i--)
+            for (int i = thresholds.Length; i >= 0; i--)
             {
                 if (i != thresholds.Length)
                 {
@@ -41,9 +54,6 @@ namespace BricksGame
             }
 
             textColor = barColor;
-
-            base.Update(gameTime );
-
         }
 
 

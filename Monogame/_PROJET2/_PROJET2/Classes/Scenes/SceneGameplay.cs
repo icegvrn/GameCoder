@@ -18,6 +18,7 @@ namespace BricksGame
         { 
         }
 
+        // Chargement du gameManager, chargé de la logique du jeu, et de l'audio.
         public override void Load()
         {
             LoadGameManager();
@@ -25,6 +26,7 @@ namespace BricksGame
             base.Load();
         }
 
+        // Si le jeu est indiqué comme Win, alors on change de scène pour afficher l'écran de victoire. Si le jeu est en pause, on vérifie si le joueur fait l'action de reprendre ou non.
         public override void Update(GameTime gameTime)
         {
             if (!GamePaused)
@@ -48,7 +50,6 @@ namespace BricksGame
         }
         public override void Draw(GameTime gameTime)
         {
-
             gameManager.Draw(mainGame._spriteBatch);
             base.Draw(gameTime);  
             DrawPauseMessage();

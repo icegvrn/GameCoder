@@ -8,8 +8,6 @@ namespace BricksGame
 {
     public class PathsService : IPathsService
     {
-
-
         public string GetImagesRoot()
         {
             return "images/";

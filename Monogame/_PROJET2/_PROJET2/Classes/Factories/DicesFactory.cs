@@ -1,18 +1,14 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BricksGame
 {
+    /// <summary>
+    /// La DicesFactory retourne une liste de d'objet Dice à partir d'une liste de valeurs int.
+    /// </summary>
     public class DicesFactory
     {
         List<Dice> dicesList;
-        List<Bricks> bricksList;
         public List<Dice> Load(List<int> dices, bool rollable)
         {
             Dice c_dice;
@@ -57,20 +53,5 @@ namespace BricksGame
             }
             return dicesList;
         }
-
-        public void AddDiceToGrid(List<Bricks> bricks)
-        {
-            bricksList = bricks;
-            for (int n = 0; n < 6; n++)
-            {
-                for (int i = 0; i < 6; i++)
-                {
-                    dicesList[i + n * 6].Position = new Vector2(bricks[i + n * 6].Position.X + bricks[i + n * 6].BoundingBox.Width / 2, bricks[i + n * 6].Position.Y + bricks[i + n * 6].BoundingBox.Height / 2);
-
-                }
-            }
-        }
-
-
     }
 }

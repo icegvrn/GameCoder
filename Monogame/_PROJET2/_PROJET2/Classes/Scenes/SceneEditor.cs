@@ -14,7 +14,6 @@ namespace BricksGame
     /// </summary>
     public class SceneEditor : Scene
     {
-
         private EditorUI editorUI;
         public Gamesystem.dice currentDice;
 
@@ -36,8 +35,6 @@ namespace BricksGame
         // List contenant temporairement les données générées par l'utilisateur
         private List<int> tempDicesGrid;
 
-   
-    
         public SceneEditor(MainGame p_mainGame) : base(p_mainGame) 
         {
             savedLevelsPath = ServiceLocator.GetService<IPathsService>().GetJSONSavedLevelPath();

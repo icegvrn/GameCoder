@@ -215,9 +215,6 @@ namespace BricksGame
             return previousKeyboardState;
         }
 
-
-
-
         public void InputUpdateBegin()
         {
             currentKeyboardState = Keyboard.GetState();

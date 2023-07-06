@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace BricksGame
 {
+    /// <summary>
+    /// Classe permettant de déterminer une limite de jeu sur la map : utilisé pour les collisions notamment
+    /// </summary>
     public class PlayerArea 
     {
-        public Rectangle area;
-        public int right;
-        public int bottom;
+        public Rectangle Area { get; private set; }
 
         public PlayerArea(int x , int y, int width, int height)
         {
-            area = new Rectangle(x, y, width, height);
-            right = x + width;
-            bottom = y + height;
+            Area = new Rectangle(x, y, width, height);
         }
     }
 }
