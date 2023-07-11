@@ -72,32 +72,29 @@ namespace BricksGame
             {
                 case 1:
                     Power = new DoubleBallsPower();
-                    Power.powerAvailable = true;
-                    player.playerFighter.CreateNewBall();
+                    player.playerFighter.CreateNewBall();       
                     break;
                 case 2:
                     Power = new LinePower();
-                    Power.powerAvailable = true;
                     break;
                 case 3:
                     Power = new KillPower();
-                    Power.powerAvailable = true;
                     break;
                 case 4:
                     Power = new SameTypePower();
-                    Power.powerAvailable = true;
                     break;
                 case 5:
                     Power = new ExplodePower();
-                    Power.powerAvailable = true;
                     break;
                 case 6:
                     Power = new DamagePower();
-                    Power.powerAvailable = true;
                     break;
                 default:
+                    Power = new KillPower();
                     break;
             }
+            magicalDice.ChangeDescription(Power.description);
+            Power.powerAvailable = true;
         }
 
         // Fonction permettant d'activer le pouvoir ; comportement différent si le pouvoir est DoubleBalls car il n'a pas a être réactivé : il trigger directement.

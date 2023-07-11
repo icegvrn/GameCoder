@@ -12,7 +12,7 @@ namespace BricksGame
     {
         private BaseGrid gameGrid;
         private DicesFactory dicesFactory;
-        private MonsterFactory monsterFactory;
+        private MonstersFactory monsterFactory;
         private LevelManager levelManager;
 
         public DicesManager(LevelManager p_levelManager, BaseGrid p_gameGrid)
@@ -55,7 +55,7 @@ namespace BricksGame
 
         private void InitMonsterFactory()
         {
-            monsterFactory = new MonsterFactory();
+            monsterFactory = new MonstersFactory();
         }
 
        // Méthode qui vérifie si tous les dés ont été lancé et s'il y a des monstres : si oui, cela signifie qu'on est dans la phase de début de jeu et on appelle la méthode indiquant que tous les dés ont été lancés.

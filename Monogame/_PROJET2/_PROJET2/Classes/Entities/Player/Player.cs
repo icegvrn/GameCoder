@@ -10,7 +10,7 @@ namespace BricksGame
     {
         // Classes utilisées par le joueur
         private PlayerPowerManager playerPowerManager;
-        private PlayerMouvement playerMouvement;
+        private PlayerMovement playerMovement;
         private PlayerAnimator playerAnimator;
         private PlayerCollisionsManager playerCollisionsManager;
         private PlayerInput playerInput;
@@ -62,7 +62,7 @@ namespace BricksGame
         public void InitComponents()
         {
             playerPowerManager = new PlayerPowerManager(this);
-            playerMouvement = new PlayerMouvement(this);
+            playerMovement = new PlayerMovement(this);
             playerCollisionsManager = new PlayerCollisionsManager(this);
             playerAnimator = new PlayerAnimator(this, 0.15f);
             playerInput = new PlayerInput(this);
@@ -161,14 +161,14 @@ namespace BricksGame
         // Méthode appelée par le playerInput quand il va à gauche
         public void Left()
         {
-            playerMouvement.Move(-1, 0);
+            playerMovement.Move(-1, 0);
             playerAnimator.ChangeDirection(Gamesystem.CharacterDirection.left);
         }
 
         // Méthode appelée par le playerInput quand il va à droite
         public void Right()
         {
-            playerMouvement.Move(1, 0);
+            playerMovement.Move(1, 0);
             playerAnimator.ChangeDirection(Gamesystem.CharacterDirection.right);
         }
 

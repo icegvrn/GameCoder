@@ -10,6 +10,7 @@ namespace BricksGame
         public override bool powerCharged { get; set; }
         public override bool powerAvailable { get; set; }
         public override bool powerUsed { get; set; }
+        public override string description { get; set; }
 
         public bool powerIsOn;
 
@@ -21,6 +22,7 @@ namespace BricksGame
         {
             multiplicator = 10;
             duration = 8;
+            description = "DAMAGE BOOSTER ! (5 sec)";
         }
 
         public void Update(GameTime gameTime)

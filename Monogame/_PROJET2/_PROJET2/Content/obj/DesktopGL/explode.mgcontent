@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/explode.wav</SourceFile>
   <SourceTime>2023-06-04T09:48:28.2478682+02:00</SourceTime>
   <DestFile>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/bin/DesktopGL/explode.xnb</DestFile>
-  <DestTime>2023-07-01T12:20:48.1111003+02:00</DestTime>
+  <DestTime>2023-07-06T17:32:42.4712325+02:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

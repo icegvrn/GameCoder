@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/Sounds/Monsters/die/14.wav</SourceFile>
   <SourceTime>2023-07-01T10:29:13.8804581+02:00</SourceTime>
   <DestFile>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/bin/DesktopGL/Sounds/Monsters/die/14.xnb</DestFile>
-  <DestTime>2023-07-01T12:42:35.9595911+02:00</DestTime>
+  <DestTime>2023-07-06T17:32:46.5724478+02:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

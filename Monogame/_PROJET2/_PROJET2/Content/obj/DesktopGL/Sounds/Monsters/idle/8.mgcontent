@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/Sounds/Monsters/idle/8.wav</SourceFile>
   <SourceTime>2023-07-01T16:18:30.8405753+02:00</SourceTime>
   <DestFile>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/bin/DesktopGL/Sounds/Monsters/idle/8.xnb</DestFile>
-  <DestTime>2023-07-01T16:19:33.052923+02:00</DestTime>
+  <DestTime>2023-07-06T17:33:03.0564665+02:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

@@ -12,8 +12,11 @@ namespace BricksGame
         public override bool powerCharged { get; set; }
         public override bool powerAvailable { get; set; }
         public override bool powerUsed { get; set; }
+
+        public override string description { get; set; }
         public ExplodePower() : base()
         {
+            description = "EXPLODE A 3X3 SQUARE OF MONSTERS !";
         }
 
         public override void Activate()

@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/Sounds/diceHover.wav</SourceFile>
   <SourceTime>2023-07-01T16:33:52.1302522+02:00</SourceTime>
   <DestFile>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/bin/DesktopGL/Sounds/diceHover.xnb</DestFile>
-  <DestTime>2023-07-01T16:36:50.8468666+02:00</DestTime>
+  <DestTime>2023-07-06T17:32:44.992099+02:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

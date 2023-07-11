@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/Sounds/Monsters/hit/10.wav</SourceFile>
   <SourceTime>2023-07-01T14:29:27.7473855+02:00</SourceTime>
   <DestFile>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/bin/DesktopGL/Sounds/Monsters/hit/10.xnb</DestFile>
-  <DestTime>2023-07-01T14:39:02.7317838+02:00</DestTime>
+  <DestTime>2023-07-06T17:32:54.7025602+02:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/Sounds/critical_life.wav</SourceFile>
   <SourceTime>2023-07-01T17:08:31.5589034+02:00</SourceTime>
   <DestFile>C:/Users/Simon/Documents/Cours/GameCoder/Monogame/_PROJET2/_PROJET2/Content/bin/DesktopGL/Sounds/critical_life.xnb</DestFile>
-  <DestTime>2023-07-01T17:08:36.0995933+02:00</DestTime>
+  <DestTime>2023-07-06T17:32:44.7757538+02:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

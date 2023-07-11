@@ -12,8 +12,11 @@ namespace BricksGame
         public override bool powerCharged { get; set; }
         public override bool powerAvailable { get; set; }
         public override bool powerUsed { get; set; }
+
+        public override string description { get; set; }
         public KillPower() : base()
         {
+            description = "MONSTER ASSASSINATION!";
         }
 
         public override void Activate()

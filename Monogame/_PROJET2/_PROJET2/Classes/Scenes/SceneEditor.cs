@@ -24,6 +24,7 @@ namespace BricksGame
 
         // Pour la création des dés sur la grille
         private DicesFactory dicesFactory;
+        private bool isFirstClick;
 
         // Chargement des levels déjà sauvegardés
         private string savedLevelsPath;
@@ -38,6 +39,7 @@ namespace BricksGame
         public SceneEditor(MainGame p_mainGame) : base(p_mainGame) 
         {
             savedLevelsPath = ServiceLocator.GetService<IPathsService>().GetJSONSavedLevelPath();
+            isFirstClick = true;
         }
 
         public override void Load()
@@ -137,24 +139,33 @@ namespace BricksGame
         // Converti la position de la souris en slot de grille et update le dé au clic
         private void GetSlotRectFromMouse()
         {
-            Vector2 mouse = ServiceLocator.GetService<IInputService>().GetMousePosition();
-
-            foreach (Rectangle rectangle in GameGrid.GetSlotsByRectangles())
+            // Evite qu'il crée un dés quand on arrive parce qu'on a cliqué sur le bouton du menu et que down est true
+            if (!isFirstClick)
             {
-                if (rectangle.Contains(mouse.X, mouse.Y) && rectangle.Y <= GameGrid.maxDestination)
-                {
-                    int slotIndex = GameGrid.GetSlotIndexFromPosition(new Vector2(rectangle.X, rectangle.Y));
+                Vector2 mouse = ServiceLocator.GetService<IInputService>().GetMousePosition();
 
-                    if (ServiceLocator.GetService<IInputService>().OnActionDown())
+                foreach (Rectangle rectangle in GameGrid.GetSlotsByRectangles())
+                {
+                    if (rectangle.Contains(mouse.X, mouse.Y) && rectangle.Y <= GameGrid.maxDestination)
                     {
-                        UpdateDiceNumber(slotIndex, currentNb);
-                    }
-                    else if (ServiceLocator.GetService<IInputService>().OnSecondaryActionDown())
-                    {
-                        UpdateDiceNumber(slotIndex, 0);
+                        int slotIndex = GameGrid.GetSlotIndexFromPosition(new Vector2(rectangle.X, rectangle.Y));
+
+                        if (ServiceLocator.GetService<IInputService>().OnActionDown())
+                        {
+                            UpdateDiceNumber(slotIndex, currentNb);
+                        }
+                        else if (ServiceLocator.GetService<IInputService>().OnSecondaryActionDown())
+                        {
+                            UpdateDiceNumber(slotIndex, 0);
+                        }
                     }
                 }
             }
+            else
+            {
+                isFirstClick = false;
+            }
+          
         }
 
         // Met à jour le dés d'une case donnée par numéro d'index slot.

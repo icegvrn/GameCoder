@@ -59,7 +59,7 @@ namespace BricksGame
         // Méthode permettant de mettre des damage au monstre
         public override void Damage(float lifeFactor)
         {
-            ProvisoryLife = Life - lifeFactor;
+            ProvisoryLife = ProvisoryLife - lifeFactor;
         }
 
         // Méthode permettant de tuer le monstre en le mettant à 0 pv.

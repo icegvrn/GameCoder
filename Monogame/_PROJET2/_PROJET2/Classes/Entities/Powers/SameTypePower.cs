@@ -9,8 +9,10 @@ namespace BricksGame
         public override bool powerCharged { get; set; }
         public override bool powerAvailable { get; set; }
         public override bool powerUsed { get; set; }
+        public override string description { get; set; }
         public SameTypePower() : base()
         {
+            description = "DESTROY ALL SAME MONSTERS IN ONCE!";
         }
 
         public override void Activate()
