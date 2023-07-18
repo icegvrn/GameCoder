@@ -2,3 +2,7 @@ _old/
 *.love
 *.zip
 *.psd
+*Library/
+*Temp/
+*.obj
+*.fbx
