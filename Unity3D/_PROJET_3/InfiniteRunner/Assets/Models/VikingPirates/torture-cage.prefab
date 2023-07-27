@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5766720324127050333}
   - component: {fileID: 5774726631510659647}
   - component: {fileID: 5807925333449198129}
+  - component: {fileID: 3490068833871333358}
   m_Layer: 0
   m_Name: torture-cage
   m_TagString: Untagged
@@ -26,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5797375369460367957}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.000045121, y: -10.973, z: 0.000043869}
   m_LocalScale: {x: 14.107186, y: 14.107186, z: 14.107186}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5766720324127050333
 MeshFilter:
@@ -92,8 +93,37 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5797375369460367957}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.9258062, y: 2.6285412, z: 0.9258062}
   m_Center: {x: 0.0000053942204, y: 1.3144585, z: -0.0000053942204}
+--- !u!65 &3490068833871333358
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5797375369460367957}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.92580616, y: 2.628541, z: 0.92580616}
+  m_Center: {x: 0.00000539422, y: 1.3144584, z: -0.00000539422}

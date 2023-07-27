@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Decor
   - Path
+  - Obstacle
   layers:
   - Default
   - TransparentFX

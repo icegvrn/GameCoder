@@ -18,7 +18,6 @@ public class ProceduralManager : MonoBehaviour
         pathGenerator.ProceduralUpdate();
         
     }
-
     private void LateUpdate()
     {
     }
