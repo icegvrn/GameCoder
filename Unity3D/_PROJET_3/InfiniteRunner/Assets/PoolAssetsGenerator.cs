@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+using UnityEngine.UIElements;
+
+public enum ObjectDirection
+{
+    Face,
+    Left,
+    Right
+}
+
 
 public class PoolAssetsGenerator : MonoBehaviour
 {
@@ -9,10 +18,8 @@ public class PoolAssetsGenerator : MonoBehaviour
     [SerializeField] private GameObject[] decorElements;
     [SerializeField] private float decorNbWanted;
     [SerializeField] private GameObject floor;
-    [SerializeField]  private List<GameObject> decorsOnPlay = new List<GameObject>();
-   
-
-  
+    [SerializeField] private List<GameObject> decorsOnPlay = new List<GameObject>();
+    [SerializeField] private ObjectDirection objDirection = new ObjectDirection();
     void Start()
     {
       
@@ -29,7 +36,7 @@ public class PoolAssetsGenerator : MonoBehaviour
 
     void Generate()
     {
-        Vector3 floorHalfSize = floor.GetComponent<Collider>().bounds.extents;
+        Vector3 floorHalfSize = floor.GetComponent<Renderer>().bounds.extents;
 
         while (decorsOnPlay.Count < decorNbWanted)
         {
@@ -39,23 +46,24 @@ public class PoolAssetsGenerator : MonoBehaviour
 
             if (newItem != null)
             {
-                newItem.transform.position = new Vector3(transform.position.x + Random.Range(-floorHalfSize.x, floorHalfSize.x), transform.position.y + 1, transform.position.z + Random.Range(-floorHalfSize.z, floorHalfSize.z));
+                newItem.transform.position = new Vector3(transform.position.x + Random.Range(-floorHalfSize.x, floorHalfSize.x), transform.position.y, transform.position.z + Random.Range(-floorHalfSize.z, floorHalfSize.z));
+
+               ChangeDirection(newItem);
 
                 bool ok = true;
 
-                Bounds newItemBound = newItem.GetComponentInChildren<Renderer>().bounds;
+                Bounds newItemBound = CalculateCombinedBounds(newItem.transform);
 
                 Debug.Log($"{newItem.name} center : {newItemBound.center}");
 
-                foreach (var childWithRenderer in newItem.GetComponentsInChildren<Renderer>())
+                foreach (Renderer childWithRenderer in newItem.GetComponentsInChildren<Renderer>())
                 {
                     newItemBound.Encapsulate(childWithRenderer.bounds);
                 }
 
                 foreach (GameObject item in decorsOnPlay)
                 {
-                    Bounds objBound = item.GetComponentInChildren<Renderer>().bounds; // A mettre dans un dictionnaire
-
+                    Bounds objBound = CalculateCombinedBounds(item.transform); // A mettre dans un dictionnaire
 
                     float distance = Vector3.Distance(newItem.transform.position, item.transform.position);
 
@@ -87,8 +95,8 @@ public class PoolAssetsGenerator : MonoBehaviour
 
     void ClampObject(int index, GameObject obj)
     {
-        Bounds objBound = obj.GetComponent<Collider>().bounds;
-        Bounds floorBound = floor.GetComponent<Collider>().bounds;
+        Bounds objBound = CalculateCombinedBounds(obj.transform);
+        Bounds floorBound = floor.GetComponent<Renderer>().bounds;
 
         if (obj.transform.position.x + objBound.extents.x > floor.transform.position.x + floorBound.extents.x ||
             obj.transform.position.x - objBound.extents.x < floor.transform.position.x - floorBound.extents.x ||
@@ -101,5 +109,44 @@ public class PoolAssetsGenerator : MonoBehaviour
         {
             decorsOnPlay.Add(obj);
         }
+    }
+
+    void ChangeDirection(GameObject newItem)
+    {
+        if (objDirection == ObjectDirection.Right)
+        {
+            newItem.transform.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
+        }
+        else if (objDirection == ObjectDirection.Left)
+        {
+            newItem.transform.rotation = Quaternion.LookRotation(-Vector3.forward, Vector3.up);
+        }
+
+        int RandomiseDirection = Random.Range(0, 6);
+
+        if (RandomiseDirection >= 5)
+        {
+            newItem.transform.rotation = Quaternion.LookRotation(-Vector3.left, Vector3.up);
+        }
+
+    }
+
+    Bounds CalculateCombinedBounds(Transform objTransform)
+    {
+        Renderer[] renderers = objTransform.GetComponentsInChildren<Renderer>();
+
+        if (renderers.Length > 0)
+        {
+            Bounds combinedBounds = renderers[0].bounds;
+
+            for (int i = 1; i < renderers.Length; i++)
+            {
+                combinedBounds.Encapsulate(renderers[i].bounds);
+            }
+
+            return combinedBounds;
+        }
+
+        return new Bounds(objTransform.position, Vector3.zero);
     }
 }

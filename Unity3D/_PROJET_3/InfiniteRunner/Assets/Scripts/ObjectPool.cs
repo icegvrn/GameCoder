@@ -36,7 +36,7 @@ public class ObjectPool : MonoBehaviour
             for (int i = 0; i < poolBatchNumber; i++)
             {
                 GameObject instantiateObj = Instantiate(objectsList[n]);
-                objectsList[n].SetActive(false);
+                instantiateObj.SetActive(false);
                 currentTotalPool++;
                 list.Add(instantiateObj);
             }
@@ -69,7 +69,7 @@ public class ObjectPool : MonoBehaviour
                 for (int i = 0; i < batchSize; i++)
                 {
                     GameObject newObj = Instantiate(objectsList[n]);
-                    objectsList[n].SetActive(false);
+                    newObj.SetActive(false);
                     pool[objectsList[n]].Add(newObj);
                     currentTotalPool++;
 
