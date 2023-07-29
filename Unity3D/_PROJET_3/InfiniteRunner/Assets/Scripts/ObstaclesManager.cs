@@ -3,14 +3,15 @@ using UnityEngine;
 
 public class ObstaclesManager : MonoBehaviour
 {
-    [SerializeField] private List<Obstacle> listObstacles;
-    public List<Obstacle> ListObstacles { get { return listObstacles; } }
-
     private List<GameObject> listTerrains;
     public List<GameObject> ListTerrains { get { return listTerrains; } }
 
     private float totalFrequency;
 
+    [SerializeField] private int minObstaclesPerTerrain;
+    [SerializeField] private int maxObstaclesPerTerrain;
+
+    [SerializeField] private ObjectPool obstaclePool;
 
     void Start()
     {
@@ -24,19 +25,21 @@ public class ObstaclesManager : MonoBehaviour
         
     }
 
-    public void AddSpawnableTerrain(GameObject terrain)
-    {
-        listTerrains.Add(terrain);
-        terrain.GetComponent<ObstacleSpawner>().Spawn(listObstacles[0]);    
-    }
+    //public void AddSpawnableTerrain(GameObject terrain)
+    //{
+    //    listTerrains.Add(terrain);
+    //    Obstacle obstacle = ChooseRandomObstacle();
+    //    Spawn(terrain, obstacle);
+    //}
 
-    public void AddSpawnableTerrain(List<GameObject> terrains)
-    {
-        foreach (GameObject terrain in listTerrains) { 
-            listTerrains.Add(terrain);
-            terrain.GetComponent<ObstacleSpawner>().Spawn(listObstacles[0]);
-        }
-    }
+    //public void AddSpawnableTerrain(List<GameObject> terrains)
+    //{
+    //    foreach (GameObject terrain in listTerrains) { 
+    //        listTerrains.Add(terrain);
+    //        Obstacle obstacle = ChooseRandomObstacle();
+    //        Spawn(terrain, obstacle);
+    //    }
+    //}
 
     public void RemoveSpawnableTerrain(GameObject terrain)
     {
@@ -55,8 +58,13 @@ public class ObstaclesManager : MonoBehaviour
 
     public void SpawnObstacleOnTerrain(GameObject terrain)
     {
-        Obstacle obstacle = ChooseRandomObstacle();
-        terrain.GetComponent<ObstacleSpawner>().Spawn(obstacle);
+        int rand = Random.Range(minObstaclesPerTerrain, maxObstaclesPerTerrain+1);
+        for (int i=0; i<rand; i++) 
+        {
+            Obstacle obstacle = ChooseRandomObstacle();
+            Spawn(terrain, obstacle);
+        }
+
     }
 
    
@@ -64,8 +72,9 @@ public class ObstaclesManager : MonoBehaviour
     {
 
         totalFrequency = 0f;
-        foreach (Obstacle obstacle in listObstacles)
+        foreach (GameObject obj in obstaclePool.ObjectList)
         {
+            Obstacle obstacle = obj.GetComponent<Obstacle>();
             totalFrequency += obstacle.Frequency;
         }
     }
@@ -79,8 +88,9 @@ public class ObstaclesManager : MonoBehaviour
         Obstacle spObstacle = null;
 
         // Parcourir les obstacles et choisir celui dont la probabilité cumulée est supérieure au nombre aléatoire
-        foreach (Obstacle obstacle in listObstacles)
+        foreach (GameObject obj in obstaclePool.ObjectList)
         {
+            Obstacle obstacle = obj.GetComponent<Obstacle>();
             cumulativeFrequency += obstacle.Frequency;
             if (randomValue <= cumulativeFrequency)
             {
@@ -90,6 +100,27 @@ public class ObstaclesManager : MonoBehaviour
         }
 
         return spObstacle;
+    }
+
+    void Spawn(GameObject terrain, Obstacle obstacle)
+    {
+        //Rajouter un script pour éviter les collisions
+
+        foreach (GameObject obj in obstaclePool.ObjectList)
+        {
+            if (obj == obstacle.gameObject)
+            {
+                GameObject spObstacle = obstaclePool.GetPooledObject(obstaclePool.ObjectList.IndexOf(obj));
+                spObstacle.transform.parent = terrain.transform;
+                Vector3 obstaclePosition = new Vector3(0, spObstacle.transform.position.y, 0);
+                float randX = Random.Range(-terrain.GetComponent<Renderer>().bounds.extents.x, terrain.GetComponent<Renderer>().bounds.extents.x);
+                obstaclePosition.x = randX;
+                spObstacle.transform.localPosition = obstaclePosition;
+
+                break;
+            }
+        }
+      
     }
 
 }

@@ -60,8 +60,11 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\ObstacleSpawner.cs" />
     <Compile Include="Assets\PathGenerator.cs" />
+    <Compile Include="Assets\AttachObjectsToEnvironnement.cs" />
+    <Compile Include="Assets\oldPathGenerator.cs" />
     <Compile Include="Assets\Scripts\Obstacle.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\ChestDemo.cs" />
+    <Compile Include="Assets\AttachObstacleToEnvironment.cs" />
     <Compile Include="Assets\Scripts\DecorGenerator.cs" />
     <Compile Include="Assets\CharacterController.cs" />
     <Compile Include="Assets\Scripts\ObjectPool.cs" />

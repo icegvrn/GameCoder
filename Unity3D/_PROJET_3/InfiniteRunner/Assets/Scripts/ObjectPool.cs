@@ -3,25 +3,18 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    public static ObjectPool SharedInstance;
-
-    [SerializeField] private List<GameObject> objectsList = new List<GameObject>();
     public List<GameObject> ObjectList { get { return objectsList; } private set { objectsList = value; } }
-
     [SerializeField] private int poolBatchNumber;
-    [SerializeField] private int batchSize;
     [SerializeField] private int totalMaxPoolNumber;
-  
+    [SerializeField] private List<GameObject> objectsList = new List<GameObject>();
+
+
     public int PoolNumber { get { return poolBatchNumber; } }
-
-    [SerializeField] private Dictionary<GameObject, List<GameObject>> pool;
-    [SerializeField] private int currentTotalPool;
-
-    public bool PoolIsRead = false;
-    void Awake()
-    {
-        SharedInstance = this;
-    }
+    private int batchSize = 2;
+    private Dictionary<GameObject, List<GameObject>> pool;
+    private int currentTotalPool;
+    private bool poolIsReady;
+    public bool PoolIsReady { get { return poolIsReady; } }
 
     public void Start()
     {
@@ -35,7 +28,7 @@ public class ObjectPool : MonoBehaviour
 
             for (int i = 0; i < poolBatchNumber; i++)
             {
-                GameObject instantiateObj = Instantiate(objectsList[n]);
+                GameObject instantiateObj = Instantiate(objectsList[n], transform);
                 instantiateObj.SetActive(false);
                 currentTotalPool++;
                 list.Add(instantiateObj);
@@ -43,7 +36,7 @@ public class ObjectPool : MonoBehaviour
             pool.Add(objectsList[n], list);
         }
 
-        PoolIsRead = true;
+        poolIsReady = true;
     }
 
     public GameObject GetPooledObject(int wantedObject)
@@ -68,7 +61,7 @@ public class ObjectPool : MonoBehaviour
             {
                 for (int i = 0; i < batchSize; i++)
                 {
-                    GameObject newObj = Instantiate(objectsList[n]);
+                    GameObject newObj = Instantiate(objectsList[n], transform);
                     newObj.SetActive(false);
                     pool[objectsList[n]].Add(newObj);
                     currentTotalPool++;
@@ -104,6 +97,14 @@ public class ObjectPool : MonoBehaviour
         {
             Debug.LogError("Invalid pool index.");
         }
+    }
+
+    public void ReleasedPooledObject(GameObject objToRelease)
+    {
+                objToRelease.SetActive(false);
+                objToRelease.transform.position = transform.position;
+                objToRelease.transform.rotation = transform.rotation;
+           
     }
 
 }

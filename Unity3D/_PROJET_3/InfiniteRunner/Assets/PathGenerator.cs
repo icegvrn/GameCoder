@@ -1,54 +1,33 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class PathGenerator : MonoBehaviour
 {
     public Transform player;
-    public GameObject[] prefabPaths;
-    private List<GameObject> prefabOnPlay = new List<GameObject>();
-    public int pathLength = 200;
+    public List<GameObject> prefabOnPlay = new List<GameObject>();
+    public int pathLength = 5;
     public float curveSegmentLength = 30f; // Length of each curved segment
     public float curveStrength = 10f; // Strength of the curve (higher values result in sharper curves)
     public float curveFrequency = 0.1f; // Lower values make curves less frequent
-    public DecorGenerator decor;
 
     [SerializeField] private ObstaclesManager obstaclesManager;
+    [SerializeField] private int pathDespawnDistance;
+    private bool pathGenerated = false;
+    [SerializeField] private ObjectPool pathPool;
 
-    void Start()
-    {
-    
-    }
-
-    public List<Bounds> GetPathBounds()
-    {
-        List<Bounds> boundsList = new List<Bounds>();
-
-        foreach (GameObject prefab  in prefabOnPlay)
-        {
-            BoxCollider boxCollider = prefab.GetComponent<BoxCollider>();
-            boundsList.Add(boxCollider.bounds);
-        }
-        return boundsList;
-    }
 
     void Update()
     {
-    
-    }
-
-    public void ProceduralStart()
-    {
-        for (int i = 0; i < pathLength; i++)
+        if (pathPool.PoolIsReady && !pathGenerated)
         {
-            SpawnPath();
+            for (int i = 0; i < pathLength; i++)
+            {
+                SpawnPath();
+                pathGenerated = true;
+            }
         }
 
-        // Déplacez la génération des objets de décor ici, après que le chemin ait été généré.
-    
-    }
-
-    public void ProceduralUpdate()
-    {
         // Get the position of the player.
         float playerZ = player.position.z;
 
@@ -56,10 +35,9 @@ public class PathGenerator : MonoBehaviour
         for (int i = 0; i < prefabOnPlay.Count; i++)
         {
             GameObject prefab = prefabOnPlay[i];
-            float prefabZ = prefab.transform.position.z;
 
             // Check if the prefab is behind the player (use a buffer of 5 units).
-            if (prefabZ + curveSegmentLength < playerZ)
+            if (prefab.transform.position.z + CalculateCombinedBounds(prefab.transform).extents.z + pathDespawnDistance < playerZ)
             {
                 RepositionPath(prefab);
 
@@ -67,18 +45,14 @@ public class PathGenerator : MonoBehaviour
                 i--;
             }
         }
-        if (!decor.isInit)
-        {
-            decor.Init();
-        }
 
-        decor.ProceduralUpdate();
+
     }
 
     void SpawnPath()
     {
         // Instantiate a new prefab.
-        GameObject newPrefab = Instantiate(prefabPaths[0]);
+        GameObject newPrefab = pathPool.GetPooledObject(0);
 
         // Position the new prefab based on the previous prefab or the player's position if it's the first one.
         if (prefabOnPlay.Count == 0)
@@ -87,57 +61,73 @@ public class PathGenerator : MonoBehaviour
         }
         else
         {
-            // Check if a curve should be added.
-            if (Random.value < curveFrequency)
-            {
-                // Calculate a random angle for the curve.
-                float curveAngle = Random.Range(-curveStrength, curveStrength);
-
-                // Calculate the control points for the Bezier curve.
-                Vector3 lastPosition = prefabOnPlay[prefabOnPlay.Count - 1].transform.position;
-                Vector3 controlPoint1 = lastPosition + Vector3.forward * curveSegmentLength / 2f;
-                Vector3 controlPoint2 = lastPosition + Quaternion.Euler(0f, curveAngle, 0f) * Vector3.forward * curveSegmentLength / 2f;
-
-                // Calculate the end position of the new prefab using the control points.
-                Vector3 endPosition = lastPosition + Quaternion.Euler(0f, curveAngle, 0f) * Vector3.forward * curveSegmentLength;
-
-                // Position the new prefab.
-                newPrefab.transform.position = endPosition;
-
-                // Rotate the new prefab to follow the curve.
-                newPrefab.transform.LookAt(endPosition + (endPosition - lastPosition), Vector3.up);
-            }
-            else
-            {
                 // Position the new prefab straight ahead if no curve is added.
-                newPrefab.transform.position = prefabOnPlay[prefabOnPlay.Count - 1].transform.position + Vector3.forward * curveSegmentLength;
-            }
+                Vector3 newPosition = prefabOnPlay[prefabOnPlay.Count - 1].transform.position;
+                newPosition.z += CalculateCombinedBounds(newPrefab.transform).size.z;
+                newPrefab.transform.position = newPosition;
         }
 
         // Add the new prefab to the list.
         prefabOnPlay.Add(newPrefab);
-        obstaclesManager.SpawnObstacleOnTerrain(newPrefab);
+      
+       // obstaclesManager.SpawnObstacleOnTerrain(newPrefab.transform.GetChild(0).gameObject);
     }
 
     void RepositionPath(GameObject prefab)
     {
         // Move the prefab to the end of the path.
-        prefab.transform.position = prefabOnPlay[prefabOnPlay.Count - 1].transform.position + Vector3.forward * curveSegmentLength;
+        Vector3 newPosition = prefabOnPlay[prefabOnPlay.Count - 1].transform.position;
+        newPosition.z += CalculateCombinedBounds(prefab.transform).size.z;
+        prefab.transform.position = newPosition;
 
-        // Remove the first prefab from the list and reposition it.
+        PoolAssetsGenerator[] generators = prefab.GetComponentsInChildren<PoolAssetsGenerator>();
+       
+
+        if (generators.Length > 0)
+        {
+            foreach (PoolAssetsGenerator generator in generators)
+            {
+                generator.Reset();
+            
+            }
+        }
+
+        ObstacleSpawner[] obstacleGenerators = prefab.GetComponentsInChildren<ObstacleSpawner>();
+
+        if (obstacleGenerators.Length > 0)
+        {
+            foreach (ObstacleSpawner obstacleGenerator in obstacleGenerators)
+            {
+                obstacleGenerator.Reset();
+
+            }
+        }
+
         prefabOnPlay.Remove(prefab);
         prefabOnPlay.Add(prefab);
     }
 
-    public List<Vector3> GetPathPositions()
-    {
-        List<Vector3> pathPositions = new List<Vector3>();
 
-        foreach (GameObject prefab in prefabOnPlay)
+    Bounds CalculateCombinedBounds(Transform objTransform)
+    {
+        Renderer[] renderers = objTransform.GetComponentsInChildren<Renderer>();
+
+        if (renderers.Length > 0)
         {
-            pathPositions.Add(prefab.transform.position);
+            Bounds combinedBounds = renderers[0].bounds;
+
+            for (int i = 1; i < renderers.Length; i++)
+            {
+                if (renderers[i].tag == "Path")
+                {
+                    combinedBounds.Encapsulate(renderers[i].bounds);
+                }
+                
+            }
+
+            return combinedBounds;
         }
 
-        return pathPositions;
+        return new Bounds(objTransform.position, Vector3.zero);
     }
 }

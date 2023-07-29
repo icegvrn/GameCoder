@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public enum ObjectDirection
 {
@@ -15,11 +13,14 @@ public enum ObjectDirection
 public class PoolAssetsGenerator : MonoBehaviour
 {
 
-    [SerializeField] private GameObject[] decorElements;
     [SerializeField] private float decorNbWanted;
     [SerializeField] private GameObject floor;
-    [SerializeField] private List<GameObject> decorsOnPlay = new List<GameObject>();
     [SerializeField] private ObjectDirection objDirection = new ObjectDirection();
+    [SerializeField] private ObjectPool objPool;
+    public ObjectPool ObjectPool { get { return objPool; } set { objPool = value; } }
+            
+    public List<GameObject> decorsOnPlay = new List<GameObject>();
+
     void Start()
     {
       
@@ -28,7 +29,7 @@ public class PoolAssetsGenerator : MonoBehaviour
 
     void Update()
     {
-        if (ObjectPool.SharedInstance.PoolIsRead)
+        if (objPool.PoolIsReady)
         {
             Generate();
         }
@@ -41,8 +42,8 @@ public class PoolAssetsGenerator : MonoBehaviour
         while (decorsOnPlay.Count < decorNbWanted)
         {
            
-            int wantedObjectIndex = Random.Range(0, ObjectPool.SharedInstance.ObjectList.Count);
-            GameObject newItem = ObjectPool.SharedInstance.GetPooledObject(wantedObjectIndex);
+            int wantedObjectIndex = Random.Range(0, objPool.ObjectList.Count);
+            GameObject newItem = objPool.GetPooledObject(wantedObjectIndex);
 
             if (newItem != null)
             {
@@ -54,7 +55,7 @@ public class PoolAssetsGenerator : MonoBehaviour
 
                 Bounds newItemBound = CalculateCombinedBounds(newItem.transform);
 
-                Debug.Log($"{newItem.name} center : {newItemBound.center}");
+                //Debug.Log($"{newItem.name} center : {newItemBound.center}");
 
                 foreach (Renderer childWithRenderer in newItem.GetComponentsInChildren<Renderer>())
                 {
@@ -79,8 +80,8 @@ public class PoolAssetsGenerator : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log($"Destory Item : {newItem.name}");
-                    ObjectPool.SharedInstance.ReleasedPooledObject(wantedObjectIndex, newItem);
+                  //  Debug.Log($"Destory Item : {newItem.name}");
+                    objPool.ReleasedPooledObject(wantedObjectIndex, newItem);
                 }
             }
             else
@@ -103,7 +104,7 @@ public class PoolAssetsGenerator : MonoBehaviour
             obj.transform.position.z + objBound.extents.z > floor.transform.position.z + floorBound.extents.z ||
             obj.transform.position.z - objBound.extents.z < floor.transform.position.z - floorBound.extents.z)
         {
-            ObjectPool.SharedInstance.ReleasedPooledObject(index, obj);
+            objPool.ReleasedPooledObject(index, obj);
         }
         else
         {
@@ -148,5 +149,15 @@ public class PoolAssetsGenerator : MonoBehaviour
         }
 
         return new Bounds(objTransform.position, Vector3.zero);
+    }
+
+    public void Reset()
+    {
+        foreach (GameObject obj in decorsOnPlay)
+        {
+            objPool.ReleasedPooledObject(obj);
+          
+        }
+        decorsOnPlay.Clear();
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProceduralManager : MonoBehaviour
 {
-    public PathGenerator pathGenerator;
+    public oldPathGenerator pathGenerator;
     public DecorGenerator decoratorGenerator;
     // Start is called before the first frame update
     void Start()
