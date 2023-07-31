@@ -12,12 +12,13 @@ public class CharacterController : MonoBehaviour, ICharacter
     [SerializeField]
     private Animator animator;
     public STATE currentState { get; set; }
-    public bool isJumpStarted {get; set; }
+    public bool isJumpStarted { get; set; }
     public bool isCrouched;
+    private bool isCollide;
     private float initialVerticalPosition;
 
-// Start is called before the first frame update
-void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         isJumpStarted = false;
         initialVerticalPosition = transform.position.y;
@@ -28,51 +29,49 @@ void Start()
     // Update is called once per frame
     void Update()
     {
-        float theSpeed = speed*Time.deltaTime;
+        float theSpeed = speed * Time.deltaTime;
         Vector3 movement = transform.position;
         movement.z += runningSpeed * Time.deltaTime;
-        
 
         if (Input.GetKey(KeyCode.Z))
         {
-           
-           if (!isJumpStarted)
-            {   currentState = STATE.JUMP;
+            if (!isJumpStarted)
+            {
+                currentState = STATE.JUMP;
                 isJumpStarted = true;
                 runningSpeed = initialRunningSpeed / 2;
                 GetComponent<Rigidbody>().AddForce(transform.up * 25, ForceMode.Impulse);
             }
         }
+        else if (Input.GetKey(KeyCode.Q))
+        {
+            movement.x -= theSpeed;
+            currentState = STATE.LEFT;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            movement.x += theSpeed;
+            currentState = STATE.RIGHT;
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            currentState = STATE.CROUCH;
+            GetComponent<CapsuleCollider>().enabled = false;
+            runningSpeed = initialRunningSpeed / 4;
+            isCrouched = true;
+        }
+
         else
         {
-            if (isJumpStarted && transform.localPosition.y > 6.5f) { GetComponent<Rigidbody>().AddForce(transform.up * -5, ForceMode.Impulse); } 
+            if (isJumpStarted && transform.localPosition.y > 6.5f) { GetComponent<Rigidbody>().AddForce(transform.up * -5, ForceMode.Impulse); }
 
-            else if (isJumpStarted && transform.localPosition.y < 0.5f ) { Debug.Log("JE STOPE LE JUMP"); isJumpStarted = false; runningSpeed = initialRunningSpeed; }
+            else if (isJumpStarted && transform.localPosition.y < 0.5f) { Debug.Log("JE STOPE LE JUMP"); isJumpStarted = false; runningSpeed = initialRunningSpeed; }
+           
             else if (isJumpStarted)
             {
                 runningSpeed = initialRunningSpeed / 2;
             }
 
-            if (Input.GetKey(KeyCode.Q))
-            {
-                movement.x -= theSpeed;
-                currentState = STATE.LEFT;
-            }
-
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                movement.x += theSpeed;
-                currentState = STATE.RIGHT;
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                currentState = STATE.CROUCH;
-                GetComponent<CapsuleCollider>().enabled = false;
-                runningSpeed = initialRunningSpeed/4;
-                isCrouched = true;
-            }
             else
             {
                 if (isCrouched)
@@ -82,16 +81,25 @@ void Start()
                     runningSpeed = initialRunningSpeed;
                     isCrouched = false;
                 }
- 
+               
             }
 
         }
-       
+
         transform.position = movement;
 
-    UpdateAnimator();
+        UpdateAnimator();
     }
+    
+    void FixedUpdate()
+    {
+ if (!isJumpStarted && !isCrouched && !isCollide)
+        {
+            currentState = STATE.RUN;
+            runningSpeed = initialRunningSpeed;
+        }
 
+    }
     void UpdateAnimator()
     {
         animator.SetBool(STATE.IDLE.ToString(), currentState == STATE.IDLE);
@@ -106,8 +114,10 @@ void Start()
 
     private void OnCollisionEnter(Collision collision)
     {
+       
         if (collision.gameObject.tag == "Obstacle")
-        {
+        {  
+            isCollide = true;
             runningSpeed = 0;
             currentState = STATE.IDLE;
         }
@@ -124,7 +134,6 @@ void Start()
 
     private void OnCollisionExit(Collision collision)
     {
-        runningSpeed = initialRunningSpeed;
-        currentState = STATE.RUN;
+        isCollide = false;
     }
 }

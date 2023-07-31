@@ -15,6 +15,8 @@ public class ObstacleSpawner : MonoBehaviour
 
     [SerializeField] private List<GameObject> obstacleInPlay;
 
+    [SerializeField] private List<GameObject> obstacleSlots;
+
     private bool obstaclesGenerated = false;
 
     void Start()
@@ -39,13 +41,11 @@ public class ObstacleSpawner : MonoBehaviour
 
     public void SpawnObstacleOnTerrain()
     {
-        int rand = Random.Range(minObstaclesPerTerrain, maxObstaclesPerTerrain+1);
-        for (int i=0; i<rand; i++) 
+       foreach (GameObject gameObject in obstacleSlots)
         {
             Obstacle obstacle = ChooseRandomObstacle();
-            Spawn(obstacle);
+            Spawn(obstacle, gameObject);
         }
-
     }
 
    
@@ -105,7 +105,20 @@ public class ObstacleSpawner : MonoBehaviour
         }
     }
 
-        public void Reset()
+    void Spawn(Obstacle obstacle, GameObject gameObject)
+    {
+        //Rajouter un script pour éviter les collisions
+
+                GameObject spObstacle = obstaclePool.GetPooledObject(obstaclePool.ObjectList.IndexOf(obstacle.gameObject));
+                spObstacle.transform.parent = gameObject.transform;
+                spObstacle.transform.localPosition = Vector3.zero;     
+                obstacleInPlay.Add(spObstacle);
+           
+            
+  
+    }
+
+    public void Reset()
     {
         foreach (GameObject obj in obstacleInPlay)
         {

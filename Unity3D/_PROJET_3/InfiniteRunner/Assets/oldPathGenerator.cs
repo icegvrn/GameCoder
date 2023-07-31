@@ -12,7 +12,7 @@ public class oldPathGenerator : MonoBehaviour
     public float curveFrequency = 0.1f; // Lower values make curves less frequent
     public DecorGenerator decor;
 
-    [SerializeField] private ObstaclesManager obstaclesManager;
+
 
     void Start()
     {
@@ -116,7 +116,7 @@ public class oldPathGenerator : MonoBehaviour
 
         // Add the new prefab to the list.
         prefabOnPlay.Add(newPrefab);
-        obstaclesManager.SpawnObstacleOnTerrain(newPrefab);
+      
     }
 
     void RepositionPath(GameObject prefab)
