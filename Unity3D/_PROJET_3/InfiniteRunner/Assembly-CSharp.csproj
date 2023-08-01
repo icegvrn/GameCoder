@@ -60,25 +60,28 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\ObstacleSpawner.cs" />
     <Compile Include="Assets\PathGenerator.cs" />
+    <Compile Include="Assets\ObstacleAnimationManager.cs" />
     <Compile Include="Assets\AttachObjectsToEnvironnement.cs" />
     <Compile Include="Assets\oldPathGenerator.cs" />
     <Compile Include="Assets\Scripts\Obstacle.cs" />
+    <Compile Include="Assets\ObstacleCollectableManager.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\ChestDemo.cs" />
     <Compile Include="Assets\PointCollector.cs" />
     <Compile Include="Assets\AttachObstacleToEnvironment.cs" />
     <Compile Include="Assets\Scripts\DecorGenerator.cs" />
     <Compile Include="Assets\CharacterController.cs" />
     <Compile Include="Assets\Scripts\ObjectPool.cs" />
+    <Compile Include="Assets\Scripts\CollectablesContainer.cs" />
     <Compile Include="Assets\ProceduralManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICharacter.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\MaterialMover.cs" />
+    <Compile Include="Assets\Scripts\Collectable.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\WheelController.cs" />
     <Compile Include="Assets\AurynSky\Gems Ultimate Pack\Scripts\AnimationScript.cs" />
     <Compile Include="Assets\PoolAssetsGenerator.cs" />
     <Compile Include="Assets\Prefabs\RaycastAlignerNoOverlap.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\Rotator.cs" />
     <Compile Include="Assets\AssetsGenerator.cs" />
-    <Compile Include="Assets\Collectable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

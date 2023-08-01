@@ -18,7 +18,8 @@ public class Collectable : MonoBehaviour
 
    void OnTriggerEnter(Collider other)
     {
-    this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
+
         if (other.gameObject.TryGetComponent(out PointCollector pCollector))
         {
             pCollector.AddPoints(pointsValue);

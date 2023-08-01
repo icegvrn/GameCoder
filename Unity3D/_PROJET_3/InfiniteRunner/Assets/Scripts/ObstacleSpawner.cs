@@ -120,6 +120,44 @@ public class ObstacleSpawner : MonoBehaviour
 
     public void Reset()
     {
+        foreach (GameObject obstacleSlot in obstacleSlots)
+        {
+            ResetCollectables(obstacleSlot);
+            ResetAnimation(obstacleSlot);
+        }
+        ResetObstacle();
+
+        
+    }
+
+    void ResetCollectables(GameObject obstacleSlot)
+    {
+
+        ObstacleCollectableManager[] collectablesManagers = obstacleSlot.GetComponentsInChildren<ObstacleCollectableManager>();
+
+        foreach (ObstacleCollectableManager collectablesManager in collectablesManagers)
+
+        {
+            collectablesManager.Reset();
+
+        }
+    }
+
+    void ResetAnimation(GameObject obstacleSlot)
+    {
+            ObstacleAnimationManager[] animationsManagers = obstacleSlot.GetComponentsInChildren<ObstacleAnimationManager>();
+
+            foreach (ObstacleAnimationManager animationsManager in animationsManagers)
+
+            {
+            animationsManager.Reset();
+
+            }
+
+    }
+
+    void ResetObstacle()
+    {
         foreach (GameObject obj in obstacleInPlay)
         {
             obstaclePool.ReleasedPooledObject(obj);
@@ -127,7 +165,7 @@ public class ObstacleSpawner : MonoBehaviour
         }
 
         obstacleInPlay.Clear();
-      obstaclesGenerated = false;
+        obstaclesGenerated = false;
     }
 
 }

@@ -57,7 +57,7 @@ public class PathGenerator : MonoBehaviour
         // Position the new prefab based on the previous prefab or the player's position if it's the first one.
         if (prefabOnPlay.Count == 0)
         {
-            newPrefab.transform.position = player.position;
+            newPrefab.transform.position = new Vector3(0, 0, player.position.z);
         }
         else
         {
@@ -100,9 +100,9 @@ public class PathGenerator : MonoBehaviour
             {
                 obstacleGenerator.Reset();
 
+              
             }
         }
-
         prefabOnPlay.Remove(prefab);
         prefabOnPlay.Add(prefab);
     }
