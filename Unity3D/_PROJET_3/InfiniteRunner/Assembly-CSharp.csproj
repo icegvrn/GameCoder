@@ -58,6 +58,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.5f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ConnectUser.cs" />
     <Compile Include="Assets\Scripts\ObstacleSpawner.cs" />
     <Compile Include="Assets\PathGenerator.cs" />
     <Compile Include="Assets\ObstacleAnimationManager.cs" />
@@ -65,8 +66,11 @@
     <Compile Include="Assets\oldPathGenerator.cs" />
     <Compile Include="Assets\Scripts\Obstacle.cs" />
     <Compile Include="Assets\ObstacleCollectableManager.cs" />
+    <Compile Include="Assets\SQLite.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\ChestDemo.cs" />
     <Compile Include="Assets\PointCollector.cs" />
+    <Compile Include="Assets\DBConnexionTest.cs" />
+    <Compile Include="Assets\PasswordEncrypter.cs" />
     <Compile Include="Assets\AttachObstacleToEnvironment.cs" />
     <Compile Include="Assets\Scripts\DecorGenerator.cs" />
     <Compile Include="Assets\CharacterController.cs" />
@@ -74,6 +78,7 @@
     <Compile Include="Assets\Scripts\CollectablesContainer.cs" />
     <Compile Include="Assets\ProceduralManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICharacter.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IPasswordSecurity.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\MaterialMover.cs" />
     <Compile Include="Assets\Scripts\Collectable.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\WheelController.cs" />
@@ -81,12 +86,14 @@
     <Compile Include="Assets\PoolAssetsGenerator.cs" />
     <Compile Include="Assets\Prefabs\RaycastAlignerNoOverlap.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\Rotator.cs" />
+    <Compile Include="Assets\RegisterUser.cs" />
     <Compile Include="Assets\AssetsGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\sqlite3.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\AurynSky\Gems Ultimate Pack\READ ME.txt" />
