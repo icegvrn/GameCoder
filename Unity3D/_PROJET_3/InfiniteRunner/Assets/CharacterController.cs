@@ -1,105 +1,111 @@
 using UnityEngine;
-using UnityEngine.Playables;
+using UnityEngine.AI;
 using static ICharacter;
 
 public class CharacterController : MonoBehaviour, ICharacter
 {
-    [SerializeField]
-    private float speed = 10f;
-    [SerializeField]
-    private float runningSpeed = 10f;
+    [SerializeField] private float speed = 10f;
+    [SerializeField] private float runningSpeed = 10f;
     private float initialRunningSpeed = 10f;
-    [SerializeField]
-    private Animator animator;
+    [SerializeField] private Animator animator;
     public STATE currentState { get; set; }
     public bool isJumpStarted { get; set; }
     public bool isCrouched;
     private bool isCollide;
     private float initialVerticalPosition;
+    public Transform cameraTransform; // Référence à la caméra
+
+    private NavMeshAgent navMeshAgent; // Référence au NavMeshAgent
+    private bool isBlocked = false; // Pour gérer le blocage
 
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
         isJumpStarted = false;
         initialVerticalPosition = transform.position.y;
         initialRunningSpeed = runningSpeed;
-        currentState = STATE.RUN;
+        currentState = STATE.IDLE;
+
+        // Récupérer le NavMeshAgent
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.speed = speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float theSpeed = speed * Time.deltaTime;
-        Vector3 movement = transform.position;
-        movement.z += runningSpeed * Time.deltaTime;
-
-        if (Input.GetKey(KeyCode.Z))
-        {
-            if (!isJumpStarted)
-            {
-                currentState = STATE.JUMP;
-                isJumpStarted = true;
-                runningSpeed = initialRunningSpeed / 2;
-                GetComponent<Rigidbody>().AddForce(transform.up * 25, ForceMode.Impulse);
-            }
-        }
-        else if (Input.GetKey(KeyCode.Q))
-        {
-            movement.x -= theSpeed;
-            currentState = STATE.LEFT;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            movement.x += theSpeed;
-            currentState = STATE.RIGHT;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            currentState = STATE.CROUCH;
-            GetComponent<CapsuleCollider>().enabled = false;
-            runningSpeed = initialRunningSpeed / 4;
-            isCrouched = true;
-        }
-
-        else
-        {
-            if (isJumpStarted && transform.localPosition.y > 6.5f) { GetComponent<Rigidbody>().AddForce(transform.up * -5, ForceMode.Impulse); }
-
-            else if (isJumpStarted && transform.localPosition.y < 0.5f) { Debug.Log("JE STOPE LE JUMP"); isJumpStarted = false; runningSpeed = initialRunningSpeed; }
-           
-            else if (isJumpStarted)
-            {
-                runningSpeed = initialRunningSpeed / 2;
-            }
-
-            else
-            {
-                if (isCrouched)
-                {
-                    GetComponent<CapsuleCollider>().enabled = true;
-                    currentState = STATE.RUN;
-                    runningSpeed = initialRunningSpeed;
-                    isCrouched = false;
-                }
-               
-            }
-
-        }
-
-        transform.position = movement;
+        HandleInput();
 
         UpdateAnimator();
     }
-    
-    void FixedUpdate()
+
+    private void HandleInput()
     {
- if (!isJumpStarted && !isCrouched && !isCollide)
+        float theSpeed = speed * Time.deltaTime;
+        Vector3 movement = transform.position;
+
+        if (cameraTransform != null)
         {
-            currentState = STATE.RUN;
-            runningSpeed = initialRunningSpeed;
+            // Obtenir la rotation de la souris et l'appliquer au personnage
+            float mouseX = Input.GetAxis("Mouse X");
+            transform.Rotate(Vector3.up * mouseX);
         }
 
+        // Contrôler le déplacement au clavier
+        if (!isBlocked)
+        {
+            Vector3 moveDirection = Vector3.zero;
+
+            if (Input.GetKey(KeyCode.Z))
+            {
+                moveDirection += transform.forward;
+                currentState = STATE.RUN;
+            }
+            else if (Input.GetKeyUp(KeyCode.Z))
+            {
+                currentState = STATE.IDLE;
+            }
+            if (Input.GetKey(KeyCode.Q))
+            {
+                moveDirection -= transform.right;
+                currentState = STATE.LEFT;
+            }
+            else if (Input.GetKeyUp(KeyCode.Q))
+            {
+                currentState = STATE.IDLE;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveDirection += transform.right;
+                currentState = STATE.RIGHT;
+            }
+            else if (Input.GetKeyUp(KeyCode.D))
+            {
+                currentState = STATE.IDLE;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                moveDirection -= transform.forward;
+                currentState = STATE.RUN;
+            }
+            else if (Input.GetKeyUp(KeyCode.S))
+            {
+                currentState = STATE.IDLE;
+            }
+
+            movement += moveDirection.normalized * theSpeed;
+        }
+
+        // Vérifier les limites du navmesh
+        if (NavMesh.SamplePosition(movement, out NavMeshHit hit, 0.1f, NavMesh.AllAreas))
+        {
+            movement = hit.position;
+        }
+
+        transform.position = movement;
     }
+
     void UpdateAnimator()
     {
         animator.SetBool(STATE.IDLE.ToString(), currentState == STATE.IDLE);
@@ -114,9 +120,8 @@ public class CharacterController : MonoBehaviour, ICharacter
 
     private void OnCollisionEnter(Collision collision)
     {
-       
         if (collision.gameObject.tag == "Obstacle")
-        {  
+        {
             isCollide = true;
             runningSpeed = 0;
             currentState = STATE.IDLE;

@@ -53,7 +53,7 @@ public class ObstacleAnimationManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out CharacterController controller))
+        if (other.gameObject.TryGetComponent(out CharacterAutoRunner controller))
         {
             EnableAnimation();
         }

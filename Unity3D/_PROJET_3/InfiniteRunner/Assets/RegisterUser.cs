@@ -64,8 +64,8 @@ public class RegisterUser : MonoBehaviour
 
     bool CheckIfPlayerExist(SQLiteConnection db, string p_user)
     {
-        List<DBPlayer> obj = db.Query<DBPlayer>("SELECT * FROM Player");
-        foreach (DBPlayer item in obj)
+        List<DBUsers> obj = db.Query<DBUsers>("SELECT * FROM Users");
+        foreach (DBUsers item in obj)
         {
          if (p_user.Equals(item.Username))
             {
@@ -90,7 +90,7 @@ public class RegisterUser : MonoBehaviour
 
     void RegisterNewPlayer(SQLiteConnection db, string username, string password, string salt)
     {
-        DBPlayer newPlayer = new DBPlayer
+        DBUsers newPlayer = new DBUsers
         {
             Username = username,
             Password = password,

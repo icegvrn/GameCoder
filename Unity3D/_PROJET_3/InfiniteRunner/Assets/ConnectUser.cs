@@ -1,10 +1,12 @@
 using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PasswordEncrypter))]
 public class ConnectUser : MonoBehaviour
@@ -13,23 +15,21 @@ public class ConnectUser : MonoBehaviour
     [SerializeField] TMP_InputField passwordInput;
     [SerializeField] TextMeshProUGUI errorUnknownIdentifiant;
     [SerializeField] TextMeshProUGUI validationConnection;
+    [SerializeField] int SceneToLoadOnConnect;
 
     private PasswordEncrypter passwordEncrypter;
-
+    private SQLiteConnection db;
     // Start is called before the first frame update
     void Start()
     {
-        passwordEncrypter = GetComponent<PasswordEncrypter>();
+        passwordEncrypter = GetComponent<PasswordEncrypter>(); 
         ResetMessages();
     }
 
     public void TryToConnectUser()
     {
-
+        db = ServiceLocator.Instance.GetService<SessionManager>().DB;
         ResetMessages();
-
-        string dataPath = Application.streamingAssetsPath + "/Database";
-        SQLiteConnection db = new SQLiteConnection(dataPath + "/database.db");
 
         if (CheckUsernameFormat(usernameInput.text))
         {
@@ -39,6 +39,10 @@ public class ConnectUser : MonoBehaviour
                 if (!TryConnectUser(db, usernameInput.text, passwordInput.text))
                 {
                     errorUnknownIdentifiant.gameObject.SetActive(true);
+                }
+                else
+                {
+                    SceneManager.LoadScene(SceneToLoadOnConnect);
                 }
 
             }
@@ -58,8 +62,8 @@ public class ConnectUser : MonoBehaviour
 
     bool CheckIfPlayerExist(SQLiteConnection db, string p_user)
     {
-        List<DBPlayer> obj = db.Query<DBPlayer>("SELECT * FROM Player");
-        foreach (DBPlayer item in obj)
+        List<DBUsers> obj = db.Query<DBUsers>("SELECT * FROM Users");
+        foreach (DBUsers item in obj)
         {
             if (p_user.Trim().Equals(item.Username))
             {
@@ -86,9 +90,9 @@ public class ConnectUser : MonoBehaviour
 
     string GetUserSalt(SQLiteConnection db, string p_username)
     {
-        List<DBPlayer> obj = db.Query<DBPlayer>("SELECT salt FROM Player WHERE username == ?", p_username);
+        List<DBUsers> obj = db.Query<DBUsers>("SELECT salt FROM Users WHERE username == ?", p_username);
       
-        foreach (DBPlayer item in obj)
+        foreach (DBUsers item in obj)
         {
             return item.Salt;
         }
@@ -104,7 +108,9 @@ public class ConnectUser : MonoBehaviour
         if (CheckPasswordMatch(db, username, Hpassword))
         {
             validationConnection.gameObject.SetActive(true);
+            ServiceLocator.Instance.GetService<SessionManager>().NewSession(db,username);
             Debug.Log("VOUS ETES CONNECTE EN TANT QUE " + username + " !");
+           ServiceLocator.Instance.GetService<SessionManager>().GetUserSessionData(db, ServiceLocator.Instance.GetService<SessionManager>().Token);
             return true;
         }
         return false;
@@ -112,8 +118,8 @@ public class ConnectUser : MonoBehaviour
 
     bool CheckPasswordMatch(SQLiteConnection db, string p_username, string password)
     {
-        List<DBPlayer> obj = db.Query<DBPlayer>("SELECT password FROM Player WHERE username == ?", p_username);
-        foreach (DBPlayer item in obj)
+        List<DBUsers> obj = db.Query<DBUsers>("SELECT password FROM Users WHERE username == ?", p_username);
+        foreach (DBUsers item in obj)
         {
             if (item.Password == password)
             {
@@ -122,4 +128,7 @@ public class ConnectUser : MonoBehaviour
         }
         return false;
     }
+
+  
+
 }

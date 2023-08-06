@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEditorInternal.Profiling.Memory.Experimental;
+using UnityEngine.SceneManagement;
 
 public class PathGenerator : MonoBehaviour
 {
@@ -16,7 +17,10 @@ public class PathGenerator : MonoBehaviour
     private bool pathGenerated = false;
     [SerializeField] private ObjectPool pathPool;
 
-
+    private void Start()
+    {
+     
+    }
     void Update()
     {
         if (pathPool.PoolIsReady && !pathGenerated)
@@ -130,4 +134,5 @@ public class PathGenerator : MonoBehaviour
 
         return new Bounds(objTransform.position, Vector3.zero);
     }
+
 }
