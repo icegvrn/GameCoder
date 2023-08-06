@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Obstacle.cs" />
     <Compile Include="Assets\ObstacleCollectableManager.cs" />
     <Compile Include="Assets\SQLite.cs" />
+    <Compile Include="Assets\FragmentsConsultationSpot.cs" />
     <Compile Include="Assets\Scripts\DBUserData.cs" />
     <Compile Include="Assets\PortalBehavior.cs" />
     <Compile Include="Assets\Scripts\DBUsers.cs" />
