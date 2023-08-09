@@ -108,7 +108,7 @@ public class ConnectUser : MonoBehaviour
         if (CheckPasswordMatch(db, username, Hpassword))
         {
             validationConnection.gameObject.SetActive(true);
-            ServiceLocator.Instance.GetService<SessionManager>().NewSession(db,username);
+            ServiceLocator.Instance.GetService<SessionManager>().NewSession(db,username, GetUserIdByName(db, username));
             Debug.Log("VOUS ETES CONNECTE EN TANT QUE " + username + " !");
            ServiceLocator.Instance.GetService<SessionManager>().GetUserSessionData(db, ServiceLocator.Instance.GetService<SessionManager>().Token);
             return true;
@@ -127,6 +127,13 @@ public class ConnectUser : MonoBehaviour
             }
         }
         return false;
+    }
+
+    int GetUserIdByName(SQLiteConnection db, string p_username)
+    {
+        List<DBUsers> obj = db.Query<DBUsers>("SELECT id FROM users WHERE username == ?", p_username);
+        return obj[0].Id;
+
     }
 
   

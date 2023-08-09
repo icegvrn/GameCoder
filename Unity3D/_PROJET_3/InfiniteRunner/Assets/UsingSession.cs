@@ -56,6 +56,7 @@ public class UsingSession : MonoBehaviour
     void EnableError()
     {
         DisableScene();
+        Cursor.visible = true;
         errorConnection.SetActive(true);
         Debug.LogError("Impossible d'accéder aux données joueur. Veuillez vous rediriger vers l'écran d'accueil.");
     }

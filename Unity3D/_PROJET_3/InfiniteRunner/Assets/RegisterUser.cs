@@ -90,14 +90,7 @@ public class RegisterUser : MonoBehaviour
 
     void RegisterNewPlayer(SQLiteConnection db, string username, string password, string salt)
     {
-        DBUsers newPlayer = new DBUsers
-        {
-            Username = username,
-            Password = password,
-            Salt = salt
-        };
-
-        db.Insert(newPlayer);
+        db.Query<DBUsers>("INSERT INTO users(username, password, salt) VALUES(?, ?, ?)", username, password, salt);
         validationRegister.gameObject.SetActive(true);
     }
 

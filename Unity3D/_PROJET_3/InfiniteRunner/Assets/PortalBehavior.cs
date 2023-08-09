@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent (typeof (PortalDBContainer))]
+[RequireComponent(typeof (BestTimeFromDB))]
 public class PortalBehavior : MonoBehaviour
 {
     [SerializeField] private bool isAvailableForPlayer;
-    public bool IsAvailableForPlayer { get { return isAvailableForPlayer; } set { isAvailableForPlayer = true; } }
+    public bool IsAvailableForPlayer { get { return isAvailableForPlayer; } set { isAvailableForPlayer = value; } }
+   
+ 
 
     [SerializeField] private Material unavailableMat;
     [SerializeField] private Material availableMat;
@@ -16,22 +20,23 @@ public class PortalBehavior : MonoBehaviour
     [SerializeField] private Material availablePortalMat;
     // Start is called before the first frame update
 
-    void Start()
+   
+    
+    public void Init()
     {
+        DisablePortal();
+
         if (isAvailableForPlayer)
         {
             EnablePortal();
         }
-        else
-        {
-            DisablePortal();
-        }
-    }
+    
+}
 
     void EnablePortal()
     {
+   
         portalElement.GetComponent<Renderer>().material = availablePortalMat;
-
         if (portalElement.TryGetComponent(out Teleporter teleporter))
         {
             teleporter.IsEnable = true;
@@ -49,6 +54,9 @@ public class PortalBehavior : MonoBehaviour
                 renderer.material = availableMat;
             }
         }
+
+        GetComponent<PortalDBContainer>().SpawnBestTimePanel();
+
     }
 
     void DisablePortal()

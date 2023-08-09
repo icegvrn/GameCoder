@@ -11,6 +11,10 @@ public class SessionManager : MonoBehaviour
 
     private string currentUser;
     public string CurrentUser { get { return currentUser; } set { currentUser = value; } }
+
+    private int currentUserId;
+    public int CurrentUserId { get { return currentUserId; } set { currentUserId = value; } }
+
     private string token;
     public string Token { get { return token; }  set { token = value; } }
     private SQLiteConnection db;
@@ -55,16 +59,18 @@ public class SessionManager : MonoBehaviour
         Debug.Log("==SESSION MANAGER : Nettoyage session ==");
         DeletePreviousSessions();
         currentUser = null;
+        currentUserId = 0;
         token = null;
       
     }
 
-    public void NewSession(SQLiteConnection db, string username)
+    public void NewSession(SQLiteConnection db, string username, int id)
     {
         DeletePreviousSessions(db, username);
         string token = GenerateAuthToken();
         InsertToken(db, username, token, (int)DateTimeOffset.UtcNow.AddHours(2).ToUnixTimeSeconds());
         CurrentUser = username;
+        CurrentUserId = id;
         Token = token;
     }
 
@@ -136,11 +142,6 @@ public class SessionManager : MonoBehaviour
 
         if (userData.Count > 0)
         {
-            Debug.Log("Données de l'utilisateur associées à la session valide :");
-            Debug.Log("Username: " + userData[0].Username);
-            Debug.Log("Salt: " + userData[0].Salt);
-            Debug.Log("Token: " + userData[0].Token);
-
             return userData[0];
         }
 
@@ -159,11 +160,6 @@ public class SessionManager : MonoBehaviour
 
         if (userData.Count > 0)
         {
-            Debug.Log("Données de l'utilisateur associées à la session valide :");
-            Debug.Log("Username: " + userData[0].Username);
-            Debug.Log("Salt: " + userData[0].Salt);
-            Debug.Log("Token: " + userData[0].Token);
-
             return userData[0];
         }
 

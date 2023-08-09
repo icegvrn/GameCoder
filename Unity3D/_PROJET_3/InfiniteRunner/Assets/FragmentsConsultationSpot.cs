@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,9 +9,11 @@ public class FragmentsConsultationSpot : MonoBehaviour
  
     bool isTrigger;
     bool isConsultationOpen;
+    private int currentPanelIndex;
     [SerializeField] GameObject Gemme;
     [SerializeField] GameObject instructionsPanel;
     [SerializeField] GameObject consultationPanel;
+
     
     void Start()
     {
@@ -41,6 +44,14 @@ public class FragmentsConsultationSpot : MonoBehaviour
             if ((isTrigger && isConsultationOpen))
             {
                 NextPage();
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            if ((isTrigger && isConsultationOpen))
+            {
+                Reset();
             }
         }
 
@@ -86,10 +97,33 @@ public class FragmentsConsultationSpot : MonoBehaviour
     void NextPage()
     {
         Debug.Log("PAGE SUIVANTE");
+
+        if (currentPanelIndex < consultationPanel.GetComponent<FragmentsDBContainer>().Fragments.Count-1)
+        {
+            consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(false);
+            currentPanelIndex++;
+            consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(true);
+        }
+
+        else
+        {   consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(false);
+            consultationPanel.GetComponent<FragmentsDBContainer>().GetAllUsersRandomFragments();
+            consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[0].gameObject.SetActive(false);
+            currentPanelIndex++;
+            consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(true);
+        }
+
+
     }
 
     void PreviousPage()
     {
         Debug.Log("PAGE PRECEDENTE");
+        if (currentPanelIndex > 0)
+        {
+            consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(false);
+            currentPanelIndex--;
+            consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(true);
+        }
     }
 }
