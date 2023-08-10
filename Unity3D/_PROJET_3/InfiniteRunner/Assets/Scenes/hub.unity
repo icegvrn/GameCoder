@@ -3000,6 +3000,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4986841478581780817, guid: 180e89f918ec9794e8504a7e41413c9d, type: 3}
+      propertyPath: time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986841478581780817, guid: 180e89f918ec9794e8504a7e41413c9d, type: 3}
+      propertyPath: Randomize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986841478581780817, guid: 180e89f918ec9794e8504a7e41413c9d, type: 3}
+      propertyPath: ShowAllUsersFragments
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5849571046069288731, guid: 180e89f918ec9794e8504a7e41413c9d, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3844,8 +3856,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7291126290468981343, guid: 4b923ada720c46c4db1f1ae10b694973, type: 3}
+      propertyPath: time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291126290468981343, guid: 4b923ada720c46c4db1f1ae10b694973, type: 3}
+      propertyPath: Randomize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291126290468981343, guid: 4b923ada720c46c4db1f1ae10b694973, type: 3}
+      propertyPath: ShowAllUsersFragments
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6369806177138092858, guid: 4b923ada720c46c4db1f1ae10b694973, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b923ada720c46c4db1f1ae10b694973, type: 3}
@@ -7694,6 +7719,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4986841478581780817, guid: 180e89f918ec9794e8504a7e41413c9d, type: 3}
+      propertyPath: time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986841478581780817, guid: 180e89f918ec9794e8504a7e41413c9d, type: 3}
+      propertyPath: Randomize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986841478581780817, guid: 180e89f918ec9794e8504a7e41413c9d, type: 3}
+      propertyPath: ShowAllUsersFragments
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5849571046069288731, guid: 180e89f918ec9794e8504a7e41413c9d, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -10020,6 +10057,14 @@ PrefabInstance:
     - target: {fileID: 4797898069604894907, guid: 180e89f918ec9794e8504a7e41413c9d, type: 3}
       propertyPath: m_Center.y
       value: -4.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986841478581780817, guid: 180e89f918ec9794e8504a7e41413c9d, type: 3}
+      propertyPath: time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986841478581780817, guid: 180e89f918ec9794e8504a7e41413c9d, type: 3}
+      propertyPath: ShowAllUsersFragments
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5317695447587422490, guid: 180e89f918ec9794e8504a7e41413c9d, type: 3}
       propertyPath: m_AnchoredPosition.x

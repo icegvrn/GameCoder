@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using static DBConstant;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 
@@ -207,17 +208,75 @@ public class UserSessionData : MonoBehaviour
 
     }
 
-    public List<DBFragment> GetAllUsersFragments()
+    public List<DBFragment> GetAllUsersFragmentsByCount(int count)
     {
-        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.title, fragments.content, fragments.date, users.username, times.name, times.id FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time");
+        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time LIMIT ?", count);
         return allFragments;
+    }
 
+    public List<DBFragment> GetAllUsersFragmentsAtTimeByCount(int time, int count)
+    {
+        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id_time = ? ORDER BY fragments.date DESC", time, count);
+        return allFragments;
     }
 
     public List<DBFragment> GetAllUsersRandomFragmentsByCount(int count)
     {
         List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id IN (SELECT id FROM fragments ORDER BY RANDOM() LIMIT ?) ORDER BY RANDOM()", count);
         return allFragments;
-
     }
+
+    public List<DBFragment> GetAllUsersRandomFragmentsAtTimeByCount(int time, int count)
+    {
+        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id_time = ? AND fragments.id IN (SELECT id FROM fragments ORDER BY RANDOM() LIMIT ?) ORDER BY RANDOM()", time, count);
+        return allFragments;
+    }
+
+
+    public List<DBFragment> GetAllCurrentUserFragments()
+    {
+        int userID = ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId;
+        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.title, fragments.content, fragments.date, users.username, times.name, times.id FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id_user = ? ", userID);
+        return allFragments;
+    }
+
+    public List<DBFragment> GetAllCurrentUserRandomFragments()
+    {
+        int userID = ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId;
+        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id_user = ? AND fragments.id IN (SELECT id FROM fragments ORDER BY RANDOM()) ORDER BY RANDOM()", userID);
+        return allFragments;
+    }
+
+    public List<DBFragment> GetAllCurrentUserRandomFragmentsByCount(int count)
+    {
+        int userID = ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId;
+        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id_user = ? AND fragments.id IN (SELECT id FROM fragments ORDER BY RANDOM() LIMIT ?) ORDER BY RANDOM()", userID, count);
+        return allFragments;
+    }
+
+    public List<DBFragment> GetAllCurrentUserFragmentsAtTime(int time)
+    {
+        int userID = ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId;
+        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id_user = ? AND fragments.id_time = ? ORDER BY fragments.date DESC", userID, time);
+        return allFragments;
+    }
+
+    public List<DBFragment> GetAllCurrentUserRandomFragmentsAtTime(int time)
+    {
+        int userID = ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId;
+        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id_user = ? AND fragments.id_time = ? AND fragments.id IN (SELECT id FROM fragments ORDER BY RANDOM()) ORDER BY RANDOM()", userID, time);
+        return allFragments;
+    }
+
+    public List<DBFragment> GetAllCurrentUsersFragmentsAtTimeByCount(int time, int count)
+    {
+        int userID = ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId;
+        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id_user = ? AND fragments.id_time = ? AND fragments.id IN (SELECT id FROM fragments ORDER BY RANDOM() LIMIT ?) ORDER BY RANDOM()", userID, time, count);
+        return allFragments;
+    }
+
+
+
+
+
 }

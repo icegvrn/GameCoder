@@ -2,67 +2,153 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DBConstant;
 
 public class FragmentsDBContainer : MonoBehaviour
 {
     [SerializeField] List<FragmentCanvasItem> fragments;
     public List<FragmentCanvasItem> Fragments { get { return fragments; } }
     [SerializeField] bool ShowAllUsersFragments;
+    [SerializeField] bool Randomize;
     [SerializeField] DBConstant.Time time;
     [SerializeField] GameObject FragmentSpotPrefab;
 
     private void Start()
     {
-        GetAllUsersRandomFragments();
+        LoadData();
+    }
+
+    public void LoadData()
+    {
+        if (ShowAllUsersFragments)
+        {
+            if (Randomize)
+            {
+                if (time == 0) { GetAllUsersRandomFragments(); } else { GetAllUsersRandomFragmentsAtTime(time); }
+            }
+            else
+            {
+                if (time == 0) { GetAllUsersFragments();} else { GetAllUsersFragmentsAtTime(time); }
+            }
+        }
+        else
+        {
+            if (Randomize)
+            {
+                if (time == 0)
+                { GetAllCurrentUserRandomFragments(); } else { GetCurrentUserRandomFragmentsAtTime(time); }
+            }
+
+            else
+            {
+                if (time == 0)
+                { GetAllCurrentUserFragments();} else { GetCurrentUserFragmentsAtTime(time); }
+            }
+        }
+
+    }
+
+    void GetAllUsersFragments()
+    {
+        List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllUsersFragmentsByCount(10);
+        UpdateFragments(fragment);
     }
 
     public void GetAllUsersRandomFragments()
     {
         List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllUsersRandomFragmentsByCount(10);
-
-        foreach (DBFragment frag in fragment)
-        {
-            Debug.Log("_______________________________"+frag.TimeId+"--------------");
-            GameObject newPanel = Instantiate(FragmentSpotPrefab, transform);
-            FragmentCanvasItem cItem = newPanel.GetComponent<FragmentCanvasItem>();
-            fragments.Add(cItem);
-            DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(frag.Date);
-            string date = dateTimeOffset.ToString("dd/MM/yyyy");
-            cItem.Title.text = frag.Title;
-            cItem.Content.text = frag.Content;
-            cItem.Time.text = ("Epoque " + frag.timeName).ToUpper();
-            cItem.OrangeInformation.text = frag.username;
-            cItem.Img.sprite = cItem.ImgSprite[frag.TimeId-1];
-            cItem.TextOverOrangeInformation.text = "Ce fragment a été trouvé le " + date + " par ";
-        }
-
-        foreach (FragmentCanvasItem elem in fragments)
-        {
-            if (elem != fragments[0])
-            {
-                elem.gameObject.SetActive(false);
-            }
-            else
-            {
-                elem.gameObject.SetActive(true);
-            }
-       
-        }
+        UpdateFragments(fragment);
     }
 
-    void GetAllCurrentUserFragments()
+    void GetAllUsersRandomFragmentsAtTime(DBConstant.Time time)
     {
-
-    }
-
-    void GetCurrentUserFragmentsAtTime(DBConstant.Time time)
-    {
-
+        List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllUsersRandomFragmentsAtTimeByCount((int)time, 10);
+        UpdateFragments(fragment);
     }
 
     void GetAllUsersFragmentsAtTime(DBConstant.Time time)
     {
+        List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllUsersFragmentsAtTimeByCount((int)time, 10);
+        UpdateFragments(fragment);
+    }
 
+    void GetAllCurrentUserFragments()
+    {
+       List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllCurrentUserFragments();
+       UpdateFragments(fragment);
+    }
+
+   
+
+    void GetAllCurrentUserRandomFragments() 
+    {
+        List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllCurrentUserRandomFragments();
+        UpdateFragments(fragment);
+    }
+
+    void GetCurrentUserRandomFragmentsAtTime(DBConstant.Time time)
+    {
+        List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllCurrentUserRandomFragmentsAtTime((int)time);
+        UpdateFragments(fragment);
+    }
+
+
+    void GetCurrentUserFragmentsAtTime(DBConstant.Time time)
+    {
+        List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllCurrentUserFragmentsAtTime((int)time);
+        UpdateFragments(fragment);
+
+    }
+
+    private void UpdateFragments(List<DBFragment> fragment)
+    {
+        if (fragment.Count > 0)
+        {
+            foreach (DBFragment frag in fragment)
+            {
+                GameObject newPanel = Instantiate(FragmentSpotPrefab, transform);
+                FragmentCanvasItem cItem = newPanel.GetComponent<FragmentCanvasItem>();
+                fragments.Add(cItem);
+                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(frag.Date);
+                string date = dateTimeOffset.ToString("dd/MM/yyyy");
+                cItem.Title.text = frag.Title;
+                cItem.Content.text = frag.Content;
+                cItem.Time.text = ("Epoque " + frag.timeName).ToUpper();
+
+                if (ShowAllUsersFragments)
+                {
+                    cItem.OrangeInformation.text = frag.username;
+                    cItem.Img.sprite = cItem.ImgSprite[frag.TimeId - 1];
+                    cItem.TextOverOrangeInformation.text = "Ce fragment a été trouvé le " + date + " par ";
+                }
+                else
+                {
+                    cItem.OrangeInformation.text = date;
+                    cItem.Img.sprite = cItem.ImgSprite[frag.TimeId - 1];
+                    cItem.TextOverOrangeInformation.text = "Vous avez trouvé ce fragment le ";
+                }
+
+            }
+
+            foreach (FragmentCanvasItem elem in fragments)
+            {
+                if (elem != fragments[0])
+                {
+                    elem.gameObject.SetActive(false);
+                }
+                else
+                {
+                    elem.gameObject.SetActive(true);
+                }
+
+            }
+        }
+        else
+        {
+            GameObject newPanel = Instantiate(FragmentSpotPrefab, transform);
+            FragmentCanvasItem cItem = newPanel.GetComponent<FragmentCanvasItem>();
+            fragments.Add(cItem);
+        }
     }
 
 }

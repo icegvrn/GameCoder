@@ -96,7 +96,7 @@ public class FragmentsConsultationSpot : MonoBehaviour
 
     void NextPage()
     {
-        Debug.Log("PAGE SUIVANTE");
+        Debug.Log("PAGE SUIVANTE avec count " + consultationPanel.GetComponent<FragmentsDBContainer>().Fragments.Count);
 
         if (currentPanelIndex < consultationPanel.GetComponent<FragmentsDBContainer>().Fragments.Count-1)
         {
@@ -107,7 +107,7 @@ public class FragmentsConsultationSpot : MonoBehaviour
 
         else
         {   consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(false);
-            consultationPanel.GetComponent<FragmentsDBContainer>().GetAllUsersRandomFragments();
+            consultationPanel.GetComponent<FragmentsDBContainer>().LoadData();
             consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[0].gameObject.SetActive(false);
             currentPanelIndex++;
             consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(true);
@@ -118,7 +118,7 @@ public class FragmentsConsultationSpot : MonoBehaviour
 
     void PreviousPage()
     {
-        Debug.Log("PAGE PRECEDENTE");
+        Debug.Log("PAGE PRECEDENTE avec count " + +consultationPanel.GetComponent<FragmentsDBContainer>().Fragments.Count);
         if (currentPanelIndex > 0)
         {
             consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(false);
