@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class DBRunSession : MonoBehaviour
 {
-    [SerializeField] private DBConstant.Time timeID;
+    private DBConstant.Time timeID;
     private bool newBestTime;
   public void WriteTimeIfBestime(int time)
     {
-
         Debug.Log("JE vais enregistrer le temps " + time);
+        timeID = ServiceLocator.Instance.GetService<RunStatsService>().TimeID;
         DBUsers_TimeJoinTime bestTimeData = ServiceLocator.Instance.GetService<UserSessionData>().GetBestTimeFromTime((int)timeID);
        
         if (bestTimeData == null)

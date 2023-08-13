@@ -1,9 +1,12 @@
 using SQLite;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using static DBConstant;
+using static UnityEditor.PlayerSettings;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 
@@ -16,6 +19,17 @@ public class DBUsers_Time
     public int Id_time { get; set; }
     [Column("bestime")]
     public int bestime { get; set; }
+}
+
+[Table("times")]
+public class DBTimes
+{
+    [Column("id")]
+    public int Id { get; set; }
+    [Column("description")]
+    public int Descriptions { get; set; }
+    [Column("name")]
+    public string Name { get; set; }
 }
 
 [Table("users_times_join")]
@@ -124,7 +138,7 @@ public class UserSessionData : MonoBehaviour
     {
         try
         {
-            db.Query<DBUsers_TimeJoinTime>("INSERT INTO users_times(id_user, id_time) VALUES(?, ?)", ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId, timeID);
+            db.Execute("INSERT INTO users_times(id_user, id_time) VALUES(?, ?)", ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId, timeID);
         }
         catch
         {
@@ -299,6 +313,80 @@ public class UserSessionData : MonoBehaviour
         return allFragments;
     }
 
+    public void InsertNewFragmentForPlayer(int timeID)
+    {
+        int date = (int)DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        Debug.Log("TENTATIVE ID JOUEUR : " + ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId + " date " + date + "time id " + timeID);
+        try
+        {
+                db.Execute("UPDATE fragments SET id_user = ?, date = ? WHERE id IN (SELECT id FROM fragments WHERE id_user IS NULL AND id_time = ? ORDER BY RANDOM() LIMIT 1)", ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId, date, timeID);
+        }
+
+        catch
+        {
+                Debug.LogError("Register time for user : Une erreur s'est produite dans la base de données.");
+        }
+    }
+
+    //SELECT * FROM fragments WHERE id_user ISNULL AND id_time = ?
+
+    public bool AreFragmentsAvailable(int timeID)
+    {
+        List<DBFragment> results = db.Query<DBFragment>("SELECT * FROM fragments WHERE id_user IS NULL AND id_time = ? ORDER BY RANDOM() LIMIT 1", timeID);
+    if (results.Count > 0)
+        {
+            return true;
+        }
+    else
+        {
+            return false;
+        }
+    }
+
+    public bool AreFragmentsAvailableOverInt(int timeID, int nb)
+    {
+        List<DBFragment> results = db.Query<DBFragment>("SELECT * FROM fragments WHERE id_user IS NULL AND id_time = ? ORDER BY RANDOM() LIMIT ?", timeID, nb+1);
+        if (results.Count > nb)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool UnlockNewTimeIfAvailable()
+    {
+        // Checker tous les temps
+        List<DBFragment> allUserTimes = db.Query<DBFragment>("SELECT id_time FROM users_times WHERE id_user = ? GROUP BY id_time", ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId);
+
+        // Checker tous les temps supérieur où égal à 2
+        List<DBFragment> timeWithMoreThanTwoFragmentForUser = db.Query<DBFragment>("SELECT id_time FROM fragments WHERE id_user = ? GROUP BY id_time HAVING COUNT(*) >= 2;", ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId);
+
+        // Comparer le nombre. 
+        if (timeWithMoreThanTwoFragmentForUser.Count == allUserTimes.Count)
+        {
+            return RegisterARandomAvailableTimeForUser();
+        }
+        Debug.Log("Pas de nouveau portail pour cet utilisateur");
+        return false;
+    }
+
+    public bool RegisterARandomAvailableTimeForUser()
+    {
+        List<DBTimes> result = db.Query<DBTimes>("SELECT times.id FROM times INNER JOIN users_times ON users_times.id_time = times.id WHERE id_time NOT IN (SELECT id_time FROM users_times WHERE id_user = ?) ORDER BY RANDOM() LIMIT 1;", ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId);
+        
+        if (result.Count > 0 && result[0].Id != 0)
+        {
+            Debug.Log("Pour cet utilisateur j'enregistre le temps : " + result[0].Id);
+
+            RegisterTimeForUser(result[0].Id);
+            return true;
+        }
+        Debug.Log("Pas de nouveau portail pour cet utilisateur");
+        return false;
+    }
 
 
 

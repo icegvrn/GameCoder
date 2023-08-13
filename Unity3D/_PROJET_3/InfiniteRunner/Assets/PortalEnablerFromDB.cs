@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class PortalEnablerFromDB : MonoBehaviour
 {
+    [SerializeField] GameObject newPortalUI;
     void Start()
     {
+        bool portalUnlocked = ServiceLocator.Instance.GetService<UserSessionData>().UnlockNewTimeIfAvailable();
+
+        if (portalUnlocked)
+        {
+            newPortalUI.SetActive(true);
+        }
+
         List<int> availablePortal = ServiceLocator.Instance.GetService<UserSessionData>().GetAvailableTimeForUser();
 
         if (availablePortal == null)

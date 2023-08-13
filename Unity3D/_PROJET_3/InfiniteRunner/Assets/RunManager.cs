@@ -25,7 +25,7 @@ public class RunManager : MonoBehaviour
     {
         lastRunState = RunLevelState.none;
         currentRunState = RunLevelState.levelInit;
-        session.Init();
+      //  session.Init();
         runStatsService = gameObject.GetComponent<RunStatsService>();
         runStatsService.Init();
         StartRunIfSessionReady();

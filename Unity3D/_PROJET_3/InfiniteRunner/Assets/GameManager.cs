@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] UIManager UIManager;
     [SerializeField] EnvironmentManager gameEnvironment;
+    [SerializeField] FragmentManager fragmentManager;
     [SerializeField] CharacterAutoRunner character;
     [SerializeField] Camera mainCamera;
 
@@ -16,6 +17,16 @@ public class GameManager : MonoBehaviour
         character.gameObject.SetActive(false);
         UIManager.DisableAll();
     }
+
+    private void Update()
+    {
+        if (fragmentManager.FragmentDetected)
+        {
+            UIManager.SetFragmentDetectedVisible(true);
+            fragmentManager.FragmentDetected = false;
+        }
+    }
+
     public void StartGame()
     {
         gameEnvironment.gameObject.SetActive(true);
@@ -34,6 +45,7 @@ public class GameManager : MonoBehaviour
         character.gameObject.SetActive(false);
         UIManager.SetHUDVisible(false);
         mainCamera.transform.parent = transform;
+        ServiceLocator.Instance.GetService<RunStatsService>().ResetData();
     }
 
     public void StopGameAndEnvironment()
@@ -68,12 +80,13 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        ServiceLocator.Instance.GetService<RunStatsService>().ResetData();
+       
         character.Reset();
         gameEnvironment.Reset();
         gameEnvironment.gameObject.SetActive(true);
         UIManager.SetHUDVisible(true);
-        UIManager.SetPlayerDeadVisible(false);
+        UIManager.SetPlayerDeadVisible(false); 
+
         mainCamera.transform.parent = character.gameObject.transform;
         mainCamera.transform.localPosition = mainCameraInitialLocalPosition;
         ServiceLocator.Instance.GetService<RunStatsService>().StartTimer();

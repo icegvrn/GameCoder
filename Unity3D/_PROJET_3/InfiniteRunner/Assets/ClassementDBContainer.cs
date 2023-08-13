@@ -24,6 +24,7 @@ public class ClassementDBContainer : MonoBehaviour
 
             foreach (DBRank rank in ranking)
             {
+            Debug.Log("J'ai trouvé " + rank.Username + " avec " + rank.TotalFragments + " fragments");
                 if (i < items.Count)
                 {
                     items[i].Name.text = rank.Username;
@@ -33,6 +34,7 @@ public class ClassementDBContainer : MonoBehaviour
 
                 if (rank.Username == ServiceLocator.Instance.GetService<SessionManager>().CurrentUser)
                 {
+
                     currentUserItem.Rank.text = "Votre place : " + (i + 1).ToString() + ".";
                     currentUserItem.Name.text = rank.Username;
                     currentUserItem.Fragments.text = rank.TotalFragments.ToString();

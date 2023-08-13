@@ -1,9 +1,12 @@
 using UnityEngine;
-using UnityEngine.Events;
-using static DBConstant;
+
 
 public class RunStatsService : MonoBehaviour
 {
+
+    [SerializeField] private DBConstant.Time timeID;
+    public DBConstant.Time TimeID { get { return timeID; } }
+
     [SerializeField] int runGoal;
     public int RunGoal { get { return runGoal; } set {  runGoal = value; } }
     int userLife;
@@ -40,6 +43,8 @@ public class RunStatsService : MonoBehaviour
            timer.Update();
            runTime = timer.GetValue();
         }
+
+
     }
 
     public void RegisterMe()
@@ -68,9 +73,15 @@ public class RunStatsService : MonoBehaviour
        
     }
 
+    void ResetUserEssences()
+    {
+        userEssences = 0;
+    }
+
     public void ResetData()
     {
         ResetUserLife();
+        ResetUserEssences();
         SetTimer();
     }
 

@@ -205,7 +205,7 @@ MonoBehaviour:
   passwordInput: {fileID: 1720191434}
   errorUnknownIdentifiant: {fileID: 1462154826}
   validationConnection: {fileID: 1984195052}
-  SceneToLoadOnConnect: 2
+  SceneToLoadOnConnect: 1
 --- !u!114 &172530173
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,6 +11,11 @@ public class CharacterPointCollector : PointCollector
         runStatsService = ServiceLocator.Instance.GetService<RunStatsService>();
     }
 
+    private void OnEnable()
+    {
+        Points = 0;
+    }
+
     void Update()
     {
         if (runStatsService == null)
@@ -22,7 +27,7 @@ public class CharacterPointCollector : PointCollector
         if (Input.GetKeyUp(KeyCode.P))
         {
             Debug.Log("P " + Points);
-            Points += 100;
+            Points += 10;
         }
     }
 }

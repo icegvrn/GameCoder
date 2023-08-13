@@ -171,4 +171,9 @@ public class ObstacleSpawner : MonoBehaviour
         obstaclesGenerated = false;
     }
 
+    public GameObject GetFirstObstacle()
+    {
+        return obstacleInPlay[0];
+    }
+
 }

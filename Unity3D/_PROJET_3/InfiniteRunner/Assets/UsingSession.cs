@@ -11,7 +11,7 @@ public class UsingSession : MonoBehaviour
     bool sessionReady;
     public bool SessionReady { get { return sessionReady; } }
     // Start is called before the first frame update
-    public void Init()
+    public void Start()
     {
         errorConnection.SetActive(false);
         CheckSession();
@@ -24,10 +24,11 @@ public class UsingSession : MonoBehaviour
 
     void CheckSession()
     {
+        Debug.Log("JE CHECK LA SESSION");
         try
         {
             DBUserData data = ServiceLocator.Instance.GetService<SessionManager>().GetUserSessionData();
-
+            Debug.Log("SESSION OK DASN LE TRY");
             if (data != null)
             {
                 sessionReady = true;
@@ -40,6 +41,7 @@ public class UsingSession : MonoBehaviour
         }
         catch
         {
+            Debug.Log("ERROR DE SESSION");
             EnableError();
         }
     }

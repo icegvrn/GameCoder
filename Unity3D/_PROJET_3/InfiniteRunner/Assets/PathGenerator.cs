@@ -53,6 +53,14 @@ public class PathGenerator : MonoBehaviour
             }
         }
 
+        // Get the nearest chunk to the player
+        GameObject nearestChunk = FindNearestChunk();
+
+        if (nearestChunk != null)
+        {
+            Debug.Log("LE PROCHAIN CHUNK LE PLUS PROCHE EST A LINDEX" + GetTheNextNearestChunkIndex());
+        }
+
 
 
     }
@@ -137,6 +145,38 @@ public class PathGenerator : MonoBehaviour
         }
 
         return new Bounds(objTransform.position, Vector3.zero);
+    }
+
+    private GameObject FindNearestChunk()
+    {
+        GameObject nearestChunk = null;
+        float shortestDistance = float.MaxValue;
+        float playerZ = player.position.z;
+
+        foreach (GameObject prefab in prefabOnPlay)
+        {
+            float prefabZ = prefab.transform.position.z;
+            float distanceToPlayer = Mathf.Abs(playerZ - prefabZ);
+
+            if (distanceToPlayer < shortestDistance)
+            {
+                shortestDistance = distanceToPlayer;
+                nearestChunk = prefab;
+            }
+        }
+
+        return nearestChunk;
+    }
+
+    private int GetTheNextNearestChunkIndex()
+    {
+     int result = prefabOnPlay.IndexOf(FindNearestChunk()) + 1;
+        if (result > prefabOnPlay.Count)
+        {
+            result = 0;
+            return result;
+        }
+        return result;
     }
 
     public void Reset()

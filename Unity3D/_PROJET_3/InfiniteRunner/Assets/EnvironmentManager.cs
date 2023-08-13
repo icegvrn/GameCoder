@@ -8,7 +8,6 @@ public class EnvironmentManager : MonoBehaviour
 
     public void Reset()
     {
-        pathGenerator.Reset();
-      
+        pathGenerator.Reset();  
     }
 }
