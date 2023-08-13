@@ -111,7 +111,10 @@ public class ObstacleSpawner : MonoBehaviour
 
                 GameObject spObstacle = obstaclePool.GetPooledObject(obstaclePool.ObjectList.IndexOf(obstacle.gameObject));
                 spObstacle.transform.parent = gameObject.transform;
-                spObstacle.transform.localPosition = Vector3.zero;     
+                spObstacle.transform.localPosition = Vector3.zero;    
+        
+        // Rajouter un script ici si contact avec le joueur, destruction, sinon... 
+
                 obstacleInPlay.Add(spObstacle);
            
             

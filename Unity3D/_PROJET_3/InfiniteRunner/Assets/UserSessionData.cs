@@ -92,7 +92,7 @@ public class UserSessionData : MonoBehaviour
         string dataPath = Application.streamingAssetsPath + "/Database";
         db = new SQLiteConnection(dataPath + "/database.db");
         ServiceLocator.Instance.RegisterService(this);
-        GetAvailableTimeForUser();
+      
     }
 
     public List<int> GetAvailableTimeForUser()
@@ -116,7 +116,7 @@ public class UserSessionData : MonoBehaviour
             return result;
         }
 
-        Debug.LogError("La session est invalide ou les données utilisateur n'ont pas été trouvées!");
+        Debug.LogError("Aucun portail de temps disponible pour cet utilisateur !");
         return null;
     }
 
@@ -129,6 +129,30 @@ public class UserSessionData : MonoBehaviour
         catch
         {
             Debug.LogError("Register time for user : Une erreur s'est produite dans la base de données.");
+        }
+    }
+
+    public void RegisterNewBestTimeForUser(int time, int timeID)
+    {
+        try
+        {
+            db.Execute("UPDATE users_times SET best_time = ? WHERE id_user = ? AND id_time = ?", time, ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId, timeID);
+        }
+        catch
+        {
+            Debug.LogError("Register besttime for user : Une erreur s'est produite dans la base de données.");
+        }
+    }
+
+    public void RegisterNewBestTimeForUserFromNull(int time, int timeID)
+    {
+        try
+        {
+            db.Execute("INSERT INTO users_times(best_time, id_user, id_time) VALUES(?,?,?)", time, ServiceLocator.Instance.GetService<SessionManager>().CurrentUserId, timeID);
+        }
+        catch
+        {
+            Debug.LogError("Register besttime for user : Une erreur s'est produite dans la base de données.");
         }
     }
 

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using System.Text.RegularExpressions;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(PasswordEncrypter))]
 public class RegisterUser : MonoBehaviour
@@ -14,9 +15,10 @@ public class RegisterUser : MonoBehaviour
     [SerializeField] TextMeshProUGUI errorUsernameWrongFormat;
     [SerializeField] TextMeshProUGUI errorWrongPasswordFormat;
     [SerializeField] TextMeshProUGUI validationRegister;
-
     private PasswordEncrypter passwordEncrypter;
- 
+
+    [SerializeField] UnityEvent OnRegisterDone;
+    [SerializeField] UserSessionData userSessionData;
 
     void Start()
     {
@@ -39,6 +41,7 @@ public class RegisterUser : MonoBehaviour
                     string userSalt = passwordEncrypter.CreateSalt();
                     string pwd = passwordEncrypter.HashPassword(passwordInput.text, userSalt);
                     RegisterNewPlayer(db, usernameInput.text, pwd, userSalt);
+                    OnRegisterDone.Invoke();
                 }
 
                 else

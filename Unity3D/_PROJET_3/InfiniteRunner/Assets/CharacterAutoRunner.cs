@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.TextCore.Text;
 using static ICharacter;
 
 public class CharacterAutoRunner : MonoBehaviour, ICharacter
@@ -16,6 +17,9 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
     public bool isCrouched;
     private bool isCollide;
     private float initialVerticalPosition;
+    private CustomTimer collisionTimer;
+    private RunStatsService runStatsService;
+    bool collisionStarted;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +28,9 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
         initialVerticalPosition = transform.position.y;
         initialRunningSpeed = runningSpeed;
         currentState = STATE.RUN;
+        collisionTimer = new CustomTimer();
+        collisionTimer.Init();
+        runStatsService = ServiceLocator.Instance.GetService<RunStatsService>();
     }
 
     // Update is called once per frame
@@ -89,6 +96,10 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
         transform.position = movement;
 
         UpdateAnimator();
+
+
+            collisionTimer.Update();
+
     }
     
     void FixedUpdate()
@@ -116,10 +127,16 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
     {
        
         if (collision.gameObject.tag == "Obstacle")
-        {  
+        {
             isCollide = true;
             runningSpeed = 0;
             currentState = STATE.IDLE;
+
+            if (!collisionTimer.TimerIsStarted)
+            {
+                collisionTimer.Start();
+            }
+              
         }
     }
 
@@ -127,13 +144,36 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
     {
         if (collision.gameObject.tag == "Obstacle")
         {
+          
             runningSpeed = 0;
             currentState = STATE.IDLE;
+           
+           // Debug.Log("----------Toujours en collision j'ai un timer de " + collisionTimer.GetValue());
+             if (collisionTimer.GetFloatValue() >= 0.4f)
+            {
+                runStatsService.UserLife -= 1;
+                collisionTimer.Stop();
+            }
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            isCollide = false;
+            collisionTimer.Stop();
+        }
+    }
+
+    public void Reset()
+    {   
+        gameObject.SetActive(true);
+        runningSpeed = initialRunningSpeed;
+        gameObject.transform.localPosition = Vector3.zero;
+        enabled = true;
+        isJumpStarted = false;
+        isCrouched = false;
         isCollide = false;
     }
 }

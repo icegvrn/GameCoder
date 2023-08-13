@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 353c59b02d05b6b46b8f9b935445b71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsValue: 10
+  pointsValue: 1
 --- !u!135 &2822178464365567511
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -144,8 +144,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2.4319928
-  m_Center: {x: -0.8331577, y: 0, z: 0}
+  m_Radius: 4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6513895843840080952
 GameObject:
   m_ObjectHideFlags: 0

@@ -103,8 +103,32 @@ public class ObjectPool : MonoBehaviour
     {
                 objToRelease.SetActive(false);
                 objToRelease.transform.position = transform.position;
-                objToRelease.transform.rotation = transform.rotation;
-           
+                objToRelease.transform.rotation = transform.rotation;       
+    }
+
+    public void Reset()
+    {
+        poolIsReady = false;
+        pool.Clear();
+
+        currentTotalPool = 0;
+
+        for (int n = 0; n < objectsList.Count; n++)
+        {
+            List<GameObject> list = new List<GameObject>();
+
+            for (int i = 0; i < poolBatchNumber; i++)
+            {
+                GameObject instantiateObj = Instantiate(objectsList[n], transform);
+                instantiateObj.SetActive(false);
+                currentTotalPool++;
+                list.Add(instantiateObj);
+            }
+            pool.Add(objectsList[n], list);
+        }
+
+        poolIsReady = true;
+
     }
 
 }

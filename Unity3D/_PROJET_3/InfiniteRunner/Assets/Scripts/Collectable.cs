@@ -22,8 +22,8 @@ public class Collectable : MonoBehaviour
 
         if (other.gameObject.TryGetComponent(out PointCollector pCollector))
         {
+            Debug.Log("JE PASSE DEDANS");
             pCollector.AddPoints(pointsValue);
-            Debug.Log("C'est le joueur qui touche et qui a désormais " + pCollector.Points);
         }
     }
 }

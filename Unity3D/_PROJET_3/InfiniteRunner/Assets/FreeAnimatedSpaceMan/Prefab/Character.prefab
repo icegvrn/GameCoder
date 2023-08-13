@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 95096058574463750}
   - component: {fileID: 111744052045278198}
   m_Layer: 0
-  m_Name: space_man_model
+  m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -12,10 +12,13 @@ public class PathGenerator : MonoBehaviour
     public float curveStrength = 10f; // Strength of the curve (higher values result in sharper curves)
     public float curveFrequency = 0.1f; // Lower values make curves less frequent
 
-
     [SerializeField] private int pathDespawnDistance;
     private bool pathGenerated = false;
+
     [SerializeField] private ObjectPool pathPool;
+    [SerializeField] private ObjectPool obstaclePool;
+    [SerializeField] private ObjectPool objectPool;
+
 
     private void Start()
     {
@@ -49,6 +52,7 @@ public class PathGenerator : MonoBehaviour
                 i--;
             }
         }
+
 
 
     }
@@ -133,6 +137,23 @@ public class PathGenerator : MonoBehaviour
         }
 
         return new Bounds(objTransform.position, Vector3.zero);
+    }
+
+    public void Reset()
+    {
+        foreach (GameObject prefab in prefabOnPlay)
+        {
+            Destroy(prefab);
+        }
+
+       prefabOnPlay.Clear();
+
+        pathGenerated = false;
+
+        objectPool.Reset();
+        pathPool.Reset();
+        obstaclePool.Reset();
+
     }
 
 }

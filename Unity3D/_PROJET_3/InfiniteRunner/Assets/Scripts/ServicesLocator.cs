@@ -48,5 +48,14 @@ public class ServiceLocator
     }
 
 
+    public void UnregisterService<T>()
+    {
+        Type serviceType = typeof(T);
+        if (servicesDictionary.ContainsKey(serviceType))
+        {
+            servicesDictionary.Remove(serviceType);
+        }
+    }
+
 
 }

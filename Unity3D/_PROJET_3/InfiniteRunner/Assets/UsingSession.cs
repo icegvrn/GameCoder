@@ -9,8 +9,9 @@ public class UsingSession : MonoBehaviour
     [SerializeField] GameObject errorConnection;
     [SerializeField] List<GameObject> ObjectsToEnableOnSessionReady;
     bool sessionReady;
+    public bool SessionReady { get { return sessionReady; } }
     // Start is called before the first frame update
-    void Start()
+    public void Init()
     {
         errorConnection.SetActive(false);
         CheckSession();
