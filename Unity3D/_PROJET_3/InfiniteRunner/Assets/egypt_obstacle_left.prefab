@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3538809241307491873, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 639ec6ab91eed7247a31657c24ea842e, type: 2}
     - target: {fileID: 5851184313232410377, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -70,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6016634322777693836, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
       propertyPath: m_Name
-      value: egypt_obstacle3
+      value: egypt_obstacle_left
       objectReference: {fileID: 0}
     - target: {fileID: 7104797153649779234, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
       propertyPath: m_Size.x
@@ -86,7 +90,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7247010607965597321, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.4
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247010607965597321, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 8793766006075073006, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
       propertyPath: m_TagString

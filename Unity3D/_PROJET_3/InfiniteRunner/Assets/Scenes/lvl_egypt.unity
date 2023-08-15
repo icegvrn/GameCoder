@@ -928,20 +928,21 @@ MonoBehaviour:
   poolBatchNumber: 2
   totalMaxPoolNumber: 800
   objectsList:
-  - {fileID: 2789600880001011283, guid: ac3a2c710a0e02b45b9bcf33573d5a68, type: 3}
-  - {fileID: 5497187357798857369, guid: 4f7a96e1b3dd1584fa06274a172e23ed, type: 3}
-  - {fileID: 1427784919248648239, guid: 0645d4c8549dcf9408d1fc7dd692bba1, type: 3}
-  - {fileID: 6357337234993688778, guid: eb167096fc2c7f944a815366d2804baf, type: 3}
-  - {fileID: 2949498135457972649, guid: 84d2064dd365b464fa85ec9915990a4a, type: 3}
-  - {fileID: 4454087457614518363, guid: 977cc6468845fd04780da459b6b16b8c, type: 3}
-  - {fileID: 1250538218410409908, guid: 7c3f152943dca5347b1aad67748a947e, type: 3}
-  - {fileID: 8240895479772845591, guid: de2d597840acdc3489b67fa72a3b6fd9, type: 3}
-  - {fileID: 9059552378173469103, guid: 2ed732c28d33b6a46a43296641fec0fb, type: 3}
-  - {fileID: 5739250389312566274, guid: 4d1b2a0f975f8cd4cbde7afc31607551, type: 3}
-  - {fileID: 5986307740910344316, guid: b183c5efea2a62e43b2910df8db38381, type: 3}
-  - {fileID: 8391519721716914918, guid: c8d6f574cfada734999c1cd37fc412df, type: 3}
-  - {fileID: 2150664148452539863, guid: 2abd75ad66d8f344386a6e7e9764d131, type: 3}
-  - {fileID: 584562670204172824, guid: bdb1809170ea7e849a39bf5bf0a34c3f, type: 3}
+  - {fileID: 6812873737267064902, guid: 2bb59d0209bd37b4dbd217fd5c1a9b9f, type: 3}
+  - {fileID: 6274662308812668559, guid: b40a44c529c1bbc498607b600c9f10f5, type: 3}
+  - {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+  - {fileID: 3070282707774578080, guid: f596a8d3169d4094fb2fd52ec4066621, type: 3}
+  - {fileID: 7944305903384657899, guid: 572ff4d12a83a77459fc99e87aa28ce4, type: 3}
+  - {fileID: 4696112778651347935, guid: 665468b707305624281b214c59eb0da9, type: 3}
+  - {fileID: 5815865850888442336, guid: 0af6081ccef99c846a4ee95946e0fd72, type: 3}
+  - {fileID: 5210312920843488421, guid: 66aaa50730bbcdb4f970eb35667c9b60, type: 3}
+  - {fileID: 2824055939284970061, guid: 5d0581106087a0e4f963ea125179a9ac, type: 3}
+  - {fileID: 4796231797540286322, guid: 336378c1fa5ae9344a574db8cb85ff32, type: 3}
+  - {fileID: 3633498916490639356, guid: 863efc53ddaa8894ba3199d6a16ec14a, type: 3}
+  - {fileID: 2189291035302417887, guid: ebd06c0a9259fde4e9c72642c279c1d2, type: 3}
+  - {fileID: 4052559861398258856, guid: 587527eafb161084ca049427448fe4c3, type: 3}
+  - {fileID: 6535564522139255247, guid: 3cb56cee75f8575429d31e35cf5d34d9, type: 3}
+  - {fileID: 919132149155446097, guid: b96f66d45a777df4e86a9a0ce0e096bf, type: 3}
 --- !u!4 &426004796
 Transform:
   m_ObjectHideFlags: 0
@@ -1147,7 +1148,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 68.1
+  m_fontSize: 59.65
   m_fontSizeBase: 101.34
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1820,6 +1821,10 @@ MonoBehaviour:
   - {fileID: 6016634322777693836, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
   - {fileID: 986192842884430086, guid: b8724bf22aadc574aa2512d2c5737c0f, type: 3}
   - {fileID: 1162068986191952904, guid: 5fd1f5fd0efad994c92f042a24c4a659, type: 3}
+  - {fileID: 6016634322777693836, guid: cb5f3e928882949479c73dcab4d159e1, type: 3}
+  - {fileID: 6016634322777693836, guid: 016319598ba0570468d23de41554adb4, type: 3}
+  - {fileID: 986192842884430086, guid: 5765913c5690d4a44b859a1cc51e3a2f, type: 3}
+  - {fileID: 1162068986191952904, guid: f3c329c9e6c6cdb448db7410191b0859, type: 3}
 --- !u!1001 &819519566
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1836,6 +1841,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6640462879254062753, guid: 89bdf0b7023b9154da92dc7314bf1dac, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5764a64b868029747bba86e215d32657, type: 2}
     - target: {fileID: 6640462879254062754, guid: 89bdf0b7023b9154da92dc7314bf1dac, type: 3}
       propertyPath: prewarm
       value: 1
@@ -1991,8 +2000,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1edd515a84f265045a0becc5c7550072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  runningSpeed: 40
+  speed: 3000
+  runningSpeed: 2000
   animator: {fileID: 838676484}
   isCrouched: 0
 --- !u!65 &838676480
@@ -2047,9 +2056,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838676477}
   serializedVersion: 4
-  m_Mass: 2
-  m_Drag: 0
-  m_AngularDrag: 0.5
+  m_Mass: 80
+  m_Drag: 0.1
+  m_AngularDrag: 0.005
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2063,7 +2072,7 @@ Rigidbody:
   m_ImplicitTensor: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!95 &838676484 stripped
@@ -2366,7 +2375,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 66.2
+  m_fontSize: 57.25
   m_fontSizeBase: 101.34
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2575,7 +2584,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39
+  m_fontSize: 38.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4726,7 +4735,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.16330206, y: 0.18636897}
   m_AnchorMax: {x: 0.30188563, y: 0.71300006}
-  m_AnchoredPosition: {x: -4.199997, y: 2.6999989}
+  m_AnchoredPosition: {x: -4.2000046, y: 2.6999989}
   m_SizeDelta: {x: 5.2944984, y: 5.2944984}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1758639152

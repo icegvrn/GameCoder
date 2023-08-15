@@ -32,7 +32,7 @@ public class PortalDBContainer : MonoBehaviour
         List<int> fragmentsInfos = GetComponent<BestTimeFromDB>().GetFragmentsStats();
 
         canvasComposer.FragmentsNb.text = dbInfos.Fragments.ToString() + " fragment(s)";
-        canvasComposer.TimeName.text = dbInfos.Time_Name.ToString().ToUpper();
+        canvasComposer.TimeName.text = ("Époque ").ToUpper() + dbInfos.Time_Name.ToString().ToUpper();
         canvasComposer.BestTime.text = dbInfos.best_time.ToString() + " secondes";
         canvasComposer.TotalFragmentsFoundInTime.text = fragmentsInfos[0].ToString() + "/"+ fragmentsInfos[1].ToString();
         canvasComposer.Image.sprite = canvasComposer.ImagesSprite[(int)idFromDb-1];

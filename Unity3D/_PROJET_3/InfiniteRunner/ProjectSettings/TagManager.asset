@@ -7,6 +7,8 @@ TagManager:
   - Decor
   - Path
   - Obstacle
+  - DeadZone
+  - UpObstacle
   layers:
   - Default
   - TransparentFX

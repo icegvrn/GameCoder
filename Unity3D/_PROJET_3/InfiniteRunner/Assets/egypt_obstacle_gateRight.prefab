@@ -348,8 +348,8 @@ GameObject:
   - component: {fileID: 8809554129787861600}
   - component: {fileID: 2151601840533309178}
   m_Layer: 0
-  m_Name: egypt_obstacle2
-  m_TagString: Obstacle
+  m_Name: egypt_obstacle_gateRight
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -397,7 +397,7 @@ Animator:
   m_GameObject: {fileID: 6016634322777693836}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 639ec6ab91eed7247a31657c24ea842e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 780a07b9501762f4fb627da7166c7e04, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
