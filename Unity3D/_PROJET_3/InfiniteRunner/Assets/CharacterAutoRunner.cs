@@ -44,6 +44,13 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
     // Update is called once per frame
     void Update()
     {
+      
+     
+    }
+
+    void FixedUpdate()
+    {
+
         Rigidbody rb = GetComponent<Rigidbody>();
 
         // Contrôle du joueur pour aller à gauche ou à droite
@@ -60,13 +67,13 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
         Vector3 horizontalMovement = new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
         rb.AddForce(horizontalMovement, ForceMode.VelocityChange);
 
-   
+
         Vector3 forwardMovement = new Vector3(0, 0, runningSpeed * Time.deltaTime);
         rb.AddForce(forwardMovement, ForceMode.VelocityChange);
 
-        if (OnSlope()) 
+        if (OnSlope())
         {
-            float slopeGravityFactor = 10f; 
+            float slopeGravityFactor = runningSpeed * 1/125f;
             Vector3 slopeGravity = Vector3.down * (Physics.gravity.magnitude * slopeGravityFactor);
             rb.AddForce(slopeGravity, ForceMode.Acceleration);
         }
@@ -80,12 +87,18 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
                 GetComponent<Rigidbody>().AddForce(transform.up * 800, ForceMode.Impulse);
             }
         }
-    
+
         else if (Input.GetKey(KeyCode.S))
         {
+
+            if (!isCrouched)
+            {
+                GetComponent<CapsuleCollider>().center = new Vector3(GetComponent<CapsuleCollider>().center.x, GetComponent<CapsuleCollider>().center.y - 0.2f, GetComponent<CapsuleCollider>().center.z);
+            }
             currentState = STATE.CROUCH;
-            GetComponent<CapsuleCollider>().center = new Vector3(GetComponent<CapsuleCollider>().center.x, GetComponent<CapsuleCollider>().center.y - 0.2f, GetComponent<CapsuleCollider>().center.z);
-            isCrouched = false;
+            isCrouched = true;
+            isCollide = false;
+
         }
 
         else
@@ -103,7 +116,7 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
             {
                 if (isCrouched)
                 {
-                    GetComponent<CapsuleCollider>().center = headInitialCenter;
+                    GetComponent<CapsuleCollider>().center = new Vector3(GetComponent<CapsuleCollider>().center.x, GetComponent<CapsuleCollider>().center.y + 0.2f, GetComponent<CapsuleCollider>().center.z);
                     currentState = STATE.RUN;
                     runningSpeed = initialRunningSpeed;
                     isCrouched = false;
@@ -112,22 +125,22 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
             }
 
         }
-   
-       
-
-
-      
 
         UpdateAnimator();
 
 
         collisionTimer.Update();
 
-     
-    }
+        if (transform.position.y < -0.1f)
+        {
+            Vector3 clamp = transform.position;
+            clamp.y = 0;
+            transform.position = clamp;
+        }
+        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
+        Debug.Log("Mon forward est : " + forwardMovement);
+        Debug.Log("Ma vélocity est : " + rb.velocity.z);
 
-    void FixedUpdate()
-    {
         if (!isJumpStarted && !isCrouched && !isCollide)
         {
             currentState = STATE.RUN;
@@ -152,6 +165,7 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
 
         if (collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "DeadZone")
         {
+    
             isCollide = true;
             runningSpeed = 0;
             currentState = STATE.IDLE;
@@ -172,6 +186,7 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
     {
         if (collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "DeadZone")
         {
+            Debug.Log("JE COLLIDE AVEC " + collision.gameObject.name);
             isCollide = true;
             runningSpeed = 0;
             currentState = STATE.IDLE;
@@ -194,10 +209,12 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
     {
         if (collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "DeadZone")
         {
+            Debug.Log("COLLIDE : JE SORS DU COLLIDER " + collision.gameObject.name);
             isCollide = false;
             collisionTimer.Stop();
-            Vector3 exitDirection = -collision.contacts[0].normal;
-            float exitDistance = 0.1f; 
+            runningSpeed = initialRunningSpeed;
+              Vector3 exitDirection = -collision.contacts[0].normal;
+             float exitDistance = 0.1f; 
             transform.position += exitDirection * exitDistance;
         }
     }

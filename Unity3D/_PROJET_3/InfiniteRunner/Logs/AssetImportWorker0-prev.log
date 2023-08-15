@@ -15,7 +15,7 @@ C:/Users/Simon/Documents/Cours/GameCoder/Unity3D/_PROJET_3/InfiniteRunner
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-49726
+60113
 Successfully changed project path to: C:/Users/Simon/Documents/Cours/GameCoder/Unity3D/_PROJET_3/InfiniteRunner
 C:/Users/Simon/Documents/Cours/GameCoder/Unity3D/_PROJET_3/InfiniteRunner
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,11 +49,11 @@ C:/Users/Simon/Documents/Cours/GameCoder/Unity3D/_PROJET_3/InfiniteRunner
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [28148] Host "[IP] 192.168.1.37 [Port] 0 [Flags] 2 [Guid] 867348124 [EditorId] 867348124 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GLC01VO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [14556] Host "[IP] 192.168.1.37 [Port] 0 [Flags] 2 [Guid] 216062489 [EditorId] 216062489 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GLC01VO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [28148] Host "[IP] 192.168.1.37 [Port] 0 [Flags] 2 [Guid] 867348124 [EditorId] 867348124 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GLC01VO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [14556] Host "[IP] 192.168.1.37 [Port] 0 [Flags] 2 [Guid] 216062489 [EditorId] 216062489 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GLC01VO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 17.25 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 16.69 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.5f1 (9674261d40ee)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/Resources/UnitySubsystems
@@ -69,47 +69,47 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56144
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56052
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.014169 seconds.
-- Loaded All Assemblies, in  0.375 seconds
+Registered in 0.013225 seconds.
+- Loaded All Assemblies, in  0.383 seconds
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 463 ms
+Android Extension - Scanning For ADB Devices 496 ms
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.808 seconds
-Domain Reload Profiling: 1180ms
-	BeginReloadAssembly (94ms)
+- Finished resetting the current domain, in  0.837 seconds
+Domain Reload Profiling: 1217ms
+	BeginReloadAssembly (98ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (36ms)
-	RebuildNativeTypeToScriptingClass (12ms)
-	initialDomainReloadingComplete (71ms)
-	LoadAllAssembliesAndSetupDomain (158ms)
-		LoadAssemblies (91ms)
+	RebuildCommonClasses (35ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (78ms)
+	LoadAllAssembliesAndSetupDomain (157ms)
+		LoadAssemblies (95ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (149ms)
-			TypeCache.Refresh (148ms)
-				TypeCache.ScanAssembly (135ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (0ms)
-	FinalizeReload (808ms)
+		AnalyzeDomain (146ms)
+			TypeCache.Refresh (145ms)
+				TypeCache.ScanAssembly (130ms)
+			ScanForSourceGeneratedMonoScriptInfo (1ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (837ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (750ms)
+		SetupLoadedEditorAssemblies (778ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (595ms)
-			SetLoadedEditorAssemblies (4ms)
+			InitializePlatformSupportModulesInManaged (631ms)
+			SetLoadedEditorAssemblies (3ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (97ms)
-			ProcessInitializeOnLoadMethodAttributes (52ms)
+			ProcessInitializeOnLoadAttributes (92ms)
+			ProcessInitializeOnLoadMethodAttributes (50ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -119,117 +119,53 @@ Worker process is ready to serve import requests
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-- Loaded All Assemblies, in  1.022 seconds
-Refreshing native plugins compatible for Editor in 7.20 ms, found 4 plugins.
+- Loaded All Assemblies, in  0.989 seconds
+Refreshing native plugins compatible for Editor in 6.84 ms, found 4 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.769 seconds
-Domain Reload Profiling: 1784ms
-	BeginReloadAssembly (145ms)
+- Finished resetting the current domain, in  0.795 seconds
+Domain Reload Profiling: 1777ms
+	BeginReloadAssembly (141ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (6ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (24ms)
-	RebuildCommonClasses (37ms)
-	RebuildNativeTypeToScriptingClass (12ms)
-	initialDomainReloadingComplete (58ms)
-	LoadAllAssembliesAndSetupDomain (762ms)
-		LoadAssemblies (385ms)
+		CreateAndSetChildDomain (23ms)
+	RebuildCommonClasses (39ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (55ms)
+	LoadAllAssembliesAndSetupDomain (735ms)
+		LoadAssemblies (397ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (434ms)
-			TypeCache.Refresh (400ms)
-				TypeCache.ScanAssembly (383ms)
+		AnalyzeDomain (401ms)
+			TypeCache.Refresh (368ms)
+				TypeCache.ScanAssembly (353ms)
 			ScanForSourceGeneratedMonoScriptInfo (23ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (769ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (565ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (32ms)
-			SetLoadedEditorAssemblies (6ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (101ms)
-			ProcessInitializeOnLoadAttributes (332ms)
-			ProcessInitializeOnLoadMethodAttributes (81ms)
-			AfterProcessingInitializeOnLoad (13ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (16ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
-Refreshing native plugins compatible for Editor in 5.83 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5195 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 68 unused Assets / (320.8 KB). Loaded Objects now: 5685.
-Memory consumption went from 235.5 MB to 235.2 MB.
-Total: 3.365000 ms (FindLiveObjects: 0.373700 ms CreateObjectMapping: 0.465600 ms MarkObjects: 2.393600 ms  DeleteObjects: 0.131300 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-- Loaded All Assemblies, in  0.875 seconds
-Refreshing native plugins compatible for Editor in 6.55 ms, found 4 plugins.
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.725 seconds
-Domain Reload Profiling: 2594ms
-	BeginReloadAssembly (157ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (4ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (43ms)
-	RebuildCommonClasses (45ms)
-	RebuildNativeTypeToScriptingClass (17ms)
-	initialDomainReloadingComplete (37ms)
-	LoadAllAssembliesAndSetupDomain (611ms)
-		LoadAssemblies (340ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (334ms)
-			TypeCache.Refresh (319ms)
-				TypeCache.ScanAssembly (308ms)
-			ScanForSourceGeneratedMonoScriptInfo (4ms)
 			ResolveRequiredComponents (10ms)
-	FinalizeReload (1726ms)
+	FinalizeReload (796ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (442ms)
+		SetupLoadedEditorAssemblies (595ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (26ms)
+			InitializePlatformSupportModulesInManaged (30ms)
 			SetLoadedEditorAssemblies (5ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (86ms)
-			ProcessInitializeOnLoadAttributes (246ms)
-			ProcessInitializeOnLoadMethodAttributes (64ms)
-			AfterProcessingInitializeOnLoad (15ms)
+			BeforeProcessingInitializeOnLoad (104ms)
+			ProcessInitializeOnLoadAttributes (358ms)
+			ProcessInitializeOnLoadMethodAttributes (84ms)
+			AfterProcessingInitializeOnLoad (14ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (16ms)
-Refreshing native plugins compatible for Editor in 8.02 ms, found 4 plugins.
+		AwakeInstancesAfterBackupRestoration (13ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.08 seconds
+Refreshing native plugins compatible for Editor in 6.67 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5027 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (319.2 KB). Loaded Objects now: 5689.
-Memory consumption went from 202.3 MB to 202.0 MB.
-Total: 3.707100 ms (FindLiveObjects: 0.421300 ms CreateObjectMapping: 0.470600 ms MarkObjects: 2.687300 ms  DeleteObjects: 0.127000 ms)
+Unloading 5195 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 68 unused Assets / (320.9 KB). Loaded Objects now: 5685.
+Memory consumption went from 235.6 MB to 235.3 MB.
+Total: 3.630500 ms (FindLiveObjects: 0.397500 ms CreateObjectMapping: 0.480400 ms MarkObjects: 2.599600 ms  DeleteObjects: 0.152200 ms)
 
-Prepare: number of updated asset objects reloaded= 0
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -243,183 +179,87 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
+Received Import Request.
+  Time since last request: 115709.401397 seconds.
+  path: Assets/FOg.mat
+  artifactKey: Guid(5764a64b868029747bba86e215d32657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FOg.mat using Guid(5764a64b868029747bba86e215d32657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '47c8f63067c7572ea484951e624698db') in 0.005999 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 13.042222 seconds.
+  path: Assets/fog.mat
+  artifactKey: Guid(5764a64b868029747bba86e215d32657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/fog.mat using Guid(5764a64b868029747bba86e215d32657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '74880abe7b77f8351fbf3f52d165b955') in 0.001342 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 4.023889 seconds.
+  path: Assets/Particles/TriangleParticle.mat
+  artifactKey: Guid(9efb441a302b04e46acb0b10177a7b0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Particles/TriangleParticle.mat using Guid(9efb441a302b04e46acb0b10177a7b0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff50cbc64b13120ecea60a3343592fcb') in 0.001209 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 15.850683 seconds.
+  path: Assets/Scenes/lvl_egypt.unity
+  artifactKey: Guid(6ca83f27a76e5674abaa140f27d8107c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/lvl_egypt.unity using Guid(6ca83f27a76e5674abaa140f27d8107c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'adfb4738a28983e6a1245b8beff6c11e') in 0.000644 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-- Loaded All Assemblies, in  0.906 seconds
-Refreshing native plugins compatible for Editor in 7.07 ms, found 4 plugins.
+- Loaded All Assemblies, in  0.827 seconds
+Refreshing native plugins compatible for Editor in 5.91 ms, found 4 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.974 seconds
-Domain Reload Profiling: 2873ms
-	BeginReloadAssembly (168ms)
+- Finished resetting the current domain, in  1.702 seconds
+Domain Reload Profiling: 2523ms
+	BeginReloadAssembly (151ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (4ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (38ms)
-	RebuildCommonClasses (36ms)
-	RebuildNativeTypeToScriptingClass (13ms)
-	initialDomainReloadingComplete (40ms)
-	LoadAllAssembliesAndSetupDomain (640ms)
-		LoadAssemblies (375ms)
+		CreateAndSetChildDomain (40ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (35ms)
+	LoadAllAssembliesAndSetupDomain (593ms)
+		LoadAssemblies (340ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (338ms)
-			TypeCache.Refresh (324ms)
-				TypeCache.ScanAssembly (312ms)
+		AnalyzeDomain (312ms)
+			TypeCache.Refresh (302ms)
+				TypeCache.ScanAssembly (289ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (14ms)
-	FinalizeReload (1975ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (1703ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (650ms)
+		SetupLoadedEditorAssemblies (527ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (34ms)
-			SetLoadedEditorAssemblies (6ms)
+			InitializePlatformSupportModulesInManaged (32ms)
+			SetLoadedEditorAssemblies (5ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (125ms)
-			ProcessInitializeOnLoadAttributes (369ms)
-			ProcessInitializeOnLoadMethodAttributes (98ms)
+			BeforeProcessingInitializeOnLoad (111ms)
+			ProcessInitializeOnLoadAttributes (287ms)
+			ProcessInitializeOnLoadMethodAttributes (76ms)
 			AfterProcessingInitializeOnLoad (17ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (22ms)
-Refreshing native plugins compatible for Editor in 9.14 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 8.88 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 5027 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (319.4 KB). Loaded Objects now: 5693.
-Memory consumption went from 202.4 MB to 202.0 MB.
-Total: 4.017600 ms (FindLiveObjects: 0.452900 ms CreateObjectMapping: 0.501400 ms MarkObjects: 2.856300 ms  DeleteObjects: 0.206100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-- Loaded All Assemblies, in  0.844 seconds
-Refreshing native plugins compatible for Editor in 6.00 ms, found 4 plugins.
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.476 seconds
-Domain Reload Profiling: 2314ms
-	BeginReloadAssembly (154ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (4ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (38ms)
-	RebuildCommonClasses (39ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (44ms)
-	LoadAllAssembliesAndSetupDomain (588ms)
-		LoadAssemblies (330ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (321ms)
-			TypeCache.Refresh (307ms)
-				TypeCache.ScanAssembly (296ms)
-			ScanForSourceGeneratedMonoScriptInfo (4ms)
-			ResolveRequiredComponents (10ms)
-	FinalizeReload (1477ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (461ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (26ms)
-			SetLoadedEditorAssemblies (5ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (93ms)
-			ProcessInitializeOnLoadAttributes (266ms)
-			ProcessInitializeOnLoadMethodAttributes (61ms)
-			AfterProcessingInitializeOnLoad (10ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (16ms)
-Refreshing native plugins compatible for Editor in 6.12 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5027 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (319.3 KB). Loaded Objects now: 5697.
+Unloading 44 unused Assets / (319.3 KB). Loaded Objects now: 5690.
 Memory consumption went from 202.4 MB to 202.1 MB.
-Total: 3.604100 ms (FindLiveObjects: 0.414300 ms CreateObjectMapping: 0.431400 ms MarkObjects: 2.659300 ms  DeleteObjects: 0.098000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-- Loaded All Assemblies, in  0.882 seconds
-Refreshing native plugins compatible for Editor in 5.81 ms, found 4 plugins.
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.320 seconds
-Domain Reload Profiling: 2196ms
-	BeginReloadAssembly (147ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (4ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (37ms)
-	RebuildCommonClasses (39ms)
-	RebuildNativeTypeToScriptingClass (15ms)
-	initialDomainReloadingComplete (39ms)
-	LoadAllAssembliesAndSetupDomain (635ms)
-		LoadAssemblies (329ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (363ms)
-			TypeCache.Refresh (352ms)
-				TypeCache.ScanAssembly (340ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (1321ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (534ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (32ms)
-			SetLoadedEditorAssemblies (6ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (113ms)
-			ProcessInitializeOnLoadAttributes (295ms)
-			ProcessInitializeOnLoadMethodAttributes (75ms)
-			AfterProcessingInitializeOnLoad (13ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (18ms)
-Refreshing native plugins compatible for Editor in 6.13 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5027 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (319.4 KB). Loaded Objects now: 5701.
-Memory consumption went from 202.4 MB to 202.1 MB.
-Total: 3.885200 ms (FindLiveObjects: 0.488200 ms CreateObjectMapping: 0.468900 ms MarkObjects: 2.804300 ms  DeleteObjects: 0.122800 ms)
+Total: 6.388900 ms (FindLiveObjects: 0.611700 ms CreateObjectMapping: 0.721700 ms MarkObjects: 4.911000 ms  DeleteObjects: 0.143000 ms)
 
 Prepare: number of updated asset objects reloaded= 0
 AssetImportParameters requested are different than current active one (requested -> active):
@@ -436,428 +276,292 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 91766.340852 seconds.
-  path: Assets/Scenes/lvl_egypt.unity
-  artifactKey: Guid(6ca83f27a76e5674abaa140f27d8107c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/lvl_egypt.unity using Guid(6ca83f27a76e5674abaa140f27d8107c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f7fbdea131530a62484cadba830be77') in 0.008090 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 587.465422 seconds.
-  path: Assets/Animations/Egypt/egypt-obelisk-old.controller
-  artifactKey: Guid(3f391bcf484f34d4ca7f980832700890) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt-obelisk-old.controller using Guid(3f391bcf484f34d4ca7f980832700890) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ced009c23954ed3b5dcdbebfe331a3a1') in 0.004855 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 1.265880 seconds.
-  path: Assets/Animations/Egypt/egypt-obelisk-old (2).controller
-  artifactKey: Guid(fe3a587e4848cdd48a04f9ee51f66e8c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt-obelisk-old (2).controller using Guid(fe3a587e4848cdd48a04f9ee51f66e8c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50ca2588aaecab32ce10638907e35360') in 0.002571 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 0.356263 seconds.
-  path: Assets/Animations/Egypt/egypt-obelisk-old (5).controller
-  artifactKey: Guid(31ed0e5ccc21a26408b913739144c25b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt-obelisk-old (5).controller using Guid(31ed0e5ccc21a26408b913739144c25b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b83b90fd62d15c16d1030065e774d32e') in 0.002736 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 8
-========================================================================
-Received Import Request.
-  Time since last request: 1.640861 seconds.
-  path: Assets/Animations/Egypt/egypt-obelisk-old (4).controller
-  artifactKey: Guid(16b586d627d2e064c90b5c137765cd7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt-obelisk-old (4).controller using Guid(16b586d627d2e064c90b5c137765cd7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1503aa675cd2c7556cf7ee3632cc9f8a') in 0.003014 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 11
-========================================================================
-Received Import Request.
-  Time since last request: 0.448224 seconds.
-  path: Assets/Animations/Egypt/egypt-obelisk-old (3).controller
-  artifactKey: Guid(e703f63e1b5be914fb4481a7133b0ade) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt-obelisk-old (3).controller using Guid(e703f63e1b5be914fb4481a7133b0ade) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b652ff8b8992bad6b5e7e83a1b6c278') in 0.002485 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 46.628207 seconds.
-  path: Assets/Animations/Egypt/egypt_obstacle2 1.controller
-  artifactKey: Guid(31bbb7ab95b52c149a79646d9274d015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt_obstacle2 1.controller using Guid(31bbb7ab95b52c149a79646d9274d015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd307aa22299655994e36662d62b2d024') in 0.002983 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 4.457297 seconds.
-  path: Assets/Animations/Egypt/egypt_obstacle3.controller
-  artifactKey: Guid(31bbb7ab95b52c149a79646d9274d015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt_obstacle3.controller using Guid(31bbb7ab95b52c149a79646d9274d015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2455ded3912a068f644ede28110acbc7') in 0.002652 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 42.935734 seconds.
-  path: Assets/Animations/Egypt/egypt_obstacle3.controller
-  artifactKey: Guid(31bbb7ab95b52c149a79646d9274d015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt_obstacle3.controller using Guid(31bbb7ab95b52c149a79646d9274d015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '953a2d6bf89487a4aa57cf3daf8dbab8') in 0.001867 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 8
-========================================================================
-Received Import Request.
-  Time since last request: 12.222595 seconds.
-  path: Assets/Animations/Egypt/leftGate.anim
-  artifactKey: Guid(d01da73be7361f34fa26ecd3b5086d7e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/leftGate.anim using Guid(d01da73be7361f34fa26ecd3b5086d7e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '39ee546bf83b8373679a032b3fbccd01') in 0.001411 seconds
+  Time since last request: 374.452473 seconds.
+  path: Assets/fog.mat
+  artifactKey: Guid(5764a64b868029747bba86e215d32657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/fog.mat using Guid(5764a64b868029747bba86e215d32657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '821bbdcc2f9df972844703be96fbd754') in 0.017989 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 1
 ========================================================================
 Received Import Request.
-  Time since last request: 2.724835 seconds.
-  path: Assets/Animations/Egypt/leftGate 1.anim
-  artifactKey: Guid(7481003dc5db2fd44ad7cc844a9c5d42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/leftGate 1.anim using Guid(7481003dc5db2fd44ad7cc844a9c5d42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4ff166f31c702b9cb151e13b90d69e65') in 0.001823 seconds
+  Time since last request: 15.343570 seconds.
+  path: Assets/egypt_obstacle_gateCenter 1.prefab
+  artifactKey: Guid(f3c329c9e6c6cdb448db7410191b0859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/egypt_obstacle_gateCenter 1.prefab using Guid(f3c329c9e6c6cdb448db7410191b0859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '94693d15e546f5789505f251438e8f48') in 0.037431 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 77
+========================================================================
+Received Import Request.
+  Time since last request: 10.870248 seconds.
+  path: Assets/egypt_obstacle_gateCenterBottom.prefab
+  artifactKey: Guid(f3c329c9e6c6cdb448db7410191b0859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/egypt_obstacle_gateCenterBottom.prefab using Guid(f3c329c9e6c6cdb448db7410191b0859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9991f6616fb79e6ed204b5c4cec22267') in 0.009747 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 77
+========================================================================
+Received Import Request.
+  Time since last request: 10.816653 seconds.
+  path: Assets/Animations/Egypt/centerGate.anim
+  artifactKey: Guid(4935c1a918d66a042a98379f4238ece7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/Egypt/centerGate.anim using Guid(4935c1a918d66a042a98379f4238ece7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b325125fddef885c58752dbe79a071e') in 0.002138 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 1
 ========================================================================
 Received Import Request.
-  Time since last request: 7.057717 seconds.
-  path: Assets/Animations/Egypt/rightGate.anim
-  artifactKey: Guid(7481003dc5db2fd44ad7cc844a9c5d42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/rightGate.anim using Guid(7481003dc5db2fd44ad7cc844a9c5d42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b12720dc2523e310457170a7ba1e631b') in 0.002263 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 1.149157 seconds.
-  path: Assets/Animations/Egypt/leftGateIDLE 1.anim
-  artifactKey: Guid(4108056d80ce7624bbd7c4c39410edc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/leftGateIDLE 1.anim using Guid(4108056d80ce7624bbd7c4c39410edc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '75b6b889b8266f521344ebff6cea99a1') in 0.001704 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 8.736135 seconds.
-  path: Assets/Animations/Egypt/rightGateIDLE.anim
-  artifactKey: Guid(4108056d80ce7624bbd7c4c39410edc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/rightGateIDLE.anim using Guid(4108056d80ce7624bbd7c4c39410edc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9630ff16960b22f3a3e7e8da6f12938e') in 0.001783 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 3.422538 seconds.
-  path: Assets/Animations/Egypt/egypt_obstacle3 1.controller
-  artifactKey: Guid(780a07b9501762f4fb627da7166c7e04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt_obstacle3 1.controller using Guid(780a07b9501762f4fb627da7166c7e04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2623ed91f2fc8abf77f497f2e1dc6446') in 0.002075 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 8
-========================================================================
-Received Import Request.
-  Time since last request: 9.015244 seconds.
+  Time since last request: 2.786383 seconds.
   path: Assets/Animations/Egypt/egypt_gateRight.controller
   artifactKey: Guid(780a07b9501762f4fb627da7166c7e04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt_gateRight.controller using Guid(780a07b9501762f4fb627da7166c7e04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ad6e69db7377379026d28c11265dbb2') in 0.001640 seconds
+Start importing Assets/Animations/Egypt/egypt_gateRight.controller using Guid(780a07b9501762f4fb627da7166c7e04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '16e7d6e2fc3cdd70a167a0e5e26e04b1') in 0.003710 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 8
 ========================================================================
 Received Import Request.
-  Time since last request: 1.910441 seconds.
-  path: Assets/Animations/Egypt/egypt_obstacle2.controller
-  artifactKey: Guid(639ec6ab91eed7247a31657c24ea842e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt_obstacle2.controller using Guid(639ec6ab91eed7247a31657c24ea842e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5f48158880bbced4d4a7bc6f09d0bca8') in 0.002304 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 6.632889 seconds.
-  path: Assets/Animations/Egypt/egypt_gateCenter.controller
-  artifactKey: Guid(639ec6ab91eed7247a31657c24ea842e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt_gateCenter.controller using Guid(639ec6ab91eed7247a31657c24ea842e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9c6842772dbd2d3cbbbafc76f1d22c44') in 0.002842 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 13.921233 seconds.
-  path: Assets/Animations/Egypt/egypt_gateLeft.controller
-  artifactKey: Guid(639ec6ab91eed7247a31657c24ea842e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt_gateLeft.controller using Guid(639ec6ab91eed7247a31657c24ea842e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4ecb8eb9c4748c9d6a4e8024a3b3eed') in 0.002800 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 5.330137 seconds.
-  path: Assets/Animations/Egypt/egypt_gateCenter.controller
-  artifactKey: Guid(31bbb7ab95b52c149a79646d9274d015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt_gateCenter.controller using Guid(31bbb7ab95b52c149a79646d9274d015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8b6ac839483e019595e6566e3fb0132') in 0.001694 seconds
+  Time since last request: 3.055321 seconds.
+  path: Assets/Animations/Egypt/egypt_gateCenter 1.controller
+  artifactKey: Guid(534de2ff071981e468dbe652b274c3e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/Egypt/egypt_gateCenter 1.controller using Guid(534de2ff071981e468dbe652b274c3e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bab5929c128d7b39f4a772ebec272031') in 0.002671 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 8
 ========================================================================
 Received Import Request.
-  Time since last request: 40.330951 seconds.
-  path: Assets/egypt_obstacle3.prefab
-  artifactKey: Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle3.prefab using Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b88286a23f77482b92e6ffbf585cdc5') in 0.035936 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 67
-========================================================================
-Received Import Request.
-  Time since last request: 28.020675 seconds.
-  path: Assets/egypt_obstacle_GateCenter.prefab
-  artifactKey: Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_GateCenter.prefab using Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be06a882d2fd980f6f011b3947c24bfb') in 0.009997 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 67
-========================================================================
-Received Import Request.
-  Time since last request: 28.384927 seconds.
-  path: Assets/egypt_obstacle_left.prefab
-  artifactKey: Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_left.prefab using Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd534773ea0f2af3f8b10bc6116e12dc') in 0.009858 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 67
-========================================================================
-Received Import Request.
-  Time since last request: 8.358643 seconds.
-  path: Assets/egypt_obstacle_gateCenter.prefab
-  artifactKey: Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_gateCenter.prefab using Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7beec048a88aec525473d8d5b2dc37f9') in 0.008516 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 77
-========================================================================
-Received Import Request.
-  Time since last request: 6.931866 seconds.
-  path: Assets/egypt_obstacle_gateCenter.prefab
-  artifactKey: Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_gateCenter.prefab using Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '39a213b22027ace943b235dcb6577659') in 0.009167 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 77
-========================================================================
-Received Import Request.
-  Time since last request: 12.161886 seconds.
-  path: Assets/egypt_obstacle_left.prefab
-  artifactKey: Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_left.prefab using Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7af7a2bfc2bf4e1a2be6a55c8139b11d') in 0.008816 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 67
-========================================================================
-Received Import Request.
-  Time since last request: 9.149892 seconds.
-  path: Assets/egypt_obstacle2.prefab
-  artifactKey: Guid(5c72693ea656b30428c1ea4e176d4a3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle2.prefab using Guid(5c72693ea656b30428c1ea4e176d4a3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c8d815469fcc5c4763e837bb17aa43b1') in 0.010451 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 67
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/egypt_obstacle_left.prefab
-  artifactKey: Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_left.prefab using Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5afc92e35c1943c5bfd13249815f4aac') in 0.009013 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 67
-========================================================================
-Received Import Request.
-  Time since last request: 42.320168 seconds.
-  path: Assets/egypt_obstacle_gateCenter.prefab
-  artifactKey: Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_gateCenter.prefab using Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b8354ef0ab8a60947911a76d9b7af1a0') in 0.009054 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 77
-========================================================================
-Received Import Request.
-  Time since last request: 0.000028 seconds.
-  path: Assets/egypt_obstacle_left.prefab
-  artifactKey: Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_left.prefab using Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2a2ad6fbab8b560afa1edcd9503f6335') in 0.008870 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 67
-========================================================================
-Received Import Request.
-  Time since last request: 84.334495 seconds.
-  path: Assets/egypt_obstacle_gateCenter.prefab
-  artifactKey: Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_gateCenter.prefab using Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fcf27bfa0df861b45db6173537bed0de') in 0.009973 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 82
-========================================================================
-Received Import Request.
-  Time since last request: 289.845011 seconds.
-  path: Assets/egypt_obstacle_gateCenter.prefab
-  artifactKey: Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_gateCenter.prefab using Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6aca095428420ce9eb5d1128b8954636') in 0.009870 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 77
-========================================================================
-Received Import Request.
-  Time since last request: 770.836963 seconds.
-  path: Assets/egypt_obstacle_left.prefab
-  artifactKey: Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_left.prefab using Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f40b0ab697176f40a5c917e890cb0d4b') in 0.011979 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 67
-========================================================================
-Received Import Request.
-  Time since last request: 1.367903 seconds.
-  path: Assets/egypt_obstacle_left.prefab
-  artifactKey: Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_left.prefab using Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1349491dc3c121b46d779716b41b6d44') in 0.011820 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 67
-========================================================================
-Received Import Request.
-  Time since last request: 8.674641 seconds.
-  path: Assets/egypt_obstacle_left.prefab
-  artifactKey: Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_left.prefab using Guid(b8724bf22aadc574aa2512d2c5737c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e696822d86ac8b6e0a4bbc599b76bc97') in 0.009239 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 67
-========================================================================
-Received Import Request.
-  Time since last request: 375.765228 seconds.
-  path: Assets/egypt_obstacle_left 1.prefab
-  artifactKey: Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_left 1.prefab using Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90d2113943fbf565b5a8384eab0a329a') in 0.010460 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 67
-========================================================================
-Received Import Request.
-  Time since last request: 6.628108 seconds.
-  path: Assets/egypt_obstacle_trap.prefab
-  artifactKey: Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_trap.prefab using Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb23326368b14a7a68fad5cbbbada033') in 0.009399 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 67
-========================================================================
-Received Import Request.
-  Time since last request: 17.297671 seconds.
-  path: Assets/Animations/Egypt/egypt_gateLeft.controller
-  artifactKey: Guid(639ec6ab91eed7247a31657c24ea842e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt_gateLeft.controller using Guid(639ec6ab91eed7247a31657c24ea842e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '85a6372596174cea495025661bfb2c06') in 0.002939 seconds
+  Time since last request: 4.530723 seconds.
+  path: Assets/Animations/Egypt/egypt_gateCenterBottom.controller
+  artifactKey: Guid(534de2ff071981e468dbe652b274c3e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/Egypt/egypt_gateCenterBottom.controller using Guid(534de2ff071981e468dbe652b274c3e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '374920e2acdb0464602b9a417143146b') in 0.002521 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 8
 ========================================================================
 Received Import Request.
-  Time since last request: 1.560000 seconds.
-  path: Assets/Animations/Egypt/egypt_gateLeft 1.controller
-  artifactKey: Guid(f0051532c3f10684eb8c40a7dbb3a925) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt_gateLeft 1.controller using Guid(f0051532c3f10684eb8c40a7dbb3a925) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46f78247f65c91a603c946ed4ad0a9de') in 0.002455 seconds
+  Time since last request: 3.271877 seconds.
+  path: Assets/Animations/Egypt/centerGate 1.anim
+  artifactKey: Guid(99a0968332d8e3e47a086d10bfbc8547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/Egypt/centerGate 1.anim using Guid(99a0968332d8e3e47a086d10bfbc8547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd0e3efc70956b5d44d68d7e09579579c') in 0.001741 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 8
+Number of asset objects unloaded after import = 1
 ========================================================================
 Received Import Request.
-  Time since last request: 5.250419 seconds.
+  Time since last request: 5.929964 seconds.
+  path: Assets/Animations/Egypt/centerGateBottom.anim
+  artifactKey: Guid(99a0968332d8e3e47a086d10bfbc8547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/Egypt/centerGateBottom.anim using Guid(99a0968332d8e3e47a086d10bfbc8547) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '40f6e0c56cf36d5c1dde623be461509c') in 0.001844 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 1.208580 seconds.
+  path: Assets/Animations/Egypt/centerGateIDLE.anim
+  artifactKey: Guid(3d8c30d172560164da311237f9ca1063) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/Egypt/centerGateIDLE.anim using Guid(3d8c30d172560164da311237f9ca1063) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '722671d5c807ebb0e72219a2e8bed788') in 0.001608 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 12.791804 seconds.
   path: Assets/Animations/Egypt/egypt_trap.controller
   artifactKey: Guid(f0051532c3f10684eb8c40a7dbb3a925) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/egypt_trap.controller using Guid(f0051532c3f10684eb8c40a7dbb3a925) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0349aae8c1860c15c02d8130980e5d92') in 0.003016 seconds
+Start importing Assets/Animations/Egypt/egypt_trap.controller using Guid(f0051532c3f10684eb8c40a7dbb3a925) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '26ff7dc24d2c1f60ec26f9f778f8898b') in 0.002616 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 8
 ========================================================================
 Received Import Request.
-  Time since last request: 4.935066 seconds.
-  path: Assets/Animations/Egypt/rightGateIDLE 1.anim
-  artifactKey: Guid(2098d51b47f496b43908fd09e03646dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/rightGateIDLE 1.anim using Guid(2098d51b47f496b43908fd09e03646dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a81012cb6d6166da679215a0a1f72e4') in 0.001744 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 5.185710 seconds.
-  path: Assets/Animations/Egypt/trap_idle.anim
-  artifactKey: Guid(2098d51b47f496b43908fd09e03646dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/trap_idle.anim using Guid(2098d51b47f496b43908fd09e03646dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1bf041758a2184822a0c6cf9edc7f2ae') in 0.001296 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 1.495415 seconds.
-  path: Assets/Animations/Egypt/trap_idle 1.anim
-  artifactKey: Guid(9bad05463f5f9df4396459bd8c8a37d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/trap_idle 1.anim using Guid(9bad05463f5f9df4396459bd8c8a37d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '500dff1eabb000ae0726071a3cdb2a79') in 0.001347 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 2.851173 seconds.
-  path: Assets/Animations/Egypt/trap.anim
-  artifactKey: Guid(9bad05463f5f9df4396459bd8c8a37d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animations/Egypt/trap.anim using Guid(9bad05463f5f9df4396459bd8c8a37d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '276bbacaf92e5197e0faf3819d09611a') in 0.001396 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 18.788666 seconds.
-  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Survival_M/bear-trap.fbx
-  artifactKey: Guid(5c6dd672999a1453da359818759e74c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Survival_M/bear-trap.fbx using Guid(5c6dd672999a1453da359818759e74c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46ed62b56663a1ff9cf5093e2387afa9') in 0.001856 seconds
+  Time since last request: 94.712302 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Japan_M/bamboo.fbx
+  artifactKey: Guid(c62ae752c23844abfbc03a0ebc02f731) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Japan_M/bamboo.fbx using Guid(c62ae752c23844abfbc03a0ebc02f731) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f1df12fddc5a8576d505e9434ebdd9d') in 0.002281 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 6
 ========================================================================
 Received Import Request.
-  Time since last request: 6.406686 seconds.
-  path: Assets/egypt_obstacle_trap.prefab
-  artifactKey: Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_trap.prefab using Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'feab16eec568c63abfc43947e091e730') in 0.009231 seconds
+  Time since last request: 0.038946 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Japan_M/bamboo-leaves.fbx
+  artifactKey: Guid(4c7b484f6aab94a45be2c47b5f94da08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Japan_M/bamboo-leaves.fbx using Guid(4c7b484f6aab94a45be2c47b5f94da08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a96140ad2c51709a8bb92296ae47340') in 0.002075 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 61
+Number of asset objects unloaded after import = 6
 ========================================================================
 Received Import Request.
-  Time since last request: 1.364182 seconds.
-  path: Assets/egypt_obstacle_trap.prefab
-  artifactKey: Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_trap.prefab using Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c62bbefd1870740d783d3f98cbfe45d9') in 0.009318 seconds
+  Time since last request: 0.000017 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Vehicles_M/boat-china.fbx
+  artifactKey: Guid(ae2c00b132c517242aa4d06c10625921) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Vehicles_M/boat-china.fbx using Guid(ae2c00b132c517242aa4d06c10625921) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7183b41f3cb8b775c765f832d6501562') in 0.002679 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 56
+Number of asset objects unloaded after import = 6
 ========================================================================
 Received Import Request.
-  Time since last request: 1.194481 seconds.
-  path: Assets/egypt_obstacle_trap.prefab
-  artifactKey: Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_trap.prefab using Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '647b357a4c3fe07dda22268acdd64155') in 0.009982 seconds
+  Time since last request: 0.000015 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Apocalypse_T/body-bag.fbx
+  artifactKey: Guid(13629a3fbe0194fcb8da38ff3d2c973d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Apocalypse_T/body-bag.fbx using Guid(13629a3fbe0194fcb8da38ff3d2c973d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf4c8118ba2fb16583398f55f827d39b') in 0.001724 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 51
+Number of asset objects unloaded after import = 6
 ========================================================================
 Received Import Request.
-  Time since last request: 1.012900 seconds.
-  path: Assets/egypt_obstacle_trap.prefab
-  artifactKey: Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/egypt_obstacle_trap.prefab using Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '925fd79cff552af83dcb259a64e07364') in 0.010749 seconds
+  Time since last request: 0.000020 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Vehicles_T/boat-china.fbx
+  artifactKey: Guid(61102e40f664bbe45a854db4eb547566) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Vehicles_T/boat-china.fbx using Guid(61102e40f664bbe45a854db4eb547566) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd9b92ec5d2ef39fe1a919584c289c7b7') in 0.002662 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 46
+Number of asset objects unloaded after import = 6
 ========================================================================
 Received Import Request.
-  Time since last request: 9.694365 seconds.
-  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Egypt_T/egypt-obelisk-old.prefab
-  artifactKey: Guid(f11d87921bd883c4ea9ffd18626b3a48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Egypt_T/egypt-obelisk-old.prefab using Guid(f11d87921bd883c4ea9ffd18626b3a48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ff80b38a1f1ae23e758aa1e79136f28') in 0.001704 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 7
-========================================================================
-Received Import Request.
-  Time since last request: 0.018878 seconds.
-  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Egypt_M/egypt-obelisk-old.prefab
-  artifactKey: Guid(5335e08ea1eddd64fbff3557bdde90f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Egypt_M/egypt-obelisk-old.prefab using Guid(5335e08ea1eddd64fbff3557bdde90f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5faf8f2f93401ead01c55933cd6fae03') in 0.002011 seconds
+  Time since last request: 0.000088 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Vehicles_T/boats/boat-fishing.prefab
+  artifactKey: Guid(c4345ffbcfc8cc945bb35cbfd2409f5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Vehicles_T/boats/boat-fishing.prefab using Guid(c4345ffbcfc8cc945bb35cbfd2409f5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ac6129d6c807c6e76694884f78f2ea7') in 0.002272 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 7
 ========================================================================
 Received Import Request.
   Time since last request: 0.000014 seconds.
-  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Egypt_T/egypt-obelisk-old-broken.fbx
-  artifactKey: Guid(3eb6c91c0e0e4e243b875611b22fa227) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Egypt_T/egypt-obelisk-old-broken.fbx using Guid(3eb6c91c0e0e4e243b875611b22fa227) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a4f69174ea925ac6903774ee2e55b2c6') in 0.002239 seconds
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Vehicles_M/Boats_M/boat-speed.prefab
+  artifactKey: Guid(1ca6a072a7c6ace46a7169820c82e247) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Vehicles_M/Boats_M/boat-speed.prefab using Guid(1ca6a072a7c6ace46a7169820c82e247) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e2ba2587d7854d752ab092576bcd3a9') in 0.003318 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Vehicles_T/boat-speed.fbx
+  artifactKey: Guid(47872d1e89f90f34fa3416cf9b02cbbb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Vehicles_T/boat-speed.fbx using Guid(47872d1e89f90f34fa3416cf9b02cbbb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'edbe0b8b40429692ed3be6faa5da0cfc') in 0.002034 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 6
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000027 seconds.
-  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Fantasy_M/potion-globe.fbx
-  artifactKey: Guid(5a3546cb4dd9946b0a1f074b8ab62f0d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Fantasy_M/potion-globe.fbx using Guid(5a3546cb4dd9946b0a1f074b8ab62f0d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '09f597ae6cc9a0321bcb05780bfb62a5') in 0.002638 seconds
+  Time since last request: 0.000016 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Apocalypse_M/body-bag.fbx
+  artifactKey: Guid(f607864edae12457f934c3fd7443703f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Apocalypse_M/body-bag.fbx using Guid(f607864edae12457f934c3fd7443703f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ed92474f31f63f236728c6fd73c98acd') in 0.003186 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Vehicles_M/boat-fishing.fbx
+  artifactKey: Guid(5f305c0611af59342a39bc0b3c8129c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Vehicles_M/boat-fishing.fbx using Guid(5f305c0611af59342a39bc0b3c8129c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c8df1190352ca2c4f52b001d5f6fac07') in 0.002053 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Vehicles_T/boat.fbx
+  artifactKey: Guid(8b789d87091534ae1b9aa8dc162c1a78) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Vehicles_T/boat.fbx using Guid(8b789d87091534ae1b9aa8dc162c1a78) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '465d860cfe7f3961d0cf60e2a3431acc') in 0.002956 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 1.482390 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Western_T/rail-straight-bottom.prefab
+  artifactKey: Guid(b2bc00575dbae0748a3c0f87973f0fbb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Western_T/rail-straight-bottom.prefab using Guid(b2bc00575dbae0748a3c0f87973f0fbb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fac876af533173b81abf191177cabd59') in 0.002212 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Western_M/rail-straight-bottom.fbx
+  artifactKey: Guid(e9d6e115e6c5e45c3b80fcc401d9d8d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Western_M/rail-straight-bottom.fbx using Guid(e9d6e115e6c5e45c3b80fcc401d9d8d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c748054c4902ce98e6a9b67232628f0') in 0.002909 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Scifi_M/scifi-floor-bottom.fbx
+  artifactKey: Guid(914c424e254966c4b9a3f9450b38ebea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Scifi_M/scifi-floor-bottom.fbx using Guid(914c424e254966c4b9a3f9450b38ebea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '92e63a78ba9d0bbdc5f72887696bed6e') in 0.002175 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Western_M/rail-straight-bottom.prefab
+  artifactKey: Guid(03326e874cf2548d4946608a4d7ebc94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Western_M/rail-straight-bottom.prefab using Guid(03326e874cf2548d4946608a4d7ebc94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '508cb54d6be2ae12c0a6465536d2bb2e') in 0.002959 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Buildings_T/skyscraper2-part-bottom.fbx
+  artifactKey: Guid(269767a3042eb204dbb620ef4a90784b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Buildings_T/skyscraper2-part-bottom.fbx using Guid(269767a3042eb204dbb620ef4a90784b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ca8b30af83ee0c2a9a1352342f376229') in 0.002712 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Scifi_M/scifi-floor-bottom 1.prefab
+  artifactKey: Guid(819bdb25daabcbe47a63a83d1896decd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Scifi_M/scifi-floor-bottom 1.prefab using Guid(819bdb25daabcbe47a63a83d1896decd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '89507258d8b605fda435268ec4656ed9') in 0.003026 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+- Loaded All Assemblies, in  0.920 seconds
+Refreshing native plugins compatible for Editor in 5.92 ms, found 4 plugins.
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.853 seconds
+Domain Reload Profiling: 2765ms
+	BeginReloadAssembly (163ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (4ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (42ms)
+	RebuildCommonClasses (57ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (37ms)
+	LoadAllAssembliesAndSetupDomain (643ms)
+		LoadAssemblies (355ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (356ms)
+			TypeCache.Refresh (344ms)
+				TypeCache.ScanAssembly (331ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1853ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (594ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (32ms)
+			SetLoadedEditorAssemblies (5ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (125ms)
+			ProcessInitializeOnLoadAttributes (330ms)
+			ProcessInitializeOnLoadMethodAttributes (86ms)
+			AfterProcessingInitializeOnLoad (17ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (23ms)
+Refreshing native plugins compatible for Editor in 7.67 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5027 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 44 unused Assets / (319.3 KB). Loaded Objects now: 5696.
+Memory consumption went from 202.7 MB to 202.4 MB.
+Total: 3.816800 ms (FindLiveObjects: 0.475100 ms CreateObjectMapping: 0.621000 ms MarkObjects: 2.604800 ms  DeleteObjects: 0.114800 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: L’opération d’entrée/sortie a été abandonnée en raison de l’arrêt d’un thread ou à la demande d’une application.
 AssetImportWorker is now disconnected from the server

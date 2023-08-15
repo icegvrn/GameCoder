@@ -54,12 +54,12 @@ public class PathGenerator : MonoBehaviour
         }
 
         // Get the nearest chunk to the player
-        GameObject nearestChunk = FindNearestChunk();
+      //  GameObject nearestChunk = FindNearestChunk();
 
-        if (nearestChunk != null)
-        {
-            Debug.Log("LE PROCHAIN CHUNK LE PLUS PROCHE EST A LINDEX" + GetTheNextNearestChunkIndex());
-        }
+     //   if (nearestChunk != null)
+       // {
+          //  Debug.Log("LE PROCHAIN CHUNK LE PLUS PROCHE EST A LINDEX" + GetTheNextNearestChunkIndex());
+       // }
 
 
 

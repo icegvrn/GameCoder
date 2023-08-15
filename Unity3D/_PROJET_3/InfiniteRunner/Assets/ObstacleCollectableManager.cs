@@ -23,22 +23,31 @@ public class ObstacleCollectableManager : MonoBehaviour
 
     public void EnableRandomCollectables()
     {
-        int randNb = Random.Range(0, collectablesGroups.Count+1);
+ 
 
         foreach (CollectablesContainer collecContainer in collectablesGroups)
         {
-
-            if (randNb > collectablesGroups.Count || collectablesGroups.IndexOf(collecContainer) != randNb)
-            {
-                collecContainer.DisableGroup();
-            }
-
-            else
-            {
-                collecContainer.EnableGroup();
-            }
-
+            collecContainer.Reset();
         }
+
+     
+            int randNb = Random.Range(0, collectablesGroups.Count + 1);
+
+            foreach (CollectablesContainer collecContainer in collectablesGroups)
+            {
+
+                if (randNb > collectablesGroups.Count || collectablesGroups.IndexOf(collecContainer) != randNb)
+                {
+                    collecContainer.DisableGroup();
+                }
+
+                else
+                {
+                    collecContainer.EnableGroup();
+                }
+            }
+        
+       
     }
 
     public void Reset()

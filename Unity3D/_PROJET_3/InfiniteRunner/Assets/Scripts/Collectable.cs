@@ -18,11 +18,10 @@ public class Collectable : MonoBehaviour
 
    void OnTriggerEnter(Collider other)
     {
-        gameObject.SetActive(false);
-
+    gameObject.SetActive(false);
         if (other.gameObject.TryGetComponent(out PointCollector pCollector))
         {
-            Debug.Log("JE PASSE DEDANS");
+        
             pCollector.AddPoints(pointsValue);
         }
     }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4563321502003803376
+--- !u!114 &-8831471332435097988
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,64 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e021b4c809a781e468c2988c016ebbea, type: 3}
-  m_Name: ColorLookup
+  m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
+  m_Name: Vignette
   m_EditorClassIdentifier: 
   active: 1
-  texture:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
-    dimension: 1
-  contribution:
-    m_OverrideState: 0
-    m_Value: 0
---- !u!114 &-1880604962152322399
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
-  m_Name: Bloom
-  m_EditorClassIdentifier: 
-  active: 1
-  skipIterations:
+  color:
     m_OverrideState: 1
-    m_Value: 0
-  threshold:
+    m_Value: {r: 0.16967782, g: 0.38679248, b: 0.3823588, a: 1}
+  center:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 1.42
-  scatter:
-    m_OverrideState: 1
-    m_Value: 0.882
-  clamp:
-    m_OverrideState: 1
-    m_Value: 65472
-  tint:
-    m_OverrideState: 1
-    m_Value: {r: 0.7028302, g: 0.89846694, b: 1, a: 1}
-  highQualityFiltering:
+    m_Value: 0.353
+  smoothness:
     m_OverrideState: 1
     m_Value: 1
-  downscale:
+  rounded:
     m_OverrideState: 0
-    m_Value: 0
-  maxIterations:
-    m_OverrideState: 0
-    m_Value: 6
-  dirtTexture:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
-    dimension: 1
-  dirtIntensity:
-    m_OverrideState: 0
-    m_Value: 0
+    m_Value: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,43 +38,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Medieval
+  m_Name: JAPAN2
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 1748499753259464154}
-  - {fileID: -1880604962152322399}
-  - {fileID: 8090621501808229040}
-  - {fileID: -4563321502003803376}
-  - {fileID: 2385086317275975279}
---- !u!114 &1748499753259464154
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
-  m_Name: ColorAdjustments
-  m_EditorClassIdentifier: 
-  active: 1
-  postExposure:
-    m_OverrideState: 0
-    m_Value: 0
-  contrast:
-    m_OverrideState: 1
-    m_Value: 14.7
-  colorFilter:
-    m_OverrideState: 0
-    m_Value: {r: 0.8396226, g: 0, b: 0, a: 1}
-  hueShift:
-    m_OverrideState: 1
-    m_Value: 5
-  saturation:
-    m_OverrideState: 1
-    m_Value: -18
---- !u!114 &2385086317275975279
+  - {fileID: 7047801163636152714}
+  - {fileID: 6737815560808479357}
+  - {fileID: -8831471332435097988}
+  - {fileID: 8171500032218370960}
+  - {fileID: 3219489491427326198}
+--- !u!114 &3219489491427326198
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,8 +79,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.38670695
-          value: 0.18064517
+          time: 0.4097222
+          value: 0.18045115
           inSlope: 1.1213566
           outSlope: 1.1213566
           tangentMode: 0
@@ -155,8 +88,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.8066465
-          value: 0.67741936
+          time: 0.8125
+          value: 0.6466166
           inSlope: 1
           outSlope: 1
           tangentMode: 0
@@ -204,8 +137,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.683871
-          value: 0.6666666
+          time: 0.6666667
+          value: 0.62406015
           inSlope: 1
           outSlope: 1
           tangentMode: 0
@@ -244,8 +177,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.3892473
-          value: 0.2972973
+          time: 0.3784722
+          value: 0.3233083
           inSlope: 1.0791411
           outSlope: 1.0791411
           tangentMode: 0
@@ -253,8 +186,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.7827957
-          value: 0.545045
+          time: 0.7291667
+          value: 0.556391
           inSlope: 1
           outSlope: 1
           tangentMode: 0
@@ -293,8 +226,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.45806453
-          value: 0.2027027
+          time: 0.43055555
+          value: 0.22556388
           inSlope: 1
           outSlope: 1
           tangentMode: 0
@@ -302,8 +235,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.7978495
-          value: 0.6216216
+          time: 0.7465278
+          value: 0.7518797
           inSlope: 1
           outSlope: 1
           tangentMode: 0
@@ -374,7 +307,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
---- !u!114 &8090621501808229040
+--- !u!114 &6737815560808479357
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -383,22 +316,89 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
-  m_Name: Vignette
+  m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
+  m_Name: Bloom
   m_EditorClassIdentifier: 
   active: 1
-  color:
+  skipIterations:
     m_OverrideState: 1
-    m_Value: {r: 0.15566039, g: 0.41338956, b: 1, a: 1}
-  center:
+    m_Value: 0
+  threshold:
     m_OverrideState: 1
-    m_Value: {x: 0.5, y: 0.5}
+    m_Value: 0.26
   intensity:
     m_OverrideState: 1
-    m_Value: 0.345
-  smoothness:
+    m_Value: 0.8
+  scatter:
     m_OverrideState: 1
     m_Value: 1
-  rounded:
-    m_OverrideState: 0
+  clamp:
+    m_OverrideState: 1
+    m_Value: 65472
+  tint:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 0.7019608, b: 0.9749702, a: 1}
+  highQualityFiltering:
+    m_OverrideState: 1
     m_Value: 1
+  downscale:
+    m_OverrideState: 0
+    m_Value: 0
+  maxIterations:
+    m_OverrideState: 0
+    m_Value: 6
+  dirtTexture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+    dimension: 1
+  dirtIntensity:
+    m_OverrideState: 0
+    m_Value: 0
+--- !u!114 &7047801163636152714
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
+  m_Name: ColorAdjustments
+  m_EditorClassIdentifier: 
+  active: 1
+  postExposure:
+    m_OverrideState: 0
+    m_Value: 0
+  contrast:
+    m_OverrideState: 1
+    m_Value: 20
+  colorFilter:
+    m_OverrideState: 1
+    m_Value: {r: 1.1486983, g: 1.1486983, b: 1.1486983, a: 1}
+  hueShift:
+    m_OverrideState: 1
+    m_Value: 17
+  saturation:
+    m_OverrideState: 1
+    m_Value: -30
+--- !u!114 &8171500032218370960
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e021b4c809a781e468c2988c016ebbea, type: 3}
+  m_Name: ColorLookup
+  m_EditorClassIdentifier: 
+  active: 1
+  texture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+    dimension: 1
+  contribution:
+    m_OverrideState: 0
+    m_Value: 0

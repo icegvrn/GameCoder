@@ -49,13 +49,13 @@ public class FragmentManager : MonoBehaviour
         {
             if (playerScore >= totalPointsNeeded / 3)
             {
-                Debug.Log("FRAGMENT MANAGER : Je suis censé passer dans le test i avec un i commence à  " + (fragmentScoreThresholds.Count));
+
              
                 if (fragmentScoreThresholds.Count > 0)
                 {
                     for (int i = fragmentScoreThresholds.Count - 1; i >= 0; i--)
                     {
-                        Debug.Log("FRAGMENT MANAGER : Mon score joueur est de " + playerScore + " et pour déclancher je dois atteindre " + fragmentScoreThresholds[i]);
+                      
                         if (playerScore >= fragmentScoreThresholds[i])
                         {
                             if (IsAFragmentAvailableOverInt(alreadySpawnedFragment))
@@ -83,7 +83,7 @@ public class FragmentManager : MonoBehaviour
         float nb = Random.Range(0f, 1f);
         //bool rand = nb <= 0.05f;(5%)
         bool rand = nb <= 0.5f;
-        Debug.Log("FRAGMENTMANAGER : JE REGARDE SI JE DOIS FAIRE POP DES FRAGMENTS ET JE DIS : " + rand + " car j'ai tiré " + nb);
+     
         return rand; // 50% de chance d'apparition d'un fragment
     }
 
@@ -92,17 +92,17 @@ public class FragmentManager : MonoBehaviour
         float randomValue = Random.Range(0f, 1f);
         if (randomValue <= 0.01f)
         {
-            Debug.Log(" FRAGMENTMANAGER : TU AURAS LE DROIT A 2 FRAG");
+         
             return 2; // 1% de chance d'obtenir deux fragments
         }
         else if (randomValue <= 0.005f)
         {
-            Debug.Log("FRAGMENTMANAGER : TU AURAS LE DROIT A 3 FRAG");
+      
             return 3; // 0.5% de chance d'obtenir trois fragments
         }
         else
         {
-            Debug.Log("FRAGMENTMANAGER : TU AURAS LE DROIT A 1 FRAG");
+          
             return 1;
         }
     }
@@ -112,7 +112,7 @@ public class FragmentManager : MonoBehaviour
         int minScore = playerScore + 10;
         int maxScore = totalPointsNeeded - 10;
         int result = Random.Range(minScore, maxScore);
-        Debug.Log("FRAGMENTMANAGER: TU DOIS FAIRE UN SCORE DE " + result);
+   
         return result;
     }
 
