@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.TextCore.Text;
 using static ICharacter;
@@ -28,6 +28,7 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
     Vector3 slopeMoveDirection;
     Vector3 headInitialCenter;
     // Start is called before the first frame update
+
     void Start()
     {
         isJumpStarted = false;
@@ -44,16 +45,14 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
     // Update is called once per frame
     void Update()
     {
-      
-     
+        collisionTimer.Update();
     }
 
     void FixedUpdate()
     {
-
         Rigidbody rb = GetComponent<Rigidbody>();
 
-        // Contrôle du joueur pour aller à gauche ou à droite
+        // ContrÃ´le du joueur pour aller Ã  gauche ou Ã  droite
         float horizontalInput = Input.GetAxis("Horizontal");
         if (horizontalInput < 0)
         {
@@ -73,18 +72,18 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
 
         if (OnSlope())
         {
-            float slopeGravityFactor = runningSpeed * 1/125f;
+            float slopeGravityFactor = runningSpeed * 1 / 125f;
             Vector3 slopeGravity = Vector3.down * (Physics.gravity.magnitude * slopeGravityFactor);
             rb.AddForce(slopeGravity, ForceMode.Acceleration);
         }
 
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             if (!isJumpStarted)
             {
                 currentState = STATE.JUMP;
                 isJumpStarted = true;
-                GetComponent<Rigidbody>().AddForce(transform.up * 800, ForceMode.Impulse);
+                GetComponent<Rigidbody>().AddForce(transform.up * 900, ForceMode.Impulse);
             }
         }
 
@@ -103,9 +102,11 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
 
         else
         {
-            if (isJumpStarted && transform.localPosition.y > 6.5f) { GetComponent<Rigidbody>().AddForce(transform.up * -5, ForceMode.Impulse); }
+            if (transform.localPosition.y < 0.1f) { if (isJumpStarted)
+                { runningSpeed = initialRunningSpeed; } isJumpStarted = false; }
 
-            else if (isJumpStarted && transform.localPosition.y < 0.5f) { Debug.Log("JE STOPE LE JUMP"); isJumpStarted = false; runningSpeed = initialRunningSpeed; }
+
+            if (isJumpStarted && transform.localPosition.y > 5f) { GetComponent<Rigidbody>().AddForce(transform.up * -500, ForceMode.Impulse); }
 
             else if (isJumpStarted)
             {
@@ -127,9 +128,9 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
         }
 
         UpdateAnimator();
+       
 
 
-        collisionTimer.Update();
 
         if (transform.position.y < -0.1f)
         {
@@ -138,9 +139,7 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
             transform.position = clamp;
         }
         rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
-        Debug.Log("Mon forward est : " + forwardMovement);
-        Debug.Log("Ma vélocity est : " + rb.velocity.z);
-
+   
         if (!isJumpStarted && !isCrouched && !isCollide)
         {
             currentState = STATE.RUN;
@@ -165,20 +164,22 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
 
         if (collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "DeadZone")
         {
-    
+            Debug.Log("ENter : J'ENTRE EN COLLISION AVEC " + collision.gameObject.name + " sur " + collision.collider);
+
             isCollide = true;
             runningSpeed = 0;
             currentState = STATE.IDLE;
 
             if (!collisionTimer.TimerIsStarted)
             {
+                Debug.Log("Je lance un timer ");
                 collisionTimer.Start();
             }
             if (collision.gameObject.tag == "DeadZone")
             {
                 canExitCollision = false;
             }
-           
+
         }
     }
 
@@ -186,22 +187,30 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
     {
         if (collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "DeadZone")
         {
-            Debug.Log("JE COLLIDE AVEC " + collision.gameObject.name);
+
+
+         
             isCollide = true;
             runningSpeed = 0;
             currentState = STATE.IDLE;
 
+
+            Debug.Log("Je collide et la Valeur du timer est " + collisionTimer.GetFloatValue());
+
             if (collisionTimer.GetFloatValue() >= 0.4f)
             {
+                Debug.Log("Timer passÃ©, j'enlÃ¨ve 1");
                 runStatsService.UserLife -= 1;
                 collisionTimer.Stop();
                 canExitCollision = true;
+
             }
 
             if (collision.gameObject.tag == "DeadZone")
             {
                 collisionTimer.Start();
             }
+
         }
     }
 
@@ -209,12 +218,12 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
     {
         if (collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "DeadZone")
         {
-            Debug.Log("COLLIDE : JE SORS DU COLLIDER " + collision.gameObject.name);
+            Debug.Log("COLLIDE : JE SORS DU COLLIDER " + collision.gameObject.name + " sur " + collision.collider);
             isCollide = false;
             collisionTimer.Stop();
             runningSpeed = initialRunningSpeed;
-              Vector3 exitDirection = -collision.contacts[0].normal;
-             float exitDistance = 0.1f; 
+            Vector3 exitDirection = -collision.contacts[0].normal;
+            float exitDistance = 0.1f;
             transform.position += exitDirection * exitDistance;
         }
     }
@@ -234,9 +243,9 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
     {
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight / 2 + 0.5f))
         {
-            Debug.Log("JE SUIS EN PENTE SLOPE");
+            Debug.Log("JE SUIS SUR UN SLOPE");
             float slopeAngle = Vector3.Angle(slopeHit.normal, Vector3.up);
-            return slopeAngle > 0 && slopeAngle < 45; // Ajustez l'angle comme nécessaire
+            return slopeAngle > 0 && slopeAngle < 45; // Ajustez l'angle comme nÃ©cessaire
         }
         return false;
     }

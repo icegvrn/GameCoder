@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class PathGenerator : MonoBehaviour
 {
@@ -85,7 +86,6 @@ public class PathGenerator : MonoBehaviour
 
         // Add the new prefab to the list.
         prefabOnPlay.Add(newPrefab);
-      
      
     }
 
