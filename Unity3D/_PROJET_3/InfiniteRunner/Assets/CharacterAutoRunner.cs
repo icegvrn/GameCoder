@@ -222,9 +222,9 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
             isCollide = false;
             collisionTimer.Stop();
             runningSpeed = initialRunningSpeed;
-            Vector3 exitDirection = -collision.contacts[0].normal;
-            float exitDistance = 0.1f;
-            transform.position += exitDirection * exitDistance;
+           // Vector3 exitDirection = -collision.contacts[0].normal;
+           // float exitDistance = 0.1f;
+           // transform.position += exitDirection * exitDistance;
         }
     }
 
