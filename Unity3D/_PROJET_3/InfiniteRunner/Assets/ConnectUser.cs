@@ -110,7 +110,7 @@ public class ConnectUser : MonoBehaviour
             validationConnection.gameObject.SetActive(true);
             ServiceLocator.Instance.GetService<SessionManager>().NewSession(db,username, GetUserIdByName(db, username));
             Debug.Log("VOUS ETES CONNECTE EN TANT QUE " + username + " !");
-           ServiceLocator.Instance.GetService<SessionManager>().GetUserSessionData(db, ServiceLocator.Instance.GetService<SessionManager>().Token);
+           ServiceLocator.Instance.GetService<SessionManager>().GetUserSessionData(db, username, ServiceLocator.Instance.GetService<SessionManager>().Token);
             return true;
         }
         return false;

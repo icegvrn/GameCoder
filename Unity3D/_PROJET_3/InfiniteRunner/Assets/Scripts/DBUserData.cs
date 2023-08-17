@@ -7,7 +7,7 @@ using SQLite;
 [Table("UserData")]
 public class DBUserData
 {
-    [Column("id_user")]
+    [Column("id")]
     public int Id_user{ get; set; }
     [Column("username")]
     public string Username { get; set; }

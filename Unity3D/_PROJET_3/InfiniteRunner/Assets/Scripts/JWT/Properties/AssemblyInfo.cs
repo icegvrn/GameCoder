@@ -1,36 +1,19 @@
-﻿using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+using JWT;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("JWT")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Public Domain")]
-[assembly: AssemblyProduct("JWT")]
-[assembly: AssemblyCopyright("Public Domain")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly: InternalsVisibleTo("JWT.Tests.Common, PublicKey=" + AssemblyInfo.PublicKey)]
+[assembly: InternalsVisibleTo("JWT.Tests.NetCore3, PublicKey=" + AssemblyInfo.PublicKey)]
+[assembly: InternalsVisibleTo("JWT.Tests.Net35, PublicKey=" + AssemblyInfo.PublicKey)]
+[assembly: InternalsVisibleTo("JWT.Tests.Net40, PublicKey=" + AssemblyInfo.PublicKey)]
+[assembly: InternalsVisibleTo("JWT.Tests.Net46, PublicKey=" + AssemblyInfo.PublicKey)]
+[assembly: InternalsVisibleTo("JWT.Tests.Net60, PublicKey=" + AssemblyInfo.PublicKey)]
+[assembly: InternalsVisibleTo("JWT.Tests.Net70, PublicKey=" + AssemblyInfo.PublicKey)]
+[assembly: InternalsVisibleTo("JWT.Extensions.AspNetCore.Tests, PublicKey=" + AssemblyInfo.PublicKey)]
 
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("745e649e-588d-4e6d-81ce-1d2c39c24b0a")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.3.4.0")]
-[assembly: AssemblyFileVersion("1.3.4.0")]
+namespace JWT
+{
+    internal static class AssemblyInfo
+    {
+        public const string PublicKey = "002400000480000094000000060200000024000052534131000400000100010041e599bf147c55b2d243a92f3b81b003a113abc6ce6c8423d3b5f41f807471d6acf45675ac5924e69d04fb76b58cd2985eb47e3408f5f20b913e2dfd8074edab55b62b1b2f2b6538af885f979acb1b2a80eb64da7f097b9788390833ed7d974f7abf6d53cbec49abc4d95e999fbb8ee626c50d3f1c3c750bb82ea5e23233dfd7";
+    }
+}
