@@ -9,14 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/start.unity
     guid: 80270322b5db135489af753820d2dbda
   - enabled: 1
-    path: Assets/Scenes/lvl_medieval.unity
-    guid: 4878b624ea9494d49b80f859560e90c7
-  - enabled: 1
     path: Assets/Scenes/hub.unity
     guid: 06605c2043cea4544a64a19fbbcaedbe
   - enabled: 1
+    path: Assets/Scenes/lvl_war.unity
+    guid: b17107589a3afb54180775f315a6607a
+  - enabled: 1
     path: Assets/Scenes/lvl_prehistoric.unity
     guid: d4ac1e77a27b401408901b8a1b918763
+  - enabled: 1
+    path: Assets/Scenes/lvl_medieval.unity
+    guid: 4878b624ea9494d49b80f859560e90c7
   - enabled: 1
     path: Assets/Scenes/lvl_japan.unity
     guid: 4fcc8ee63c062d64b9b4dc7d74bfce76
@@ -26,9 +29,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/lvl_pirats.unity
     guid: 49eb4b3e08048f04aa15f9ada5041342
-  - enabled: 1
-    path: Assets/Scenes/lvl_war.unity
-    guid: b17107589a3afb54180775f315a6607a
   - enabled: 1
     path: Assets/Scenes/lvl_future.unity
     guid: 3504bc4ecfeea424186ed2adb1895bf8

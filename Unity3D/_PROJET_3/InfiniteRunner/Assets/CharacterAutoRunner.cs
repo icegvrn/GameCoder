@@ -72,7 +72,8 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
 
         if (OnSlope())
         {
-            float slopeGravityFactor = runningSpeed * 1 / 125f;
+            Debug.Log("JE SUIS SUR UN SLOPE");
+            float slopeGravityFactor = runningSpeed* 1/125;
             Vector3 slopeGravity = Vector3.down * (Physics.gravity.magnitude * slopeGravityFactor);
             rb.AddForce(slopeGravity, ForceMode.Acceleration);
         }
@@ -106,9 +107,9 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
                 { runningSpeed = initialRunningSpeed; } isJumpStarted = false; }
 
 
-            if (isJumpStarted && transform.localPosition.y > 5f) { GetComponent<Rigidbody>().AddForce(transform.up * -500, ForceMode.Impulse); }
+            if (transform.localPosition.y > 5f) { GetComponent<Rigidbody>().AddForce(transform.up * -500, ForceMode.Impulse); }
 
-            else if (isJumpStarted)
+            if (isJumpStarted)
             {
                 runningSpeed = initialRunningSpeed * 0.4f;
             }
@@ -243,9 +244,9 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
     {
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight / 2 + 0.5f))
         {
-            Debug.Log("JE SUIS SUR UN SLOPE");
+           
             float slopeAngle = Vector3.Angle(slopeHit.normal, Vector3.up);
-            return slopeAngle > 0 && slopeAngle < 45; // Ajustez l'angle comme nécessaire
+            return slopeAngle > 5 && slopeAngle < 45; // Ajustez l'angle comme nécessaire
         }
         return false;
     }

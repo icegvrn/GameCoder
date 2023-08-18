@@ -102,7 +102,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -523,10 +523,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (26)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -589,10 +585,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (39)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -655,10 +647,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (18)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -721,10 +709,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (18)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -787,10 +771,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (13)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -853,10 +833,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (29)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -919,10 +895,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (31)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -945,6 +917,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: fe3191231b0f28f4b965ae3dfe4af781, type: 2}
+    - target: {fileID: 8385280434489818808, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8385280434490915960, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1003,7 +979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_Name
-      value: egypt-obelisk-old (1)
+      value: pillar1
       objectReference: {fileID: 0}
     - target: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_TagString
@@ -1012,7 +988,10 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2049434587504495531, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8385280434492685976, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8405796783730828651}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       insertIndex: -1
@@ -1072,8 +1051,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.3919816, y: 11.496052, z: 2.2844787}
-  m_Center: {x: -0.16801901, y: 5.748026, z: 0.01775983}
+  m_Size: {x: 0.83, y: 13.39, z: 1.82}
+  m_Center: {x: 0.03, y: 3.9, z: 0.01775983}
 --- !u!136 &3063807794815370544
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1093,10 +1072,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.83
-  m_Height: 17.74123
+  m_Radius: 0.55
+  m_Height: 17.68
   m_Direction: 1
-  m_Center: {x: -0.000006616115, y: 8.870615, z: 0}
+  m_Center: {x: -0.000006616115, y: 6.3, z: 0}
 --- !u!65 &1448190388710088475
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1116,8 +1095,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.8556895, y: 1.5483038, z: 4.184292}
-  m_Center: {x: -0.05244159, y: 0.7741519, z: 0.01918068}
+  m_Size: {x: 0.97, y: 0.96, z: 4.61}
+  m_Center: {x: -0.05244159, y: 10.97, z: 0.01918068}
 --- !u!4 &9157401122043686273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8385280434492685976, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
@@ -1175,10 +1154,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (35)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1241,10 +1216,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (18)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1307,10 +1278,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (30)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1373,10 +1340,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (17)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1386,6 +1349,80 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 327448606826093753, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
   m_PrefabInstance: {fileID: 1109298883197905424}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1128948156653710949
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4825076688638556623}
+    m_Modifications:
+    - target: {fileID: 2632019101186705322, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_Name
+      value: rock-pillar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5281129
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.5678408
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5281129
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+--- !u!4 &3107944771061025459 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+  m_PrefabInstance: {fileID: 1128948156653710949}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1252620441184107690
 PrefabInstance:
@@ -1439,10 +1476,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (32)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1452,6 +1485,80 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 327448606826093753, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
   m_PrefabInstance: {fileID: 1252620441184107690}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1300562450805283573
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3321059781507623650}
+    m_Modifications:
+    - target: {fileID: 2632019101186705322, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_Name
+      value: rock-pillar (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5281126
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.5678403
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5281126
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+--- !u!4 &3929374972546973219 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+  m_PrefabInstance: {fileID: 1300562450805283573}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1378192072721781772
 PrefabInstance:
@@ -1505,10 +1612,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (34)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1571,10 +1674,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (13)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1637,10 +1736,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (10)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1703,10 +1798,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (27)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1769,10 +1860,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (42)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1835,10 +1922,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (43)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1901,10 +1984,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (24)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1967,10 +2046,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (40)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2033,10 +2108,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (16)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2099,10 +2170,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (36)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2165,10 +2232,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (31)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2231,10 +2294,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (26)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2297,10 +2356,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (37)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2363,10 +2418,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (11)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2429,10 +2480,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (36)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2495,10 +2542,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (27)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2561,10 +2604,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (32)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2627,10 +2666,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (34)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2693,10 +2728,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (28)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2759,10 +2790,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (42)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2825,10 +2852,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (22)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2838,6 +2861,80 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 327448606826093753, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
   m_PrefabInstance: {fileID: 3617808414531826694}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3668754793003002083
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3258749015284638142}
+    m_Modifications:
+    - target: {fileID: 2632019101186705322, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_Name
+      value: rock-pillar (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5281125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.56784
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5281125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.72676754
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.6868835
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -86.768
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+--- !u!4 &1612708797472148533 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+  m_PrefabInstance: {fileID: 3668754793003002083}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3693897831111412682
 PrefabInstance:
@@ -2891,10 +2988,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (11)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2957,10 +3050,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (10)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3023,10 +3112,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (43)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3089,10 +3174,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (33)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3115,6 +3196,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: fe3191231b0f28f4b965ae3dfe4af781, type: 2}
+    - target: {fileID: 8385280434489818808, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 643a92a4e01e6904089bfe1121327b30, type: 3}
     - target: {fileID: 8385280434490915960, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3173,7 +3258,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_Name
-      value: egypt-obelisk-old
+      value: pillar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_TagString
@@ -3181,8 +3270,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2049434587504495531, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+    - {fileID: 8385280434490915960, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8385280434492685976, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3107944771061025459}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       insertIndex: -1
@@ -3192,10 +3285,10 @@ PrefabInstance:
       addedObject: {fileID: 1895803950296665102}
     - targetCorrespondingSourceObject: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4584052520479993753}
+      addedObject: {fileID: 3403626295170202244}
     - targetCorrespondingSourceObject: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3403626295170202244}
+      addedObject: {fileID: 4584052520479993753}
   m_SourcePrefab: {fileID: 100100000, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
 --- !u!4 &4825076688638556623 stripped
 Transform:
@@ -3247,31 +3340,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.3919816, y: 11.496052, z: 2.2844787}
-  m_Center: {x: -0.16801901, y: 5.748026, z: 0.01775983}
---- !u!136 &4584052520479993753
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4825076688638846447}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.83
-  m_Height: 17.74123
-  m_Direction: 1
-  m_Center: {x: -0.000006616115, y: 8.870615, z: 0}
+  m_Size: {x: 0.83, y: 13.39, z: 1.82}
+  m_Center: {x: 0.03, y: 3.9, z: 0.01775983}
 --- !u!65 &3403626295170202244
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3291,8 +3361,31 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.8556895, y: 1.5483038, z: 4.184292}
-  m_Center: {x: -0.05244159, y: 0.7741519, z: 0.01918068}
+  m_Size: {x: 0.97, y: 0.96, z: 4.61}
+  m_Center: {x: -0.05244159, y: 10.97, z: 0.01918068}
+--- !u!136 &4584052520479993753
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4825076688638846447}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.55
+  m_Height: 17.68
+  m_Direction: 1
+  m_Center: {x: -0.000006616115, y: 6.3, z: 0}
 --- !u!1001 &3961903656293542121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3345,10 +3438,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (32)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3411,10 +3500,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (23)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3477,10 +3562,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (25)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3543,10 +3624,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (29)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3609,10 +3686,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (35)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3675,10 +3748,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (12)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3701,6 +3770,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: fe3191231b0f28f4b965ae3dfe4af781, type: 2}
+    - target: {fileID: 8385280434489818808, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8385280434490915960, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3759,7 +3832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_Name
-      value: egypt-obelisk-old (5)
+      value: pillar6
       objectReference: {fileID: 0}
     - target: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_TagString
@@ -3768,7 +3841,10 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2049434587504495531, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8385280434492685976, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8805856072230176848}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       insertIndex: -1
@@ -3833,8 +3909,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.3919816, y: 11.496052, z: 2.2844787}
-  m_Center: {x: -0.16801901, y: 5.748026, z: 0.01775983}
+  m_Size: {x: 0.83, y: 13.39, z: 1.82}
+  m_Center: {x: 0.03, y: 3.9, z: 0.01775983}
 --- !u!136 &2823427898085399737
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3854,10 +3930,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.83
-  m_Height: 17.74123
+  m_Radius: 0.55
+  m_Height: 17.68
   m_Direction: 1
-  m_Center: {x: -0.000006616115, y: 8.870615, z: 0}
+  m_Center: {x: -0.000006616115, y: 6.3, z: 0}
 --- !u!65 &6247860016300722478
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3877,8 +3953,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.8556895, y: 1.5483038, z: 4.184292}
-  m_Center: {x: -0.05244159, y: 0.7741519, z: 0.01918068}
+  m_Size: {x: 0.97, y: 0.96, z: 4.61}
+  m_Center: {x: -0.05244159, y: 10.97, z: 0.01918068}
 --- !u!1001 &4670298849543774475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3931,10 +4007,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (13)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3944,6 +4016,80 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 327448606826093753, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
   m_PrefabInstance: {fileID: 4670298849543774475}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4727465297811174341
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1463426578172395378}
+    m_Modifications:
+    - target: {fileID: 2632019101186705322, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_Name
+      value: rock-pillar (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5281124
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.56784
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5281124
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+--- !u!4 &7282359856404125459 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+  m_PrefabInstance: {fileID: 4727465297811174341}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4788461154460622862
 PrefabInstance:
@@ -3997,10 +4143,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (11)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4063,10 +4205,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (15)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4129,10 +4267,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (36)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4195,10 +4329,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (21)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4261,10 +4391,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (12)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4327,10 +4453,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (33)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4393,10 +4515,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (28)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4459,10 +4577,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (31)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4525,10 +4639,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (15)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4591,10 +4701,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (39)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4657,10 +4763,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (19)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4723,10 +4825,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (38)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4789,10 +4887,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (15)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4802,6 +4896,80 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 327448606826093753, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
   m_PrefabInstance: {fileID: 5721169425325909266}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5777015181576536509
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 9157401122043686273}
+    m_Modifications:
+    - target: {fileID: 2632019101186705322, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_Name
+      value: rock-pillar (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5281128
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.5678406
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5281128
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99741274
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.07188805
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -8.245
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+--- !u!4 &8405796783730828651 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+  m_PrefabInstance: {fileID: 5777015181576536509}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5834192845177260834
 PrefabInstance:
@@ -4855,10 +5023,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (41)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4921,10 +5085,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (20)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4987,10 +5147,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (23)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5053,10 +5209,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (37)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5119,10 +5271,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (40)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5185,10 +5333,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (30)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5211,6 +5355,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: fe3191231b0f28f4b965ae3dfe4af781, type: 2}
+    - target: {fileID: 8385280434489818808, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8385280434490915960, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -5269,7 +5417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_Name
-      value: egypt-obelisk-old (3)
+      value: pillar4
       objectReference: {fileID: 0}
     - target: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_TagString
@@ -5278,7 +5426,10 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2049434587504495531, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8385280434492685976, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1612708797472148533}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       insertIndex: -1
@@ -5343,8 +5494,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.3919816, y: 11.496052, z: 2.2844787}
-  m_Center: {x: -0.16801901, y: 5.748026, z: 0.01775983}
+  m_Size: {x: 0.83, y: 13.39, z: 1.82}
+  m_Center: {x: 0.03, y: 3.9, z: 0.01775983}
 --- !u!136 &4252156324808098163
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5364,10 +5515,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.83
-  m_Height: 17.74123
+  m_Radius: 0.55
+  m_Height: 17.68
   m_Direction: 1
-  m_Center: {x: -0.000006616115, y: 8.870615, z: 0}
+  m_Center: {x: -0.000006616115, y: 6.3, z: 0}
 --- !u!65 &7488165680440565538
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5387,8 +5538,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.8556895, y: 1.5483038, z: 4.184292}
-  m_Center: {x: -0.05244159, y: 0.7741519, z: 0.01918068}
+  m_Size: {x: 0.97, y: 0.96, z: 4.61}
+  m_Center: {x: -0.05244159, y: 10.97, z: 0.01918068}
 --- !u!1001 &6444988860201433174
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5441,10 +5592,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (14)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5467,6 +5614,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: fe3191231b0f28f4b965ae3dfe4af781, type: 2}
+    - target: {fileID: 8385280434489818808, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8385280434490915960, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -5525,7 +5676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_Name
-      value: egypt-obelisk-old (2)
+      value: pillar3
       objectReference: {fileID: 0}
     - target: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_TagString
@@ -5534,7 +5685,10 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2049434587504495531, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8385280434492685976, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3929374972546973219}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       insertIndex: -1
@@ -5599,8 +5753,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.3919816, y: 11.496052, z: 2.2844787}
-  m_Center: {x: -0.16801901, y: 5.748026, z: 0.01775983}
+  m_Size: {x: 0.83, y: 13.39, z: 1.82}
+  m_Center: {x: 0.03, y: 3.9, z: 0.01775983}
 --- !u!136 &3845015600903348435
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5620,10 +5774,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.83
-  m_Height: 17.74123
+  m_Radius: 0.55
+  m_Height: 17.68
   m_Direction: 1
-  m_Center: {x: -0.000006616115, y: 8.870615, z: 0}
+  m_Center: {x: -0.000006616115, y: 6.3, z: 0}
 --- !u!65 &3647029527150181370
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5643,8 +5797,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.8556895, y: 1.5483038, z: 4.184292}
-  m_Center: {x: -0.05244159, y: 0.7741519, z: 0.01918068}
+  m_Size: {x: 0.97, y: 0.96, z: 4.61}
+  m_Center: {x: -0.05244159, y: 10.97, z: 0.01918068}
 --- !u!1001 &6548395213532577026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5697,10 +5851,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (24)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5763,10 +5913,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (22)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5776,6 +5922,80 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 327448606826093753, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
   m_PrefabInstance: {fileID: 6753184143049877233}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6827413474259381382
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3818024272245509277}
+    m_Modifications:
+    - target: {fileID: 2632019101186705322, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_Name
+      value: rock-pillar (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5281123
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.56784
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5281123
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.934613
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.35566643
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 41.669
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+--- !u!4 &8805856072230176848 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2633329320072651990, guid: 3c503e02b554af045b0fd05ac54a5070, type: 3}
+  m_PrefabInstance: {fileID: 6827413474259381382}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6839726331031180514
 PrefabInstance:
@@ -5829,10 +6049,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (40)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5895,10 +6111,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (25)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5921,6 +6133,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: fe3191231b0f28f4b965ae3dfe4af781, type: 2}
+    - target: {fileID: 8385280434489818808, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8385280434490915960, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -5979,7 +6195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_Name
-      value: egypt-obelisk-old (4)
+      value: pillar5
       objectReference: {fileID: 0}
     - target: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       propertyPath: m_TagString
@@ -5988,7 +6204,10 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2049434587504495531, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8385280434492685976, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7282359856404125459}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8385280434493170360, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
       insertIndex: -1
@@ -6048,8 +6267,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.3919816, y: 11.496052, z: 2.2844787}
-  m_Center: {x: -0.16801901, y: 5.748026, z: 0.01775983}
+  m_Size: {x: 0.83, y: 13.39, z: 1.82}
+  m_Center: {x: 0.03, y: 3.9, z: 0.01775983}
 --- !u!136 &5907599167144840112
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6069,10 +6288,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.83
-  m_Height: 17.74123
+  m_Radius: 0.55
+  m_Height: 17.68
   m_Direction: 1
-  m_Center: {x: -0.000006616115, y: 8.870615, z: 0}
+  m_Center: {x: -0.000006616115, y: 6.3, z: 0}
 --- !u!65 &9040567843163865778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6092,8 +6311,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.8556895, y: 1.5483038, z: 4.184292}
-  m_Center: {x: -0.05244159, y: 0.7741519, z: 0.01918068}
+  m_Size: {x: 0.97, y: 0.96, z: 4.61}
+  m_Center: {x: -0.05244159, y: 10.97, z: 0.01918068}
 --- !u!4 &1463426578172395378 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8385280434492685976, guid: 06f6d9b7d1c6a1c4db05222b8c52a793, type: 3}
@@ -6151,10 +6370,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (28)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6217,10 +6432,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (21)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6283,10 +6494,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (19)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6349,10 +6556,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (38)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6415,10 +6618,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (39)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6481,10 +6680,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (38)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6547,10 +6742,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (10)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6691,10 +6882,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (37)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6757,10 +6944,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (25)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6823,10 +7006,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (41)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6889,10 +7068,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (17)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6955,10 +7130,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (34)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7021,10 +7192,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (20)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7087,10 +7254,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (17)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7153,10 +7316,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (22)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7219,10 +7378,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (27)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7285,10 +7440,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (21)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7351,10 +7502,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (26)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7417,10 +7564,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (30)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7483,10 +7626,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (29)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7549,10 +7688,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (14)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7615,10 +7750,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (24)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7681,10 +7812,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (19)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7747,10 +7874,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (20)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7813,10 +7936,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (35)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7879,10 +7998,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (12)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7945,10 +8060,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (14)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8011,10 +8122,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (16)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8077,10 +8184,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (16)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8143,10 +8246,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (23)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8209,10 +8308,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gemme (33)
       objectReference: {fileID: 0}
-    - target: {fileID: 8384292179090889118, guid: 4b1f99251675f6a4a9f91702a94d84b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 878bb386381adcd4c91d5c38210eac7c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

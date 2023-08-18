@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\JWT\Builder\JwtBuilder.cs" />
     <Compile Include="Assets\InputEvents.cs" />
     <Compile Include="Assets\Scripts\JWT\Algorithms\IAsymmetricAlgorithm.cs" />
+    <Compile Include="Assets\PauseManager.cs" />
     <Compile Include="Assets\Scripts\JWT\IDateTimeProvider.cs" />
     <Compile Include="Assets\oldPathGenerator.cs" />
     <Compile Include="Assets\FragmentSpawner.cs" />
