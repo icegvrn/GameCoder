@@ -18,9 +18,12 @@ public class CharacterController : MonoBehaviour, ICharacter
     private NavMeshAgent navMeshAgent; // Référence au NavMeshAgent
     private bool isBlocked = false; // Pour gérer le blocage
 
+    private InputService input;
+
     // Start is called before the first frame update
     void Start()
     {
+        input = ServiceLocator.Instance.GetService<InputService>();
         Cursor.visible = false;
         isJumpStarted = false;
         initialVerticalPosition = transform.position.y;
@@ -57,39 +60,40 @@ public class CharacterController : MonoBehaviour, ICharacter
         {
             Vector3 moveDirection = Vector3.zero;
 
-            if (Input.GetKey(KeyCode.Z))
+           
+            if (input.GetKey(InputService.ActionKey.up))
             {
                 moveDirection += transform.forward;
                 currentState = STATE.RUN;
             }
-            else if (Input.GetKeyUp(KeyCode.Z))
+            else if (input.GetKeyUp(InputService.ActionKey.up))
             {
                 currentState = STATE.IDLE;
             }
-            if (Input.GetKey(KeyCode.Q))
+            if (input.GetKey(InputService.ActionKey.left))
             {
                 moveDirection -= transform.right;
                 currentState = STATE.LEFT;
             }
-            else if (Input.GetKeyUp(KeyCode.Q))
+            else if (input.GetKeyUp(InputService.ActionKey.left))
             {
                 currentState = STATE.IDLE;
             }
-            if (Input.GetKey(KeyCode.D))
+            if (input.GetKey(InputService.ActionKey.right))
             {
                 moveDirection += transform.right;
                 currentState = STATE.RIGHT;
             }
-            else if (Input.GetKeyUp(KeyCode.D))
+            else if (input.GetKeyUp(InputService.ActionKey.right))
             {
                 currentState = STATE.IDLE;
             }
-            if (Input.GetKey(KeyCode.S))
+            if (input.GetKey(InputService.ActionKey.down))
             {
                 moveDirection -= transform.forward;
                 currentState = STATE.RUN;
             }
-            else if (Input.GetKeyUp(KeyCode.S))
+            else if (input.GetKeyUp(InputService.ActionKey.down))
             {
                 currentState = STATE.IDLE;
             }

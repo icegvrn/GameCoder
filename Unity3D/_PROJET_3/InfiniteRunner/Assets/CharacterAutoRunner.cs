@@ -27,6 +27,8 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
     float playerHeight;
     Vector3 slopeMoveDirection;
     Vector3 headInitialCenter;
+
+    private InputService input;
     // Start is called before the first frame update
 
     void Start()
@@ -38,6 +40,7 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
         collisionTimer = new CustomTimer();
         collisionTimer.Init();
         runStatsService = ServiceLocator.Instance.GetService<RunStatsService>();
+        input = ServiceLocator.Instance.GetService<InputService>();
         playerHeight = GetComponent<BoxCollider>().bounds.size.y;
         headInitialCenter = GetComponent<CapsuleCollider>().center;
     }
@@ -53,7 +56,7 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
         Rigidbody rb = GetComponent<Rigidbody>();
 
         // Contrôle du joueur pour aller à gauche ou à droite
-        float horizontalInput = Input.GetAxis("Horizontal");
+        float horizontalInput = input.GetHorizontalAxis();
         if (horizontalInput < 0)
         {
             currentState = STATE.LEFT;
@@ -78,7 +81,7 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
             rb.AddForce(slopeGravity, ForceMode.Acceleration);
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (input.GetKeyDown(InputService.ActionKey.up))
         {
             if (!isJumpStarted)
             {
@@ -88,7 +91,7 @@ public class CharacterAutoRunner : MonoBehaviour, ICharacter
             }
         }
 
-        else if (Input.GetKey(KeyCode.S))
+        else if (input.GetKey(InputService.ActionKey.down))
         {
 
             if (!isCrouched)

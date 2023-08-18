@@ -99,9 +99,11 @@
     <Compile Include="Assets\PasswordEncrypter.cs" />
     <Compile Include="Assets\Scripts\JWT\JwtDecoder.cs" />
     <Compile Include="Assets\AttachObstacleToEnvironment.cs" />
+    <Compile Include="Assets\SoundLevelService.cs" />
     <Compile Include="Assets\Scripts\JWT\Algorithms\RS4096Algorithm.cs" />
     <Compile Include="Assets\DisplayChildOnTrigger.cs" />
     <Compile Include="Assets\TextAnimator.cs" />
+    <Compile Include="Assets\Scripts\GameSettingsObject.cs" />
     <Compile Include="Assets\Scripts\DecorGenerator.cs" />
     <Compile Include="Assets\UIManager.cs" />
     <Compile Include="Assets\Scripts\JWT\JwtBase64UrlEncoder.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="Assets\Scripts\JWT\IJsonSerializer.cs" />
     <Compile Include="Assets\EnvironmentManager.cs" />
     <Compile Include="Assets\Scripts\CharacterPointCollector.cs" />
+    <Compile Include="Assets\Scripts\UIGameSettingsModifier.cs" />
     <Compile Include="Assets\Scripts\JWT\Algorithms\RSAlgorithmFactory.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IPasswordSecurity.cs" />
     <Compile Include="Assets\Scripts\JWT\Properties\AssemblyInfo.cs" />
@@ -148,6 +151,7 @@
     <Compile Include="Assets\Scripts\JWT\Algorithms\ECDSAAlgorithm.cs" />
     <Compile Include="Assets\Scripts\JWT\Exceptions\SignatureVerificationException.cs" />
     <Compile Include="Assets\Scripts\JWT\ValidationParameters.cs" />
+    <Compile Include="Assets\ToggleInt.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\MaterialMover.cs" />
     <Compile Include="Assets\CharacterAutoRunner.cs" />
     <Compile Include="Assets\Scripts\JWT\Algorithms\HMACSHAAlgorithm.cs" />
@@ -157,6 +161,7 @@
     <Compile Include="Assets\Teleporter.cs" />
     <Compile Include="Assets\Scripts\Collectable.cs" />
     <Compile Include="Assets\Scripts\JWT\Compatibility\System.Reflection\CustomAttributeExtensions.cs" />
+    <Compile Include="Assets\Scripts\GameSettings.cs" />
     <Compile Include="Assets\Scripts\ServicesLocator.cs" />
     <Compile Include="Assets\FragmentItem.cs" />
     <Compile Include="Assets\Scripts\JWT\JwtValidator.cs" />
@@ -183,6 +188,7 @@
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\DBRunSession.cs" />
     <Compile Include="Assets\Scripts\JWT\Algorithms\ECDSAAlgorithmFactory.cs" />
+    <Compile Include="Assets\Scripts\InputService.cs" />
     <Compile Include="Assets\Scripts\JWT\Serializers\Converters\DictionaryStringObjectJsonConverter.cs" />
     <Compile Include="Assets\Scripts\JWT\JwtEncoder.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\Rotator.cs" />
