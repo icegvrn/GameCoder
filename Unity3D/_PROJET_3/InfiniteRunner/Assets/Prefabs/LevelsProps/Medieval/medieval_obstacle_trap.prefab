@@ -5861,6 +5861,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.45
       objectReference: {fileID: 0}
+    - target: {fileID: 7783558160757380218, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8468501748515946192, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
       propertyPath: frequency
       value: 30
@@ -5873,7 +5877,9 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -19.4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5987000632760602497, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
+    - {fileID: 7783558160757380218, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8793766006075073006, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
     - {fileID: 1348176436997155328, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}

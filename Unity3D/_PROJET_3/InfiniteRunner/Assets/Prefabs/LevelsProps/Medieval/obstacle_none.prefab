@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3742569447428826246}
   - component: {fileID: 4099096185912814781}
   - component: {fileID: 7783558160757380218}
-  - component: {fileID: 5987000632760602497}
   m_Layer: 8
   m_Name: path
   m_TagString: Path
@@ -102,28 +101,11 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5987000632760602497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2408536501885483695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 915fa7bf2b5327e48a8e076dbee65977, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minObstaclesPerTerrain: 0
-  maxObstaclesPerTerrain: 10
-  obstaclePool: {fileID: 0}
-  obstacleInPlay: []
-  obstacleSlots: []
 --- !u!1 &2897936888334352555
 GameObject:
   m_ObjectHideFlags: 0

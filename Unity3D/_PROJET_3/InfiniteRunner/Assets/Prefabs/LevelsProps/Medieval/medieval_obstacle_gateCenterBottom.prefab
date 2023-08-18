@@ -579,7 +579,7 @@ GameObject:
   - component: {fileID: 5240795524635832090}
   m_Layer: 0
   m_Name: porte
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2813,6 +2813,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tower-castle_round
       objectReference: {fileID: 0}
+    - target: {fileID: 8391519721716914918, guid: c8d6f574cfada734999c1cd37fc412df, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 8392760023222704668, guid: c8d6f574cfada734999c1cd37fc412df, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5006037
@@ -2865,7 +2869,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -2421190887972602949, guid: c8d6f574cfada734999c1cd37fc412df, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8392760023222704668, guid: c8d6f574cfada734999c1cd37fc412df, type: 3}
@@ -4251,6 +4256,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 85fe620d97f80fb40bdd49d9a3764495, type: 3}
       propertyPath: m_Name
       value: porte_castle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 85fe620d97f80fb40bdd49d9a3764495, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 3161891318795192096, guid: 85fe620d97f80fb40bdd49d9a3764495, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5857,7 +5866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6016634322777693836, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
       propertyPath: m_Name
-      value: medieval_obstacle_gateCenter
+      value: medieval_obstacle_gateCenterBottom
       objectReference: {fileID: 0}
     - target: {fileID: 6016634322777693836, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
       propertyPath: m_TagString
@@ -5885,7 +5894,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a610025cab28cd048aab8c4beb0723f7, type: 2}
     - target: {fileID: 7783558160757380218, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8468501748515946192, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
       propertyPath: frequency
@@ -5903,7 +5912,9 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -3.1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5987000632760602497, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
+    - {fileID: 7783558160757380218, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1539176661100858273, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
     - {fileID: 1117000480527684990, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
@@ -8376,6 +8387,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tower-castle_round (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8391519721716914918, guid: c8d6f574cfada734999c1cd37fc412df, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 8392760023222704668, guid: c8d6f574cfada734999c1cd37fc412df, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5006037
@@ -8428,7 +8443,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -2421190887972602949, guid: c8d6f574cfada734999c1cd37fc412df, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

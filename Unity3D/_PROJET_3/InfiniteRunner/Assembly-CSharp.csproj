@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\JWT\Algorithms\CertificateAlgorithm.cs" />
     <Compile Include="Assets\BestimeCanvasDecomposer.cs" />
     <Compile Include="Assets\Scripts\JWT\Serializers\DefaultJsonSerializerFactory.cs" />
+    <Compile Include="Assets\AutorunDebug.cs" />
     <Compile Include="Assets\Scripts\JWT\Algorithms\IAlgorithmFactory.cs" />
     <Compile Include="Assets\AttachObjectsToEnvironnement.cs" />
     <Compile Include="Assets\PortalEnablerFromDB.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Assets\Scripts\JWT\Algorithms\RS1024Algorithm.cs" />
     <Compile Include="Assets\Scripts\JWT\Algorithms\ECDSAAlgorithm.cs" />
     <Compile Include="Assets\Scripts\JWT\Exceptions\SignatureVerificationException.cs" />
+    <Compile Include="Assets\ColliderOffset.cs" />
     <Compile Include="Assets\Scripts\JWT\ValidationParameters.cs" />
     <Compile Include="Assets\ToggleInt.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\MaterialMover.cs" />

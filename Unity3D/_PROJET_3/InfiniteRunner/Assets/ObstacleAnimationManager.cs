@@ -44,7 +44,7 @@ public class ObstacleAnimationManager : MonoBehaviour
         {
 
             int indexAnimatorToEnable = Random.Range(0, animators.Count);
-            Debug.Log("JE PASSE LA AVEC UN RANDOM DE " + indexAnimatorToEnable);
+         //   Debug.Log("JE PASSE LA AVEC UN RANDOM DE " + indexAnimatorToEnable);
             Animator animatorToEnable = animators[indexAnimatorToEnable];
             animatorToEnable.speed = 1;
             animatorToEnable.SetBool("animate", true);

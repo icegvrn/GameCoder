@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
        
-        character.Reset();
+        character.ResetCharacter();
         gameEnvironment.Reset();
         gameEnvironment.gameObject.SetActive(true);
         UIManager.SetHUDVisible(true);
