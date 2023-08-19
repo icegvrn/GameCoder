@@ -27,7 +27,7 @@ public class UsingSession : MonoBehaviour
         Debug.Log("JE CHECK LA SESSION");
         try
         {
-            DBUserData data = ServiceLocator.Instance.GetService<SessionManager>().GetUserSessionData();
+            DBUserData data = ServiceLocator.Instance.GetService<ISessionService>().GetUserSessionData();
             Debug.Log("SESSION OK DASN LE TRY");
             if (data != null)
             {
@@ -66,6 +66,6 @@ public class UsingSession : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        ServiceLocator.Instance.GetService<SessionManager>().EndSession();
+        ServiceLocator.Instance.GetService<ISessionService>().EndSession();
     }
 }

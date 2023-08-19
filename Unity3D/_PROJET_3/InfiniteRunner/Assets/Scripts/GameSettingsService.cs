@@ -1,21 +1,23 @@
 using System.IO;
 using UnityEngine;
 
-public class GameSettings : MonoBehaviour
+public class GameSettingsService : IGameSettingsService
 {
     private string settingsFilePath;
-    private SoundLevelService soundLevelService;
-    private InputService inputService;
-    private void Awake()
+    private ISoundService soundLevelService;
+    private IInputService inputService;
+
+    public GameSettingsService(IInputService input, ISoundService sound)
     {
-        settingsFilePath = Application.persistentDataPath + "/settings.json";
-        soundLevelService = new SoundLevelService();
-        inputService = new InputService();
-        SetSettings();
+        soundLevelService = sound;
+        inputService = input;
+
     }
+
 
     public void SaveSettings(GameSettingsContainer settings)
     {
+        settingsFilePath = Application.persistentDataPath + "/settings.json";
         string json = JsonUtility.ToJson(settings);
         File.WriteAllText(settingsFilePath, json);
         SetSettings();
@@ -23,6 +25,8 @@ public class GameSettings : MonoBehaviour
 
     public GameSettingsContainer LoadSettings()
     {
+         settingsFilePath = Application.persistentDataPath + "/settings.json";
+
         if (File.Exists(settingsFilePath))
         {
             string json = File.ReadAllText(settingsFilePath);

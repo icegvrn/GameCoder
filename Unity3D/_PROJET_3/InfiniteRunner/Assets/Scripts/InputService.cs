@@ -1,20 +1,12 @@
 using UnityEngine;
 
-public class InputService : MonoBehaviour
+public class InputService : IInputService
 {
     public enum ActionKey { up, down, left, right, escape, cheatGemme }
     public enum ControlMode { azerty, qwerty }
 
     public ControlMode currentMode = ControlMode.azerty;
 
-
-    public InputService()
-    {
-        if (ServiceLocator.Instance.GetService<InputService>() == null)
-        {
-            ServiceLocator.Instance.RegisterService(this);
-        }
-    }
 
     public bool GetKey(ActionKey key)
     {

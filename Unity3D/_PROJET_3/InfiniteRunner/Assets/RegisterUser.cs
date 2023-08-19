@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(PasswordEncrypter))]
 public class RegisterUser : MonoBehaviour
 {
     [SerializeField] TMP_InputField usernameInput;
@@ -15,32 +14,34 @@ public class RegisterUser : MonoBehaviour
     [SerializeField] TextMeshProUGUI errorUsernameWrongFormat;
     [SerializeField] TextMeshProUGUI errorWrongPasswordFormat;
     [SerializeField] TextMeshProUGUI validationRegister;
-    private PasswordEncrypter passwordEncrypter;
 
     [SerializeField] UnityEvent OnRegisterDone;
-    [SerializeField] UserSessionData userSessionData;
+
+    private SQLiteSessionRegisterQuery dbRegister;
+
+    public RegisterUser()
+    {
+        dbRegister = ServiceLocator.Instance.GetService<ISessionService>().RegisterQuery;
+    }
 
     void Start()
     {
-        passwordEncrypter = GetComponent<PasswordEncrypter>();
         ResetMessages();
     }
+
     public void TryToRegisterUser()
     {
         ResetMessages();
 
-        string dataPath = Application.streamingAssetsPath + "/Database";
-        SQLiteConnection db = new SQLiteConnection(dataPath + "/database.db");
-
         if (CheckUsernameFormat(usernameInput.text))
         {
-            if (!CheckIfPlayerExist(db, usernameInput.text))
+            if (!dbRegister.CheckIfPlayerExist(usernameInput.text))
             {
                 if (CheckPasswordFormat(passwordInput.text))
                 {
-                    string userSalt = passwordEncrypter.CreateSalt();
-                    string pwd = passwordEncrypter.HashPassword(passwordInput.text, userSalt);
-                    RegisterNewPlayer(db, usernameInput.text, pwd, userSalt);
+
+                    dbRegister.RegisterNewPlayer(usernameInput.text, passwordInput.text);
+                    validationRegister.gameObject.SetActive(true);
                     OnRegisterDone.Invoke();
                 }
 
@@ -65,37 +66,19 @@ public class RegisterUser : MonoBehaviour
 
     }
 
-    bool CheckIfPlayerExist(SQLiteConnection db, string p_user)
-    {
-        List<DBUsers> obj = db.Query<DBUsers>("SELECT * FROM Users");
-        foreach (DBUsers item in obj)
-        {
-         if (p_user.Equals(item.Username))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
 
     bool CheckUsernameFormat(string user)
     {
         Regex validationRegex = new Regex(@"^[a-zA-Z0-9]+$");
         return (validationRegex.IsMatch(user));
     }
-
-    bool CheckPasswordFormat(string pswd)
+ bool CheckPasswordFormat(string pswd)
     {
         Regex numericalCaseRegex = new Regex(@"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?!.* ).{8,}$");
         Regex specialCharCaseRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,}$"); 
         return (numericalCaseRegex.IsMatch(pswd) || specialCharCaseRegex.IsMatch(pswd));
     }
 
-    void RegisterNewPlayer(SQLiteConnection db, string username, string password, string salt)
-    {
-        db.Query<DBUsers>("INSERT INTO users(username, password, salt) VALUES(?, ?, ?)", username, password, salt);
-        validationRegister.gameObject.SetActive(true);
-    }
 
     void ResetMessages()
     {

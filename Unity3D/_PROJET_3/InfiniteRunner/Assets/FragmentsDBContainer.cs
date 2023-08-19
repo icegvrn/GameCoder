@@ -50,31 +50,31 @@ public class FragmentsDBContainer : MonoBehaviour
 
     void GetAllUsersFragments()
     {
-        List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllUsersFragmentsByCount(10);
+        List<DBFragment> fragment = ServiceLocator.Instance.GetService<ISessionService>().Query.GetAllUsersFragmentsByCount(10);
         UpdateFragments(fragment);
     }
 
     public void GetAllUsersRandomFragments()
     {
-        List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllUsersRandomFragmentsByCount(10);
+        List<DBFragment> fragment = ServiceLocator.Instance.GetService<ISessionService>().Query.GetAllUsersRandomFragmentsByCount(10);
         UpdateFragments(fragment);
     }
 
     void GetAllUsersRandomFragmentsAtTime(DBConstant.Time time)
     {
-        List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllUsersRandomFragmentsAtTimeByCount((int)time, 10);
+        List<DBFragment> fragment = ServiceLocator.Instance.GetService<ISessionService>().Query.GetAllUsersRandomFragmentsAtTimeByCount((int)time, 10);
         UpdateFragments(fragment);
     }
 
     void GetAllUsersFragmentsAtTime(DBConstant.Time time)
     {
-        List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllUsersFragmentsAtTimeByCount((int)time, 10);
+        List<DBFragment> fragment = ServiceLocator.Instance.GetService<ISessionService>().Query.GetAllUsersFragmentsAtTimeByCount((int)time, 10);
         UpdateFragments(fragment);
     }
 
     void GetAllCurrentUserFragments()
     {
-       List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllCurrentUserFragments();
+       List<DBFragment> fragment = ServiceLocator.Instance.GetService<ISessionService>().Query.GetAllCurrentUserFragments();
        UpdateFragments(fragment);
     }
 
@@ -82,20 +82,20 @@ public class FragmentsDBContainer : MonoBehaviour
 
     void GetAllCurrentUserRandomFragments() 
     {
-        List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllCurrentUserRandomFragments();
+        List<DBFragment> fragment = ServiceLocator.Instance.GetService<ISessionService>().Query.GetAllCurrentUserRandomFragments();
         UpdateFragments(fragment);
     }
 
     void GetCurrentUserRandomFragmentsAtTime(DBConstant.Time time)
     {
-        List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllCurrentUserRandomFragmentsAtTime((int)time);
+        List<DBFragment> fragment = ServiceLocator.Instance.GetService<ISessionService>().Query.GetAllCurrentUserRandomFragmentsAtTime((int)time);
         UpdateFragments(fragment);
     }
 
 
     void GetCurrentUserFragmentsAtTime(DBConstant.Time time)
     {
-        List<DBFragment> fragment = ServiceLocator.Instance.GetService<UserSessionData>().GetAllCurrentUserFragmentsAtTime((int)time);
+        List<DBFragment> fragment = ServiceLocator.Instance.GetService<ISessionService>().Query.GetAllCurrentUserFragmentsAtTime((int)time);
         UpdateFragments(fragment);
 
     }

@@ -18,12 +18,12 @@ public class CharacterController : MonoBehaviour, ICharacter
     private NavMeshAgent navMeshAgent; // Référence au NavMeshAgent
     private bool isBlocked = false; // Pour gérer le blocage
 
-    private InputService input;
+    private IInputService input;
 
     // Start is called before the first frame update
     void Start()
     {
-        input = ServiceLocator.Instance.GetService<InputService>();
+        input = ServiceLocator.Instance.GetService<IInputService>();
         Cursor.visible = false;
         isJumpStarted = false;
         initialVerticalPosition = transform.position.y;

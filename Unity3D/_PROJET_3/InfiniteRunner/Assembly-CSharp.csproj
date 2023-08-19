@@ -68,6 +68,7 @@
     <Compile Include="Assets\SessionInitializer.cs" />
     <Compile Include="Assets\Scripts\JWT\Algorithms\CertificateAlgorithm.cs" />
     <Compile Include="Assets\BestimeCanvasDecomposer.cs" />
+    <Compile Include="Assets\Scripts\SQLiteSessionConnexionQuery.cs" />
     <Compile Include="Assets\Scripts\JWT\Serializers\DefaultJsonSerializerFactory.cs" />
     <Compile Include="Assets\AutorunDebug.cs" />
     <Compile Include="Assets\Scripts\JWT\Algorithms\IAlgorithmFactory.cs" />
@@ -89,6 +90,8 @@
     <Compile Include="Assets\FragmentsConsultationSpot.cs" />
     <Compile Include="Assets\Scripts\DBUserData.cs" />
     <Compile Include="Assets\PortalBehavior.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IGameSettingsService.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IInputService.cs" />
     <Compile Include="Assets\UserSessionData.cs" />
     <Compile Include="Assets\Scripts\DBUsers.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\ChestDemo.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Assets\Scripts\JWT\JwtDecoder.cs" />
     <Compile Include="Assets\AttachObstacleToEnvironment.cs" />
     <Compile Include="Assets\SoundLevelService.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\ISessionService.cs" />
     <Compile Include="Assets\Scripts\JWT\Algorithms\RS4096Algorithm.cs" />
     <Compile Include="Assets\DisplayChildOnTrigger.cs" />
     <Compile Include="Assets\TextAnimator.cs" />
@@ -124,6 +128,7 @@
     <Compile Include="Assets\Scripts\JWT\Algorithms\NoneAlgorithm.cs" />
     <Compile Include="Assets\Scripts\JWT\Algorithms\RS2048Algorithm.cs" />
     <Compile Include="Assets\Scripts\JWT\Internal\EncodingHelper.cs" />
+    <Compile Include="Assets\ApplicationManager.cs" />
     <Compile Include="Assets\Scripts\CollectablesContainer.cs" />
     <Compile Include="Assets\Scripts\DBSessionData.cs" />
     <Compile Include="Assets\BestTimeFromDB.cs" />
@@ -154,6 +159,7 @@
     <Compile Include="Assets\ColliderOffset.cs" />
     <Compile Include="Assets\Scripts\JWT\ValidationParameters.cs" />
     <Compile Include="Assets\ToggleInt.cs" />
+    <Compile Include="Assets\Scripts\GameSettingsService.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\MaterialMover.cs" />
     <Compile Include="Assets\CharacterAutoRunner.cs" />
     <Compile Include="Assets\Scripts\JWT\Algorithms\HMACSHAAlgorithm.cs" />
@@ -163,19 +169,21 @@
     <Compile Include="Assets\Teleporter.cs" />
     <Compile Include="Assets\Scripts\Collectable.cs" />
     <Compile Include="Assets\Scripts\JWT\Compatibility\System.Reflection\CustomAttributeExtensions.cs" />
-    <Compile Include="Assets\Scripts\GameSettings.cs" />
     <Compile Include="Assets\Scripts\ServicesLocator.cs" />
     <Compile Include="Assets\FragmentItem.cs" />
     <Compile Include="Assets\Scripts\JWT\JwtValidator.cs" />
     <Compile Include="Assets\UsingSession.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\WheelController.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\ISoundService.cs" />
     <Compile Include="Assets\RunStatsService.cs" />
     <Compile Include="Assets\Scripts\JWT\JwtParts.cs" />
+    <Compile Include="Assets\Scripts\SQLiteSessionDataQuery.cs" />
     <Compile Include="Assets\Scripts\JWT\Compatibility\System.Security.Cryptography\HashAlgorithmName.cs" />
     <Compile Include="Assets\FragmentManager.cs" />
     <Compile Include="Assets\InfiniteRunnerSceneManager.cs" />
     <Compile Include="Assets\Scripts\JWT\Builder\JwtHeader.cs" />
     <Compile Include="Assets\Scripts\JWT\Algorithms\HMACSHA384Algorithm.cs" />
+    <Compile Include="Assets\Scripts\SQLiteSessionQuery.cs" />
     <Compile Include="Assets\AurynSky\Gems Ultimate Pack\Scripts\AnimationScript.cs" />
     <Compile Include="Assets\Scripts\JWT\Algorithms\RS256Algorithm.cs" />
     <Compile Include="Assets\PoolAssetsGenerator.cs" />
@@ -186,6 +194,7 @@
     <Compile Include="Assets\Scripts\JWT\Builder\ClaimName.cs" />
     <Compile Include="Assets\ClassementConsultationSpot.cs" />
     <Compile Include="Assets\DBFragmentItem.cs" />
+    <Compile Include="Assets\Scripts\SQLiteSessionRegisterQuery.cs" />
     <Compile Include="Assets\FragmentCanvasItem.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\DBRunSession.cs" />

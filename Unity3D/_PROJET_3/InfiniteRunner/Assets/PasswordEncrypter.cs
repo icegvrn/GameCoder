@@ -4,7 +4,7 @@ using System.Text;
 using System.Security.Cryptography;
 
 // Credit to Griffin Framework : https://github.com/jgauffin/Griffin.Framework
-public class PasswordEncrypter : MonoBehaviour, IPasswordSecurity
+public class PasswordEncrypter : IPasswordSecurity
 {
   
     /// <summary>

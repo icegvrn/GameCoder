@@ -127,7 +127,7 @@ public class FragmentManager : MonoBehaviour
 
     private bool IsAFragmentAvailableOverInt(int nb)
     {
-      bool result = ServiceLocator.Instance.GetService<UserSessionData>().AreFragmentsAvailableOverInt((int)ServiceLocator.Instance.GetService<RunStatsService>().TimeID, nb);
+      bool result = ServiceLocator.Instance.GetService<ISessionService>().Query.AreFragmentsAvailableOverInt((int)ServiceLocator.Instance.GetService<RunStatsService>().TimeID, nb);
         return result;
     }
 

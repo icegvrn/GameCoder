@@ -7,19 +7,19 @@ public class PortalEnablerFromDB : MonoBehaviour
     [SerializeField] GameObject newPortalUI;
     void Start()
     {
-        bool portalUnlocked = ServiceLocator.Instance.GetService<UserSessionData>().UnlockNewTimeIfAvailable();
+        bool portalUnlocked = ServiceLocator.Instance.GetService<ISessionService>().Query.UnlockNewTimeIfAvailable();
 
         if (portalUnlocked)
         {
             newPortalUI.SetActive(true);
         }
 
-        List<int> availablePortal = ServiceLocator.Instance.GetService<UserSessionData>().GetAvailableTimeForUser();
+        List<int> availablePortal = ServiceLocator.Instance.GetService<ISessionService>().Query.GetAvailableTimeForUser();
 
         if (availablePortal == null)
         {
             int rand = Random.Range(1, GetComponentsInChildren<PortalBehavior>().Length + 1);
-            ServiceLocator.Instance.GetService<UserSessionData>().RegisterTimeForUser(rand);
+            ServiceLocator.Instance.GetService<ISessionService>().Query.RegisterTimeForUser(rand);
             GetComponentsInChildren<PortalBehavior>()[rand - 1].IsAvailableForPlayer = true;
             availablePortal = new List<int>();
             availablePortal.Add(rand);

@@ -8,7 +8,7 @@ public class DBFragmentItem : MonoBehaviour
     {
        
         int timeID = (int)ServiceLocator.Instance.GetService<RunStatsService>().TimeID;
-        ServiceLocator.Instance.GetService<UserSessionData>().InsertNewFragmentForPlayer(timeID);
+        ServiceLocator.Instance.GetService<ISessionService>().Query.InsertNewFragmentForPlayer(timeID);
  
     }
 }
