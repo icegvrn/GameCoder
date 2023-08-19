@@ -9,10 +9,9 @@ public class HUDManager : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        Debug.Log("J'initialise le HUD manager");
         decomposer = GetComponent<HUDDecomposer>();
         runStatsService = ServiceLocator.Instance.GetService<RunStatsService>();
-        decomposer.Username.text = ServiceLocator.Instance.GetService<SessionManager>().CurrentUser;
+        decomposer.Username.text = ServiceLocator.Instance.GetService<ISessionService>().UserData.CurrentUser;
         initialized = true;
     }
 

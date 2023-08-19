@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(RunStatsService))]
 public class RunManager : MonoBehaviour
@@ -90,7 +87,7 @@ public class RunManager : MonoBehaviour
 
     private void StartRunIfSessionReady()
     {
-        if (session.SessionReady)
+        if (session.IsSessionReady())
         {
             currentRunState = RunLevelState.levelStart; 
         }

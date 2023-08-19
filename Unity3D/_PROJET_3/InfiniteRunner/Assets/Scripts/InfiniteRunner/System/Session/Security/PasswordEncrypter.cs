@@ -1,10 +1,9 @@
 using System;
-using UnityEngine;
 using System.Text;
 using System.Security.Cryptography;
 
 // Credit to Griffin Framework : https://github.com/jgauffin/Griffin.Framework
-public class PasswordEncrypter : MonoBehaviour, IPasswordSecurity
+public class PasswordEncrypter : IPasswordSecurity
 {
   
     /// <summary>
@@ -14,7 +13,7 @@ public class PasswordEncrypter : MonoBehaviour, IPasswordSecurity
     /// <returns>Base64 encoded salt</returns>
     public string CreateSalt()
     {
-        byte[] salt = new byte[32]; // Repasser à 16 si problème
+        byte[] salt = new byte[32];
 
         using (RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider())
         {

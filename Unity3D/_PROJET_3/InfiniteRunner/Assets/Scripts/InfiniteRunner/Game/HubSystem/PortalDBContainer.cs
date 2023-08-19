@@ -12,17 +12,6 @@ public class PortalDBContainer : MonoBehaviour
     [SerializeField] private GameObject BestTimePrefab;
     [SerializeField] private Transform BestTimeParent;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public  void SpawnBestTimePanel()
     {
@@ -37,7 +26,5 @@ public class PortalDBContainer : MonoBehaviour
         canvasComposer.TotalFragmentsFoundInTime.text = fragmentsInfos[0].ToString() + "/"+ fragmentsInfos[1].ToString();
         canvasComposer.Image.sprite = canvasComposer.ImagesSprite[(int)idFromDb-1];
 
-        // Ajouter le total des fragments trouvés par les joueurs.
-        
     }
 }

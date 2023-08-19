@@ -18,7 +18,7 @@ public class ClassementDBContainer : MonoBehaviour
     void Start()
     {
   
-            List<DBRank> ranking = ServiceLocator.Instance.GetService<UserSessionData>().GetAllUsersRanking();
+            List<DBRank> ranking = ServiceLocator.Instance.GetService<ISessionService>().Query.GetAllUsersRanking();
 
             int i = 0;
 
@@ -32,7 +32,7 @@ public class ClassementDBContainer : MonoBehaviour
 
                 }
 
-                if (rank.Username == ServiceLocator.Instance.GetService<SessionManager>().CurrentUser)
+                if (rank.Username == ServiceLocator.Instance.GetService<ISessionService>().UserData.CurrentUser)
                 {
 
                     currentUserItem.Rank.text = "Votre place : " + (i + 1).ToString() + ".";

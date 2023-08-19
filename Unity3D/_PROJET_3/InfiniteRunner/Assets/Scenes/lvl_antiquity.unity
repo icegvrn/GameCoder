@@ -1064,6 +1064,7 @@ MonoBehaviour:
   - {fileID: 3688522909308950422, guid: 43a7d47dfcb3f8f4db35b6aa4aa6e2aa, type: 3}
   - {fileID: 9023008561699296875, guid: c9a7119bdce56e84a95e18cff9b737c6, type: 3}
   - {fileID: 5291292771180174926, guid: 1120dba4f67d4124883bb582c1e7985f, type: 3}
+  - {fileID: 1164288450502436, guid: 071558a5188d54142b114a11ab2fb950, type: 3}
 --- !u!4 &426004796
 Transform:
   m_ObjectHideFlags: 0
@@ -1269,7 +1270,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 61.35
+  m_fontSize: 42.4
   m_fontSizeBase: 101.34
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2124,7 +2125,6 @@ MonoBehaviour:
   speed: 2000
   runningSpeed: 2000
   animator: {fileID: 838676484}
-  isCrouched: 0
 --- !u!65 &838676480
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2496,7 +2496,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.05
+  m_fontSize: 39
   m_fontSizeBase: 101.34
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2705,7 +2705,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39
+  m_fontSize: 25.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

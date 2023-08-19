@@ -14,13 +14,8 @@ public class JwtPayload
     public int exp;
 }
 
-public class JWTTokenGenerator : MonoBehaviour
+public class JWTTokenGenerator 
 {
-    void Start()
-    {
-
-    }
-
 
     public string GenerateToken(int id, string username)
     {

@@ -6,18 +6,17 @@ public class DBRunSession : MonoBehaviour
     private bool newBestTime;
   public void WriteTimeIfBestime(int time)
     {
-        Debug.Log("JE vais enregistrer le temps " + time);
         timeID = ServiceLocator.Instance.GetService<RunStatsService>().TimeID;
-        DBUsers_TimeJoinTime bestTimeData = ServiceLocator.Instance.GetService<UserSessionData>().GetBestTimeFromTime((int)timeID);
+        DBUsers_TimeJoinTime bestTimeData = ServiceLocator.Instance.GetService<ISessionService>().Query.GetCurrentUserBestScoreTimeFromTime((int)timeID);
        
         if (bestTimeData == null)
         {
-            ServiceLocator.Instance.GetService<UserSessionData>().RegisterNewBestTimeForUserFromNull(time, (int)timeID);
+            ServiceLocator.Instance.GetService<ISessionService>().Query.RegisterNewBestScoreTimeForUserFromNull(time, (int)timeID);
             newBestTime = true;
         }
         else if (time < bestTimeData.best_time && time != 0)
         {
-            ServiceLocator.Instance.GetService<UserSessionData>().RegisterNewBestTimeForUser(time, (int)timeID);
+            ServiceLocator.Instance.GetService<ISessionService>().Query.RegisterNewBestScoreTimeForUser(time, (int)timeID);
             newBestTime = true;
         } 
     }

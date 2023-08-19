@@ -1,48 +1,44 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class UsingSession : MonoBehaviour
 {
 
     [SerializeField] GameObject errorConnection;
     [SerializeField] List<GameObject> ObjectsToEnableOnSessionReady;
-    bool sessionReady;
-    public bool SessionReady { get { return sessionReady; } }
-    // Start is called before the first frame update
+
     public void Start()
     {
-        errorConnection.SetActive(false);
-        CheckSession();
-
-        if (sessionReady)
+        ResetMessages();
+     
+        if (IsSessionReady())
         {
             EnableScene();
         }
     }
 
-    void CheckSession()
+   public bool IsSessionReady()
     {
-        Debug.Log("JE CHECK LA SESSION");
         try
         {
-            DBUserData data = ServiceLocator.Instance.GetService<SessionManager>().GetUserSessionData();
-            Debug.Log("SESSION OK DASN LE TRY");
+            DBUserData data = ServiceLocator.Instance.GetService<ISessionService>().Query.GetUserSessionData();
+
             if (data != null)
             {
-                sessionReady = true;
+               return true;
             }
             else
             {
                 EnableError();
+                return false;
             }
           
         }
         catch
         {
-            Debug.Log("ERROR DE SESSION");
             EnableError();
+            Debug.LogError("UsingSession : un problème a été rencontré lors de la tentative de lecture de session.");
+            return false;
         }
     }
 
@@ -64,8 +60,9 @@ public class UsingSession : MonoBehaviour
         Debug.LogError("Impossible d'accéder aux données joueur. Veuillez vous rediriger vers l'écran d'accueil.");
     }
 
-    private void OnApplicationQuit()
+    void ResetMessages()
     {
-        ServiceLocator.Instance.GetService<SessionManager>().EndSession();
+        errorConnection.SetActive(false);
     }
+
 }

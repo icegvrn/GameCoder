@@ -1,21 +1,22 @@
 using System.IO;
 using UnityEngine;
 
-public class GameSettingsService : MonoBehaviour
+public class GameSettingsService : IGameSettingsService
 {
     private string settingsFilePath;
-    private SoundLevelService soundLevelService;
-    private InputService inputService;
-    private void Awake()
+    private ISoundService soundLevelService;
+    private IInputService inputService;
+
+    public GameSettingsService(IInputService input, ISoundService sound)
     {
-        settingsFilePath = Application.persistentDataPath + "/settings.json";
-        soundLevelService = new SoundLevelService();
-        inputService = new InputService();
-        SetSettings();
+        soundLevelService = sound;
+        inputService = input;
     }
+
 
     public void SaveSettings(GameSettingsContainer settings)
     {
+        settingsFilePath = Application.persistentDataPath + "/settings.json";
         string json = JsonUtility.ToJson(settings);
         File.WriteAllText(settingsFilePath, json);
         SetSettings();
@@ -23,6 +24,8 @@ public class GameSettingsService : MonoBehaviour
 
     public GameSettingsContainer LoadSettings()
     {
+         settingsFilePath = Application.persistentDataPath + "/settings.json";
+
         if (File.Exists(settingsFilePath))
         {
             string json = File.ReadAllText(settingsFilePath);
@@ -36,13 +39,11 @@ public class GameSettingsService : MonoBehaviour
 
     public void SetSettings()
     {
-     
         GameSettingsContainer gc = LoadSettings();
         SetQuality(gc);
         soundLevelService.MusicLevel = gc.musicVolume;
         soundLevelService.VFXLevel = gc.soundVolume;
         inputService.SetAzertyModeTo(gc.isAzerty);
-
     }   
 
     private void SetQuality(GameSettingsContainer gc)
@@ -62,6 +63,5 @@ public class GameSettingsService : MonoBehaviour
             QualitySettings.SetQualityLevel(5, true);
         }
 
-        Debug.Log("La qualité du jeu est maintenant setup sur " + QualitySettings.GetQualityLevel());
     }
 }

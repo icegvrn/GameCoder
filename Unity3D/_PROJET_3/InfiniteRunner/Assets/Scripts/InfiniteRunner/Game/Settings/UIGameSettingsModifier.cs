@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,8 +5,7 @@ using UnityEngine.UI;
 
 public class UIGameSettingsModifier : MonoBehaviour
 {
-    [SerializeField] GameSettingsService gameSettings;
-
+    private IGameSettingsService gameSettings;
     private GameSettingsContainer gameSettingsContainer;
 
     [SerializeField] List<Toggle> qualityToggles;
@@ -17,7 +15,9 @@ public class UIGameSettingsModifier : MonoBehaviour
 
     private void OnEnable()
     {
+        gameSettings = ServiceLocator.Instance.GetService<IGameSettingsService>();
         GameSettingsContainer gs = gameSettings.LoadSettings();
+
         gameSettingsContainer = gs;
 
 

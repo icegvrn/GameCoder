@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ServiceLocator
@@ -41,8 +40,9 @@ public class ServiceLocator
         {
             return (T)servicesDictionary[serviceType];
         }
-        else {
-            Debug.LogError("Le service de type " + serviceType + " est manquant.");
+        else 
+        {
+            Debug.LogWarning("Le service de type " + serviceType + " est manquant.");
         }
        return default(T);
     }

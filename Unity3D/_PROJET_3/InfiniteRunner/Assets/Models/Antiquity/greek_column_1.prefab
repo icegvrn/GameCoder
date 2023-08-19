@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5629269774301750312}
   - component: {fileID: 5629269774303044622}
   - component: {fileID: 5629269774304044750}
-  - component: {fileID: 5629269774308398760}
+  - component: {fileID: 5894570768315697017}
   m_Layer: 0
   m_Name: greek_column_1
   m_TagString: Untagged
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 5629269774302115848}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000035723103, y: -0.0000073035535, z: -0.000004359069, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8.751016, y: 8.751016, z: 8.751016}
+  m_LocalPosition: {x: 0, y: 1.39, z: -0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,8 +86,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5629269774308398760
-MeshCollider:
+--- !u!65 &5894570768315697017
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -104,7 +104,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 2a454462cc1bc47eab5642f1bcf4ba54, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 2.0000477, y: 7.000143, z: 2.0000854}
+  m_Center: {x: 0.000009298323, y: 2.499992, z: 0.0000205636}

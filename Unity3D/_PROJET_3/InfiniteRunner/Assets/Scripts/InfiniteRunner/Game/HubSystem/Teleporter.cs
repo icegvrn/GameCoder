@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+
 
 public class Teleporter : MonoBehaviour
 {
-    [SerializeField] int sceneToLoad;
+    [SerializeField] UnityEvent OnTeleport;
+
     [SerializeField] bool isEnable;
     bool isTrigger;
     public bool IsEnable { get { return isEnable; } set { isEnable = value; } }
@@ -17,22 +16,15 @@ public class Teleporter : MonoBehaviour
         unavailableMessage.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
      
         if (other.gameObject.TryGetComponent(out CharacterController cc) && !isTrigger)
         {   
-            Debug.Log("Je rentre pour " + other);
             isTrigger = true;
             if (isEnable)
             {
-                SceneManager.LoadScene(sceneToLoad);
+                OnTeleport.Invoke();
             }
             else
             {

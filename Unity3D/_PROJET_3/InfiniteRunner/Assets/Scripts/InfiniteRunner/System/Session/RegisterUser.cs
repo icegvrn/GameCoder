@@ -1,101 +1,73 @@
-using SQLite;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using System.Text.RegularExpressions;
-using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(PasswordEncrypter))]
 public class RegisterUser : MonoBehaviour
 {
-    [SerializeField] TMP_InputField usernameInput;
-    [SerializeField] TMP_InputField passwordInput;
-    [SerializeField] TextMeshProUGUI errorUsernameAlreadyExist;
-    [SerializeField] TextMeshProUGUI errorUsernameWrongFormat;
-    [SerializeField] TextMeshProUGUI errorWrongPasswordFormat;
-    [SerializeField] TextMeshProUGUI validationRegister;
-    private PasswordEncrypter passwordEncrypter;
+
+    private SQLiteSessionRegisterQuery dbRegister;
+
+    [SerializeField] private TMP_InputField usernameInput;
+    [SerializeField] private TMP_InputField passwordInput;
+    [SerializeField] private TextMeshProUGUI errorUsernameAlreadyExist;
+    [SerializeField] private TextMeshProUGUI errorUsernameWrongFormat;
+    [SerializeField] private TextMeshProUGUI errorWrongPasswordFormat;
+    [SerializeField] private TextMeshProUGUI validationRegister;
 
     [SerializeField] UnityEvent OnRegisterDone;
-    [SerializeField] UserSessionData userSessionData;
+
 
     void Start()
     {
-        passwordEncrypter = GetComponent<PasswordEncrypter>();
+        dbRegister = ServiceLocator.Instance.GetService<ISessionService>().RegisterQuery;
         ResetMessages();
     }
+
     public void TryToRegisterUser()
     {
         ResetMessages();
 
-        string dataPath = Application.streamingAssetsPath + "/Database";
-        SQLiteConnection db = new SQLiteConnection(dataPath + "/database.db");
+        string username = usernameInput.text;
+        string password = passwordInput.text;
 
-        if (CheckUsernameFormat(usernameInput.text))
-        {
-            if (!CheckIfPlayerExist(db, usernameInput.text))
-            {
-                if (CheckPasswordFormat(passwordInput.text))
-                {
-                    string userSalt = passwordEncrypter.CreateSalt();
-                    string pwd = passwordEncrypter.HashPassword(passwordInput.text, userSalt);
-                    RegisterNewPlayer(db, usernameInput.text, pwd, userSalt);
-                    OnRegisterDone.Invoke();
-                }
-
-                else
-                {
-                    errorWrongPasswordFormat.gameObject.SetActive(true);
-                }
-
-            }
-            else
-            {
-                errorUsernameAlreadyExist.gameObject.SetActive(true);
-                Debug.LogError("Ce joueur existe déjà !");
-            }
-
-        }
-        else
+        if (!CheckUsernameFormat(username))
         {
             errorUsernameWrongFormat.gameObject.SetActive(true);
+            return;
         }
 
-
-    }
-
-    bool CheckIfPlayerExist(SQLiteConnection db, string p_user)
-    {
-        List<DBUsers> obj = db.Query<DBUsers>("SELECT * FROM Users");
-        foreach (DBUsers item in obj)
+        if (dbRegister.CheckIfPlayerExist(username))
         {
-         if (p_user.Equals(item.Username))
-            {
-                return true;
-            }
+            errorUsernameAlreadyExist.gameObject.SetActive(true);
+            Debug.LogError("Ce joueur existe déjà !");
+            return;
         }
-        return false;
+
+        if (!CheckPasswordFormat(password))
+        {
+            errorWrongPasswordFormat.gameObject.SetActive(true);
+            return;
+        }
+
+        dbRegister.RegisterNewPlayer(username, password);
+        validationRegister.gameObject.SetActive(true);
+        OnRegisterDone.Invoke();
     }
+
 
     bool CheckUsernameFormat(string user)
     {
         Regex validationRegex = new Regex(@"^[a-zA-Z0-9]+$");
         return (validationRegex.IsMatch(user));
     }
-
-    bool CheckPasswordFormat(string pswd)
+ bool CheckPasswordFormat(string pswd)
     {
         Regex numericalCaseRegex = new Regex(@"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?!.* ).{8,}$");
         Regex specialCharCaseRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,}$"); 
         return (numericalCaseRegex.IsMatch(pswd) || specialCharCaseRegex.IsMatch(pswd));
     }
 
-    void RegisterNewPlayer(SQLiteConnection db, string username, string password, string salt)
-    {
-        db.Query<DBUsers>("INSERT INTO users(username, password, salt) VALUES(?, ?, ?)", username, password, salt);
-        validationRegister.gameObject.SetActive(true);
-    }
 
     void ResetMessages()
     {

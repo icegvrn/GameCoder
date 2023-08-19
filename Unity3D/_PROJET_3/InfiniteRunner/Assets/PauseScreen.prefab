@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5906818339532325341}
   - component: {fileID: 4620099096613164239}
   - component: {fileID: 3686364380112799534}
-  - component: {fileID: 3923147379279113452}
+  - component: {fileID: 6414996216504781798}
   m_Layer: 5
   m_Name: BackToHome
   m_TagString: Untagged
@@ -134,10 +134,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3923147379279113452}
-        m_TargetAssemblyTypeName: InfiniteRunnerSceneManager, Assembly-CSharp
+      - m_Target: {fileID: 6414996216504781798}
+        m_TargetAssemblyTypeName: ApplicationSceneLoader, Assembly-CSharp
         m_MethodName: LoadScene
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -146,7 +146,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3923147379279113452
+--- !u!114 &6414996216504781798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,9 +155,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 651177854580225194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e88a6752378b1cf478f9ab16cd3458bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 32fa6785c9c1d0b4098f15d6411f8783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneToLoad: 1
 --- !u!1 &1455430280500206046
 GameObject:
   m_ObjectHideFlags: 0

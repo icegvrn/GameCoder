@@ -1,257 +1,274 @@
 ﻿using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.TextCore.Text;
-using static ICharacter;
 
-public class CharacterAutoRunner : MonoBehaviour, ICharacter
+public class CharacterAutoRunner : MonoBehaviour
 {
-    [SerializeField]
-    private float speed = 10f;
-    [SerializeField]
-    private float runningSpeed = 10f;
-    private float initialRunningSpeed = 10f;
-    [SerializeField]
-    private Animator animator;
-    public STATE currentState { get; set; }
-    public bool isJumpStarted { get; set; }
-    public bool isCrouched;
+    [SerializeField] private float speed = 10f;
+    [SerializeField] private float runningSpeed = 10f;
+    [SerializeField] private Animator animator;
+
+    private Rigidbody rb;
+    private IInputService input;
+
+    private const float SlopeGravityFactor = 1f / 125f;
+    private const float CrouchOffset = 0.2f;
+
+    private bool isJumpStarted;
+    private bool isCrouched;
     private bool isCollide;
-    private float initialVerticalPosition;
+    private float initialRunningSpeed;
+    private float playerHeight;
+
     private CustomTimer collisionTimer;
     private RunStatsService runStatsService;
-    bool collisionStarted;
 
-    private bool canExitCollision = true;
-
-    RaycastHit slopeHit;
-    float playerHeight;
-    Vector3 slopeMoveDirection;
-    Vector3 headInitialCenter;
-
-    private InputService input;
-    // Start is called before the first frame update
-
-    void Start()
+    private enum STATE
     {
+        IDLE,
+        RUN,
+        LEFT,
+        RIGHT,
+        JUMP,
+        CROUCH,
+        DEAD
+    }
+
+    private STATE currentState;
+
+    private void Start()
+    {
+
+        rb = GetComponent<Rigidbody>();
+        input = ServiceLocator.Instance.GetService<IInputService>();
+
         isJumpStarted = false;
-        initialVerticalPosition = transform.position.y;
         initialRunningSpeed = runningSpeed;
         currentState = STATE.RUN;
+
         collisionTimer = new CustomTimer();
         collisionTimer.Init();
+
         runStatsService = ServiceLocator.Instance.GetService<RunStatsService>();
-        input = ServiceLocator.Instance.GetService<InputService>();
+
         playerHeight = GetComponent<BoxCollider>().bounds.size.y;
-        headInitialCenter = GetComponent<CapsuleCollider>().center;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+      
         collisionTimer.Update();
+
+      
+       HandleForwardMovement();
+        HandleHorizontalMovement();
+        
+        
+        HandleJumping();
+        HandleVerticalMovement();
+
+        HandleCrouching();
+        
+        HandleAnimator();
+
+        HandleCollisionExit();
+    
+        
+        
     }
 
-    void FixedUpdate()
+    private void HandleHorizontalMovement()
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-
-        // Contrôle du joueur pour aller à gauche ou à droite
         float horizontalInput = input.GetHorizontalAxis();
-        if (horizontalInput < 0)
+
+        if (!isCrouched && !isJumpStarted)
         {
-            currentState = STATE.LEFT;
-        }
-        else if (horizontalInput > 0)
-        {
-            currentState = STATE.RIGHT;
+            if (horizontalInput < 0)
+            {
+                currentState = STATE.LEFT;
+            }
+            else if (horizontalInput > 0)
+            {
+                currentState = STATE.RIGHT;
+            }
         }
 
-        Vector3 horizontalMovement = new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
+        Vector3 horizontalMovement = new Vector3(horizontalInput * speed * Time.fixedDeltaTime, 0, 0);
         rb.AddForce(horizontalMovement, ForceMode.VelocityChange);
+    }
 
-
-        Vector3 forwardMovement = new Vector3(0, 0, runningSpeed * Time.deltaTime);
-        rb.AddForce(forwardMovement, ForceMode.VelocityChange);
-
-        if (OnSlope())
+    private void HandleForwardMovement()
+    {
+        if (!isCollide)
         {
-            Debug.Log("JE SUIS SUR UN SLOPE");
-            float slopeGravityFactor = runningSpeed* 1/125;
-            Vector3 slopeGravity = Vector3.down * (Physics.gravity.magnitude * slopeGravityFactor);
-            rb.AddForce(slopeGravity, ForceMode.Acceleration);
+            Vector3 forwardMovement = new Vector3(0, 0, runningSpeed * Time.fixedDeltaTime);
+            rb.AddForce(forwardMovement, ForceMode.VelocityChange);
         }
+    }
 
-        if (input.GetKeyDown(InputService.ActionKey.up))
+    private void HandleJumping()
+    {
+        if (input.GetKey(InputService.ActionKey.up))
         {
             if (!isJumpStarted)
             {
-                currentState = STATE.JUMP;
+                rb.AddForce(transform.up * 900, ForceMode.Impulse);
                 isJumpStarted = true;
-                GetComponent<Rigidbody>().AddForce(transform.up * 900, ForceMode.Impulse);
             }
+            runningSpeed = initialRunningSpeed * 0.4f;
+            currentState = STATE.JUMP;
         }
 
-        else if (input.GetKey(InputService.ActionKey.down))
+        if (transform.localPosition.y < 0f)
         {
-
-            if (!isCrouched)
-            {
-                GetComponent<CapsuleCollider>().center = new Vector3(GetComponent<CapsuleCollider>().center.x, GetComponent<CapsuleCollider>().center.y - 0.2f, GetComponent<CapsuleCollider>().center.z);
-            }
-            currentState = STATE.CROUCH;
-            isCrouched = true;
-            isCollide = false;
-
-        }
-
-        else
-        {
-            if (transform.localPosition.y < 0.1f) { if (isJumpStarted)
-                { runningSpeed = initialRunningSpeed; } isJumpStarted = false; }
-
-
-            if (transform.localPosition.y > 5f) { GetComponent<Rigidbody>().AddForce(transform.up * -500, ForceMode.Impulse); }
-
             if (isJumpStarted)
             {
-                runningSpeed = initialRunningSpeed * 0.4f;
+                isJumpStarted = false;
+                currentState = STATE.RUN;
             }
-
-            else
-            {
-                if (isCrouched)
-                {
-                    GetComponent<CapsuleCollider>().center = new Vector3(GetComponent<CapsuleCollider>().center.x, GetComponent<CapsuleCollider>().center.y + 0.2f, GetComponent<CapsuleCollider>().center.z);
-                    currentState = STATE.RUN;
-                    runningSpeed = initialRunningSpeed;
-                    isCrouched = false;
-                }
-
-            }
-
         }
 
-        UpdateAnimator();
-       
+             
+    }
 
+    private void HandleCrouching()
+    {
+        if (input.GetKey(InputService.ActionKey.down))
+        {
+            if (!isCrouched)
+            {
+                GetComponent<CapsuleCollider>().center = new Vector3(
+                    GetComponent<CapsuleCollider>().center.x,
+                    GetComponent<CapsuleCollider>().center.y - CrouchOffset,
+                    GetComponent<CapsuleCollider>().center.z
+                );
+                currentState = STATE.CROUCH;
+                isCrouched = true;
+                isCollide = false;
+            }
+        }
+        else if (input.GetKeyUp(InputService.ActionKey.down))
+        {
+            if (isCrouched)
+            {
+                GetComponent<CapsuleCollider>().center = new Vector3(
+                    GetComponent<CapsuleCollider>().center.x,
+                    GetComponent<CapsuleCollider>().center.y + CrouchOffset,
+                    GetComponent<CapsuleCollider>().center.z
+                );
 
+                isCrouched = false;
+            }
+        }
+    }
 
+ 
+
+    private void HandleVerticalMovement()
+    {
+        if (OnSlope())
+        {
+            Vector3 slopeGravity = Vector3.down * (Physics.gravity.magnitude * SlopeGravityFactor);
+           rb.AddForce(slopeGravity, ForceMode.Acceleration);
+        }
+        if (transform.localPosition.y > 6f)
+        {
+            rb.AddForce(transform.up * -300, ForceMode.Impulse);
+        }
+    }
+
+    private void HandleCollisionExit()
+    {
         if (transform.position.y < -0.1f)
         {
             Vector3 clamp = transform.position;
-            clamp.y = 0;
+            clamp.y = -0.08f;
             transform.position = clamp;
         }
         rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
-   
+
         if (!isJumpStarted && !isCrouched && !isCollide)
         {
             currentState = STATE.RUN;
             runningSpeed = initialRunningSpeed;
         }
-
     }
-    void UpdateAnimator()
+
+    private void HandleAnimator()
     {
         animator.SetBool(STATE.IDLE.ToString(), currentState == STATE.IDLE);
         animator.SetBool(STATE.RUN.ToString(), currentState == STATE.RUN);
         animator.SetBool(STATE.LEFT.ToString(), currentState == STATE.LEFT);
         animator.SetBool(STATE.RIGHT.ToString(), currentState == STATE.RIGHT);
-        animator.SetBool(STATE.BOOSTED.ToString(), currentState == STATE.BOOSTED);
         animator.SetBool(STATE.JUMP.ToString(), currentState == STATE.JUMP);
         animator.SetBool(STATE.CROUCH.ToString(), currentState == STATE.CROUCH);
         animator.SetBool(STATE.DEAD.ToString(), currentState == STATE.DEAD);
     }
 
+    private bool OnSlope()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit slopeHit, playerHeight / 2 + 0.5f))
+        {
+            float slopeAngle = Vector3.Angle(slopeHit.normal, Vector3.up);
+            return slopeAngle > 5 && slopeAngle < 45;
+        }
+        return false;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-
-        if (collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "DeadZone")
+        if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("DeadZone"))
         {
-            Debug.Log("ENter : J'ENTRE EN COLLISION AVEC " + collision.gameObject.name + " sur " + collision.collider);
-
             isCollide = true;
             runningSpeed = 0;
             currentState = STATE.IDLE;
 
             if (!collisionTimer.TimerIsStarted)
             {
-                Debug.Log("Je lance un timer ");
                 collisionTimer.Start();
             }
-            if (collision.gameObject.tag == "DeadZone")
-            {
-                canExitCollision = false;
-            }
-
         }
+
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "DeadZone")
+        if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("DeadZone"))
         {
-
-
-         
             isCollide = true;
             runningSpeed = 0;
             currentState = STATE.IDLE;
 
-
-            Debug.Log("Je collide et la Valeur du timer est " + collisionTimer.GetFloatValue());
-
             if (collisionTimer.GetFloatValue() >= 0.4f)
             {
-                Debug.Log("Timer passé, j'enlève 1");
                 runStatsService.UserLife -= 1;
                 collisionTimer.Stop();
-                canExitCollision = true;
-
             }
 
-            if (collision.gameObject.tag == "DeadZone")
-            {
-                collisionTimer.Start();
-            }
 
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "DeadZone")
+        if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("DeadZone"))
         {
-            Debug.Log("COLLIDE : JE SORS DU COLLIDER " + collision.gameObject.name + " sur " + collision.collider);
             isCollide = false;
             collisionTimer.Stop();
             runningSpeed = initialRunningSpeed;
-            Vector3 exitDirection = -collision.contacts[0].normal;
-           float exitDistance = 0.1f;
-           transform.position += exitDirection * exitDistance;
+          //  Vector3 exitDirection = -collision.contacts[0].normal;
+           // float exitDistance = 0.1f;
+            //transform.position += exitDirection * exitDistance;
         }
+   
     }
 
-    public void Reset()
+    public void ResetCharacter()
     {
         gameObject.SetActive(true);
         runningSpeed = initialRunningSpeed;
-        gameObject.transform.localPosition = Vector3.zero;
+        transform.localPosition = Vector3.zero;
         enabled = true;
         isJumpStarted = false;
         isCrouched = false;
         isCollide = false;
     }
-
-    private bool OnSlope()
-    {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight / 2 + 0.5f))
-        {
-           
-            float slopeAngle = Vector3.Angle(slopeHit.normal, Vector3.up);
-            return slopeAngle > 5 && slopeAngle < 45; // Ajustez l'angle comme nécessaire
-        }
-        return false;
-    }
-
 }

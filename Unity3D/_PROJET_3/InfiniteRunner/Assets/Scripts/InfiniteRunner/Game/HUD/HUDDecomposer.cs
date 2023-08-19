@@ -17,14 +17,4 @@ public class HUDDecomposer : MonoBehaviour
     [SerializeField] TextAnimator bestTimeAnimator;
     public TextAnimator BestTimeAnimator { get { return bestTimeAnimator; } }
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
