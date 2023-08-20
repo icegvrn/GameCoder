@@ -48,10 +48,10 @@ MonoBehaviour:
   textElem: {fileID: 5918736863754707873}
   fadeDuration: 0.5
   maxScale: 2
+  lastTextPersistenceLenght: 0.5
   textsToAnimate:
   - Congratulations
   - +1 Fragment!
-  lastTextPersistenceLenght: 0.5
   OnAnimationEnd:
     m_PersistentCalls:
       m_Calls:
@@ -5230,9 +5230,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 3be870bd3141f9741b70abdfb4242cb6, type: 3}
       insertIndex: -1
       addedObject: {fileID: -5050423318489575050}
-    - targetCorrespondingSourceObject: {fileID: 100000, guid: 3be870bd3141f9741b70abdfb4242cb6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 92884054808680863}
   m_SourcePrefab: {fileID: 100100000, guid: 3be870bd3141f9741b70abdfb4242cb6, type: 3}
 --- !u!1 &4499687566450259277 stripped
 GameObject:
@@ -5252,18 +5249,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fragmentUI: {fileID: 164093997875766334}
---- !u!114 &92884054808680863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4499687566450259277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b5aa6eba93e48949aaf0e61f61a87c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &4499687566450485613 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 3be870bd3141f9741b70abdfb4242cb6, type: 3}

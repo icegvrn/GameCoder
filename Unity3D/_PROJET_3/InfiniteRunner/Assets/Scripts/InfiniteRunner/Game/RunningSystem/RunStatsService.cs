@@ -1,14 +1,21 @@
 using UnityEngine;
 
-
-public class RunStatsService : MonoBehaviour
+/// <summary>
+/// Service qui permet de connaître l'état d'avancé de la course actuelle en trackant les informations : points de vie du joueur, essences collectée, temps passé à courir etc.
+/// </summary>
+public class RunStatsService : MonoBehaviour, IRunningGameService
 {
-
+    [Header("Configuration de la course")]
     [SerializeField] private DBConstant.Time timeID;
-    public DBConstant.Time TimeID { get { return timeID; } }
-
     [SerializeField] int runGoal;
+    public DBConstant.Time TimeID { get { return timeID; } }
     public int RunGoal { get { return runGoal; } set {  runGoal = value; } }
+
+    // Informations course
+    int runTime;
+    public int RunTime { get { return runTime; } }
+
+    // Informations joueur
     int userLife;
     public int UserLife { get {  return userLife; } set {  userLife = value; } }
 
@@ -18,24 +25,29 @@ public class RunStatsService : MonoBehaviour
     int userEssences;
     public int UserEssences { get {  return userEssences; } set {  userEssences = value; } }
 
-    int runTime;
-    public int RunTime { get { return runTime; } }
-
+    // Timer pour le temps de course
     private CustomTimer timer;
-
     bool initialized;
-    
 
+   
+    public RunStatsService()
+    {
+        // On réécrit par-dessus l'éventuel IRunnerGameService qui existerait déjà, dans le cas d'une course relancée par exemple.
+        ServiceLocator.Instance.UnregisterService<IRunningGameService>();
+        ServiceLocator.Instance.RegisterService<IRunningGameService>(this);
+    }
+    
+    /// <summary>
+    /// Méthode initialisant le timer pour compter le temps de course et la vie de l'utilisateur.
+    /// </summary>
     public void Init()
     {
-        RegisterMe();
-        SetTimer();
+        SetNewTimer();
         ResetUserLife();
         initialized = true;
     }
 
 
-    // Update is called once per frame
     void Update()
     {
         if (initialized)
@@ -43,34 +55,26 @@ public class RunStatsService : MonoBehaviour
            timer.Update();
            runTime = timer.GetValue();
         }
-
-
     }
 
-    public void RegisterMe()
-    {
-        if (ServiceLocator.Instance.GetService<RunStatsService>() == null)
-        {
-            ServiceLocator.Instance.RegisterService(this);
-            Debug.Log("Service enregistré");
-        }
-      
-    }
-
-    public void UnregisterMe()
-    {
-        ServiceLocator.Instance.UnregisterService<RunStatsService>();
-    }
-
-    void SetTimer()
+    public void SetNewTimer()
     {
         timer = new CustomTimer();
+    }
+
+    public void StartTimer()
+    {
+        timer.Start();
+    }
+
+    public void StopTimer()
+    {
+        timer.Stop();
     }
 
     void ResetUserLife()
     {
         userLife = maxUserLife;
-       
     }
 
     void ResetUserEssences()
@@ -82,17 +86,7 @@ public class RunStatsService : MonoBehaviour
     {
         ResetUserLife();
         ResetUserEssences();
-        SetTimer();
-    }
-
-    public void StartTimer()
-    {
-        timer.Start();
-    }
-
-    public void StopTimer()
-    {
-        timer.Stop();
+        SetNewTimer();
     }
 
 }

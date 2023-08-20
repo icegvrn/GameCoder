@@ -1,32 +1,36 @@
-﻿
+﻿using UnityEngine;
+using static InputService;
 
-using UnityEngine;
-
+/// <summary>
+/// Classe héritante de PointCollector. Elle communique avec le Running Game Service pour lui indiquer le nombre de point collecté.
+/// </summary>
 public class CharacterPointCollector : PointCollector
-    {
-    RunStatsService runStatsService;
+{
+    IRunningGameService runStatsService;
+    IInputService input;
 
     private void Start()
     {
-        runStatsService = ServiceLocator.Instance.GetService<RunStatsService>();
+        InitCollector();
     }
 
-    private void OnEnable()
+    void InitCollector()
     {
+        runStatsService = ServiceLocator.Instance.GetService<IRunningGameService>();
+        input = ServiceLocator.Instance.GetService<IInputService>();
         Points = 0;
     }
 
+    /// <summary>
+    /// Envoi constant des points cumulés au RunningGameService.
+    /// </summary>
     void Update()
     {
-        if (runStatsService == null)
-        {
-            runStatsService = ServiceLocator.Instance.GetService<RunStatsService>();
-        }
         runStatsService.UserEssences = Points;
 
-        if (Input.GetKeyUp(KeyCode.P))
+        //(demo) Cheat pour gagner des points plus rapidement
+        if (input.GetKeyDown(ActionKey.cheatPoints))
         {
-            Debug.Log("P " + Points);
             Points += 10;
         }
     }

@@ -74,10 +74,8 @@
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\AttachObjectsToEnvironnement.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Builder\HeaderName.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\HubSystem\Teleporter.cs" />
-    <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\DBFragmentItem.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\RS512Algorithm.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\NoneAlgorithm.cs" />
-    <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\RunManager.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\Managers\ApplicationManager.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Utils\CustomTimer.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\ObjectPool.cs" />
@@ -132,12 +130,12 @@
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\Obstacle.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\DBRunSession.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\RS4096Algorithm.cs" />
-    <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\UIManager.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\HUDManager.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\FragmentManager.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\UtcDateTimeProvider.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\HubSystem\FragmentCanvasDecomposer.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\GameManager.cs" />
+    <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\RunUIManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICharacter.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\UnixEpoch.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Builder\JwtBuilderExtensions.cs" />
@@ -189,6 +187,7 @@
     <Compile Include="Assets\ThirdParty\AurynSky\Gems Ultimate Pack\Scripts\AnimationScript.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Utils\ColliderOffset.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\RSAlgorithm.cs" />
+    <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\RunStateMachine.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\IJwtDecoder.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\RS384Algorithm.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\HUDDecomposer.cs" />
@@ -203,6 +202,7 @@
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\HMACSHA512Algorithm.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\HubSystem\PortalBehavior.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\RSAlgorithmFactory.cs" />
+    <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\Interfaces\IRunningGameService.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\SQLConnection\SQLiteSessionDataQuery.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\Rotator.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\JwtDecoder.cs" />

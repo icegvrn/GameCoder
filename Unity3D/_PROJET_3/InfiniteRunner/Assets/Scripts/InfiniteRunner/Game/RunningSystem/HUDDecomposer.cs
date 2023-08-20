@@ -3,6 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Classe décomposant le HUD du running game. 
+/// </summary>
 public class HUDDecomposer : MonoBehaviour
 {
     [SerializeField] List<Image> lifeIcons;

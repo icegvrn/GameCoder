@@ -925,8 +925,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfa29295986ff64c9fec83a5c5348cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolBatchNumber: 2
   totalMaxPoolNumber: 800
+  poolBatchNumber: 2
   objectsList:
   - {fileID: 6812873737267064902, guid: 2bb59d0209bd37b4dbd217fd5c1a9b9f, type: 3}
   - {fileID: 6274662308812668559, guid: b40a44c529c1bbc498607b600c9f10f5, type: 3}
@@ -1813,8 +1813,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfa29295986ff64c9fec83a5c5348cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolBatchNumber: 20
   totalMaxPoolNumber: 10
+  poolBatchNumber: 20
   objectsList:
   - {fileID: 6016634322777693836, guid: ab4a40d7e5b9f7146ad44a1bad543889, type: 3}
   - {fileID: 6016634322777693836, guid: b1f96b0e895423444910f0742af96236, type: 3}
@@ -2000,8 +2000,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1edd515a84f265045a0becc5c7550072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2000
   runningSpeed: 2000
+  lateralSpeed: 2000
   animator: {fileID: 838676484}
 --- !u!65 &838676480
 BoxCollider:
@@ -3393,6 +3393,7 @@ GameObject:
   - component: {fileID: 1265036101}
   - component: {fileID: 1265036100}
   - component: {fileID: 1265036099}
+  - component: {fileID: 1265036102}
   m_Layer: 0
   m_Name: Dead
   m_TagString: Untagged
@@ -3432,9 +3433,9 @@ MonoBehaviour:
   OnAnimationEnd:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 397444355}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RestartGame
+      - m_Target: {fileID: 1265036102}
+        m_TargetAssemblyTypeName: ApplicationSceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3481,6 +3482,19 @@ Transform:
   - {fileID: 87555836}
   m_Father: {fileID: 863830764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1265036102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265036098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32fa6785c9c1d0b4098f15d6411f8783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: 3
 --- !u!1 &1268195289
 GameObject:
   m_ObjectHideFlags: 0
@@ -4414,10 +4428,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be1a34f2c3cf65b459b28fb257a55465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRunState: 0
   session: {fileID: 1152053435}
   dbRunSession: {fileID: 1152053437}
   gameManager: {fileID: 397444355}
+  currentRunState: 0
 --- !u!4 &1513303749
 Transform:
   m_ObjectHideFlags: 0
@@ -4445,6 +4459,7 @@ GameObject:
   - component: {fileID: 1526873955}
   - component: {fileID: 1526873957}
   - component: {fileID: 1526873956}
+  - component: {fileID: 1526873958}
   m_Layer: 0
   m_Name: Victory
   m_TagString: Untagged
@@ -4495,9 +4510,9 @@ MonoBehaviour:
   OnAnimationEnd:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 397444355}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GoToTheHub
+      - m_Target: {fileID: 1526873958}
+        m_TargetAssemblyTypeName: ApplicationSceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4528,6 +4543,19 @@ MonoBehaviour:
   OnAnimationEnd:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1526873958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526873954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32fa6785c9c1d0b4098f15d6411f8783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: 2
 --- !u!4 &1610977769 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6640462879254062755, guid: 89bdf0b7023b9154da92dc7314bf1dac, type: 3}
@@ -5076,8 +5104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfa29295986ff64c9fec83a5c5348cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolBatchNumber: 7
   totalMaxPoolNumber: 0
+  poolBatchNumber: 7
   objectsList:
   - {fileID: 6307707481150517304, guid: 817808b48c4fe7143991602f5cb08b69, type: 3}
 --- !u!114 &1850283567

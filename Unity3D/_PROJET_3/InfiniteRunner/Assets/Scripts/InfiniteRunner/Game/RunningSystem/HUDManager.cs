@@ -7,7 +7,7 @@ using UnityEngine;
 public class HUDManager : MonoBehaviour
 {
     private HUDDecomposer decomposer;
-    private RunStatsService runStatsService;
+    private IRunningGameService runStatsService;
     private bool initialized;
 
     public void Start()
@@ -21,7 +21,7 @@ public class HUDManager : MonoBehaviour
     void Initialization()
     {
         decomposer = GetComponent<HUDDecomposer>();
-        runStatsService = ServiceLocator.Instance.GetService<RunStatsService>();
+        runStatsService = ServiceLocator.Instance.GetService<IRunningGameService>();
         decomposer.Username.text = ServiceLocator.Instance.GetService<ISessionService>().UserData.CurrentUser;
         initialized = true;
     }

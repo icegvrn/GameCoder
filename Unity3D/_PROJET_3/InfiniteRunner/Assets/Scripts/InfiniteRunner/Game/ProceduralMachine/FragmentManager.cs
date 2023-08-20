@@ -18,7 +18,7 @@ public class FragmentManager : MonoBehaviour
 
     // Composant dont le manager a besoin : la map, une connexion à la bdd, les stats de jeu
     private MapGenerator map;
-    private RunStatsService runStatsService;
+    private IRunningGameService runStatsService;
     private SQLiteSessionDataQuery db;
 
     // Pour faire apparaitre le fragment en version "cheat"
@@ -110,7 +110,7 @@ public class FragmentManager : MonoBehaviour
     {
         map = GetComponent<MapGenerator>();
         input = ServiceLocator.Instance.GetService<IInputService>();
-        runStatsService = ServiceLocator.Instance.GetService<RunStatsService>();
+        runStatsService = ServiceLocator.Instance.GetService<IRunningGameService>();
         db = ServiceLocator.Instance.GetService<ISessionService>().Query;
     }
 

@@ -3,18 +3,18 @@ using UnityEngine;
 /// <summary>
 /// Définit un objet comme étant un FragmentItem : quand le joueur le ramasse, le joueur est associé en BDD avec un nouveau fragment disponible.
 /// </summary>
-[RequireComponent(typeof(DBFragmentItem))]
 public class FragmentItem : MonoBehaviour
 {
     [Header("UI display au ramassage")]
     [SerializeField] GameObject fragmentUI;
 
-    private DBFragmentItem DBFragmentItem;
-    
+    private SQLiteSessionDataQuery db;
+    private IRunningGameService runningGameService;
 
     private void Start()
     {
-        DBFragmentItem = GetComponent<DBFragmentItem>();
+        runningGameService = ServiceLocator.Instance.GetService<IRunningGameService>();
+        db = ServiceLocator.Instance.GetService<ISessionService>().Query;
     }
 
     void OnTriggerEnter(Collider other)
@@ -23,7 +23,7 @@ public class FragmentItem : MonoBehaviour
         {
             Disable();
             fragmentUI.SetActive(true);
-            DBFragmentItem.AddNewFragmentForPlayer(); // Appel à DBFragmentItem pour demander à la db d'associer le joueur à un fragment disponible. 
+            db.InsertNewFragmentForPlayer((int)runningGameService.TimeID); // Demande à la db d'associer le joueur à un fragment disponible. 
         } 
     }
 
