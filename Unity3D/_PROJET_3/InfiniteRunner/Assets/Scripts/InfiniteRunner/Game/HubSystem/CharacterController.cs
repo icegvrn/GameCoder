@@ -2,106 +2,97 @@ using UnityEngine;
 using UnityEngine.AI;
 using static ICharacter;
 
+
+/// /// <summary>
+/// Controle du personnage lorsqu'il n'est pas en run. Il peut se déplacer librement tant qu'il y a un navmesh.
+/// </summary>
+[RequireComponent(typeof(NavMeshAgent))]
 public class CharacterController : MonoBehaviour, ICharacter
 {
     [SerializeField] private float speed = 10f;
-    [SerializeField] private float runningSpeed = 10f;
-    private float initialRunningSpeed = 10f;
     [SerializeField] private Animator animator;
-    public STATE currentState { get; set; }
-    public bool isJumpStarted { get; set; }
-    public bool isCrouched;
-    private bool isCollide;
-    private float initialVerticalPosition;
-    public Transform cameraTransform; // Référence à la caméra
-
-    private NavMeshAgent navMeshAgent; // Référence au NavMeshAgent
-    private bool isBlocked = false; // Pour gérer le blocage
-
+   
     private IInputService input;
+    public STATE CurrentState { get; set; }
 
-    // Start is called before the first frame update
+    private NavMeshAgent navMeshAgent;
+
+
     void Start()
     {
-        input = ServiceLocator.Instance.GetService<IInputService>();
-        Cursor.visible = false;
-        isJumpStarted = false;
-        initialVerticalPosition = transform.position.y;
-        initialRunningSpeed = runningSpeed;
-        currentState = STATE.IDLE;
+        InitCharacter();
+        InitNavMesh();
+    }
 
-        // Récupérer le NavMeshAgent
+    void Update()
+    {
+        MoveCharacter();
+        UpdateAnimator();
+    }
+
+    void InitCharacter()
+    {
+        Cursor.visible = false;
+        input = ServiceLocator.Instance.GetService<IInputService>();
+        CurrentState = STATE.IDLE;
+    }
+
+    void InitNavMesh()
+    {
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = speed;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        HandleInput();
 
-        UpdateAnimator();
-    }
-
-    private void HandleInput()
+    private void MoveCharacter()
     {
-        float theSpeed = speed * Time.deltaTime;
+        Vector3 moveDirection = Vector3.zero;
         Vector3 movement = transform.position;
 
-        if (cameraTransform != null)
-        {
-            // Obtenir la rotation de la souris et l'appliquer au personnage
-            float mouseX = Input.GetAxis("Mouse X");
-            transform.Rotate(Vector3.up * mouseX);
-        }
+        float theSpeed = speed * Time.deltaTime;
+        
 
-        // Contrôler le déplacement au clavier
-        if (!isBlocked)
-        {
-            Vector3 moveDirection = Vector3.zero;
-
-           
             if (input.GetKey(InputService.ActionKey.up))
             {
                 moveDirection += transform.forward;
-                currentState = STATE.RUN;
+                CurrentState = STATE.RUN;
             }
             else if (input.GetKeyUp(InputService.ActionKey.up))
             {
-                currentState = STATE.IDLE;
+                CurrentState = STATE.IDLE;
             }
             if (input.GetKey(InputService.ActionKey.left))
             {
                 moveDirection -= transform.right;
-                currentState = STATE.LEFT;
+                CurrentState = STATE.LEFT;
             }
             else if (input.GetKeyUp(InputService.ActionKey.left))
             {
-                currentState = STATE.IDLE;
+                CurrentState = STATE.IDLE;
             }
             if (input.GetKey(InputService.ActionKey.right))
             {
                 moveDirection += transform.right;
-                currentState = STATE.RIGHT;
+                CurrentState = STATE.RIGHT;
             }
             else if (input.GetKeyUp(InputService.ActionKey.right))
             {
-                currentState = STATE.IDLE;
+                CurrentState = STATE.IDLE;
             }
             if (input.GetKey(InputService.ActionKey.down))
             {
                 moveDirection -= transform.forward;
-                currentState = STATE.RUN;
+                CurrentState = STATE.RUN;
             }
             else if (input.GetKeyUp(InputService.ActionKey.down))
             {
-                currentState = STATE.IDLE;
+                CurrentState = STATE.IDLE;
             }
 
             movement += moveDirection.normalized * theSpeed;
-        }
+        
 
-        // Vérifier les limites du navmesh
+        // Méthode Unity qui prend le point le plus proche accessible du navmesh
         if (NavMesh.SamplePosition(movement, out NavMeshHit hit, 0.1f, NavMesh.AllAreas))
         {
             movement = hit.position;
@@ -112,37 +103,14 @@ public class CharacterController : MonoBehaviour, ICharacter
 
     void UpdateAnimator()
     {
-        animator.SetBool(STATE.IDLE.ToString(), currentState == STATE.IDLE);
-        animator.SetBool(STATE.RUN.ToString(), currentState == STATE.RUN);
-        animator.SetBool(STATE.LEFT.ToString(), currentState == STATE.LEFT);
-        animator.SetBool(STATE.RIGHT.ToString(), currentState == STATE.RIGHT);
-        animator.SetBool(STATE.BOOSTED.ToString(), currentState == STATE.BOOSTED);
-        animator.SetBool(STATE.JUMP.ToString(), currentState == STATE.JUMP);
-        animator.SetBool(STATE.CROUCH.ToString(), currentState == STATE.CROUCH);
-        animator.SetBool(STATE.DEAD.ToString(), currentState == STATE.DEAD);
+        animator.SetBool(STATE.IDLE.ToString(), CurrentState == STATE.IDLE);
+        animator.SetBool(STATE.RUN.ToString(), CurrentState == STATE.RUN);
+        animator.SetBool(STATE.LEFT.ToString(), CurrentState == STATE.LEFT);
+        animator.SetBool(STATE.RIGHT.ToString(), CurrentState == STATE.RIGHT);
+        animator.SetBool(STATE.BOOSTED.ToString(), CurrentState == STATE.BOOSTED);
+        animator.SetBool(STATE.JUMP.ToString(), CurrentState == STATE.JUMP);
+        animator.SetBool(STATE.CROUCH.ToString(), CurrentState == STATE.CROUCH);
+        animator.SetBool(STATE.DEAD.ToString(), CurrentState == STATE.DEAD);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Obstacle")
-        {
-            isCollide = true;
-            runningSpeed = 0;
-            currentState = STATE.IDLE;
-        }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.tag == "Obstacle")
-        {
-            runningSpeed = 0;
-            currentState = STATE.IDLE;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        isCollide = false;
-    }
 }

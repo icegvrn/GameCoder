@@ -1,92 +1,83 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using static InputService;
 
+/// <summary>
+/// Gère la navigation dans les fragments d'histoires : permet d'ouvrir un spot de consultat, de passer de l'histoire suivante ou précédente et de quitter.
+/// </summary>
 public class FragmentsConsultationSpot : MonoBehaviour
 {
- 
-    bool isTrigger;
-    bool isConsultationOpen;
-    private int currentPanelIndex;
+    // Elements serialises
     [SerializeField] GameObject Gemme;
     [SerializeField] GameObject instructionsPanel;
     [SerializeField] GameObject consultationPanel;
-
     
+    private FragmentContentFromDB container;
+
+    // States
+    private bool isTrigger;
+    private bool isConsultationOpen;
+    private int currentPanelIndex;
+    
+    //Systeme custom d'input
+    private IInputService input;
+    
+
     void Start()
     {
-        Reset();
+        input = ServiceLocator.Instance.GetService<IInputService>();
+        InitFragmentContainer();
+        CloseState();
     }
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.A)) 
+        if (input.GetKeyUp(ActionKey.interact))
         {
             if (isTrigger && !isConsultationOpen)
             {
-                isConsultationOpen = true;
-                Gemme.SetActive(false);
-                consultationPanel.SetActive(true);
-                instructionsPanel.SetActive(false);
+                OpenState();
             }
-            else if ((isTrigger && isConsultationOpen)) 
+        }
+
+        if (input.GetKeyUp(ActionKey.quit))
+        {
+            if ((isTrigger && isConsultationOpen))
+            {
+                CloseState();
+            }
+        }
+
+        if (input.GetKeyUp(ActionKey.previous))
+        {
+            if ((isTrigger && isConsultationOpen))
             {
                 PreviousPage();
             }
-
-
         }
 
-        if (Input.GetKeyUp(KeyCode.E))
+        if (input.GetKeyUp(ActionKey.next))
         {
             if ((isTrigger && isConsultationOpen))
             {
                 NextPage();
             }
         }
-
-        if (Input.GetKeyUp(KeyCode.Q))
-        {
-            if ((isTrigger && isConsultationOpen))
-            {
-                Reset();
-            }
-        }
-
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if (other.gameObject.TryGetComponent(out CharacterController cc) && !isTrigger)
-        {
-            Debug.Log("Je rentre pour " + other);
-            isTrigger = true;
      
-         
-                if (instructionsPanel != null)
-                {
-                    instructionsPanel.SetActive(true);
-                }
-            
-        }
-
     }
 
-    private void OnTriggerExit(Collider other)
+    void InitFragmentContainer()
     {
-        if (other.gameObject.TryGetComponent(out CharacterController cc))
-        {
-            isTrigger = false;
-            Reset();
-        }
-
+        container = consultationPanel.GetComponent<FragmentContentFromDB>();
     }
 
-    private void Reset()
+    private void OpenState()
+    {
+        isConsultationOpen = true;
+        Gemme.SetActive(false);
+        consultationPanel.SetActive(true);
+        instructionsPanel.SetActive(false);
+    }
+    private void CloseState()
     {
         instructionsPanel.SetActive(false);
         consultationPanel.SetActive(false);
@@ -96,34 +87,56 @@ public class FragmentsConsultationSpot : MonoBehaviour
 
     void NextPage()
     {
-        Debug.Log("PAGE SUIVANTE avec count " + consultationPanel.GetComponent<FragmentsDBContainer>().Fragments.Count);
-
-        if (currentPanelIndex < consultationPanel.GetComponent<FragmentsDBContainer>().Fragments.Count-1)
+        if (currentPanelIndex < container.FragmentsPanels.Count-1)
         {
-            consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(false);
+            container.FragmentsPanels[currentPanelIndex].gameObject.SetActive(false);
             currentPanelIndex++;
-            consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(true);
+            container.FragmentsPanels[currentPanelIndex].gameObject.SetActive(true);
         }
 
         else
-        {   consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(false);
-            consultationPanel.GetComponent<FragmentsDBContainer>().LoadData();
-            consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[0].gameObject.SetActive(false);
+        {
+            container.FragmentsPanels[currentPanelIndex].gameObject.SetActive(false);
+            container.LoadData();
+            container.FragmentsPanels[0].gameObject.SetActive(false);
             currentPanelIndex++;
-            consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(true);
+            container.FragmentsPanels[currentPanelIndex].gameObject.SetActive(true);
         }
-
-
     }
 
     void PreviousPage()
     {
-        Debug.Log("PAGE PRECEDENTE avec count " + +consultationPanel.GetComponent<FragmentsDBContainer>().Fragments.Count);
         if (currentPanelIndex > 0)
         {
-            consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(false);
+            container.FragmentsPanels[currentPanelIndex].gameObject.SetActive(false);
             currentPanelIndex--;
-            consultationPanel.GetComponent<FragmentsDBContainer>().Fragments[currentPanelIndex].gameObject.SetActive(true);
+            container.FragmentsPanels[currentPanelIndex].gameObject.SetActive(true);
+        }
+    }
+
+    void ShowInstructionPanel()
+    {
+        if (instructionsPanel != null)
+        {
+            instructionsPanel.SetActive(true);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out CharacterController cc))
+        {
+            isTrigger = true;
+            ShowInstructionPanel();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out CharacterController cc))
+        {
+            isTrigger = false;
+            CloseState();
         }
     }
 }

@@ -15,22 +15,22 @@ public class UIGameSettingsModifier : MonoBehaviour
 
     private void OnEnable()
     {
+        GameSettingsContainer gs = Initialize();
+        UpdateUIValues(gs);
+
+       
+    }
+
+    private GameSettingsContainer Initialize()
+    {
         gameSettings = ServiceLocator.Instance.GetService<IGameSettingsService>();
         GameSettingsContainer gs = gameSettings.LoadSettings();
+        return gs;
+    }
 
+    private void UpdateUIValues(GameSettingsContainer gs)
+    {
         gameSettingsContainer = gs;
-
-
-        if (gs.isAzerty)
-        {
-            controlDropDown.value = 0;
-        }
-        
-        else
-        {
-            controlDropDown.value = 1;
-        }
-
         musicVolume.value = gs.musicVolume;
         effectVolume.value = gs.soundVolume;
         SetControlToAzerty(gs.isAzerty);
@@ -39,15 +39,7 @@ public class UIGameSettingsModifier : MonoBehaviour
 
     private void SetControlToAzerty(bool b)
     {
-        if (b)
-        {
-            controlDropDown.value = 0;
-        }
-
-        else
-        {
-            controlDropDown.value = 1;
-        }
+        controlDropDown.value = b ? 0 : 1;
     }
 
     private void SetQualityLevel(int quality)

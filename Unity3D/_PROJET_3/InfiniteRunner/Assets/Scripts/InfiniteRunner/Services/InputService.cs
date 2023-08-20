@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InputService : IInputService
 {
-    public enum ActionKey { up, down, left, right, escape, cheatGemme }
+    public enum ActionKey { up, down, left, right, escape, interact, next, previous, quit, cheatGemme }
     public enum ControlMode { azerty, qwerty }
 
     public ControlMode currentMode = ControlMode.azerty;
@@ -49,6 +49,11 @@ public class InputService : IInputService
                     case ActionKey.right: return KeyCode.D;
                     case ActionKey.escape: return KeyCode.Escape;
                     case ActionKey.cheatGemme: return KeyCode.M;
+                    case ActionKey.interact: return KeyCode.A;
+                    case ActionKey.next: return KeyCode.E;
+                    case ActionKey.previous: return KeyCode.A;
+                    case ActionKey.quit : return KeyCode.Q;
+
                 }
                 break;
 
@@ -61,6 +66,10 @@ public class InputService : IInputService
                     case ActionKey.right: return KeyCode.D;
                     case ActionKey.escape: return KeyCode.Escape;
                     case ActionKey.cheatGemme: return KeyCode.M;
+                    case ActionKey.interact: return KeyCode.A;
+                    case ActionKey.next: return KeyCode.E;
+                    case ActionKey.previous: return KeyCode.A;
+                    case ActionKey.quit: return KeyCode.Q;
                 }
                 break;
         }

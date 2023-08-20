@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BestTimeFromDB))]
+[RequireComponent(typeof(BestScoreTimeFromDB))]
 
 public class PortalDBContainer : MonoBehaviour
 {
@@ -17,8 +17,8 @@ public class PortalDBContainer : MonoBehaviour
     {
         GameObject bestTimePanel = Instantiate(BestTimePrefab, BestTimeParent.transform);
         BestimeCanvasDecomposer canvasComposer = bestTimePanel.GetComponent<BestimeCanvasDecomposer>();
-        DBUsers_TimeJoinTime dbInfos = GetComponent<BestTimeFromDB>().GetBestTimeInformations();
-        List<int> fragmentsInfos = GetComponent<BestTimeFromDB>().GetFragmentsStats();
+        DBUsers_TimeJoinTime dbInfos = GetComponent<BestScoreTimeFromDB>().GetBestTimeInformations();
+        List<int> fragmentsInfos = GetComponent<BestScoreTimeFromDB>().GetFragmentsStats();
 
         canvasComposer.FragmentsNb.text = dbInfos.Fragments.ToString() + " fragment(s)";
         canvasComposer.TimeName.text = ("Époque ").ToUpper() + dbInfos.Time_Name.ToString().ToUpper();

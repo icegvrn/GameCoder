@@ -1,82 +1,65 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
+using static InputService;
 public class ClassementConsultationSpot : MonoBehaviour
 {
-
-    bool isTrigger;
-    bool isConsultationOpen;
+    // Composition du canvas
+    [SerializeField] Canvas canvas;
     [SerializeField] GameObject instructionsPanel;
     [SerializeField] GameObject consultationPanel;
-    [SerializeField] Canvas canvas;
+    [SerializeField] GameObject QuitButton;
+   
+    // Données du canvas
     private RectTransform canvasTransform;
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private Vector3 originalScale;
-    private Canvas canvasComponent;
 
-    [SerializeField] GameObject QuitButton;
+    // State du canvas
+    private bool isTrigger;
+    private bool isConsultationOpen;
+
+    private IInputService input;
+   
 
     private void Start()
     {
-        // Récupérer les références nécessaires
-        canvasTransform = canvas.GetComponent<RectTransform>();
-        canvasComponent = canvas.GetComponent<Canvas>();
-         
-        // Sauvegarder l'état d'origine du Canvas
-        originalPosition = canvasTransform.localPosition;
-        originalRotation = canvasTransform.localRotation;
-        originalScale = canvasTransform.localScale;
-        QuitButton.SetActive(false);
+        input = ServiceLocator.Instance.GetService<IInputService>();
+        InitCanvas();
     }
 
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.A))
+        
+        if (input.GetKeyUp(ActionKey.interact))
         {
             if (isTrigger && !isConsultationOpen)
             {
-                canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-                isConsultationOpen = true;
-                consultationPanel.SetActive(true);
-                instructionsPanel.SetActive(false);
-                QuitButton.SetActive(true);
+                OpenState();
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Q))
+        if (input.GetKeyUp(ActionKey.quit))
         {
-            if ((isTrigger && isConsultationOpen))
+            if (isConsultationOpen)
             {
-                canvas.renderMode = RenderMode.WorldSpace;
-                QuitButton.SetActive(false);
-                canvasTransform.localPosition = originalPosition;
-                canvasTransform.localRotation = originalRotation;
-                canvasTransform.localScale = originalScale;
-                isConsultationOpen = false;
+                CloseState();
             }
         }
-
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-
-        if (other.gameObject.TryGetComponent(out CharacterController cc) && !isTrigger)
+        if (other.gameObject.TryGetComponent(out CharacterController cc))
         {
-
             isTrigger = true;
+
             if (instructionsPanel != null)
             {
                 instructionsPanel.SetActive(true);
             }
-
         }
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -86,6 +69,35 @@ public class ClassementConsultationSpot : MonoBehaviour
             isTrigger = false;
             instructionsPanel.SetActive(false);
         }
+    }
+
+    void InitCanvas()
+    {
+        canvas.renderMode = RenderMode.WorldSpace;
+        canvasTransform = canvas.GetComponent<RectTransform>();
+        originalPosition = canvasTransform.localPosition;
+        originalRotation = canvasTransform.localRotation;
+        originalScale = canvasTransform.localScale;
+        QuitButton.SetActive(false);
+    }
+
+    void CloseState()
+    {
+        canvas.renderMode = RenderMode.WorldSpace;
+        QuitButton.SetActive(false);
+        canvasTransform.localPosition = originalPosition;
+        canvasTransform.localRotation = originalRotation;
+        canvasTransform.localScale = originalScale;
+        isConsultationOpen = false;
+    }
+
+    void OpenState()
+    {
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        isConsultationOpen = true;
+        consultationPanel.SetActive(true);
+        instructionsPanel.SetActive(false);
+        QuitButton.SetActive(true);
     }
 
 }

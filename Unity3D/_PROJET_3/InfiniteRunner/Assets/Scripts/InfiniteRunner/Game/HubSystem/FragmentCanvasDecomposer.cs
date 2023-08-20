@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FragmentCanvasItem : MonoBehaviour
+public class FragmentCanvasDecomposer : MonoBehaviour
 {
     [SerializeField] Image img;
     public Image Img { get { return img; } set { img = value; } }
@@ -23,15 +22,4 @@ public class FragmentCanvasItem : MonoBehaviour
     [SerializeField] List<Sprite> imgSprites;
     public List<Sprite> ImgSprite { get { return imgSprites; } set { imgSprites = value; } }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
