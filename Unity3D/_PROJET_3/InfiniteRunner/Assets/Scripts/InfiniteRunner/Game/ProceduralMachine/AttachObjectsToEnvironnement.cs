@@ -1,29 +1,33 @@
 using UnityEngine;
 
+
+/// <summary>
+/// Permet l'attache d'une nouvelle pool d'objet choisie dès qu'un nouveau générateur d'asset est instancié dans la scène.
+/// </summary>
 public class AttachObjectsToEnvironnement : MonoBehaviour
 {
     [SerializeField] ObjectPool objectPool;
     private int previousChildrenNb = 0;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Update()
     {
-        
+        AttachGeneratorsToObjectPool();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void AttachGeneratorsToObjectPool()
     {
-        PoolAssetsGenerator[] generators = GetComponentsInChildren<PoolAssetsGenerator>();
+        AssetsGeneratorByPool[] generators = GetComponentsInChildren<AssetsGeneratorByPool>();
 
-       if (previousChildrenNb < generators.Length)
+        if (previousChildrenNb != generators.Length)
         {
-            foreach (PoolAssetsGenerator generator in generators)
+            foreach (AssetsGeneratorByPool generator in generators)
             {
                 if (generator.ObjectPool == null)
                 {
                     generator.ObjectPool = objectPool;
                 }
-            }
+            }   
+            previousChildrenNb = generators.Length;
         }
     }
 }

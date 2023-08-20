@@ -873,7 +873,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1056609680}
+  - {fileID: 1742386386}
   - {fileID: 863830764}
   - {fileID: 1440738905}
   - {fileID: 838676478}
@@ -892,8 +892,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIManager: {fileID: 863830765}
-  gameEnvironment: {fileID: 1056609681}
-  fragmentManager: {fileID: 1056609682}
+  gameEnvironment: {fileID: 1742386387}
+  fragmentManager: {fileID: 1742386388}
   character: {fileID: 838676479}
   mainCamera: {fileID: 1440738908}
 --- !u!1 &426004794
@@ -1148,7 +1148,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.55
+  m_fontSize: 68.1
   m_fontSizeBase: 101.34
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1364,9 +1364,9 @@ MonoBehaviour:
   textElem: {fileID: 548481969}
   fadeDuration: 1
   maxScale: 2
+  lastTextPersistenceLenght: 1
   textsToAnimate:
   - Fragment detected!
-  lastTextPersistenceLenght: 1
   OnAnimationEnd:
     m_PersistentCalls:
       m_Calls:
@@ -2387,7 +2387,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.2
+  m_fontSize: 66.2
   m_fontSizeBase: 101.34
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2596,7 +2596,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.6
+  m_fontSize: 39
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2656,7 +2656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1041612822}
   m_Layer: 0
-  m_Name: ==Pools==
+  m_Name: Pools
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2827,9 +2827,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1056609680}
   - component: {fileID: 1056609681}
-  - component: {fileID: 1056609682}
   m_Layer: 0
-  m_Name: ==Environment==
+  m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2848,10 +2847,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1106549796}
   - {fileID: 1200394045}
-  - {fileID: 1742386386}
-  m_Father: {fileID: 397444354}
+  - {fileID: 1106549796}
+  m_Father: {fileID: 1742386386}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1056609681
 MonoBehaviour:
@@ -2866,19 +2864,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathGenerator: {fileID: 1742386387}
---- !u!114 &1056609682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056609679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd5346eebf2d92a4e827b3e97db8b368, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapGenerator: {fileID: 1742386387}
 --- !u!1 &1106549794
 GameObject:
   m_ObjectHideFlags: 0
@@ -3116,9 +3101,9 @@ MonoBehaviour:
   textElem: {fileID: 697218967}
   fadeDuration: 0.5
   maxScale: 1.3
+  lastTextPersistenceLenght: 0
   textsToAnimate:
   - 1234 s
-  lastTextPersistenceLenght: 0
   OnAnimationEnd:
     m_PersistentCalls:
       m_Calls: []
@@ -3137,9 +3122,9 @@ MonoBehaviour:
   textElem: {fileID: 1373147795}
   fadeDuration: 0.5
   maxScale: 2
+  lastTextPersistenceLenght: 0
   textsToAnimate:
   - New Bestime !
-  lastTextPersistenceLenght: 0
   OnAnimationEnd:
     m_PersistentCalls:
       m_Calls: []
@@ -3430,6 +3415,7 @@ MonoBehaviour:
   textElem: {fileID: 1761408603}
   fadeDuration: 0.5
   maxScale: 2
+  lastTextPersistenceLenght: 0.5
   textsToAnimate:
   - Restart in
   - 10
@@ -3443,7 +3429,6 @@ MonoBehaviour:
   - 2
   - 1
   - Go!
-  lastTextPersistenceLenght: 0.5
   OnAnimationEnd:
     m_PersistentCalls:
       m_Calls:
@@ -3474,9 +3459,9 @@ MonoBehaviour:
   textElem: {fileID: 1492984820}
   fadeDuration: 0.5
   maxScale: 2
+  lastTextPersistenceLenght: 0
   textsToAnimate:
   - You are dead!
-  lastTextPersistenceLenght: 0
   OnAnimationEnd:
     m_PersistentCalls:
       m_Calls: []
@@ -4498,6 +4483,7 @@ MonoBehaviour:
   textElem: {fileID: 613935160}
   fadeDuration: 0.5
   maxScale: 1.3
+  lastTextPersistenceLenght: 0.5
   textsToAnimate:
   - Return in
   - 5
@@ -4506,7 +4492,6 @@ MonoBehaviour:
   - 2
   - 1
   - Redirection to the hub...
-  lastTextPersistenceLenght: 0.5
   OnAnimationEnd:
     m_PersistentCalls:
       m_Calls:
@@ -4537,9 +4522,9 @@ MonoBehaviour:
   textElem: {fileID: 17897558}
   fadeDuration: 0.5
   maxScale: 2
+  lastTextPersistenceLenght: 0
   textsToAnimate:
   - Victory!
-  lastTextPersistenceLenght: 0
   OnAnimationEnd:
     m_PersistentCalls:
       m_Calls: []
@@ -4795,8 +4780,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1742386386}
   - component: {fileID: 1742386387}
+  - component: {fileID: 1742386388}
   m_Layer: 0
-  m_Name: MapGenerator
+  m_Name: ==Environnement==
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4811,12 +4797,13 @@ Transform:
   m_GameObject: {fileID: 1742386385}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2054.6357, y: -629.44946, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1041612822}
-  m_Father: {fileID: 1056609680}
+  - {fileID: 1056609680}
+  m_Father: {fileID: 397444354}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1742386387
 MonoBehaviour:
@@ -4831,15 +4818,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 838676478}
-  prefabOnPlay: []
-  pathLength: 5
-  curveSegmentLength: 20
-  curveStrength: 400
-  curveFrequency: 0
-  pathDespawnDistance: 100
-  pathPool: {fileID: 1850283566}
+  runPathPool: {fileID: 1850283566}
   obstaclePool: {fileID: 789325618}
-  objectPool: {fileID: 426004795}
+  assetPool: {fileID: 426004795}
+  runPathLenght: 2
+  runPathDespawnDistance: 100
+  prefabOnPlay: []
+--- !u!114 &1742386388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742386385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd5346eebf2d92a4e827b3e97db8b368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1758639150
 GameObject:
   m_ObjectHideFlags: 0
@@ -5535,6 +5531,7 @@ MonoBehaviour:
   textElem: {fileID: 282524037}
   fadeDuration: 0.5
   maxScale: 2
+  lastTextPersistenceLenght: 0.5
   textsToAnimate:
   - Ready?
   - 5
@@ -5543,7 +5540,6 @@ MonoBehaviour:
   - 2
   - 1
   - Go!
-  lastTextPersistenceLenght: 0.5
   OnAnimationEnd:
     m_PersistentCalls:
       m_Calls:

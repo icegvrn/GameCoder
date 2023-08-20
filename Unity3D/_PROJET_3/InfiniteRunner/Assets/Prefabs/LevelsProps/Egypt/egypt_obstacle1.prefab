@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1203a3ed36fe614ba8096a3420aa13e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frequency: 45
+  frequency: 40
 --- !u!114 &3111069861793457568
 MonoBehaviour:
   m_ObjectHideFlags: 0

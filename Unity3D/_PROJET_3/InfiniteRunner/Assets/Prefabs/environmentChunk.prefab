@@ -119,11 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7239a0278a7a2034e9d694bfd18883bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decorNbWanted: 30
-  floor: {fileID: 1016109935459469186}
-  objDirection: 1
-  objPool: {fileID: 0}
-  decorsOnPlay: []
+  nbAssetsWanted: 40
+  defaultAssetsDirection: 1
+  spawnSurface: {fileID: 1016109935459469186}
 --- !u!1 &1084758971606680068
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,11 +480,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7239a0278a7a2034e9d694bfd18883bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decorNbWanted: 30
-  floor: {fileID: 4046891154961525584}
-  objDirection: 2
-  objPool: {fileID: 0}
-  decorsOnPlay: []
+  nbAssetsWanted: 40
+  defaultAssetsDirection: 2
+  spawnSurface: {fileID: 4046891154961525584}
 --- !u!1 &4171985605786560675
 GameObject:
   m_ObjectHideFlags: 0

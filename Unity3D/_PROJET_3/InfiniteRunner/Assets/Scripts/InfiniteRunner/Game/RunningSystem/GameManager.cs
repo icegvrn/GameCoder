@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] UIManager UIManager;
-    [SerializeField] EnvironmentManager gameEnvironment;
+    [SerializeField] MapGenerator gameEnvironment;
     [SerializeField] FragmentManager fragmentManager;
     [SerializeField] CharacterAutoRunner character;
     [SerializeField] Camera mainCamera;

@@ -59,8 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\JwtBase64UrlEncoder.cs" />
-    <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\ES256Algorithm.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\HubSystem\BestScoreTimeFromDB.cs" />
+    <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\ES256Algorithm.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Compatibility\System.Security.Cryptography\HashAlgorithmName.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Builder\ClaimName.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\SQLConnection\DBEntities\DBUsers_Time.cs" />
@@ -95,13 +95,11 @@
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\SQLConnection\SQLiteSessionConnexionQuery.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\TextAnimator.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\RunStatsService.cs" />
-    <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\PoolAssetsGenerator.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\ES384Algorithm.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\CharacterAutoRunner.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\FragmentItem.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\Settings\UIGameSettingsModifier.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\IAlgorithmFactory.cs" />
-    <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\AssetsGenerator.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\IJwtValidator.cs" />
     <Compile Include="Assets\ThirdParty\Reversed Interactive\The Portal Collection\Scripts\SimpleCameraControllerPortals.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\CertificateAlgorithm.cs" />
@@ -119,13 +117,15 @@
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\JwtAlgorithmName.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\IDateTimeProvider.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\SQLConnection\DBEntities\DBRank.cs" />
+    <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\UsingSession.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Exceptions\SignatureVerificationException.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\RS1024Algorithm.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\JwtAlgorithmFactory.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\HubSystem\ClassementConsultationSpot.cs" />
-    <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\IBase64UrlEncoder.cs" />
+    <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\AssetsGeneratorByPool.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\HubSystem\CameraControlByMouse.cs" />
+    <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\IBase64UrlEncoder.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\SQLConnection\DBEntities\DBUsers.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Serializers\DefaultJsonSerializerFactory.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Builder\JwtBuilder.cs" />
@@ -159,7 +159,6 @@
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Builder\JwtHeader.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Serializers\Converters\DictionaryStringObjectJsonConverter.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\SQLConnection\DBEntities\DBUserData.cs" />
-    <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\CollectablesContainer.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Utils\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\SQLConnection\DBEntities\DBFragment.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\JwtValidator.cs" />
@@ -174,11 +173,11 @@
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\IAsymmetricAlgorithm.cs" />
     <Compile Include="Assets\Models\_ThirdParty\AurynSky\Forest Pack\Scripts\WheelController.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ISoundService.cs" />
-    <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\DecorGenerator.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\RS2048Algorithm.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\IJwtEncoder.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Builder\JwtData.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\JwtDecoderContext.cs" />
+    <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\CollectablesGroup.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\ObstacleSpawner.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\SQLConnection\SQLiteSessionQuery.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\HubSystem\ClassementItem.cs" />
@@ -211,9 +210,7 @@
     <Compile Include="Assets\Scripts\InfiniteRunner\Services\GameSettingsService.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Services\ServicesLocator.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\JwtEncoder.cs" />
-    <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\PathGenerator.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\AttachObstacleToEnvironment.cs" />
-    <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\EnvironmentManager.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Exceptions\TokenExpiredException.cs" />
   </ItemGroup>
   <ItemGroup>

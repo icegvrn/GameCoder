@@ -1,13 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectablesContainer : MonoBehaviour
+/// <summary>
+/// Gère un groupe de collectables (objet que le joueur peut collecter dans le jeu) en contenant une liste de collectable qu'il peut masquer ou afficher.
+/// </summary>
+public class CollectablesGroup : MonoBehaviour
 {
     [SerializeField] private List<Collectable> collectables;
     public List<Collectable> Collectables { get { return collectables; } }
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// A l'initiation, ajoute tous les enfants "collectable" à sa liste pour ne pas avoir à le faire manuellement. 
+    /// </summary>
     public void Init()
     {
         foreach (Collectable collectable in GetComponentsInChildren<Collectable>())
@@ -18,7 +22,6 @@ public class CollectablesContainer : MonoBehaviour
 
     public void EnableGroup()
     {
-     
         foreach (Collectable c in collectables)
         {
             c.gameObject.SetActive(true);
@@ -34,11 +37,11 @@ public class CollectablesContainer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Le reset d'un collectable group est appelé lorsqu'il va être réutilisé par la pool. Il consiste donc à réafficher les collectables. 
+    /// </summary>
     public void Reset()
     {
-        foreach (Collectable c in collectables)
-        {
-            c.gameObject.SetActive(true);
-        }
+        EnableGroup();
     }
 }

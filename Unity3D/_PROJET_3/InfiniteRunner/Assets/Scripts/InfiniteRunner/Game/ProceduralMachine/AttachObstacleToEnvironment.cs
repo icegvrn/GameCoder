@@ -1,24 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Permet l'attache d'une nouvelle pool d'obstacle choisie dès qu'un nouveau générateur d'obstacle est instancié dans la scène.
+/// </summary>
 public class AttachObstacleToEnvironment : MonoBehaviour
 {
-
     [SerializeField] ObjectPool obstaclePool;
     private int previousChildrenNb = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
         ObstacleSpawner[] generators = GetComponentsInChildren<ObstacleSpawner>();
 
-        if (previousChildrenNb < generators.Length)
+        if (previousChildrenNb != generators.Length)
         {
             foreach (ObstacleSpawner generator in generators)
             {
@@ -27,6 +21,7 @@ public class AttachObstacleToEnvironment : MonoBehaviour
                     generator.ObstaclePool = obstaclePool;
                 }
             }
+            previousChildrenNb = generators.Length;
         }
     }
 }
