@@ -254,13 +254,13 @@ public class SQLiteSessionDataQuery : SQLiteSessionQuery
 
     public List<DBFragment> GetAllUsersRandomFragmentsByCount(int count)
     {
-        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id IN (SELECT id FROM fragments ORDER BY RANDOM() LIMIT ?) ORDER BY RANDOM()", count);
+        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id IN (SELECT id FROM fragments ORDER BY RANDOM()) ORDER BY RANDOM()  LIMIT ?", count);
         return allFragments;
     }
 
     public List<DBFragment> GetAllUsersRandomFragmentsAtTimeByCount(int time, int count)
     {
-        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id_time = ? AND fragments.id IN (SELECT id FROM fragments ORDER BY RANDOM() LIMIT ?) ORDER BY RANDOM()", time, count);
+        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id_time = ? AND fragments.id IN (SELECT id FROM fragments ORDER BY RANDOM()) ORDER BY RANDOM() LIMIT ?", time, count);
         return allFragments;
     }
 
@@ -282,7 +282,7 @@ public class SQLiteSessionDataQuery : SQLiteSessionQuery
     public List<DBFragment> GetAllCurrentUserRandomFragmentsByCount(int count)
     {
         int userID = sessionManager.UserData.CurrentUserId;
-        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id_user = ? AND fragments.id IN (SELECT id FROM fragments ORDER BY RANDOM() LIMIT ?) ORDER BY RANDOM()", userID, count);
+        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id_user = ? AND fragments.id IN (SELECT id FROM fragments ORDER BY RANDOM()) ORDER BY RANDOM() LIMIT ?", userID, count);
         return allFragments;
     }
 
@@ -303,7 +303,7 @@ public class SQLiteSessionDataQuery : SQLiteSessionQuery
     public List<DBFragment> GetAllCurrentUsersFragmentsAtTimeByCount(int time, int count)
     {
         int userID = sessionManager.UserData.CurrentUserId;
-        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id_user = ? AND fragments.id_time = ? AND fragments.id IN (SELECT id FROM fragments ORDER BY RANDOM() LIMIT ?) ORDER BY RANDOM()", userID, time, count);
+        List<DBFragment> allFragments = db.Query<DBFragment>("SELECT fragments.id, fragments.title, fragments.content, fragments.rarety, fragments.date, fragments.id_user, fragments.id_time, users.username, times.name, times.id as idtime FROM fragments INNER JOIN users ON users.id = fragments.id_user INNER JOIN times ON times.id = fragments.id_time WHERE fragments.id_user = ? AND fragments.id_time = ? AND fragments.id IN (SELECT id FROM fragments ORDER BY RANDOM()) ORDER BY RANDOM() LIMIT ?", userID, time, count);
         return allFragments;
     }
 

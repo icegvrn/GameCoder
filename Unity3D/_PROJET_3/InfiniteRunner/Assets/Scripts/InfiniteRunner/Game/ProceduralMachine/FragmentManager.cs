@@ -68,13 +68,13 @@ public class FragmentManager : MonoBehaviour
         if (ShouldSpawnFragment()) 
         {
             // Si oui on tire au sort si c'est 1, 2 ou 3 fragments
-            fragmentsNbUserCanHave = CalculateNumFragments(); 
-
+            fragmentsNbUserCanHave = CalculateNumFragments();
             for (int i = 0; i < fragmentsNbUserCanHave; i++)
             {
                 // Pour chaque fragment, on définit un score auquel on va le faire apparaitre (pour pas qu'ils apparaissent tous en même temps)
                 int score = CalculateScoreTarget(playerScore);
                 // On enregistre ce score à atteindre dans une liste
+
                 fragmentScoreThresholds.Add(score); 
             }
         }
@@ -126,6 +126,7 @@ public class FragmentManager : MonoBehaviour
     /// <returns></returns>
     private bool ShouldSpawnFragment()
     {
+       
         float nb = Random.Range(0f, 1f);
         bool rand = nb <= 0.5f;
 
@@ -166,7 +167,7 @@ public class FragmentManager : MonoBehaviour
     private int CalculateScoreTarget(int playerScore)
     {
         int minScore = playerScore + 10;
-        int maxScore = runStatsService.RunGoal - 10;
+        int maxScore = runStatsService.RunGoal - 50;
         int result = Random.Range(minScore, maxScore);
         return result;
     }

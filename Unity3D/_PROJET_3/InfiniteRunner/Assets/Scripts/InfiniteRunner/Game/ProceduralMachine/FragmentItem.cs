@@ -29,14 +29,16 @@ public class FragmentItem : MonoBehaviour
 
     private void Disable()
     {
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<BoxCollider>().enabled = false;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        
     }
 
     private void Enable()
     {
-        gameObject.GetComponent<MeshRenderer>().enabled = true;
         gameObject.GetComponent<BoxCollider>().enabled = true;
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        
     }
 
     /// <summary>

@@ -2554,3 +2554,8 @@ Received Import Request.
 Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Farm_M/farm-flower-bed.fbx using Guid(3c1b130c2be5aa14aafd0dbbc8a84271) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b8c1ae27ff83dc5ff322dae4b500782b') in 0.002508 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 6
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: L’opération d’entrée/sortie a été abandonnée en raison de l’arrêt d’un thread ou à la demande d’une application.
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
