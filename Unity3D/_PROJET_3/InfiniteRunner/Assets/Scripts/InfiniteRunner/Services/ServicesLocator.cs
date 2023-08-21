@@ -22,6 +22,7 @@ public class ServiceLocator
 
     public void RegisterService<T>(T service)
     {
+
         Type serviceType = typeof(T);
         if (!servicesDictionary.ContainsKey(serviceType))
         {
@@ -45,6 +46,12 @@ public class ServiceLocator
             Debug.LogWarning("Le service de type " + serviceType + " est manquant.");
         }
        return default(T);
+    }
+
+    public bool IsServiceRegistered<T>()
+    {
+        Type serviceType = typeof(T);
+        return servicesDictionary.ContainsKey(serviceType);
     }
 
 

@@ -37,13 +37,11 @@
 
     public void Start()
     {
-        Debug.Log("Timer : je start");
         timerIsStarted = true;
     }
 
     public void Stop()
     {
-        Debug.Log("Timer : je stop");
         Reset();
     }
 
@@ -56,8 +54,6 @@
     {
         return floatTimer;
     }
-
-
 
 }
 

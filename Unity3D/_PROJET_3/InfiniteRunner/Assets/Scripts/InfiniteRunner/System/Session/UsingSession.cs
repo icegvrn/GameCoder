@@ -9,7 +9,7 @@ public class UsingSession : MonoBehaviour
 
     public void Start()
     {
-        ResetMessages();
+          ResetMessages();
      
         if (IsSessionReady())
         {

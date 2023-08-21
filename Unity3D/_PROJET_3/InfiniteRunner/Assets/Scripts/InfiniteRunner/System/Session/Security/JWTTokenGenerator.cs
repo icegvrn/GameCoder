@@ -29,16 +29,13 @@ public class JWTTokenGenerator
         };
 
         // Création de l'encodeur JWT
-        IJwtAlgorithm algorithm = new HMACSHA256Algorithm(); // Utilisez l'algorithme approprié
+        IJwtAlgorithm algorithm = new HMACSHA256Algorithm(); 
         IJsonSerializer serializer = new JsonNetSerializer();
         IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
         IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);
 
         // Génération du token
         string token = encoder.Encode(payload, DBConstant.JWTSecret);
-
-        // Affichage du token (à des fins de démonstration)
-        Debug.Log("Generated Token: " + token);
 
         return token;
     }
@@ -55,17 +52,10 @@ public class JWTTokenGenerator
 
         try
         {
-            Debug.Log("Avant le décode");
             string decodedJson = decoder.Decode(token, DBConstant.JWTSecret, verify: true);
-            Debug.Log("Decoded Token Payload: " + decodedJson);
 
             JwtPayload payload = JsonUtility.FromJson<JwtPayload>(decodedJson);
 
-            Debug.Log("User ID: " + payload.id);
-            Debug.Log("Username: " + payload.username);
-            Debug.Log("Date expiration du token: " +payload.exp);
-
-      
             if (payload.id == userId && (int)DateTimeOffset.UtcNow.ToUnixTimeSeconds() < payload.exp)
             {
                 return true;

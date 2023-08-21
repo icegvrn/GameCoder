@@ -3,38 +3,32 @@ using System.Collections;
 
 public class AnimationScript : MonoBehaviour {
 
-    public bool isAnimated = false;
+    [SerializeField] private bool isAnimated = false;
 
-    public bool isRotating = false;
-    public bool isFloating = false;
-    public bool isScaling = false;
+    [SerializeField] private bool isRotating = false;
+    [SerializeField] private bool isFloating = false;
+    [SerializeField] private bool isScaling = false;
 
-    public Vector3 rotationAngle;
-    public float rotationSpeed;
+    [SerializeField] private Vector3 rotationAngle;
+    [SerializeField] private float rotationSpeed;
 
-    public float floatSpeed;
+    [SerializeField] private float floatSpeed;
     private bool goingUp = true;
-    public float floatRate;
+    [SerializeField] private float floatRate;
     private float floatTimer;
-   
-    public Vector3 startScale;
-    public Vector3 endScale;
+
+    [SerializeField] private Vector3 startScale;
+    [SerializeField] private Vector3 endScale;
 
     private bool scalingUp = true;
-    public float scaleSpeed;
-    public float scaleRate;
+    [SerializeField] private float scaleSpeed;
+    [SerializeField] private float scaleRate;
     private float scaleTimer;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
 	
 	// Update is called once per frame
 	void Update () {
 
-       
-        
         if(isAnimated)
         {
             if(isRotating)

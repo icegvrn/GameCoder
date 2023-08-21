@@ -38,7 +38,7 @@ public class DBRunSession : MonoBehaviour
            db.RegisterNewBestScoreTimeForUserFromNull(scoreTime, (int)timeID);
             newBestTime = true;
         }
-        else if (scoreTime < bestTimeData.best_time && scoreTime != 0)
+        else if ((scoreTime < bestTimeData.best_time || bestTimeData.best_time == 0) && scoreTime > 0)
         {
             db.RegisterNewBestScoreTimeForUser(scoreTime, (int)timeID);
             newBestTime = true;

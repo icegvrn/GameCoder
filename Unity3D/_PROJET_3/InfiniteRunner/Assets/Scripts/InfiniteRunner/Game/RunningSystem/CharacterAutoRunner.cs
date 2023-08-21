@@ -121,7 +121,7 @@ public class CharacterAutoRunner : MonoBehaviour
         }
 
       //Utilité à questionner : 
-      //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
+      rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
     }
 
     /// <summary>
@@ -314,8 +314,8 @@ public class CharacterAutoRunner : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("DeadZone"))
         {
             isCollide = true;
-            runningSpeed = 0;
-            currentState = CHARACTER_STATE.IDLE;
+          //  runningSpeed = 0;
+           // currentState = CHARACTER_STATE.IDLE;
 
             if (collisionTimer.GetFloatValue() >= 0.4f)
             {

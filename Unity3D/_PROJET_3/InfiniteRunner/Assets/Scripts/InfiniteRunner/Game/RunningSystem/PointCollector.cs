@@ -5,8 +5,7 @@ using UnityEngine;
 /// </summary>
 public class PointCollector : MonoBehaviour
 {
-    [Header("Configuration des points")]
-    [SerializeField] private int points;
+    private int points;
     public int Points { get { return points; } protected set { points = value; } }
 
 

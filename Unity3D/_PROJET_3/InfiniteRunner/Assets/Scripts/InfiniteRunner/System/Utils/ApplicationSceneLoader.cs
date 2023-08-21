@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ApplicationSceneLoader : MonoBehaviour
 {
@@ -8,6 +7,14 @@ public class ApplicationSceneLoader : MonoBehaviour
 
     public void LoadScene()
     {
-        ServiceLocator.Instance.GetService<ApplicationManager>().LoadScene(sceneToLoad);
+
+        if (ServiceLocator.Instance.IsServiceRegistered<ApplicationManager>())
+        {
+            ServiceLocator.Instance.GetService<ApplicationManager>().LoadScene(sceneToLoad);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }

@@ -13,12 +13,17 @@ public class ApplicationManager : MonoBehaviour
     private Scene currentScene;
     public Scene sceneToLoadAfterInitialization;
 
+
    void Awake()
     {
-        if (ServiceLocator.Instance.GetService<ApplicationManager>() == null)
+      
+        if (ServiceLocator.Instance.IsServiceRegistered<ApplicationManager>())
         {
-            ServiceLocator.Instance.RegisterService(this);
+            ServiceLocator.Instance.UnregisterService<ApplicationManager>();
         }
+
+        ServiceLocator.Instance.RegisterService(this);
+
         SetCurrentScene(Scene.Initialization);
         InitBaseServices();
         RegisterServices();    
@@ -26,8 +31,9 @@ public class ApplicationManager : MonoBehaviour
 
     private void Start()
     {
-        LoadScene(sceneToLoadAfterInitialization);
         gameSettingsService.SetSettings();
+        LoadScene(sceneToLoadAfterInitialization);
+        
     }
     private void InitBaseServices()
     {
@@ -48,6 +54,7 @@ public class ApplicationManager : MonoBehaviour
     public void LoadScene(Scene scene)
     {
         SceneManager.LoadScene((int)scene);
+        SetCurrentScene(scene);
     }
 
     private void SetCurrentScene(Scene scene)

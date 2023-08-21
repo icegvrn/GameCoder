@@ -199,7 +199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Menu principal
+  m_text: Retour au hub
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f19eea1afd76bd44195efdf3129d7936, type: 2}
   m_sharedMaterial: {fileID: -8724821288527808288, guid: f19eea1afd76bd44195efdf3129d7936, type: 2}
@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 2440304621374465305}
   - component: {fileID: 5190175278702930122}
   - component: {fileID: 2254499046024624712}
-  - component: {fileID: 1552932182731961377}
+  - component: {fileID: 5201634052787601000}
   m_Layer: 5
   m_Name: BackToHome
   m_TagString: Untagged
@@ -492,9 +492,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1552932182731961377}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: Load
+      - m_Target: {fileID: 5201634052787601000}
+        m_TargetAssemblyTypeName: ApplicationSceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -504,7 +504,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1552932182731961377
+--- !u!114 &5201634052787601000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -513,10 +513,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5333693382244288902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7765da057bdf9e1428d1ae22a44030f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 32fa6785c9c1d0b4098f15d6411f8783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indexSceneToLoad: 0
+  sceneToLoad: 2
 --- !u!1 &5736200335048955758
 GameObject:
   m_ObjectHideFlags: 0
