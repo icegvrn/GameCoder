@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Permet l'attache d'une nouvelle pool d'objet choisie dès qu'un nouveau générateur d'asset est instancié dans la scène.
+/// Permet l'attache d'une pool d'objet choisie dès qu'un nouveau générateur d'asset est instancié dans la scène.
 /// </summary>
 public class AttachObjectsToEnvironnement : MonoBehaviour
 {

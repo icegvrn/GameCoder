@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UsingSession : MonoBehaviour
+public class TryUsingSession : MonoBehaviour
 {
 
     [SerializeField] GameObject errorConnection;

@@ -15,7 +15,7 @@ C:/Users/Simon/Documents/Cours/GameCoder/Unity3D/_PROJET_3/InfiniteRunner
 -logFile
 Logs/AssetImportWorker2.log
 -srvPort
-54220
+50011
 Successfully changed project path to: C:/Users/Simon/Documents/Cours/GameCoder/Unity3D/_PROJET_3/InfiniteRunner
 C:/Users/Simon/Documents/Cours/GameCoder/Unity3D/_PROJET_3/InfiniteRunner
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,11 +49,11 @@ C:/Users/Simon/Documents/Cours/GameCoder/Unity3D/_PROJET_3/InfiniteRunner
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [23580] Host "[IP] 192.168.1.37 [Port] 0 [Flags] 2 [Guid] 1763234132 [EditorId] 1763234132 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GLC01VO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [23444] Host "[IP] 192.168.1.37 [Port] 0 [Flags] 2 [Guid] 2467506833 [EditorId] 2467506833 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GLC01VO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [23580] Host "[IP] 192.168.1.37 [Port] 0 [Flags] 2 [Guid] 1763234132 [EditorId] 1763234132 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GLC01VO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [23444] Host "[IP] 192.168.1.37 [Port] 0 [Flags] 2 [Guid] 2467506833 [EditorId] 2467506833 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GLC01VO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 32.91 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 23.03 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.5f1 (9674261d40ee)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/Resources/UnitySubsystems
@@ -69,47 +69,47 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56908
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56644
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.016992 seconds.
-- Loaded All Assemblies, in  0.413 seconds
+Registered in 0.017105 seconds.
+- Loaded All Assemblies, in  0.443 seconds
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 455 ms
+Android Extension - Scanning For ADB Devices 563 ms
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.802 seconds
-Domain Reload Profiling: 1212ms
+- Finished resetting the current domain, in  0.947 seconds
+Domain Reload Profiling: 1387ms
 	BeginReloadAssembly (117ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (35ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (79ms)
-	LoadAllAssembliesAndSetupDomain (167ms)
-		LoadAssemblies (114ms)
+	RebuildCommonClasses (38ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (84ms)
+	LoadAllAssembliesAndSetupDomain (188ms)
+		LoadAssemblies (112ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (157ms)
-			TypeCache.Refresh (156ms)
-				TypeCache.ScanAssembly (143ms)
+		AnalyzeDomain (176ms)
+			TypeCache.Refresh (174ms)
+				TypeCache.ScanAssembly (160ms)
 			ScanForSourceGeneratedMonoScriptInfo (1ms)
 			ResolveRequiredComponents (1ms)
-	FinalizeReload (802ms)
+	FinalizeReload (948ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (744ms)
+		SetupLoadedEditorAssemblies (882ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (592ms)
+			InitializePlatformSupportModulesInManaged (707ms)
 			SetLoadedEditorAssemblies (4ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (95ms)
-			ProcessInitializeOnLoadMethodAttributes (51ms)
+			ProcessInitializeOnLoadAttributes (113ms)
+			ProcessInitializeOnLoadMethodAttributes (56ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -120,53 +120,90 @@ Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.078 seconds
-Refreshing native plugins compatible for Editor in 6.50 ms, found 4 plugins.
+- Loaded All Assemblies, in  1.259 seconds
+Refreshing native plugins compatible for Editor in 10.19 ms, found 4 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.827 seconds
-Domain Reload Profiling: 1894ms
-	BeginReloadAssembly (150ms)
+- Finished resetting the current domain, in  0.870 seconds
+Domain Reload Profiling: 2119ms
+	BeginReloadAssembly (179ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (7ms)
+		DisableScriptedObjects (9ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (22ms)
-	RebuildCommonClasses (39ms)
-	RebuildNativeTypeToScriptingClass (12ms)
-	initialDomainReloadingComplete (53ms)
-	LoadAllAssembliesAndSetupDomain (812ms)
-		LoadAssemblies (469ms)
+		CreateAndSetChildDomain (32ms)
+	RebuildCommonClasses (45ms)
+	RebuildNativeTypeToScriptingClass (15ms)
+	initialDomainReloadingComplete (68ms)
+	LoadAllAssembliesAndSetupDomain (942ms)
+		LoadAssemblies (485ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (410ms)
-			TypeCache.Refresh (378ms)
-				TypeCache.ScanAssembly (362ms)
-			ScanForSourceGeneratedMonoScriptInfo (23ms)
-			ResolveRequiredComponents (9ms)
-	FinalizeReload (827ms)
+		AnalyzeDomain (529ms)
+			TypeCache.Refresh (482ms)
+				TypeCache.ScanAssembly (457ms)
+			ScanForSourceGeneratedMonoScriptInfo (33ms)
+			ResolveRequiredComponents (13ms)
+	FinalizeReload (871ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (641ms)
+		SetupLoadedEditorAssemblies (640ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (28ms)
-			SetLoadedEditorAssemblies (3ms)
+			InitializePlatformSupportModulesInManaged (33ms)
+			SetLoadedEditorAssemblies (5ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (92ms)
-			ProcessInitializeOnLoadAttributes (435ms)
-			ProcessInitializeOnLoadMethodAttributes (69ms)
-			AfterProcessingInitializeOnLoad (13ms)
+			BeforeProcessingInitializeOnLoad (108ms)
+			ProcessInitializeOnLoadAttributes (385ms)
+			ProcessInitializeOnLoadMethodAttributes (93ms)
+			AfterProcessingInitializeOnLoad (16ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (11ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
-Refreshing native plugins compatible for Editor in 6.68 ms, found 4 plugins.
+		AwakeInstancesAfterBackupRestoration (14ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.89 seconds
+Refreshing native plugins compatible for Editor in 9.32 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5274 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 71 unused Assets / (352.4 KB). Loaded Objects now: 5739.
+Unloading 5276 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 71 unused Assets / (352.0 KB). Loaded Objects now: 5741.
 Memory consumption went from 226.0 MB to 225.6 MB.
-Total: 4.992800 ms (FindLiveObjects: 0.425400 ms CreateObjectMapping: 0.501400 ms MarkObjects: 3.339300 ms  DeleteObjects: 0.725700 ms)
+Total: 4.941500 ms (FindLiveObjects: 0.447900 ms CreateObjectMapping: 0.465800 ms MarkObjects: 3.816000 ms  DeleteObjects: 0.210800 ms)
 
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 127545.113238 seconds.
+  path: Assets/Light/Scene1 - verylow.asset
+  artifactKey: Guid(c6a240753dc626e46a1ded1ab58073b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Light/Scene1 - verylow.asset using Guid(c6a240753dc626e46a1ded1ab58073b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ce54f86b35d79e9bd6af2045860a08c5') in 0.005291 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/ThirdParty/Reversed Interactive/The Portal Collection/Settings/SampleScenePostProcessingSettings.asset
+  artifactKey: Guid(183cbd347d25080429f42b520742bbd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ThirdParty/Reversed Interactive/The Portal Collection/Settings/SampleScenePostProcessingSettings.asset using Guid(183cbd347d25080429f42b520742bbd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b5cd96df6ecbdd4b615214ed1001f3c') in 0.002783 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 5
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 6.79 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2 unused Assets / (290.7 KB). Loaded Objects now: 5742.
+Memory consumption went from 114.1 MB to 113.8 MB.
+Total: 4.132800 ms (FindLiveObjects: 0.370200 ms CreateObjectMapping: 0.386300 ms MarkObjects: 3.300900 ms  DeleteObjects: 0.074500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -181,364 +218,156 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 18334.413023 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_gateCenter.prefab
-  artifactKey: Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_gateCenter.prefab using Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60bc2412a93a0d0ca357e2bb7a676904') in 0.071927 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2579
-========================================================================
-Received Import Request.
-  Time since last request: 7.590025 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_gateCenterBottom.prefab
-  artifactKey: Guid(f3c329c9e6c6cdb448db7410191b0859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_gateCenterBottom.prefab using Guid(f3c329c9e6c6cdb448db7410191b0859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '163f2c9cac9d2b059a22a48f014bc439') in 0.039162 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2804
-========================================================================
-Received Import Request.
-  Time since last request: 24.858798 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_gateCenter.prefab
-  artifactKey: Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_gateCenter.prefab using Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cfd29eb67468c9c55a9f446a3755acd7') in 0.039254 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2579
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_trap.prefab
-  artifactKey: Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_trap.prefab using Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ef0767b79299c8f3c7f1db855ddd50e4') in 0.031327 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1696
-========================================================================
-Received Import Request.
-  Time since last request: 2.026419 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_gateCenter.prefab
-  artifactKey: Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_gateCenter.prefab using Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b46e86d1a6d023d53f75e6e4874dc4f8') in 0.036745 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2579
-========================================================================
-Received Import Request.
-  Time since last request: 0.000051 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_trap.prefab
-  artifactKey: Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_trap.prefab using Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '12e79dcd1dad77b6b2562e808532a658') in 0.030797 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1696
-========================================================================
-Received Import Request.
-  Time since last request: 6.381031 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_gateCenter.prefab
-  artifactKey: Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_gateCenter.prefab using Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '86ef34d0365939abd50c3cd658b2c69f') in 0.036289 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2579
-========================================================================
-Received Import Request.
-  Time since last request: 0.000024 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_trap.prefab
-  artifactKey: Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_trap.prefab using Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2058c300b80bcffc2b43331dd55c05af') in 0.031170 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1696
-========================================================================
-Received Import Request.
-  Time since last request: 17.444796 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_gateCenter.prefab
-  artifactKey: Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_gateCenter.prefab using Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bcf483f876bce1897ae3da466953a9b8') in 0.036806 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2579
-========================================================================
-Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_trap.prefab
-  artifactKey: Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_trap.prefab using Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '276e8c1833ac84f9f219a837b3ea04bb') in 0.026210 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1696
-========================================================================
-Received Import Request.
-  Time since last request: 6.767532 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_gateCenter.prefab
-  artifactKey: Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_gateCenter.prefab using Guid(5fd1f5fd0efad994c92f042a24c4a659) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a91c09dfa1f5847c0b8943727c28434') in 0.033717 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2579
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_trap.prefab
-  artifactKey: Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_trap.prefab using Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4e692b128224bf18d72e8545d7cfb16') in 0.025206 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1696
-========================================================================
-Received Import Request.
-  Time since last request: 33.732308 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_trap.prefab
-  artifactKey: Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_trap.prefab using Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '883cf6d0848f8db3c78ac6b9953e1448') in 0.026881 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1695
-========================================================================
-Received Import Request.
-  Time since last request: 1.264987 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_trap.prefab
-  artifactKey: Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/egypt_obstacle_trap.prefab using Guid(5765913c5690d4a44b859a1cc51e3a2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b224dfbe53cbdb84436480707b68e688') in 0.027151 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1696
-========================================================================
-Received Import Request.
-  Time since last request: 58.336402 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/obstacle_movable.prefab
-  artifactKey: Guid(cb5f3e928882949479c73dcab4d159e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/obstacle_movable.prefab using Guid(cb5f3e928882949479c73dcab4d159e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6930c18c925f43e9496f7509fe4ce856') in 0.043311 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3498
-========================================================================
-Received Import Request.
-  Time since last request: 1.500393 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/obstacle_movable.prefab
-  artifactKey: Guid(cb5f3e928882949479c73dcab4d159e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/obstacle_movable.prefab using Guid(cb5f3e928882949479c73dcab4d159e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c9c01cc20e33a07198032752c4c8ee56') in 0.044537 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3499
-========================================================================
-Received Import Request.
-  Time since last request: 13.511305 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab
-  artifactKey: Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab using Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '217d9520a6ae1fa30c14595e4662370e') in 0.032760 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2290
-========================================================================
-Received Import Request.
-  Time since last request: 25.188221 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab
-  artifactKey: Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab using Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '76b7fc5291319a00748eac9354a725fa') in 0.028926 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2290
-========================================================================
-Received Import Request.
-  Time since last request: 10.381509 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab
-  artifactKey: Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab using Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6690b31043411876e7e5ff8a21ba7c6f') in 0.029141 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2290
-========================================================================
-Received Import Request.
-  Time since last request: 7.635367 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab
-  artifactKey: Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab using Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '13f62b9bea25a37c470caed4d6c69c4a') in 0.035839 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2290
-========================================================================
-Received Import Request.
-  Time since last request: 1.475972 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab
-  artifactKey: Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab using Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b442cb302796f9d610401d18d45209a7') in 0.032480 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2291
-========================================================================
-Received Import Request.
-  Time since last request: 5.523560 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab
-  artifactKey: Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab using Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7fa8853e699082d3d58f575de73ccda1') in 0.031356 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2292
-========================================================================
-Received Import Request.
-  Time since last request: 1.849380 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab
-  artifactKey: Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab using Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b6665c0ff2b6edaf992809c1c6b179b') in 0.031122 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2292
-========================================================================
-Received Import Request.
-  Time since last request: 13.881757 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab
-  artifactKey: Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab using Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e2fd3b2b5ba56ebe4b00d5367fd9fa9') in 0.031215 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2292
-========================================================================
-Received Import Request.
-  Time since last request: 11.190525 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab
-  artifactKey: Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab using Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5325b78986700e528e55afe0bba3a913') in 0.031908 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2292
-========================================================================
-Received Import Request.
-  Time since last request: 14.039459 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab
-  artifactKey: Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Egypt/obstacle_up.prefab using Guid(016319598ba0570468d23de41554adb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f57c384dd59e031fa454d30649abc556') in 0.029092 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2292
-========================================================================
-Received Import Request.
-  Time since last request: 21.637827 seconds.
-  path: Assets/Prefabs/LevelsObstacles/War/medieval_obstacle_trap.prefab
-  artifactKey: Guid(7d7de94e38e1ad34a8ca73dba52fcd03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/War/medieval_obstacle_trap.prefab using Guid(7d7de94e38e1ad34a8ca73dba52fcd03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '23a669af725315004873c7a41cc582f2') in 0.025880 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1609
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Prefabs/LevelsObstacles/War/war_obstacle_gateLeft.prefab
-  artifactKey: Guid(c3ea4674d1081824a828404c31d106a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/War/war_obstacle_gateLeft.prefab using Guid(c3ea4674d1081824a828404c31d106a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5207fd4909aa999a1383c96f7381a2a6') in 0.071689 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 5069
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Prefabs/LevelsObstacles/War/war_obstacle_movable.prefab
-  artifactKey: Guid(f78f77313273e46439ba104bef054e0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/War/war_obstacle_movable.prefab using Guid(f78f77313273e46439ba104bef054e0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6340c4cbd7b6553ef64c4198d7787b15') in 0.060852 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3789
-========================================================================
-Received Import Request.
-  Time since last request: 0.000043 seconds.
-  path: Assets/Prefabs/LevelsObstacles/War/war_obstacle_gateCenterBottom.prefab
-  artifactKey: Guid(8ece54062c0a11a489c95635f9ae16a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/War/war_obstacle_gateCenterBottom.prefab using Guid(8ece54062c0a11a489c95635f9ae16a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c665cbeced6a627577be23b07648760') in 0.032051 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2579
-========================================================================
-Received Import Request.
-  Time since last request: 5.148885 seconds.
-  path: Assets/Prefabs/LevelsObstacles/War/medieval_obstacle_trap.prefab
-  artifactKey: Guid(7d7de94e38e1ad34a8ca73dba52fcd03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/War/medieval_obstacle_trap.prefab using Guid(7d7de94e38e1ad34a8ca73dba52fcd03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd0cc5e6657cf2d7862e543e07758ca31') in 0.033248 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1604
-========================================================================
-Received Import Request.
-  Time since last request: 52.158327 seconds.
-  path: Assets/Prefabs/LevelsObstacles/War/war_obstacle1.prefab
-  artifactKey: Guid(6c56119a839f4f149a69708651dc5107) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/War/war_obstacle1.prefab using Guid(6c56119a839f4f149a69708651dc5107) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6a535c8b0dde3c73e4cf1e1430886d57') in 0.024625 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1645
-========================================================================
-Received Import Request.
-  Time since last request: 13.971450 seconds.
-  path: Assets/Prefabs/LevelsObstacles/War/war_obstacle_gateCenter.prefab
-  artifactKey: Guid(7e2d8787eff3366418d540d5c2894a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/War/war_obstacle_gateCenter.prefab using Guid(7e2d8787eff3366418d540d5c2894a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e02f4c7419296f0053b61785d4404710') in 0.034029 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2574
-========================================================================
-Received Import Request.
-  Time since last request: 14.218582 seconds.
-  path: Assets/Prefabs/LevelsObstacles/War/war_obstacle_gateCenter.prefab
-  artifactKey: Guid(7e2d8787eff3366418d540d5c2894a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/War/war_obstacle_gateCenter.prefab using Guid(7e2d8787eff3366418d540d5c2894a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a8429af39bb8e68f8567f0f8576daff3') in 0.032150 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2574
-========================================================================
-Received Import Request.
-  Time since last request: 10.344192 seconds.
-  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/WW2_T/bunker-big.fbx
-  artifactKey: Guid(c579196e492cd43759615e5c58733476) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/WW2_T/bunker-big.fbx using Guid(c579196e492cd43759615e5c58733476) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c83cf1fe0a54f06a5a187d7c2e5c53f') in 0.002178 seconds
+  Time since last request: 1718.855096 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Tiles_T/Roads_T/tile-mainroad-curve.fbx
+  artifactKey: Guid(060c4500940ee4fe3b397a7868452928) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Tiles_T/Roads_T/tile-mainroad-curve.fbx using Guid(060c4500940ee4fe3b397a7868452928) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3dcf1ebd7c640ab3e733f4eb1f0a7888') in 0.013610 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 6
 ========================================================================
 Received Import Request.
-  Time since last request: 0.019902 seconds.
-  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/WW2_T/Jeep-willys.fbx
-  artifactKey: Guid(0b29a566bacc045a4ad4f54f39bb40d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/WW2_T/Jeep-willys.fbx using Guid(0b29a566bacc045a4ad4f54f39bb40d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'edd2decaf1e80dfdbb604fda040da154') in 0.005031 seconds
+  Time since last request: 0.006836 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Tiles_M/Roads_M/tile-mainroad-curve.prefab
+  artifactKey: Guid(cc8321d76764142a0adf00468a1a68dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Tiles_M/Roads_M/tile-mainroad-curve.prefab using Guid(cc8321d76764142a0adf00468a1a68dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '24594c207a13dbae8b2c95ca25f4e93b') in 0.009691 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 28
+Number of asset objects unloaded after import = 7
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000033 seconds.
-  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/WW2_T/helmet-us.fbx
-  artifactKey: Guid(a02f397167876497f88c5d8538b95123) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/WW2_T/helmet-us.fbx using Guid(a02f397167876497f88c5d8538b95123) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '94c7e161709f4da6694cf67f27bde926') in 0.001683 seconds
+  Time since last request: 0.000016 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Roads_T/tile-mainroad-hill.prefab
+  artifactKey: Guid(b1662f7596fbf49d2836030674b41ef5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Roads_T/tile-mainroad-hill.prefab using Guid(b1662f7596fbf49d2836030674b41ef5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '196bf211e039dd5d510197456abaa001') in 0.003192 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 6
-========================================================================
-Received Import Request.
-  Time since last request: 0.000031 seconds.
-  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/WW2_T/sherman.fbx
-  artifactKey: Guid(963661cdb95c347a0ad5a279c028dc9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/WW2_T/sherman.fbx using Guid(963661cdb95c347a0ad5a279c028dc9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1fe98de885a029a3045bec69009c853d') in 0.009407 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 78
-========================================================================
-Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/WW2_T/tent-war.fbx
-  artifactKey: Guid(8b4405832ce9c43949fe91c5d514fe59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/WW2_T/tent-war.fbx using Guid(8b4405832ce9c43949fe91c5d514fe59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf7dda21b2a15e88a836beaa7a6b280f') in 0.003122 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 6
+Number of asset objects unloaded after import = 7
 ========================================================================
 Received Import Request.
   Time since last request: 0.000018 seconds.
-  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/WW2_T/trenches-wire.fbx
-  artifactKey: Guid(be74b61ed1d38478e9eefee53ea53e4c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/WW2_T/trenches-wire.fbx using Guid(be74b61ed1d38478e9eefee53ea53e4c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8eb2f12887d8b4431091a4a93f4c6c8c') in 0.002720 seconds
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Tiles_M/Roads_M/tile-mainroad-intersection.prefab
+  artifactKey: Guid(1c2c97d44483d40bb944f369f60436c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Tiles_M/Roads_M/tile-mainroad-intersection.prefab using Guid(1c2c97d44483d40bb944f369f60436c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '96b692c7578e5ab8f762797f61120f36') in 0.002885 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Roads_T/tile-mainroad-straight.prefab
+  artifactKey: Guid(10559c3c45c9e4714b032dc317910152) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Roads_T/tile-mainroad-straight.prefab using Guid(10559c3c45c9e4714b032dc317910152) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b6cbe42bc11f261ab04c718f15b1aad') in 0.002114 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Tiles_M/Roads_M/tile-mainroad-straight.fbx
+  artifactKey: Guid(1352904537ca54351a00660c91827c19) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Tiles_M/Roads_M/tile-mainroad-straight.fbx using Guid(1352904537ca54351a00660c91827c19) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5981cc960ba296b6cc5c949cf6556bd7') in 0.002471 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Tiles_T/Tunnels_T/tile-mainroad-tunnel.fbx
+  artifactKey: Guid(4a3bd77f025c14015b416f308f94b893) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Tiles_T/Tunnels_T/tile-mainroad-tunnel.fbx using Guid(4a3bd77f025c14015b416f308f94b893) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ef24b8801216d8c848808998f4bf24be') in 0.002474 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Tiles_M/Roads_M/tile-mainroad-road-intersection-t.fbx
+  artifactKey: Guid(905b15cb732a1fd45bda845d96dbbcaf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Tiles_M/Roads_M/tile-mainroad-road-intersection-t.fbx using Guid(905b15cb732a1fd45bda845d96dbbcaf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c3ca4349793a196896723e1d44f154d') in 0.001976 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Tiles_T/Roads_T/tile-mainroad-straight.fbx
+  artifactKey: Guid(679206422c3b24d9f927b830d3a35657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Tiles_T/Roads_T/tile-mainroad-straight.fbx using Guid(679206422c3b24d9f927b830d3a35657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d336e25c3cee509738c86edbe69b20c') in 0.002387 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Tiles_M/Roads_M/tile-mainroad-straight.prefab
+  artifactKey: Guid(494957db1966c4528a98d8c72a75f577) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Tiles_M/Roads_M/tile-mainroad-straight.prefab using Guid(494957db1966c4528a98d8c72a75f577) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80078b166821e272709fd92804b64fa0') in 0.002433 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Tiles_M/Roads_M/tile-mainroad-road-intersection-t.prefab
+  artifactKey: Guid(7ea223eeb9c13be4b8b958f5fdbd8eb1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Tiles_M/Roads_M/tile-mainroad-road-intersection-t.prefab using Guid(7ea223eeb9c13be4b8b958f5fdbd8eb1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '64f0634f7401547b9bdf9afccc297be0') in 0.002555 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Tiles_T/Roads_T/tile-mainroad-straight-crosswalk.fbx
+  artifactKey: Guid(1af050bec48f72341a8a948e04a3e2d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Tiles_T/Roads_T/tile-mainroad-straight-crosswalk.fbx using Guid(1af050bec48f72341a8a948e04a3e2d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77cdfa69274af89615dab81810d50b60') in 0.001946 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Roads_T/tile-mainroad-intersection-t.prefab
+  artifactKey: Guid(79083873821eea9468fa981568eee21b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Roads_T/tile-mainroad-intersection-t.prefab using Guid(79083873821eea9468fa981568eee21b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ddf7b60b5af5da7b054f383efb8a7a5') in 0.002382 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Tunnels_T/tile-mainroad-tunnel-curve.prefab
+  artifactKey: Guid(643de4425845e05498791d3da6ff4b0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Tunnels_T/tile-mainroad-tunnel-curve.prefab using Guid(643de4425845e05498791d3da6ff4b0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57c5f9bae2f292aa8d3b198999c3ec1d') in 0.002878 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Tiles_T/Roads_T/tile-mainroad-road-intersection.fbx
+  artifactKey: Guid(5dea1c2528c6db049801265f3539d4ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Tiles_T/Roads_T/tile-mainroad-road-intersection.fbx using Guid(5dea1c2528c6db049801265f3539d4ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56fe5318cd1199f5b21b5b4d8df044cd') in 0.001844 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Roads_T/tile-mainroad-straight-crosswalk.prefab
+  artifactKey: Guid(5fdccc78e3d92e34588ccd5cab804915) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Roads_T/tile-mainroad-straight-crosswalk.prefab using Guid(5fdccc78e3d92e34588ccd5cab804915) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a9a687b637e83a70c0bf2768fc9960ff') in 0.002287 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Tiles_M/Tunnel_M/tile-mainroad-tunnel.fbx
+  artifactKey: Guid(ecc51ab978cb94823a2a0f5d9dadb540) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Tiles_M/Tunnel_M/tile-mainroad-tunnel.fbx using Guid(ecc51ab978cb94823a2a0f5d9dadb540) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7030e731da6cde0c8c606670a75779bf') in 0.002167 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Tiles_M/Roads_M/tile-mainroad-hill.fbx
+  artifactKey: Guid(d63200e88b13145e1bf5269ce28c9a85) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Tiles_M/Roads_M/tile-mainroad-hill.fbx using Guid(d63200e88b13145e1bf5269ce28c9a85) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e43f832c4cba30b569e64e442dd1e24f') in 0.002231 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 6
 ========================================================================
 Received Import Request.
   Time since last request: 0.000017 seconds.
-  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/WW2_T/log-post.fbx
-  artifactKey: Guid(83f8bf54fb56f4243bf685c9a5347fc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/WW2_T/log-post.fbx using Guid(83f8bf54fb56f4243bf685c9a5347fc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8efc20d79d6e78f2917df060dafa1f5f') in 0.001727 seconds
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Tiles_T/Roads_T/tile-mainroad-hill.fbx
+  artifactKey: Guid(13d2d0ab3c6d9439aa7dac980890085d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Tiles_T/Roads_T/tile-mainroad-hill.fbx using Guid(13d2d0ab3c6d9439aa7dac980890085d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6274b8136a7ee3c5eb99f886e43b2b12') in 0.002804 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 6
-========================================================================
-Received Import Request.
-  Time since last request: 259.134328 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Medieval/medieval_obstacle_gateCenter.prefab
-  artifactKey: Guid(aebde906b51659544804100ec2e522da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Medieval/medieval_obstacle_gateCenter.prefab using Guid(aebde906b51659544804100ec2e522da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb5c8135e7f1548694f1ceca20884cf4') in 0.042426 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2617
-========================================================================
-Received Import Request.
-  Time since last request: 0.000024 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Medieval/medieval_obstacle_gateRight.prefab
-  artifactKey: Guid(35f3970e5c0985a43bab9d7f5fe5c5e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Medieval/medieval_obstacle_gateRight.prefab using Guid(35f3970e5c0985a43bab9d7f5fe5c5e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5edd32128f5f0b58ad87b869e285241c') in 0.078273 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 5085
-========================================================================
-Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Medieval/medieval_obstacle_movable.prefab
-  artifactKey: Guid(a4123dfecb5a28f4da4c78283af5d9f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Medieval/medieval_obstacle_movable.prefab using Guid(a4123dfecb5a28f4da4c78283af5d9f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9652d07d0e6939b837142f693e94fe44') in 0.045620 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3565
-========================================================================
-Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/Prefabs/LevelsObstacles/Medieval/medieval_obstacle_up.prefab
-  artifactKey: Guid(acbc2d11fd4e58147bc31d551404c962) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/LevelsObstacles/Medieval/medieval_obstacle_up.prefab using Guid(acbc2d11fd4e58147bc31d551404c962) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b76e4f987475f60e9545a5704d2ad26e') in 0.036296 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2272
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: L’opération d’entrée/sortie a été abandonnée en raison de l’arrêt d’un thread ou à la demande d’une application.
 AssetImportWorker is now disconnected from the server

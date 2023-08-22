@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class RunStateMachine : MonoBehaviour
 {
     [Header("Session informations")]
-    [SerializeField] UsingSession session;
+    [SerializeField] TryUsingSession session;
     [SerializeField] DBRunSession dbRunSession;
     IRunningGameService runStatsService;
 

@@ -128,13 +128,23 @@ public class FragmentManager : MonoBehaviour
     {
        
         float nb = Random.Range(0f, 1f);
-        bool rand = nb <= 0.5f;
-
-        // 50% de chance d'apparition d'un fragment pour la démo ; normalement réglé à 5%
-        //bool rand = nb <= 0.05f;(5%)
-
+        bool rand = nb <= CalculateSpawnProbability();
         return rand; 
     }
+
+    /// <summary>
+    /// Méthode permettant d'augmenter les probabilités d'obtenir un fragment en fonction de la rapidité avec laquelle le joueur est arrivé au score
+    /// </summary>
+    /// <param name="playerScore"></param>
+    /// <returns></returns>
+    private float CalculateSpawnProbability()
+    {
+        float baseProbability = 0.5f;  // 50 % de chance d'apparition d'un fragment pour la démo; normalement réglé à 5 %
+        float speedModificator = (float)runStatsService.RunTime / (float)runStatsService.RunGoal;
+        float adjustedProbability = baseProbability - speedModificator;
+        return adjustedProbability; 
+    }
+
 
     /// <summary>
     /// Détermine combien de fragments doivent apparaitre, selon un pourcentage de chance

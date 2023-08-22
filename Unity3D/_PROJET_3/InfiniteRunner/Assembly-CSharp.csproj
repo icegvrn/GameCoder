@@ -68,7 +68,6 @@
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Compatibility\System.Reflection\CustomAttributeExtensions.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Serializers\DelegateJsonSerializerFactory.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\RegisterUser.cs" />
-    <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\SessionManager.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\HubSystem\CharacterController.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\HMACSHAAlgorithmFactory.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\AttachObjectsToEnvironnement.cs" />
@@ -115,9 +114,8 @@
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\JwtAlgorithmName.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\IDateTimeProvider.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\SQLConnection\DBEntities\DBRank.cs" />
-    <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Utils\GlobalApplication.cs" />
-    <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\UsingSession.cs" />
+    <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Exceptions\SignatureVerificationException.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\RS1024Algorithm.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Algorithms\JwtAlgorithmFactory.cs" />
@@ -138,6 +136,7 @@
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\GameManager.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\RunUIManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICharacter.cs" />
+    <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\SessionManagerService.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\UnixEpoch.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Builder\JwtBuilderExtensions.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\HubSystem\PortalEnablerFromDB.cs" />
@@ -209,9 +208,9 @@
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\SQLConnection\DBEntities\DBConstant.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Services\GameSettingsService.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Services\ServicesLocator.cs" />
-    <Compile Include="Assets\debug.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\JwtEncoder.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\ProceduralMachine\AttachObstacleToEnvironment.cs" />
+    <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\TryUsingSession.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\Exceptions\TokenExpiredException.cs" />
   </ItemGroup>
   <ItemGroup>
