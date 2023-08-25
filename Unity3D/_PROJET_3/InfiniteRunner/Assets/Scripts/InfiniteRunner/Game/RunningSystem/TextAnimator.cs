@@ -18,9 +18,11 @@ public class TextAnimator : MonoBehaviour
 
     [Header("Contenu du texte")]
     [SerializeField] private string[] textsToAnimate = { "Ready?", "5", "4", "3", "2", "1", "Go!" };
-    public string[] TextsToAnimate { get { return textsToAnimate; } set {  textsToAnimate = value; } }
+    public string[] TextsToAnimate { get { return textsToAnimate; } set { textsToAnimate = value; } }
 
-    [Header("Action de fin d'animation")]
+    [Header("Actions d'animation")]
+    [SerializeField] private UnityEvent OnAnimationStart;
+    [SerializeField] private UnityEvent OnLastText;
     [SerializeField] private UnityEvent OnAnimationEnd;
 
     /// <summary>
@@ -30,6 +32,7 @@ public class TextAnimator : MonoBehaviour
     {
         StartCoroutine(PlayCountdown());
     }
+
 
 
     private IEnumerator PlayCountdown()
@@ -43,11 +46,12 @@ public class TextAnimator : MonoBehaviour
             textElem.color = new Color(textElem.color.r, textElem.color.g, textElem.color.b, 0f);
 
             // Initialise le texte à une taille plus grande que sa taille voulue pour un effet "dézoom"
-            textElem.transform.localScale = Vector3.one * maxScale; 
+            textElem.transform.localScale = Vector3.one * maxScale;
 
             // Initialisation d'un timer 
             float elapsedTime = 0f;
 
+          
             while (elapsedTime < fadeDuration)
             {
 
@@ -71,17 +75,22 @@ public class TextAnimator : MonoBehaviour
             textElem.color = new Color(textElem.color.r, textElem.color.g, textElem.color.b, 1f);
             textElem.transform.localScale = Vector3.one;
 
+            if (i == 0)
+            {
+                OnAnimationStart.Invoke();
+            }
+
             yield return new WaitForSeconds(0.5f); // Effectue une pause avant d'afficher le texte suivant
 
-      
-     
+           
             // Si c'était le dernier texte, on attend le temps du "lastTextPersistenceLenght", utilisé pour faire "trainer" certains infos plus longtemps
-                if (i == TextsToAnimate.Length - 1 && lastTextPersistenceLenght != 0)
-                {
-                yield return new WaitForSeconds(lastTextPersistenceLenght); 
+             if (i == TextsToAnimate.Length - 1 && lastTextPersistenceLenght != 0)
+            {
+                OnLastText.Invoke();
+                yield return new WaitForSeconds(lastTextPersistenceLenght);
                 textElem.text = ""; // Supprime le texte
                 OnAnimationEnd.Invoke(); // Invoque l'action à effectuer par la suite
-                }
+            }
         }
     }
 }

@@ -592,9 +592,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8885058690877294826, guid: 98f3cc67010846c42b3808fc77ec6572, type: 3}
+      propertyPath: OnAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8885058690877294826, guid: 98f3cc67010846c42b3808fc77ec6572, type: 3}
       propertyPath: OnAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 397444355}
+    - target: {fileID: 8885058690877294826, guid: 98f3cc67010846c42b3808fc77ec6572, type: 3}
+      propertyPath: OnAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartRun
+      objectReference: {fileID: 0}
+    - target: {fileID: 8885058690877294826, guid: 98f3cc67010846c42b3808fc77ec6572, type: 3}
+      propertyPath: OnAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8885058690877294826, guid: 98f3cc67010846c42b3808fc77ec6572, type: 3}
+      propertyPath: OnAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -931,7 +947,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.55
+  m_fontSize: 68.1
   m_fontSizeBase: 101.34
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1442,8 +1458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1edd515a84f265045a0becc5c7550072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runningSpeed: 2000
-  lateralSpeed: 2000
+  runningSpeed: 2500
+  lateralSpeed: 2500
   animator: {fileID: 838676484}
 --- !u!65 &838676480
 BoxCollider:
@@ -1815,7 +1831,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.2
+  m_fontSize: 66.2
   m_fontSizeBase: 101.34
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2158,7 +2174,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.6
+  m_fontSize: 39
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2255,13 +2271,13 @@ MonoBehaviour:
   totalMaxPoolNumber: 10
   poolBatchNumber: 20
   objectsList:
-  - {fileID: 6016634322777693836, guid: b1f96b0e895423444910f0742af96236, type: 3}
+  - {fileID: 6016634322777693836, guid: e57ee561a2958f644a0d71055944b643, type: 3}
   - {fileID: 1162068986191952904, guid: 5fd1f5fd0efad994c92f042a24c4a659, type: 3}
   - {fileID: 1162068986191952904, guid: f3c329c9e6c6cdb448db7410191b0859, type: 3}
   - {fileID: 6016634322777693836, guid: 5c72693ea656b30428c1ea4e176d4a3b, type: 3}
   - {fileID: 986192842884430086, guid: b8724bf22aadc574aa2512d2c5737c0f, type: 3}
   - {fileID: 986192842884430086, guid: 5765913c5690d4a44b859a1cc51e3a2f, type: 3}
-  - {fileID: 6016634322777693836, guid: 016319598ba0570468d23de41554adb4, type: 3}
+  - {fileID: 6016634322777693836, guid: 9c35c58f76d673941ab2f4a98fcaa63d, type: 3}
   - {fileID: 6016634322777693836, guid: ab4a40d7e5b9f7146ad44a1bad543889, type: 3}
   - {fileID: 6016634322777693836, guid: cb5f3e928882949479c73dcab4d159e1, type: 3}
 --- !u!1 &1106549794
@@ -2680,7 +2696,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   errorConnection: {fileID: 1698028978}
-  ObjectsToEnableOnSessionReady: []
+  ObjectsToEnableOnSessionReady:
+  - {fileID: 397444351}
+  - {fileID: 1474759108}
 --- !u!4 &1271882795
 Transform:
   m_ObjectHideFlags: 0

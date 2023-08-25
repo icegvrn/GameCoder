@@ -204,7 +204,5 @@ public class ObstacleSpawner : MonoBehaviour
         obstacleInPlay.Clear();
         obstaclesGenerated = false;
     }
-    
-  
 
 }

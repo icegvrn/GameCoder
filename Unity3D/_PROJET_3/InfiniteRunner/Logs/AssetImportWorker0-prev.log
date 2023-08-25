@@ -15,7 +15,7 @@ C:/Users/Simon/Documents/Cours/GameCoder/Unity3D/_PROJET_3/InfiniteRunner
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50011
+50762
 Successfully changed project path to: C:/Users/Simon/Documents/Cours/GameCoder/Unity3D/_PROJET_3/InfiniteRunner
 C:/Users/Simon/Documents/Cours/GameCoder/Unity3D/_PROJET_3/InfiniteRunner
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,11 +49,11 @@ C:/Users/Simon/Documents/Cours/GameCoder/Unity3D/_PROJET_3/InfiniteRunner
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [2476] Host "[IP] 192.168.1.37 [Port] 0 [Flags] 2 [Guid] 3073492630 [EditorId] 3073492630 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GLC01VO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [16340] Host "[IP] 192.168.1.37 [Port] 0 [Flags] 2 [Guid] 3649299427 [EditorId] 3649299427 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GLC01VO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [2476] Host "[IP] 192.168.1.37 [Port] 0 [Flags] 2 [Guid] 3073492630 [EditorId] 3073492630 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GLC01VO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [16340] Host "[IP] 192.168.1.37 [Port] 0 [Flags] 2 [Guid] 3649299427 [EditorId] 3649299427 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GLC01VO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 21.96 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 20.99 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.5f1 (9674261d40ee)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/Resources/UnitySubsystems
@@ -69,47 +69,47 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56816
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56836
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.5f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.015410 seconds.
-- Loaded All Assemblies, in  0.430 seconds
+Registered in 0.025065 seconds.
+- Loaded All Assemblies, in  0.480 seconds
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 582 ms
+Android Extension - Scanning For ADB Devices 580 ms
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.963 seconds
-Domain Reload Profiling: 1390ms
-	BeginReloadAssembly (116ms)
+- Finished resetting the current domain, in  1.000 seconds
+Domain Reload Profiling: 1476ms
+	BeginReloadAssembly (123ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
 	RebuildCommonClasses (40ms)
-	RebuildNativeTypeToScriptingClass (12ms)
-	initialDomainReloadingComplete (82ms)
-	LoadAllAssembliesAndSetupDomain (176ms)
-		LoadAssemblies (112ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (99ms)
+	LoadAllAssembliesAndSetupDomain (200ms)
+		LoadAssemblies (119ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (165ms)
-			TypeCache.Refresh (164ms)
-				TypeCache.ScanAssembly (150ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (0ms)
-	FinalizeReload (964ms)
+		AnalyzeDomain (187ms)
+			TypeCache.Refresh (186ms)
+				TypeCache.ScanAssembly (167ms)
+			ScanForSourceGeneratedMonoScriptInfo (1ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (1001ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (896ms)
+		SetupLoadedEditorAssemblies (922ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (726ms)
+			InitializePlatformSupportModulesInManaged (739ms)
 			SetLoadedEditorAssemblies (4ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (106ms)
-			ProcessInitializeOnLoadMethodAttributes (58ms)
+			ProcessInitializeOnLoadAttributes (119ms)
+			ProcessInitializeOnLoadMethodAttributes (57ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -120,52 +120,52 @@ Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image C:\Users\Simon\Documents\Cours\GameCoder\Unity3D\_PROJET_3\InfiniteRunner\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.249 seconds
-Refreshing native plugins compatible for Editor in 10.80 ms, found 4 plugins.
+- Loaded All Assemblies, in  1.280 seconds
+Refreshing native plugins compatible for Editor in 12.07 ms, found 4 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.873 seconds
-Domain Reload Profiling: 2114ms
-	BeginReloadAssembly (188ms)
+- Finished resetting the current domain, in  1.085 seconds
+Domain Reload Profiling: 2356ms
+	BeginReloadAssembly (173ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (10ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (32ms)
-	RebuildCommonClasses (46ms)
-	RebuildNativeTypeToScriptingClass (17ms)
-	initialDomainReloadingComplete (63ms)
-	LoadAllAssembliesAndSetupDomain (927ms)
-		LoadAssemblies (492ms)
+		CreateAndSetChildDomain (26ms)
+	RebuildCommonClasses (55ms)
+	RebuildNativeTypeToScriptingClass (19ms)
+	initialDomainReloadingComplete (64ms)
+	LoadAllAssembliesAndSetupDomain (959ms)
+		LoadAssemblies (476ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (516ms)
-			TypeCache.Refresh (470ms)
-				TypeCache.ScanAssembly (444ms)
-			ScanForSourceGeneratedMonoScriptInfo (33ms)
-			ResolveRequiredComponents (13ms)
-	FinalizeReload (873ms)
+		AnalyzeDomain (553ms)
+			TypeCache.Refresh (506ms)
+				TypeCache.ScanAssembly (479ms)
+			ScanForSourceGeneratedMonoScriptInfo (32ms)
+			ResolveRequiredComponents (14ms)
+	FinalizeReload (1086ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (641ms)
+		SetupLoadedEditorAssemblies (741ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (37ms)
+			InitializePlatformSupportModulesInManaged (35ms)
 			SetLoadedEditorAssemblies (5ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (109ms)
-			ProcessInitializeOnLoadAttributes (381ms)
-			ProcessInitializeOnLoadMethodAttributes (94ms)
-			AfterProcessingInitializeOnLoad (15ms)
+			BeforeProcessingInitializeOnLoad (120ms)
+			ProcessInitializeOnLoadAttributes (479ms)
+			ProcessInitializeOnLoadMethodAttributes (86ms)
+			AfterProcessingInitializeOnLoad (16ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (15ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.86 seconds
-Refreshing native plugins compatible for Editor in 9.56 ms, found 4 plugins.
+		AwakeInstancesAfterBackupRestoration (17ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 1.52 seconds
+Refreshing native plugins compatible for Editor in 10.26 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 5276 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 71 unused Assets / (352.0 KB). Loaded Objects now: 5741.
-Memory consumption went from 226.0 MB to 225.6 MB.
-Total: 4.004500 ms (FindLiveObjects: 0.475400 ms CreateObjectMapping: 0.488700 ms MarkObjects: 2.751300 ms  DeleteObjects: 0.288300 ms)
+Unloading 71 unused Assets / (352.6 KB). Loaded Objects now: 5741.
+Memory consumption went from 226.1 MB to 225.8 MB.
+Total: 4.349400 ms (FindLiveObjects: 0.547500 ms CreateObjectMapping: 0.611000 ms MarkObjects: 2.948900 ms  DeleteObjects: 0.241000 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
@@ -180,20 +180,84 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 127545.111063 seconds.
-  path: Assets/Light/Scene1 - Medium.asset
-  artifactKey: Guid(452cd5f4d41216f4b97dcb69672d9b9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Light/Scene1 - Medium.asset using Guid(452cd5f4d41216f4b97dcb69672d9b9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '89507121938d82d078e35ae57f3ddb3d') in 0.007438 seconds
+  Time since last request: 770.230311 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Tiles_M/Roads_M/tile-road-mainroad-intersection-t.prefab
+  artifactKey: Guid(f81870c72f74c449fa83b5a59612dd11) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Tiles_M/Roads_M/tile-road-mainroad-intersection-t.prefab using Guid(f81870c72f74c449fa83b5a59612dd11) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7bfd70c998b359b8e0cd5c32383011b') in 0.015594 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
+Number of asset objects unloaded after import = 7
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000029 seconds.
-  path: Assets/Light/Scene1.asset
-  artifactKey: Guid(014c9517b6af6604885aefff304991e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Light/Scene1.asset using Guid(014c9517b6af6604885aefff304991e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b1af9d1cbd82eaf4ebe853d8f362890') in 0.001461 seconds
+  Time since last request: 0.000026 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Tiles_M/Rails_M/tile-rail-mainroad-crossing.fbx
+  artifactKey: Guid(b39b8d5f422da44f495b5677ed7348ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Tiles_M/Rails_M/tile-rail-mainroad-crossing.fbx using Guid(b39b8d5f422da44f495b5677ed7348ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f375a9bd326272595676112bbeba0905') in 0.002925 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Tiles_M/Roads_M/tile-road-mainroad-intersection.fbx
+  artifactKey: Guid(e3f4b0cba74ba4e14a3be01f9bb8ba5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Tiles_M/Roads_M/tile-road-mainroad-intersection.fbx using Guid(e3f4b0cba74ba4e14a3be01f9bb8ba5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad3b9c02e464082a34664beef3b15a3c') in 0.002500 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Roads_T/tile-road-mainroad-intersection.prefab
+  artifactKey: Guid(175bcd8413dc44d0292008b9d8c431a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Roads_T/tile-road-mainroad-intersection.prefab using Guid(175bcd8413dc44d0292008b9d8c431a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9c3610fef49c3611474825fcdb9c7c41') in 0.003080 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Tiles_M/Roads_M/tile-roads-mainroad-intersection.fbx
+  artifactKey: Guid(3abdcdc29333ed347a8e3ac7d2b3f8d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Meshes_M/Tiles_M/Roads_M/tile-roads-mainroad-intersection.fbx using Guid(3abdcdc29333ed347a8e3ac7d2b3f8d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '10367dd092cb76f15a7108e187f19d88') in 0.002762 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Tiles_T/Rails_T/tile-rail-mainroad-crossing.fbx
+  artifactKey: Guid(cc8dd4c273ce5498dac01b270ec785e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Meshes_T/Tiles_T/Rails_T/tile-rail-mainroad-crossing.fbx using Guid(cc8dd4c273ce5498dac01b270ec785e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7d983c381166855091e022b20c540f8') in 0.002439 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Roads_T/tile-road-to-mainroad.prefab
+  artifactKey: Guid(455b71411efbec445975502120f68078) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Roads_T/tile-road-to-mainroad.prefab using Guid(455b71411efbec445975502120f68078) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1bddc1e16cc8391bca901b288153f7a2') in 0.002706 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Tiles_M/Roads_M/tile-roads-mainroad-intersection.prefab
+  artifactKey: Guid(e533f67785b49cc4d86758b48f7555d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Tiles_M/Roads_M/tile-roads-mainroad-intersection.prefab using Guid(e533f67785b49cc4d86758b48f7555d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f5f642c6934f34772b85d4b72c3940c2') in 0.002868 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Rails_T/tile-rail-mainroad-crossing.prefab
+  artifactKey: Guid(0e8d2db4284af4dbd9b858fc2332e5e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/T/- Prefabs_T/Tiles_T/Rails_T/tile-rail-mainroad-crossing.prefab using Guid(0e8d2db4284af4dbd9b858fc2332e5e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37c71335c894437116a072d7496d6097') in 0.002809 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Tiles_M/Roads_M/tile-road-to-mainroad-intersection-t.prefab
+  artifactKey: Guid(5d41d26226093d34abd8a9d6c1b38846) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/_ThirdParty/polyperfect/Low Poly Ultimate Pack/M/- Prefabs_M/Tiles_M/Roads_M/tile-road-to-mainroad-intersection-t.prefab using Guid(5d41d26226093d34abd8a9d6c1b38846) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56b3f3ecb1ba5c243d6cace1985d7519') in 0.002643 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: L’opération d’entrée/sortie a été abandonnée en raison de l’arrêt d’un thread ou à la demande d’une application.
 AssetImportWorker is now disconnected from the server

@@ -1172,7 +1172,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.55
+  m_fontSize: 68.1
   m_fontSizeBase: 101.34
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1500,8 +1500,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1edd515a84f265045a0becc5c7550072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runningSpeed: 2000
-  lateralSpeed: 2000
+  runningSpeed: 2500
+  lateralSpeed: 2500
   animator: {fileID: 838676484}
 --- !u!65 &838676480
 BoxCollider:
@@ -1873,7 +1873,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.2
+  m_fontSize: 66.2
   m_fontSizeBase: 101.34
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2149,7 +2149,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.6
+  m_fontSize: 39
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3378,7 +3378,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   errorConnection: {fileID: 1134490699}
-  ObjectsToEnableOnSessionReady: []
+  ObjectsToEnableOnSessionReady:
+  - {fileID: 397444351}
+  - {fileID: 1638095314}
 --- !u!4 &1610977769 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6640462879254062755, guid: 89bdf0b7023b9154da92dc7314bf1dac, type: 3}

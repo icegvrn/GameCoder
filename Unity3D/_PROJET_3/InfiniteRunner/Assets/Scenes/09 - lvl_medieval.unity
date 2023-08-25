@@ -1060,9 +1060,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8885058690877294826, guid: 98f3cc67010846c42b3808fc77ec6572, type: 3}
+      propertyPath: OnAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8885058690877294826, guid: 98f3cc67010846c42b3808fc77ec6572, type: 3}
       propertyPath: OnAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 397444355}
+    - target: {fileID: 8885058690877294826, guid: 98f3cc67010846c42b3808fc77ec6572, type: 3}
+      propertyPath: OnAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartRun
+      objectReference: {fileID: 0}
+    - target: {fileID: 8885058690877294826, guid: 98f3cc67010846c42b3808fc77ec6572, type: 3}
+      propertyPath: OnAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8885058690877294826, guid: 98f3cc67010846c42b3808fc77ec6572, type: 3}
+      propertyPath: OnAnimationEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1776,8 +1792,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1edd515a84f265045a0becc5c7550072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runningSpeed: 2000
-  lateralSpeed: 2000
+  runningSpeed: 2500
+  lateralSpeed: 2500
   animator: {fileID: 838676484}
 --- !u!65 &838676480
 BoxCollider:
@@ -2274,7 +2290,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   errorConnection: {fileID: 2146057497}
-  ObjectsToEnableOnSessionReady: []
+  ObjectsToEnableOnSessionReady:
+  - {fileID: 397444351}
+  - {fileID: 155692222}
 --- !u!4 &883397088
 Transform:
   m_ObjectHideFlags: 0
@@ -2787,7 +2805,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 2866b660769f4834a9827add5541736a, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 978ede02bd4acfc4a85f1d5861007048, type: 2}
 --- !u!4 &1200394045
 Transform:
   m_ObjectHideFlags: 0

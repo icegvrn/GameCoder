@@ -10,6 +10,8 @@ public class FragmentItem : MonoBehaviour
 
     private SQLiteSessionDataQuery db;
     private IRunningGameService runningGameService;
+    [SerializeField] private AudioSource audioSource;
+
 
     private void Start()
     {
@@ -22,6 +24,7 @@ public class FragmentItem : MonoBehaviour
         if (other.gameObject.TryGetComponent(out CharacterAutoRunner c))
         {
             Disable();
+            audioSource.Play();
             fragmentUI.SetActive(true);
             db.InsertNewFragmentForPlayer((int)runningGameService.TimeID); // Demande à la db d'associer le joueur à un fragment disponible. 
         } 

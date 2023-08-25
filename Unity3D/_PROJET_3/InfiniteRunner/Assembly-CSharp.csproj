@@ -134,6 +134,7 @@
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\Security\JWT\UtcDateTimeProvider.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\HubSystem\FragmentCanvasDecomposer.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\GameManager.cs" />
+    <Compile Include="Assets\Scripts\InfiniteRunner\System\Utils\CursorParameters.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\Game\RunningSystem\RunUIManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICharacter.cs" />
     <Compile Include="Assets\Scripts\InfiniteRunner\System\Session\SessionManagerService.cs" />

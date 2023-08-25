@@ -8,6 +8,7 @@ public class CharacterAutoRunner : MonoBehaviour
     [SerializeField] private float runningSpeed = 10f;
     [SerializeField] private float lateralSpeed = 10f;
     [SerializeField] private Animator animator;
+    private CapsuleCollider head;
     private float initialRunningSpeed;
 
     // State du personnage
@@ -67,6 +68,7 @@ public class CharacterAutoRunner : MonoBehaviour
     void InitializePhysicAndCollisionComponents()
     {
         rb = GetComponent<Rigidbody>();
+        head = GetComponent<CapsuleCollider>();
         playerHeight = GetComponent<BoxCollider>().bounds.size.y;
         collisionTimer = new CustomTimer();
         collisionTimer.Init();
@@ -120,8 +122,7 @@ public class CharacterAutoRunner : MonoBehaviour
             runningSpeed = initialRunningSpeed;
         }
 
-      //Utilité à questionner : 
-      rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
+        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
     }
 
     /// <summary>
@@ -162,18 +163,18 @@ public class CharacterAutoRunner : MonoBehaviour
             }
         }
 
-        Vector3 horizontalMovement = new Vector3(horizontalInput * lateralSpeed * Time.fixedDeltaTime, 0, 0);
+        Vector3 horizontalMovement = new Vector3(horizontalInput * lateralSpeed * Time.deltaTime, 0, 0);
         rb.AddForce(horizontalMovement, ForceMode.VelocityChange);
     }
 
     /// <summary>
-    /// Methode permettant de faire avancer automatiquement le personnage s'il n'est pas en collision. FixedDeltaTime pour plus de régularité.
+    /// Methode permettant de faire avancer automatiquement le personnage s'il n'est pas en collision. 
     /// </summary>
     private void HandleForwardMovement()
     {
         if (!isCollide)
         {
-            Vector3 forwardMovement = new Vector3(0, 0, runningSpeed * Time.fixedDeltaTime);
+            Vector3 forwardMovement = new Vector3(0, 0, runningSpeed * Time.deltaTime);
             rb.AddForce(forwardMovement, ForceMode.VelocityChange);
         }
     }
@@ -194,12 +195,12 @@ public class CharacterAutoRunner : MonoBehaviour
             currentState = CHARACTER_STATE.JUMP;
         }
 
-        if (transform.localPosition.y < 0f)
+        if (transform.localPosition.y <= 0.001f)
         {
             if (isJumpStarted)
             {
                 isJumpStarted = false;
-              //  currentState = CHARACTER_STATE.RUN; (utilité à vérifier)
+                currentState = CHARACTER_STATE.RUN;
             }
         }
     }
@@ -214,11 +215,11 @@ public class CharacterAutoRunner : MonoBehaviour
         {
             if (!isCrouched)
             {
-                GetComponent<CapsuleCollider>().center = new Vector3(
-                    GetComponent<CapsuleCollider>().center.x,
-                    GetComponent<CapsuleCollider>().center.y - CrouchOffset,
-                    GetComponent<CapsuleCollider>().center.z
-                );
+                head.center = new Vector3(
+                    head.center.x,
+                     head.center.y - CrouchOffset,
+                     head.center.z
+                 );
                 currentState = CHARACTER_STATE.CROUCH;
                 isCrouched = true;
                 isCollide = false;
@@ -228,10 +229,10 @@ public class CharacterAutoRunner : MonoBehaviour
         {
             if (isCrouched)
             {
-                GetComponent<CapsuleCollider>().center = new Vector3(
-                    GetComponent<CapsuleCollider>().center.x,
-                    GetComponent<CapsuleCollider>().center.y + CrouchOffset,
-                    GetComponent<CapsuleCollider>().center.z
+                head.center = new Vector3(
+                   head.center.x,
+                   head.center.y + CrouchOffset,
+                   head.center.z
                 );
 
                 isCrouched = false;
@@ -252,7 +253,7 @@ public class CharacterAutoRunner : MonoBehaviour
         }
         if (transform.localPosition.y > 6f)
         {
-            rb.AddForce(transform.up * -300, ForceMode.Impulse);
+            rb.AddForce(transform.up * -200, ForceMode.Impulse);
         }
     }
 
@@ -261,15 +262,15 @@ public class CharacterAutoRunner : MonoBehaviour
     /// </summary>
     private void ClampPositionFromFloor()
     {
-        if (transform.position.y < -0.1f)
+        if (transform.position.y < 0f)
         {
             Vector3 clamp = transform.position;
-            clamp.y = -0.08f;
+            clamp.y = 0f;
             transform.position = clamp;
         }
     }
 
-  
+
     /// <summary>
     /// Méthode permettant de dire à l'aide d'un Raycast si le personnage se trouve sur une pente.
     /// </summary>
@@ -279,7 +280,7 @@ public class CharacterAutoRunner : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit slopeHit, playerHeight / 2 + 0.5f))
         {
             float slopeAngle = Vector3.Angle(slopeHit.normal, Vector3.up);
-            return slopeAngle > 5 && slopeAngle < 45;
+            return slopeAngle > 10 && slopeAngle < 45;
         }
         return false;
     }
@@ -291,9 +292,11 @@ public class CharacterAutoRunner : MonoBehaviour
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("DeadZone"))
         {
             isCollide = true;
+            rb.velocity = Vector3.zero;
             runningSpeed = 0;
             currentState = CHARACTER_STATE.IDLE;
 
@@ -302,7 +305,6 @@ public class CharacterAutoRunner : MonoBehaviour
                 collisionTimer.Start();
             }
         }
-
     }
 
     /// <summary>
@@ -314,20 +316,19 @@ public class CharacterAutoRunner : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("DeadZone"))
         {
             isCollide = true;
-          //  runningSpeed = 0;
-           // currentState = CHARACTER_STATE.IDLE;
+            rb.velocity = Vector3.zero;
 
             if (collisionTimer.GetFloatValue() >= 0.4f)
             {
                 runStatsService.UserLife -= 1;
                 collisionTimer.Stop();
+                currentState = CHARACTER_STATE.IDLE;
             }
-        
-    
+      
+
         }
-
-
     }
+
 
     /// <summary>
     /// QUand le personnage quitte une collision avec un obstacle ou une deadzone, on stop le timer pour ne pas qu'il perde de la vie.
@@ -341,9 +342,13 @@ public class CharacterAutoRunner : MonoBehaviour
             isCollide = false;
             collisionTimer.Stop();
             runningSpeed = initialRunningSpeed;
-            // Vector3 exitDirection = -collision.contacts[0].normal;
-            //float exitDistance = 0.1f;
-            //transform.position += exitDirection * exitDistance;
+
+            if (transform.position.y > 0)
+            {
+                Vector3 newPosition = transform.position;
+                newPosition.y = 0;
+                transform.position = newPosition;
+            }
         }
 
     }

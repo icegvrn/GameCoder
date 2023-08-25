@@ -21,7 +21,9 @@ public class PauseManager : MonoBehaviour
 
     public void TogglePause()
     {
-        isPaused = !isPaused;
+       
+        isPaused = !isPaused; 
+        Cursor.visible = !Cursor.visible;
         Time.timeScale = isPaused ? 0 : 1;
         EnablePauseScreen(isPaused);
     }

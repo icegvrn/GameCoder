@@ -15,6 +15,7 @@ public class ConnectUser : MonoBehaviour
     void Start()
     {
         dbQuery = ServiceLocator.Instance.GetService<ISessionService>().ConnexionQuery;
+        Cursor.visible = true;
         ResetMessages();
     }
     public void TryToConnectUser()
